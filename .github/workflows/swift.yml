@@ -17,6 +17,5 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+      run: | 
+        xcodebuild clean test -project Ren2U.xcodeproj -scheme Ren2U -destination "platform=iOS Simulator,name=iPhone 14,OS=latest"
