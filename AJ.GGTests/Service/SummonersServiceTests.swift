@@ -37,7 +37,7 @@ final class SummonersServiceTests: XCTestCase {
     func testSummonerByNameForNotExistsname() async {
         let expectation = XCTestExpectation()
         
-        let notExistedName = "오누영"
+        let notExistedName = "오1누1영"
         let response = await service.summonerByName(summonerName: notExistedName)
         
         if response.error == nil {
