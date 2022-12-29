@@ -12,6 +12,8 @@ let BASE_URL = "api.riotgames.com"
 let AUTH_KEY = "X-Riot-Token"
 let RIOT_API_URL = "https://KR.\(BASE_URL)"
 
+
+
 enum Region: String {
     case br1, enu1, euw1, jp1, kr, la1, la2, na1, oc1, tr1, ru 
 }
