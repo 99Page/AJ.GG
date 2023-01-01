@@ -51,6 +51,18 @@ struct RegisterSummonerView: View {
         .onTapGesture {
             self.focusState = nil
         }
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                Button {
+                    Task { await viewModel.buttonTapped() }
+                    focusState = nil
+                } label: {
+                    Text("완료")
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+
+            }
+        }
     }
 }
 
