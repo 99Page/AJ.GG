@@ -40,27 +40,16 @@ class RegisterSummonerViewModel: ObservableObject {
     
     @MainActor
     func buttonTapped() async {
-        
         let response = await summonerService.summonerByName(summonerName: self.summonerName)
-        if let id = response.value?.id {
-            let summonerID = await getTier(id)
-            self.tier = setTier(summonerID)
+        if let value = response.value {
+            let summonerTier = await getTier(value.id)
+            self.tier = Tier(rawValue: summonerTier)
         }
     }
     
     func getTier(_ summonerID: String) async -> String  {
         let response = await leagueV4Service.leaguesBySummonerID(summonerID: summonerID)
         return response.value?.first?.tier ?? ""
-    }
-    
-    func setTier(_ searchedTier: String) -> Tier? {
-        for tier in Tier.allCases {
-            if tier.rawValue == searchedTier {
-                return tier
-            }
-        }
-        
-        return nil
     }
     
     func addSummoner(summoner: Summoner) {

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		151EAEA4296683BF00322ACE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151EAEA3296683BF00322ACE /* StringExtension.swift */; };
+		151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151EAEA6296687DA00322ACE /* StringExntensionTests.swift */; };
 		15717271295D666C0053BCC1 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717270295D666C0053BCC1 /* UserDefaultKey.swift */; };
 		15717277295D70640053BCC1 /* SummonersServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717276295D70640053BCC1 /* SummonersServiceTests.swift */; };
 		15717279295D73930053BCC1 /* LeagueV4Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717278295D73930053BCC1 /* LeagueV4Service.swift */; };
@@ -54,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		151EAEA3296683BF00322ACE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		151EAEA6296687DA00322ACE /* StringExntensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExntensionTests.swift; sourceTree = "<group>"; };
 		15717270295D666C0053BCC1 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		15717276295D70640053BCC1 /* SummonersServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonersServiceTests.swift; sourceTree = "<group>"; };
 		15717278295D73930053BCC1 /* LeagueV4Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueV4Service.swift; sourceTree = "<group>"; };
@@ -112,6 +116,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		151EAEA5296687C200322ACE /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				151EAEA6296687DA00322ACE /* StringExntensionTests.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		15717275295D704D0053BCC1 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +183,7 @@
 		15A4D6E2295972D70052E3AD /* AJ.GGTests */ = {
 			isa = PBXGroup;
 			children = (
+				151EAEA5296687C200322ACE /* Extension */,
 				15717275295D704D0053BCC1 /* Service */,
 				15A4D6E3295972D70052E3AD /* AJ_GGTests.swift */,
 			);
@@ -228,6 +241,7 @@
 			children = (
 				15A4D7082959787B0052E3AD /* ViewExtension.swift */,
 				158591602962C36600E888FC /* EntitiesEntexsion.swift */,
+				151EAEA3296683BF00322ACE /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -404,6 +418,7 @@
 				15A4D712295981090052E3AD /* RiotAPI.swift in Sources */,
 				15A4D6CF295972D60052E3AD /* ContentView.swift in Sources */,
 				1571727F295D78BE0053BCC1 /* Tier.swift in Sources */,
+				151EAEA4296683BF00322ACE /* StringExtension.swift in Sources */,
 				15C448512959899C0063223E /* SummonerDTO.swift in Sources */,
 				15C4485329598A4D0063223E /* ServerError.swift in Sources */,
 				1585915D2962BF8700E888FC /* HomeView.swift in Sources */,
@@ -424,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15A4D6E4295972D70052E3AD /* AJ_GGTests.swift in Sources */,
+				151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */,
 				15717277295D70640053BCC1 /* SummonersServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

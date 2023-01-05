@@ -25,5 +25,16 @@ class LeagueV4Serivce: RiotAuthorizaiton, LeagueV4ServiceEnable {
         }
     }
     
+    func getLeagureTierBySummonerID(summonerID: String) async -> LeagueTier? {
+        
+        let response = await self.leaguesBySummonerID(summonerID: summonerID)
+        
+        if let value = response.value?.first {
+            return LeagueTier(tier: Tier(rawValue: value.tier), rank: Rank(rawValue: value.rank))
+        }
+        
+        return nil
+    }
+    
     
 }

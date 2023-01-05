@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+struct LeagueTier {
+    let tier: Tier?
+    let rank: Rank?
+}
+
 enum Tier: String, CaseIterable{
     case iron = "IRON"
     case bronze = "BRONZE"
@@ -21,7 +26,6 @@ enum Tier: String, CaseIterable{
     
     var emblem: String {
         switch self {
-            
         case .iron:
             return "Emblem_Iron"
         case .bronze:
@@ -42,4 +46,38 @@ enum Tier: String, CaseIterable{
             return "Emblem_Challenger"
         }
     }
+}
+
+extension Tier {
+    init? (_ tierString: String) {
+        switch tierString {
+        case "IRON":
+            self = .iron
+        case "BRONZE":
+            self = .bronze
+        case "SILVER":
+            self = .silver
+        case "GOLD":
+            self = .gold
+        case "PLATINUM":
+            self = .platinum
+        case "DIAMOND":
+            self = .diamond
+        case "MASTER":
+            self = .master
+        case "GRANDMASTER":
+            self = .grandmaster
+        case "CHALLENGER":
+            self = .challenger
+        default:
+            return nil 
+        }
+    }
+}
+
+enum Rank: String {
+    case i = "I"
+    case ii = "II"
+    case iii = "III"
+    case iv = "IV"
 }

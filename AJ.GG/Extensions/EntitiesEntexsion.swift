@@ -8,6 +8,11 @@
 import Foundation
 
 extension Summoner {
+    
+    convenience init(id: String, puuid: String, summonerName: String, tier: String, rank: String) {
+        self.init
+    }
+    
     func to(summoner: Summoner) {
         self.tier = summoner.tier
         self.id = summoner.id
