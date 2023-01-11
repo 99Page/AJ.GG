@@ -9,12 +9,13 @@ import Foundation
 import Alamofire
 
 protocol SummonerServiceEnable {
-    func summonerByName(summonerName: String) async -> DataResponse<SummonerDTO, NetworkError>
+    func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError>
+    func idByName(summonerName: String) async -> Result<String, NetworkError>
 }
 
 class SummonerService: SummonerServiceEnable {
     
-    func summonerByName(summonerName: String) async -> Alamofire.DataResponse<SummonerDTO, NetworkError> {
+    func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError> {
         
         let url = "https://KR.api.riotgames.com/lol/summoner/v4/summoners/by-name/\(summonerName)"
         let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
@@ -26,9 +27,26 @@ class SummonerService: SummonerServiceEnable {
         
         let response = await AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: headers).serializingDecodable(SummonerDTO.self).response
         
-        return response.mapError { err in
+        if response.error != nil {
+            print(response.debugDescription)
+        }
+        
+        let result = response.result
+        
+        return result.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
             return NetworkError(AFError: err, status: serverError)
+        }
+    }
+    
+    func idByName(summonerName: String) async -> Result<String, NetworkError> {
+        let response = await self.summonerByName(summonerName: summonerName)
+        
+        switch response {
+        case .success(let value):
+            return .success(value.id)
+        case .failure(let err):
+            return .failure(err)
         }
     }
     

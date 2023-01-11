@@ -7,7 +7,7 @@
 
 import Foundation
 
-// LEAGURE-V4 : Leagues by Summoner ID
+// LEAGUE-V4 : Leagues by Summoner ID
 
 struct LeagueEntryDTO: Codable {
     let leagueID, queueType, tier, rank: String

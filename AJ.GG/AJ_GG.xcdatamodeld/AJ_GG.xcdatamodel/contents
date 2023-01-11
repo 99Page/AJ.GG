@@ -3,8 +3,18 @@
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
+    <entity name="Match" representedClassName="Match" syncable="YES" codeGenerationType="class">
+        <attribute name="enemyChampionID" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="isWin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lane" optional="YES" attributeType="String"/>
+        <attribute name="myChmpionID" optional="YES" attributeType="String"/>
+        <attribute name="summonerID" optional="YES" attributeType="String"/>
+        <attribute name="version" optional="YES" attributeType="String"/>
+    </entity>
     <entity name="Summoner" representedClassName="Summoner" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="leaguePoints" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="puuid" optional="YES" attributeType="String"/>
         <attribute name="rank" optional="YES" attributeType="String"/>
         <attribute name="summonerName" optional="YES" attributeType="String"/>

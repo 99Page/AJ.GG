@@ -7,14 +7,5 @@
 
 import Foundation
 
-extension String {
-    func tier() -> Tier? {
-        for tier in Tier.allCases {
-            if tier.rawValue == self {
-                return tier
-            }
-        }
-        
-        return nil 
-    }
-}
+
+typealias Strings = [String]

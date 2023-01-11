@@ -11,6 +11,11 @@ import SwiftUI
 struct LeagueTier {
     let tier: Tier?
     let rank: Rank?
+    let points: Int32
+    
+    var emblem: String {
+        self.tier?.emblem ?? "IRON"
+    }
 }
 
 enum Tier: String, CaseIterable{

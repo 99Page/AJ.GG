@@ -9,15 +9,27 @@
 /* Begin PBXBuildFile section */
 		151EAEA4296683BF00322ACE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151EAEA3296683BF00322ACE /* StringExtension.swift */; };
 		151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151EAEA6296687DA00322ACE /* StringExntensionTests.swift */; };
+		15298C98296C8FEF005FC900 /* champ.json in Resources */ = {isa = PBXBuildFile; fileRef = 15298C97296C8FEF005FC900 /* champ.json */; };
+		15298C9A296C9002005FC900 /* Champion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15298C99296C9002005FC900 /* Champion.swift */; };
+		152FBE63296D255600B082C7 /* MatchV5Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE62296D255600B082C7 /* MatchV5Service.swift */; };
+		152FBE65296D275E00B082C7 /* ParticipantDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE64296D275E00B082C7 /* ParticipantDTO.swift */; };
+		152FBE67296D2A5000B082C7 /* MetadataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE66296D2A5000B082C7 /* MetadataDTO.swift */; };
+		152FBE69296D2AB800B082C7 /* InfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE68296D2AB800B082C7 /* InfoDTO.swift */; };
+		152FBE6B296D2B0100B082C7 /* BanDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE6A296D2B0100B082C7 /* BanDTO.swift */; };
+		152FBE6D296D2B6B00B082C7 /* TeamDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE6C296D2B6B00B082C7 /* TeamDTO.swift */; };
+		152FBE6F296D2BA400B082C7 /* ObjectivesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE6E296D2BA400B082C7 /* ObjectivesDTO.swift */; };
+		152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE70296D2C9600B082C7 /* PerksDTO.swift */; };
+		152FBE73296D2D9800B082C7 /* MatchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE72296D2D9800B082C7 /* MatchDTO.swift */; };
 		15717271295D666C0053BCC1 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717270295D666C0053BCC1 /* UserDefaultKey.swift */; };
 		15717277295D70640053BCC1 /* SummonersServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717276295D70640053BCC1 /* SummonersServiceTests.swift */; };
 		15717279295D73930053BCC1 /* LeagueV4Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717278295D73930053BCC1 /* LeagueV4Service.swift */; };
 		1571727B295D73FB0053BCC1 /* LeagueEntryDTO .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727A295D73FB0053BCC1 /* LeagueEntryDTO .swift */; };
 		1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727C295D76130053BCC1 /* RiotAuthorization.swift */; };
 		1571727F295D78BE0053BCC1 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727E295D78BE0053BCC1 /* Tier.swift */; };
-		1585915D2962BF8700E888FC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915C2962BF8700E888FC /* HomeView.swift */; };
+		1585915D2962BF8700E888FC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915C2962BF8700E888FC /* ProfileView.swift */; };
 		1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* HomeViewModel.swift */; };
 		158591612962C36600E888FC /* EntitiesEntexsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158591602962C36600E888FC /* EntitiesEntexsion.swift */; };
+		159D74F1296ECBEE009668CB /* SummonerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159D74F0296ECBEE009668CB /* SummonerManager.swift */; };
 		15A4D6CD295972D60052E3AD /* AJ_GGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6CC295972D60052E3AD /* AJ_GGApp.swift */; };
 		15A4D6CF295972D60052E3AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6CE295972D60052E3AD /* ContentView.swift */; };
 		15A4D6D1295972D70052E3AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15A4D6D0295972D70052E3AD /* Assets.xcassets */; };
@@ -34,6 +46,7 @@
 		15A4D70C295980B70052E3AD /* SummonersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D70B295980B70052E3AD /* SummonersService.swift */; };
 		15A4D70F295980F20052E3AD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15A4D70E295980F20052E3AD /* Alamofire */; };
 		15A4D712295981090052E3AD /* RiotAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D711295981090052E3AD /* RiotAPI.swift */; };
+		15A9ED65296EE0D10043A5B4 /* RoundedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A9ED64296EE0D10043A5B4 /* RoundedText.swift */; };
 		15C448512959899C0063223E /* SummonerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C448502959899C0063223E /* SummonerDTO.swift */; };
 		15C4485329598A4D0063223E /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C4485229598A4D0063223E /* ServerError.swift */; };
 /* End PBXBuildFile section */
@@ -58,15 +71,27 @@
 /* Begin PBXFileReference section */
 		151EAEA3296683BF00322ACE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		151EAEA6296687DA00322ACE /* StringExntensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExntensionTests.swift; sourceTree = "<group>"; };
+		15298C97296C8FEF005FC900 /* champ.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = champ.json; sourceTree = "<group>"; };
+		15298C99296C9002005FC900 /* Champion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Champion.swift; sourceTree = "<group>"; };
+		152FBE62296D255600B082C7 /* MatchV5Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchV5Service.swift; sourceTree = "<group>"; };
+		152FBE64296D275E00B082C7 /* ParticipantDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipantDTO.swift; sourceTree = "<group>"; };
+		152FBE66296D2A5000B082C7 /* MetadataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataDTO.swift; sourceTree = "<group>"; };
+		152FBE68296D2AB800B082C7 /* InfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoDTO.swift; sourceTree = "<group>"; };
+		152FBE6A296D2B0100B082C7 /* BanDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BanDTO.swift; sourceTree = "<group>"; };
+		152FBE6C296D2B6B00B082C7 /* TeamDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamDTO.swift; sourceTree = "<group>"; };
+		152FBE6E296D2BA400B082C7 /* ObjectivesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectivesDTO.swift; sourceTree = "<group>"; };
+		152FBE70296D2C9600B082C7 /* PerksDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerksDTO.swift; sourceTree = "<group>"; };
+		152FBE72296D2D9800B082C7 /* MatchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDTO.swift; sourceTree = "<group>"; };
 		15717270295D666C0053BCC1 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		15717276295D70640053BCC1 /* SummonersServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonersServiceTests.swift; sourceTree = "<group>"; };
 		15717278295D73930053BCC1 /* LeagueV4Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueV4Service.swift; sourceTree = "<group>"; };
 		1571727A295D73FB0053BCC1 /* LeagueEntryDTO .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LeagueEntryDTO .swift"; sourceTree = "<group>"; };
 		1571727C295D76130053BCC1 /* RiotAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotAuthorization.swift; sourceTree = "<group>"; };
 		1571727E295D78BE0053BCC1 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
-		1585915C2962BF8700E888FC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		1585915C2962BF8700E888FC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1585915E2962BF9900E888FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		158591602962C36600E888FC /* EntitiesEntexsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesEntexsion.swift; sourceTree = "<group>"; };
+		159D74F0296ECBEE009668CB /* SummonerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerManager.swift; sourceTree = "<group>"; };
 		15A4D6C9295972D60052E3AD /* AJ.GG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AJ.GG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A4D6CC295972D60052E3AD /* AJ_GGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJ_GGApp.swift; sourceTree = "<group>"; };
 		15A4D6CE295972D60052E3AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,6 +111,7 @@
 		15A4D7082959787B0052E3AD /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		15A4D70B295980B70052E3AD /* SummonersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonersService.swift; sourceTree = "<group>"; };
 		15A4D711295981090052E3AD /* RiotAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotAPI.swift; sourceTree = "<group>"; };
+		15A9ED64296EE0D10043A5B4 /* RoundedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedText.swift; sourceTree = "<group>"; };
 		15C448502959899C0063223E /* SummonerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerDTO.swift; sourceTree = "<group>"; };
 		15C4485229598A4D0063223E /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +158,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		159D74EF296ECBD6009668CB /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				159D74F0296ECBEE009668CB /* SummonerManager.swift */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
 		15A4D6C0295972D60052E3AD = {
 			isa = PBXGroup;
 			children = (
@@ -157,12 +191,12 @@
 			children = (
 				15A4D710295980FE0052E3AD /* Environment */,
 				15A4D707295978590052E3AD /* Extensions */,
+				159D74EF296ECBD6009668CB /* DataManager */,
 				15A4D70A295980840052E3AD /* Service */,
 				15A4D6FE295973170052E3AD /* Model */,
 				15A4D6FD295973100052E3AD /* ViewModel */,
 				15A4D6FC295973080052E3AD /* View */,
 				15A4D6CC295972D60052E3AD /* AJ_GGApp.swift */,
-				15A4D6CE295972D60052E3AD /* ContentView.swift */,
 				15A4D6D0295972D70052E3AD /* Assets.xcassets */,
 				15A4D6D5295972D70052E3AD /* Persistence.swift */,
 				15A4D6DA295972D70052E3AD /* Info.plist */,
@@ -203,8 +237,9 @@
 			isa = PBXGroup;
 			children = (
 				15A4D700295974E30052E3AD /* UIComponents */,
+				15A4D6CE295972D60052E3AD /* ContentView.swift */,
 				15A4D7012959751E0052E3AD /* RegisterSummonerView.swift */,
-				1585915C2962BF8700E888FC /* HomeView.swift */,
+				1585915C2962BF8700E888FC /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +259,8 @@
 				15A4D7132959895F0052E3AD /* DTO */,
 				15C4485229598A4D0063223E /* ServerError.swift */,
 				1571727E295D78BE0053BCC1 /* Tier.swift */,
+				15298C97296C8FEF005FC900 /* champ.json */,
+				15298C99296C9002005FC900 /* Champion.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -232,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				15A4D705295975640052E3AD /* CapsuleText.swift */,
+				15A9ED64296EE0D10043A5B4 /* RoundedText.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -252,6 +290,7 @@
 				1571727C295D76130053BCC1 /* RiotAuthorization.swift */,
 				15A4D70B295980B70052E3AD /* SummonersService.swift */,
 				15717278295D73930053BCC1 /* LeagueV4Service.swift */,
+				152FBE62296D255600B082C7 /* MatchV5Service.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -270,6 +309,14 @@
 			children = (
 				15C448502959899C0063223E /* SummonerDTO.swift */,
 				1571727A295D73FB0053BCC1 /* LeagueEntryDTO .swift */,
+				152FBE64296D275E00B082C7 /* ParticipantDTO.swift */,
+				152FBE66296D2A5000B082C7 /* MetadataDTO.swift */,
+				152FBE68296D2AB800B082C7 /* InfoDTO.swift */,
+				152FBE6A296D2B0100B082C7 /* BanDTO.swift */,
+				152FBE6C296D2B6B00B082C7 /* TeamDTO.swift */,
+				152FBE6E296D2BA400B082C7 /* ObjectivesDTO.swift */,
+				152FBE70296D2C9600B082C7 /* PerksDTO.swift */,
+				152FBE72296D2D9800B082C7 /* MatchDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -386,6 +433,7 @@
 			files = (
 				15A4D6D4295972D70052E3AD /* Preview Assets.xcassets in Resources */,
 				15A4D6D1295972D70052E3AD /* Assets.xcassets in Resources */,
+				15298C98296C8FEF005FC900 /* champ.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,19 +459,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */,
+				159D74F1296ECBEE009668CB /* SummonerManager.swift in Sources */,
+				152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */,
+				152FBE67296D2A5000B082C7 /* MetadataDTO.swift in Sources */,
+				152FBE6D296D2B6B00B082C7 /* TeamDTO.swift in Sources */,
 				15717279295D73930053BCC1 /* LeagueV4Service.swift in Sources */,
 				15A4D6D6295972D70052E3AD /* Persistence.swift in Sources */,
 				15A4D7022959751E0052E3AD /* RegisterSummonerView.swift in Sources */,
+				152FBE73296D2D9800B082C7 /* MatchDTO.swift in Sources */,
 				1571727B295D73FB0053BCC1 /* LeagueEntryDTO .swift in Sources */,
+				15A9ED65296EE0D10043A5B4 /* RoundedText.swift in Sources */,
 				15A4D712295981090052E3AD /* RiotAPI.swift in Sources */,
+				152FBE6B296D2B0100B082C7 /* BanDTO.swift in Sources */,
 				15A4D6CF295972D60052E3AD /* ContentView.swift in Sources */,
 				1571727F295D78BE0053BCC1 /* Tier.swift in Sources */,
 				151EAEA4296683BF00322ACE /* StringExtension.swift in Sources */,
 				15C448512959899C0063223E /* SummonerDTO.swift in Sources */,
+				15298C9A296C9002005FC900 /* Champion.swift in Sources */,
+				152FBE63296D255600B082C7 /* MatchV5Service.swift in Sources */,
 				15C4485329598A4D0063223E /* ServerError.swift in Sources */,
-				1585915D2962BF8700E888FC /* HomeView.swift in Sources */,
+				152FBE69296D2AB800B082C7 /* InfoDTO.swift in Sources */,
+				152FBE65296D275E00B082C7 /* ParticipantDTO.swift in Sources */,
+				1585915D2962BF8700E888FC /* ProfileView.swift in Sources */,
 				15A4D704295975300052E3AD /* RegisterSummonerViewModel.swift in Sources */,
 				1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */,
+				152FBE6F296D2BA400B082C7 /* ObjectivesDTO.swift in Sources */,
 				15A4D6D9295972D70052E3AD /* AJ_GG.xcdatamodeld in Sources */,
 				15A4D6CD295972D60052E3AD /* AJ_GGApp.swift in Sources */,
 				15A4D7092959787B0052E3AD /* ViewExtension.swift in Sources */,

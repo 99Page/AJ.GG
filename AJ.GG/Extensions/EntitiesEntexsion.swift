@@ -6,18 +6,26 @@
 //
 
 import Foundation
+import CoreData
 
 extension Summoner {
     
-    convenience init(id: String, puuid: String, summonerName: String, tier: String, rank: String) {
-        self.init
+    convenience init(summonerDTO: SummonerDTO, leagueTier: LeagueTier?, context: NSManagedObjectContext) {
+        self.init(context: context)
+        self.id = summonerDTO.id
+        self.puuid = summonerDTO.puuid
+        self.summonerName = summonerDTO.name
+        self.tier = leagueTier?.tier?.rawValue
+        self.rank = leagueTier?.rank?.rawValue
+        self.leaguePoints = leagueTier?.points ?? 0
     }
     
-    func to(summoner: Summoner) {
-        self.tier = summoner.tier
-        self.id = summoner.id
-        self.summonerName = summoner.summonerName
-        self.puuid = summoner.puuid
-        self.rank = summoner.rank
+    func setSummoner(summonerDTO: SummonerDTO, leagueTier: LeagueTier?) {
+        self.id = summonerDTO.id
+        self.puuid = summonerDTO.puuid
+        self.summonerName = summonerDTO.name
+        self.tier = leagueTier?.tier?.rawValue
+        self.rank = leagueTier?.rank?.rawValue
+        self.leaguePoints = leagueTier?.points ?? 0
     }
 }

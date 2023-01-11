@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct RegisterSummonerView: View {
     
@@ -29,25 +30,37 @@ struct RegisterSummonerView: View {
                 .focused($focusState, equals: .summonerName)
                 .animation(.easeIn(duration: 0.4), value: isSummonerNameFocused)
             
-            
-            Spacer()
-                .hidden(!isSummonerNameFocused)
+            HStack {
+                ForEach(0..<viewModel.summoners.count, id: \.self) { i in
+                    Text("\(viewModel.summoners[i].summonerName ?? "이름")")
+                }
+            }
             
             if let tier = viewModel.tier {
-                Image(tier.emblem)
+                SwiftUI.Image(tier.emblem)
                     .resizable()
             }
+            
+            
+            Spacer()
             
             Button {
                 Task {
                     await viewModel.buttonTapped()
                 }
             } label: {
-                Text("버튼")
+                Text("검색")
+            }
+            
+            Button {
+                viewModel.deleteSummonersAll()
+            } label: {
+                Text("삭제")
             }
 
             
         }
+        .hidden(viewModel.isSummonerRegistered)
         .onTapGesture {
             self.focusState = nil
         }

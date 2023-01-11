@@ -8,63 +8,47 @@
 import Foundation
 import CoreData
 
+@MainActor
 class RegisterSummonerViewModel: ObservableObject {
     
-    let container: NSPersistentContainer
     let title = "소환사 이름을 입력해주세요."
-    
-    @Published var summonerName: String = ""
-    @Published var tier: Tier?
-    
+    private let summonerManager: SummonerManager
     private let summonerService: SummonerServiceEnable
     private let leagueV4Service: LeagueV4ServiceEnable
+    
+    @Published var summonerName: String = ""
+    @Published var tier: LeagueTier?
+    @Published var summoners: [Summoner] = []
+    
+    var isSummonerRegistered: Bool {
+        !summoners.isEmpty
+    }
+  
     
     init(summonerService: SummonerServiceEnable, leagueV4Service: LeagueV4ServiceEnable) {
         self.summonerService = summonerService
         self.leagueV4Service = leagueV4Service
-        
-        container = NSPersistentContainer(name: "AJ_GG")
-        container.loadPersistentStores { description, error in
-           if let error = error {
-               print("ERROR LOADING CORE DATA")
-               print(error.localizedDescription)
-           } else {
-               print("SUCCESSFULLY LOAD CORE DATA")
-           }
-       }
-    }
-    
-    var isNameEmpty: Bool {
-        summonerName.isEmpty
+        self.summonerManager = SummonerManager()
+        self.summoners = summonerManager.getAll()
     }
     
     @MainActor
     func buttonTapped() async {
-        let response = await summonerService.summonerByName(summonerName: self.summonerName)
-        if let value = response.value {
-            let summonerTier = await getTier(value.id)
-            self.tier = Tier(rawValue: summonerTier)
-        }
-    }
-    
-    func getTier(_ summonerID: String) async -> String  {
-        let response = await leagueV4Service.leaguesBySummonerID(summonerID: summonerID)
-        return response.value?.first?.tier ?? ""
-    }
-    
-    func addSummoner(summoner: Summoner) {
-        let summonerData = Summoner(context: container.viewContext)
-        summonerData.to(summoner: summoner)
-        saveSummoner()
-    }
-    
-    func saveSummoner() {
         do {
-            try container.viewContext.save()
+            let summonerResult = await summonerService.summonerByName(summonerName: self.summonerName)
+            let summoner = try summonerResult.get()
+            let tierResult = await leagueV4Service.leagueTierBySummonerID(summonerID: summoner.id)
+            let tier = try tierResult.get()
+            self.tier = tier
+            self.summonerManager.save(summonerDTO: summoner, tier: tier)
+            self.summoners = summonerManager.getAll()
         } catch {
-            print("ERROR SAVING CORE DATA")
-            print(error.localizedDescription)
+            
         }
+    }
+
+    func deleteSummonersAll() {
+        summonerManager.deleteAll()
     }
 }
 
