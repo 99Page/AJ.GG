@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		151BC86D296FDC2E0042D719 /* MatchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151BC86C296FDC2E0042D719 /* MatchManager.swift */; };
 		151EAEA4296683BF00322ACE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151EAEA3296683BF00322ACE /* StringExtension.swift */; };
 		151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151EAEA6296687DA00322ACE /* StringExntensionTests.swift */; };
 		15298C98296C8FEF005FC900 /* champ.json in Resources */ = {isa = PBXBuildFile; fileRef = 15298C97296C8FEF005FC900 /* champ.json */; };
@@ -69,6 +70,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		151BC86C296FDC2E0042D719 /* MatchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchManager.swift; sourceTree = "<group>"; };
 		151EAEA3296683BF00322ACE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		151EAEA6296687DA00322ACE /* StringExntensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExntensionTests.swift; sourceTree = "<group>"; };
 		15298C97296C8FEF005FC900 /* champ.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = champ.json; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				159D74F0296ECBEE009668CB /* SummonerManager.swift */,
+				151BC86C296FDC2E0042D719 /* MatchManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -461,6 +464,7 @@
 				1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */,
 				159D74F1296ECBEE009668CB /* SummonerManager.swift in Sources */,
 				152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */,
+				151BC86D296FDC2E0042D719 /* MatchManager.swift in Sources */,
 				152FBE67296D2A5000B082C7 /* MetadataDTO.swift in Sources */,
 				152FBE6D296D2B6B00B082C7 /* TeamDTO.swift in Sources */,
 				15717279295D73930053BCC1 /* LeagueV4Service.swift in Sources */,

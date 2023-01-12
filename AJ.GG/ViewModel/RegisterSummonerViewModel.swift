@@ -8,7 +8,6 @@
 import Foundation
 import CoreData
 
-@MainActor
 class RegisterSummonerViewModel: ObservableObject {
     
     let title = "소환사 이름을 입력해주세요."

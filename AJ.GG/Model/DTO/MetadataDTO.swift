@@ -16,4 +16,12 @@ struct MetadataDTO: Codable {
         case matchID = "matchId"
         case participants
     }
+    
+    func getVersion() -> String {
+        return dataVersion
+    }
+    
+    func getMatchID() -> String {
+        return matchID
+    }
 }

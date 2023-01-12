@@ -73,6 +73,42 @@ struct ParticipantDTO: Codable {
         case teamID = "teamId"
         case teamPosition, timeCCingOthers, timePlayed, totalDamageDealt, totalDamageDealtToChampions, totalDamageShieldedOnTeammates, totalDamageTaken, totalHeal, totalHealsOnTeammates, totalMinionsKilled, totalTimeCCDealt, totalTimeSpentDead, totalUnitsHealed, tripleKills, trueDamageDealt, trueDamageDealtToChampions, trueDamageTaken, turretKills, turretTakedowns, turretsLost, unrealKills, visionClearedPings, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win
     }
+    
+    func getLane() -> Lane {
+        return self.individualPosition
+    }
+    
+    func getChampionName() -> String {
+        return self.championName
+    }
+    
+    func getTeamID() -> Int {
+        return self.teamID
+    }
+    
+    func getPuuid() -> String {
+        return self.puuid
+    }
+    
+    func isSameTeam(teamID: Int) -> Bool {
+        return self.teamID == teamID
+    }
+    
+    func isSameLane(lane: Lane) -> Bool {
+        return self.lane == lane
+    }
+    
+    func isEnemy(teamID: Int, lane: Lane) -> Bool {
+        return !isSameTeam(teamID: teamID) && isSameLane(lane: lane)
+    }
+    
+    func isSamePuuid(puuid: String) -> Bool {
+        return self.puuid == puuid
+    }
+    
+    func isWin() -> Bool {
+        return self.win
+    }
 }
 
 typealias ParticipantDTOs = [ParticipantDTO]
@@ -85,4 +121,5 @@ enum Lane: String, Codable {
     case mid = "MIDDLE"
     case adCarry = "BOTTOM"
     case supoort = "UTILITY"
+    case none = "NONE"
 }

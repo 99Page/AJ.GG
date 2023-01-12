@@ -11,7 +11,8 @@ import Alamofire
 protocol MatchV5ServiceEnable {
     func matcheIDsByPuuid(puuid: String) async -> Result<Strings, NetworkError>
     func matchByMatchID(matchID: String) async -> Result<MatchDTO, NetworkError>
-    func searchMatch(puuid: String) async
+    func searchMatchDTOsByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError>
+    func searchMatchDTOsByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError>
 }
 
 class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
@@ -31,7 +32,7 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
         }
     }
     
-    func matcheIDsByPuuid(puuid: String) async -> Result<Strings, NetworkError> {
+    func matcheIDsByPuuid(puuid: String) async -> Result<[String], NetworkError> {
         
         let url = "\(url(region: .asia))/lol/match/v5/matches/by-puuid/\(puuid)/ids"
         
@@ -48,16 +49,30 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
         }
     }
     
-    func searchMatch(puuid: String) async {
-        do {
-            print("searchMatch called")
-            let idsResult = await self.matcheIDsByPuuid(puuid: puuid)
-            let ids = try idsResult.get()
-            let matchResult = await self.matchByMatchID(matchID: ids[0])
-            let match = try matchResult.get()
-            print(match)
-        } catch {
-            
+    func searchMatchDTOsByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError> {
+        var matchDTOs: [MatchDTO] = []
+        
+        for matchID in matchIDs {
+            let matchResult = await self.matchByMatchID(matchID: matchID)
+            switch matchResult {
+            case .success(let success):
+                matchDTOs.append(success)
+            case .failure(let failure):
+                return .failure(failure)
+            }
+        }
+        
+        return .success(matchDTOs)
+    }
+    
+    
+    func searchMatchDTOsByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError> {
+        let idsResult = await self.matcheIDsByPuuid(puuid: puuid)
+        switch idsResult {
+        case .success(let ids):
+            return await searchMatchDTOsByMatchIDs(matchIDs: ids)
+        case .failure(let failure):
+            return .failure(failure)
         }
     }
 }
