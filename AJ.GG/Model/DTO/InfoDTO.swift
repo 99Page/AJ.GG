@@ -43,6 +43,15 @@ struct InfoDTO: Codable {
     func getEnemyPuuidByPuuid(puuid: String) -> String? {
         let myTeamID = getTeamIDByPuuid(puuid: puuid)!
         let myLane = getLaneByPuuid(puuid: puuid)!
+        
+//        print("myTeamID: \(myTeamID), myLane: \(myLane)")
+//        
+//        participants.forEach { dto in
+//            print("name: \(dto.summonerName) teamID: \(dto.teamID), individualPosition: \(dto.individualPosition)")
+//            print("\(dto.summonerName)이랑 라인이 같은가? \(dto.isSameLane(lane: myLane))")
+//            print("\(dto.summonerName)이랑 적인가? \(!dto.isSameTeam(teamID: myTeamID))")
+//            print("\(dto.summonerName)이랑 맞라이너인가? \(dto.isEnemy(teamID: myTeamID, lane: myLane))")
+//        }
         return participants.first { $0.isEnemy(teamID: myTeamID, lane: myLane)}?.getPuuid()
     }
     
@@ -52,8 +61,11 @@ struct InfoDTO: Codable {
     }
     
     func getEnemyChmapionByPuuid(puuid: String) -> String? {
-        let enemyPuuid = getEnemyPuuidByPuuid(puuid: puuid)!
-        return getChampionNameByPuuid(puuid: enemyPuuid)
+        if let enemyPuuid = getEnemyPuuidByPuuid(puuid: puuid) {
+            return getChampionNameByPuuid(puuid: enemyPuuid)
+        }
+        
+        return nil
     }
     
     func isWinByPuuid(puuid: String) -> Bool {

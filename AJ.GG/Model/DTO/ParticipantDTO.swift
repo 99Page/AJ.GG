@@ -95,7 +95,7 @@ struct ParticipantDTO: Codable {
     }
     
     func isSameLane(lane: Lane) -> Bool {
-        return self.lane == lane
+        return self.getLane() == lane
     }
     
     func isEnemy(teamID: Int, lane: Lane) -> Bool {

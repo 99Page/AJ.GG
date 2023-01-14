@@ -27,6 +27,10 @@ struct MatchDTO: Codable {
         return info.isWinByPuuid(puuid: puudid)
     }
     
+    func isEqualMatchID(match: Match) -> Bool {
+        return self.getMatchID() == match.id
+    }
+    
     func getChampionNameByPuuid(puuid: String) -> String? {
         return info.getChampionNameByPuuid(puuid: puuid)
     }

@@ -15,6 +15,8 @@ struct ProfileView: View {
         GeometryReader { proxy in
             ScrollView {
                 
+                Text("Profile View")
+                RecordView(matches: viewModel.matches)
             }
             .overlay(alignment: .topTrailing) {
                 Button {

@@ -12,7 +12,6 @@ extension Match {
     convenience init(matchDTO: MatchDTO, puuid: String, context: NSManagedObjectContext) {
         self.init(context: context)
         self.id = matchDTO.getMatchID()
-        self.summonerID = puuid
         self.myChmpionID = matchDTO.getChampionNameByPuuid(puuid: puuid)
         self.enemyChampionID = matchDTO.getEnemyChampionNameByPuuid(puuid: puuid)
         self.lane = matchDTO.getLaneByPuuid(puuid: puuid)?.rawValue
@@ -41,6 +40,10 @@ class MatchManager {
     }
     
     func save(matchDTO: MatchDTO, puuid: String) {
+        
+        let matches = self.getAll()
+        
+        guard !matches.contains( where: { matchDTO.isEqualMatchID(match: $0) }) else { return }
         let data = Match(matchDTO: matchDTO, puuid: puuid, context: container.viewContext)
         print(data)
         
@@ -67,7 +70,7 @@ class MatchManager {
     }
     
     func deleteAll() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Summoner.fetchRequest()
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Match.fetchRequest()
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         _ = try? container.viewContext.execute(batchDeleteRequest)
     }

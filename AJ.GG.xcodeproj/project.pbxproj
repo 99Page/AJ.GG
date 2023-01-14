@@ -30,6 +30,9 @@
 		1585915D2962BF8700E888FC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915C2962BF8700E888FC /* ProfileView.swift */; };
 		1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* HomeViewModel.swift */; };
 		158591612962C36600E888FC /* EntitiesEntexsion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158591602962C36600E888FC /* EntitiesEntexsion.swift */; };
+		1597B1D82970FCE100A66486 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597B1D72970FCE100A66486 /* RecordView.swift */; };
+		1597B1DA2971218900A66486 /* RiotImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597B1D92971218900A66486 /* RiotImageService.swift */; };
+		1597B1DD297123E700A66486 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1597B1DC297123E700A66486 /* Kingfisher */; };
 		159D74F1296ECBEE009668CB /* SummonerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159D74F0296ECBEE009668CB /* SummonerManager.swift */; };
 		15A4D6CD295972D60052E3AD /* AJ_GGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6CC295972D60052E3AD /* AJ_GGApp.swift */; };
 		15A4D6CF295972D60052E3AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6CE295972D60052E3AD /* ContentView.swift */; };
@@ -93,6 +96,9 @@
 		1585915C2962BF8700E888FC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1585915E2962BF9900E888FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		158591602962C36600E888FC /* EntitiesEntexsion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitiesEntexsion.swift; sourceTree = "<group>"; };
+		1597B1D72970FCE100A66486 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		1597B1D92971218900A66486 /* RiotImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotImageService.swift; sourceTree = "<group>"; };
+		1597B1DE2971270400A66486 /* AJ-GG-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AJ-GG-Info.plist"; sourceTree = SOURCE_ROOT; };
 		159D74F0296ECBEE009668CB /* SummonerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerManager.swift; sourceTree = "<group>"; };
 		15A4D6C9295972D60052E3AD /* AJ.GG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AJ.GG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A4D6CC295972D60052E3AD /* AJ_GGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJ_GGApp.swift; sourceTree = "<group>"; };
@@ -123,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1597B1DD297123E700A66486 /* Kingfisher in Frameworks */,
 				15A4D70F295980F20052E3AD /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -192,6 +199,7 @@
 		15A4D6CB295972D60052E3AD /* AJ.GG */ = {
 			isa = PBXGroup;
 			children = (
+				1597B1DE2971270400A66486 /* AJ-GG-Info.plist */,
 				15A4D710295980FE0052E3AD /* Environment */,
 				15A4D707295978590052E3AD /* Extensions */,
 				159D74EF296ECBD6009668CB /* DataManager */,
@@ -243,6 +251,7 @@
 				15A4D6CE295972D60052E3AD /* ContentView.swift */,
 				15A4D7012959751E0052E3AD /* RegisterSummonerView.swift */,
 				1585915C2962BF8700E888FC /* ProfileView.swift */,
+				1597B1D72970FCE100A66486 /* RecordView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -294,6 +303,7 @@
 				15A4D70B295980B70052E3AD /* SummonersService.swift */,
 				15717278295D73930053BCC1 /* LeagueV4Service.swift */,
 				152FBE62296D255600B082C7 /* MatchV5Service.swift */,
+				1597B1D92971218900A66486 /* RiotImageService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -342,6 +352,7 @@
 			name = AJ.GG;
 			packageProductDependencies = (
 				15A4D70E295980F20052E3AD /* Alamofire */,
+				1597B1DC297123E700A66486 /* Kingfisher */,
 			);
 			productName = AJ.GG;
 			productReference = 15A4D6C9295972D60052E3AD /* AJ.GG.app */;
@@ -417,6 +428,7 @@
 			mainGroup = 15A4D6C0295972D60052E3AD;
 			packageReferences = (
 				15A4D70D295980F20052E3AD /* XCRemoteSwiftPackageReference "Alamofire" */,
+				1597B1DB297123E700A66486 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 15A4D6CA295972D60052E3AD /* Products */;
 			projectDirPath = "";
@@ -464,6 +476,7 @@
 				1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */,
 				159D74F1296ECBEE009668CB /* SummonerManager.swift in Sources */,
 				152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */,
+				1597B1D82970FCE100A66486 /* RecordView.swift in Sources */,
 				151BC86D296FDC2E0042D719 /* MatchManager.swift in Sources */,
 				152FBE67296D2A5000B082C7 /* MetadataDTO.swift in Sources */,
 				152FBE6D296D2B6B00B082C7 /* TeamDTO.swift in Sources */,
@@ -489,6 +502,7 @@
 				1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */,
 				152FBE6F296D2BA400B082C7 /* ObjectivesDTO.swift in Sources */,
 				15A4D6D9295972D70052E3AD /* AJ_GG.xcdatamodeld in Sources */,
+				1597B1DA2971218900A66486 /* RiotImageService.swift in Sources */,
 				15A4D6CD295972D60052E3AD /* AJ_GGApp.swift in Sources */,
 				15A4D7092959787B0052E3AD /* ViewExtension.swift in Sources */,
 				158591612962C36600E888FC /* EntitiesEntexsion.swift in Sources */,
@@ -658,6 +672,7 @@
 				DEVELOPMENT_TEAM = MAU8HFALP8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AJ-GG-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -687,6 +702,7 @@
 				DEVELOPMENT_TEAM = MAU8HFALP8;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "AJ-GG-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -823,6 +839,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1597B1DB297123E700A66486 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		15A4D70D295980F20052E3AD /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -834,6 +858,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1597B1DC297123E700A66486 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1597B1DB297123E700A66486 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		15A4D70E295980F20052E3AD /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 15A4D70D295980F20052E3AD /* XCRemoteSwiftPackageReference "Alamofire" */;

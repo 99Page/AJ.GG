@@ -9,9 +9,8 @@
         <attribute name="isWin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lane" optional="YES" attributeType="String"/>
         <attribute name="myChmpionID" optional="YES" attributeType="String"/>
-        <attribute name="summonerID" optional="YES" attributeType="String"/>
         <attribute name="version" optional="YES" attributeType="String"/>
-        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Summoner" inverseName="relationship" inverseEntity="Summoner"/>
+        <relationship name="playedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summoner" inverseName="plays" inverseEntity="Summoner"/>
     </entity>
     <entity name="Summoner" representedClassName="Summoner" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -20,6 +19,6 @@
         <attribute name="rank" optional="YES" attributeType="String"/>
         <attribute name="summonerName" optional="YES" attributeType="String"/>
         <attribute name="tier" optional="YES" attributeType="String"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Match" inverseName="relationship" inverseEntity="Match"/>
+        <relationship name="plays" optional="YES" toMany="YES" maxCount="500" deletionRule="Cascade" destinationEntity="Match" inverseName="playedBy" inverseEntity="Match"/>
     </entity>
 </model>

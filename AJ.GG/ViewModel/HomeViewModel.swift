@@ -15,34 +15,43 @@ class ProfileViewModel: ObservableObject {
     
     let matchV5Service: MatchV5ServiceEnable
     @Published var summoners: [Summoner] = []
-    @Published var matchs: [Match] = []
+    @Published var matches: [Match] = []
     
     init(matchV5Service: MatchV5ServiceEnable) {
         self.summonerManager = SummonerManager()
         self.matchManager = MatchManager()
-        
         self.summoners = summonerManager.getAll()
         self.matchV5Service = matchV5Service
         
-        getRecentMatch()
-        let matchs = matchManager.getAll()
-        print("match count : \(matchs.count)")
+        Task {
+            await fetchMatches()
+            getRecentMatch()
+        }
     }
     
     func getRecentMatch() {
         Task {
-            let matchDTOs = await matchV5Service.searchMatchDTOsByPuuid(puuid: summoners[0].puuid!)
-            switch matchDTOs {
-            case .success(let success):
-                success.forEach { matchDTO in
-                    matchManager.save(matchDTO: matchDTO, puuid: summoners[0].puuid!)
+            if let puuid = summoners.first?.puuid {
+                print("puuid : \(puuid)")
+                let matchDTOs = await matchV5Service.searchMatchDTOsByPuuid(puuid: puuid)
+                switch matchDTOs {
+                case .success(let success):
+                    success.forEach { matchDTO in
+                        matchManager.save(matchDTO: matchDTO, puuid: puuid)
+                    }
+                    
+                    await fetchMatches()
+                case .failure(_):
+                    break
                 }
-            case .failure(_):
-                break
             }
         }
     }
     
+    @MainActor
+    func fetchMatches() async {
+        self.matches = matchManager.getAll()
+    }
     
     
 }
