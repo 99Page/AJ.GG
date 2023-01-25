@@ -13,8 +13,8 @@ struct LeagueTier {
     let rank: Rank?
     let points: Int32
     
-    var emblem: String {
-        self.tier?.emblem ?? "IRON"
+    var emblemImage: Image {
+        self.tier?.emblemImage ?? Tier.bronze.emblemImage
     }
 }
 
@@ -29,26 +29,26 @@ enum Tier: String, CaseIterable{
     case grandmaster = "GRANDMASTER"
     case challenger = "CHALLENGER"
     
-    var emblem: String {
+    var emblemImage: Image {
         switch self {
         case .iron:
-            return "Emblem_Iron"
+            return Image("Emblem_Iron")
         case .bronze:
-            return "Emblem_Bronze"
+            return Image("Emblem_Bronze")
         case .silver:
-            return "Emblem_Silver"
+            return Image("Emblem_Silver")
         case .gold:
-            return "Emblem_Gold"
+            return Image("Emblem_Gold")
         case .platinum:
-            return "Emblem_Platinum"
+            return Image("Emblem_Platinum")
         case .diamond:
-            return "Emblem_Diamond"
+            return Image("Emblem_Diamond")
         case .master:
-            return "Emblem_Master"
+            return Image("Emblem_Master")
         case .grandmaster:
-            return "Emblem_Grandmaster"
+            return Image("Emblem_Grandmaster")
         case .challenger:
-            return "Emblem_Challenger"
+            return Image("Emblem_Challenger")
         }
     }
 }

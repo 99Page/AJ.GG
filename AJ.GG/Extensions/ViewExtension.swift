@@ -15,4 +15,12 @@ extension View {
         if isHidden {}
         else { self }
     }
+    
+    @ViewBuilder
+    func frame(cgsize: CGSize, alignment: Alignment = .center) -> some View {
+        self
+            .frame(width: cgsize.width, height: cgsize.height, alignment: alignment)
+    }
 }
+
+

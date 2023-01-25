@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 
 class RiotAuthorizaiton {
-    let headers: HTTPHeaders = [ AUTH_KEY : RIOT_API_KEY ]
+    let headers: HTTPHeaders = [ RiotAuth.key.rawValue : RiotAuth.value.rawValue]
     
     func url(region: Region) -> String {
         return "https://\(region.rawValue).\(BASE_URL)"

@@ -8,39 +8,26 @@
 import Foundation
 import CoreData
 
-class SummonerManager {
+class SummonerManager: DataManagerDelegate {
+    typealias CDData = Summoner
     
-    let container: NSPersistentContainer
-    
+    let context: NSManagedObjectContext
     
     init() {
-        self.container = NSPersistentContainer(name: "AJ_GG")
-        
-        container.loadPersistentStores { description, error in
-           if let error = error {
-               print("ERROR LOADING CORE DATA")
-               print(error.localizedDescription)
-           } else {
-               print("SUCCESSFULLY LOAD CORE DATA : Register")
-           }
-       }
+        self.context = PersistenceController.shared.container.viewContext
     }
     
-    func save(summonerDTO: SummonerDTO, tier: LeagueTier?) {
-        _ = Summoner(summonerDTO: summonerDTO, leagueTier: tier, context: self.container.viewContext)
-        
-        do {
-            try container.viewContext.save()
-        } catch {
-            print("ERROR SAVING CORE DATA")
-            print(error.localizedDescription)
-        }
+    func add(_ data: Summoner) {
+        let insertData = NSEntityDescription.insertNewObject(forEntityName: "Summoner",
+                                                             into: self.context) as! Summoner
+        insertData.copy(data)
+        save()
     }
     
     func getAll() -> [Summoner] {
         let request = NSFetchRequest<Summoner>(entityName: "Summoner")
         do {
-            let summoners = try container.viewContext.fetch(request)
+            let summoners = try context.fetch(request)
             print("Fetch Success")
             return summoners
         } catch {
@@ -54,7 +41,7 @@ class SummonerManager {
     func deleteAll() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Summoner.fetchRequest()
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        _ = try? container.viewContext.execute(batchDeleteRequest)
+        _ = try? context.execute(batchDeleteRequest)
     }
     
 }

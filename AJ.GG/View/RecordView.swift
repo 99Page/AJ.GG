@@ -10,27 +10,23 @@ import Kingfisher
 
 struct RecordView: View {
     
-    let matches: [Match]
+    let matches: [CDMatch]
     var body: some View {
         VStack {
             ForEach(matches.indices, id: \.self) { i in
                 HStack {
-                    Text("내 챔피언 : \(matches[i].myChmpionID ?? "에러")")
+                    Text("내 챔피언")
                     
-                    Text("상대 챔피언 : \(matches[i].enemyChampionID ?? "에러")")
+                    KFImage(URL(string: RiotURL.championSquareAsset(champion: matches[i].myChmpionID ?? "Aatrox").url))
                     
-                    if let url: URL = URL(string: RiotURL.championSquareAsset(champion: matches[i].myChmpionID ?? "Aatrox").url) {
-                        KFImage(url)
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                    } else {
-                        Text("???")
-                    }
+                    Text("상대 챔피언")
                     
-                    
+                    KFImage(URL(string: RiotURL.championSquareAsset(champion: matches[i].enemyChampionID ?? "Aatrox").url))
+//
+////
                     Text(matches[i].isWin ? "승리" : "패배")
-                    
-                    Text(matches[i].lane ?? "에러")
+//
+//                    Text(matches[i].lane ?? "에러")
                 }
             }
         }

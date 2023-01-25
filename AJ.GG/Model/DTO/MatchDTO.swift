@@ -11,6 +11,10 @@ struct MatchDTO: Codable {
     let metadata: MetadataDTO
     let info: InfoDTO
     
+    var gameCreation: Int64 {
+        info.gameCreation
+    }
+    
     func getVersion() -> String {
         return metadata.getVersion()
     }
@@ -27,7 +31,7 @@ struct MatchDTO: Codable {
         return info.isWinByPuuid(puuid: puudid)
     }
     
-    func isEqualMatchID(match: Match) -> Bool {
+    func isEqualMatchID(match: CDMatch) -> Bool {
         return self.getMatchID() == match.id
     }
     

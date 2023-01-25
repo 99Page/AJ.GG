@@ -10,7 +10,7 @@ import Foundation
 struct ParticipantDTO: Codable {
     let allInPings, assistMePings, assists, baitPings: Int
     let baronKills, basicPings, bountyLevel: Int
-    let challenges: [String: Double]
+//    let challenges: [String: Double]
     let champExperience, champLevel, championID: Int
     let championName: String
     let championTransform, commandPings, consumablesPurchased, damageDealtToBuildings: Int
@@ -57,7 +57,9 @@ struct ParticipantDTO: Codable {
     let win: Bool
 
     enum CodingKeys: String, CodingKey {
-        case allInPings, assistMePings, assists, baitPings, baronKills, basicPings, bountyLevel, challenges, champExperience, champLevel
+        case allInPings, assistMePings, assists, baitPings, baronKills, basicPings, bountyLevel
+        // case challenges
+        case champExperience, champLevel
         case championID = "championId"
         case championName, championTransform, commandPings, consumablesPurchased, damageDealtToBuildings, damageDealtToObjectives, damageDealtToTurrets, damageSelfMitigated, dangerPings, deaths, detectorWardsPlaced, doubleKills, dragonKills, eligibleForProgression, enemyMissingPings, enemyVisionPings, firstBloodAssist, firstBloodKill, firstTowerAssist, firstTowerKill, gameEndedInEarlySurrender, gameEndedInSurrender, getBackPings, goldEarned, goldSpent, holdPings, individualPosition, inhibitorKills, inhibitorTakedowns, inhibitorsLost, item0, item1, item2, item3, item4, item5, item6, itemsPurchased, killingSprees, kills, lane, largestCriticalStrike, largestKillingSpree, largestMultiKill, longestTimeSpentLiving, magicDamageDealt, magicDamageDealtToChampions, magicDamageTaken, needVisionPings, neutralMinionsKilled, nexusKills, nexusLost, nexusTakedowns, objectivesStolen, objectivesStolenAssists, onMyWayPings
         case participantID = "participantId"

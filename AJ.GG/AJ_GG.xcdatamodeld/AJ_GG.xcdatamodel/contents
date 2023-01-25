@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-    </entity>
-    <entity name="Match" representedClassName="Match" syncable="YES" codeGenerationType="class">
+    <entity name="CDMatch" representedClassName="CDMatch" syncable="YES" codeGenerationType="class">
         <attribute name="enemyChampionID" optional="YES" attributeType="String"/>
+        <attribute name="gameCreation" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="isWin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lane" optional="YES" attributeType="String"/>
-        <attribute name="myChmpionID" optional="YES" attributeType="String"/>
+        <attribute name="myChmpionID" attributeType="String" defaultValueString="Aatrox"/>
         <attribute name="version" optional="YES" attributeType="String"/>
         <relationship name="playedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Summoner" inverseName="plays" inverseEntity="Summoner"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
     <entity name="Summoner" representedClassName="Summoner" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -19,6 +20,6 @@
         <attribute name="rank" optional="YES" attributeType="String"/>
         <attribute name="summonerName" optional="YES" attributeType="String"/>
         <attribute name="tier" optional="YES" attributeType="String"/>
-        <relationship name="plays" optional="YES" toMany="YES" maxCount="500" deletionRule="Cascade" destinationEntity="Match" inverseName="playedBy" inverseEntity="Match"/>
+        <relationship name="plays" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDMatch" inverseName="playedBy" inverseEntity="CDMatch"/>
     </entity>
 </model>

@@ -11,9 +11,13 @@ import CoreData
 struct ContentView: View {
     
     var body: some View {
-        ZStack {
-            ProfileView()
-            RegisterSummonerView()
+        Group {
+            
+            HStack {
+                CircleChampionImage(champion: Champion.dummyChampion(), isEnemy: false)
+                CircleChampionImage(champion: Champion.dummyChampion(), isEnemy: true)
+            }
+//            RegisterSummonerView()
         }
     }
 }

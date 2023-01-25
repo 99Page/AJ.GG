@@ -13,17 +13,13 @@ protocol SummonerServiceEnable {
     func idByName(summonerName: String) async -> Result<String, NetworkError>
 }
 
-class SummonerService: SummonerServiceEnable {
+class SummonerService: RiotAuthorizaiton, SummonerServiceEnable {
     
     func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError> {
         
         let url = "https://KR.api.riotgames.com/lol/summoner/v4/summoners/by-name/\(summonerName)"
         let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         let encodedURL = URL(string: encoded)!
-        
-        let headers: HTTPHeaders = [
-            AUTH_KEY : RIOT_API_KEY
-        ]
         
         let response = await AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: headers).serializingDecodable(SummonerDTO.self).response
         

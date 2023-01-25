@@ -7,10 +7,11 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class RegisterSummonerViewModel: ObservableObject {
     
-    let title = "소환사 이름을 입력해주세요."
+    let _title = "소환사 이름을 입력해주세요."
     private let summonerManager: SummonerManager
     private let summonerService: SummonerServiceEnable
     private let leagueV4Service: LeagueV4ServiceEnable
@@ -18,11 +19,6 @@ class RegisterSummonerViewModel: ObservableObject {
     @Published var summonerName: String = ""
     @Published var tier: LeagueTier?
     @Published var summoners: [Summoner] = []
-    
-    var isSummonerRegistered: Bool {
-        !summoners.isEmpty
-    }
-  
     
     init(summonerService: SummonerServiceEnable, leagueV4Service: LeagueV4ServiceEnable) {
         self.summonerService = summonerService
@@ -33,17 +29,19 @@ class RegisterSummonerViewModel: ObservableObject {
     
     @MainActor
     func buttonTapped() async {
-        do {
-            let summonerResult = await summonerService.summonerByName(summonerName: self.summonerName)
-            let summoner = try summonerResult.get()
-            let tierResult = await leagueV4Service.leagueTierBySummonerID(summonerID: summoner.id)
-            let tier = try tierResult.get()
-            self.tier = tier
-            self.summonerManager.save(summonerDTO: summoner, tier: tier)
-            self.summoners = summonerManager.getAll()
-        } catch {
-            
-        }
+        print(_summonerName)
+//        do {
+//            let summonerResult = await summonerService.summonerByName(summonerName: self._summonerName)
+//            let summoner = try summonerResult.get()
+//            let tierResult = await leagueV4Service.leagueTierBySummonerID(summonerID: summoner.id)
+//            let tier = try tierResult.get()
+//            self._tier = tier
+//            let summonerData = Summoner(summonerDTO: summoner, leagueTier: tier)
+//            self.summonerManager.add(summonerData)
+//            self._summoners = summonerManager.getAll()
+//        } catch {
+//
+//        }
     }
 
     func deleteSummonersAll() {

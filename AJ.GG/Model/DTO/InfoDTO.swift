@@ -8,21 +8,24 @@
 import Foundation
 
 struct InfoDTO: Codable {
-    let gameCreation, gameDuration, gameEndTimestamp, gameID: Int
-    let gameMode, gameName: String
-    let gameStartTimestamp: Int
-    let gameType, gameVersion: String
-    let mapID: Int
-    let participants: ParticipantDTOs
-    let platformID: String
-    let queueID: Int
-    let teams: Teams
-    let tournamentCode: String
+    private let _gameCreation, gameDuration, gameEndTimestamp, gameID: Int64
+    private let _gameMode: String
+    private let gameName: String
+    private let gameStartTimestamp: Int
+    private let gameType, gameVersion: String
+    private let mapID: Int
+    private let participants: ParticipantDTOs
+    private let platformID: String
+    private let queueID: Int
+    private let teams: Teams
+    private let tournamentCode: String
 
     enum CodingKeys: String, CodingKey {
-        case gameCreation, gameDuration, gameEndTimestamp
+        case _gameCreation = "gameCreation"
+        case gameDuration, gameEndTimestamp
         case gameID = "gameId"
-        case gameMode, gameName, gameStartTimestamp, gameType, gameVersion
+        case _gameMode = "gameMode"
+        case gameName, gameStartTimestamp, gameType, gameVersion
         case mapID = "mapId"
         case participants
         case platformID = "platformId"
@@ -30,7 +33,17 @@ struct InfoDTO: Codable {
         case teams, tournamentCode
     }
     
-  
+    var gameCreation: Int64 {
+        return _gameCreation
+    }
+    
+    var gameMode: String {
+        return _gameMode
+    }
+    
+    func isSummonerRift() -> Bool {
+        self.gameMode.isEqual(str: "CLASSIC")
+    }
     
     func getLaneByPuuid(puuid: String) -> Lane? {
         return participants.first { $0.isSamePuuid(puuid: puuid) }?.getLane()
@@ -72,3 +85,4 @@ struct InfoDTO: Codable {
         return participants.first { $0.isSamePuuid(puuid: puuid) }?.isWin() ?? true 
     }
 }
+

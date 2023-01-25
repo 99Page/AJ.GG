@@ -9,3 +9,9 @@ import Foundation
 
 
 typealias Strings = [String]
+
+extension String {
+    func isEqual(str: String) -> Bool {
+        return self == str 
+    }
+}

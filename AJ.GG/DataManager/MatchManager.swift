@@ -8,57 +8,31 @@
 import Foundation
 import CoreData
 
-extension Match {
-    convenience init(matchDTO: MatchDTO, puuid: String, context: NSManagedObjectContext) {
-        self.init(context: context)
-        self.id = matchDTO.getMatchID()
-        self.myChmpionID = matchDTO.getChampionNameByPuuid(puuid: puuid)
-        self.enemyChampionID = matchDTO.getEnemyChampionNameByPuuid(puuid: puuid)
-        self.lane = matchDTO.getLaneByPuuid(puuid: puuid)?.rawValue
-        self.isWin = matchDTO.isWingByPuuid(puudid: puuid)
-        self.version = matchDTO.getVersion()
-    }
-}
-
-
-class MatchManager {
+class MatchManager: DataManagerDelegate {
+    typealias CDData = CDMatch
+    typealias Data = Match
     
-    let container: NSPersistentContainer
+    let context: NSManagedObjectContext
     
     
     init() {
-        self.container = NSPersistentContainer(name: "AJ_GG")
-        
-        container.loadPersistentStores { description, error in
-           if let error = error {
-               print("ERROR LOADING CORE DATA")
-               print(error.localizedDescription)
-           } else {
-               print("SUCCESSFULLY LOAD CORE DATA : Register")
-           }
-       }
+        self.context = PersistenceController.shared.container.viewContext
     }
     
-    func save(matchDTO: MatchDTO, puuid: String) {
+    func add(_ data: CDMatch) {
         
         let matches = self.getAll()
-        
-        guard !matches.contains( where: { matchDTO.isEqualMatchID(match: $0) }) else { return }
-        let data = Match(matchDTO: matchDTO, puuid: puuid, context: container.viewContext)
-        print(data)
-        
-        do {
-            try container.viewContext.save()
-        } catch {
-            print("ERROR SAVING CORE DATA")
-            print(error.localizedDescription)
-        }
+        guard !matches.contains( where: { data.isEqual($0) }) else { return }
+        let insertData = NSEntityDescription.insertNewObject(forEntityName: "Match", into: self.context) as! CDMatch
+        insertData.copy(data)
+        save()
     }
     
-    func getAll() -> [Match] {
-        let request = NSFetchRequest<Match>(entityName: "Match")
+    func getAll() -> [CDMatch] {
+        let request = NSFetchRequest<CDMatch>(entityName: "Match")
+        request.sortDescriptors = [NSSortDescriptor(key: "gameCreation", ascending: false)]
         do {
-            let matches = try container.viewContext.fetch(request)
+            let matches = try self.context.fetch(request)
             print("Fetch Success")
             return matches
         } catch {
@@ -66,13 +40,13 @@ class MatchManager {
             print(error.localizedDescription)
         }
         
-        return [Match]()
+        return [CDMatch]()
     }
     
     func deleteAll() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Match.fetchRequest()
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDMatch.fetchRequest()
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        _ = try? container.viewContext.execute(batchDeleteRequest)
+        _ = try? self.context.execute(batchDeleteRequest)
     }
     
 }
