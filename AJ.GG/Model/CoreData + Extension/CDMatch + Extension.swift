@@ -29,16 +29,16 @@ extension CDMatch: Copyable {
     
     
 }
-
-extension CDMatch {
-    convenience init(matchDTO: MatchDTO, puuid: String, context: NSManagedObjectContext) {
-        self.init(context: context)
-        self.id = matchDTO.getMatchID()
-        self.myChmpionID = matchDTO.getChampionNameByPuuid(puuid: puuid)
-        self.enemyChampionID = matchDTO.getEnemyChampionNameByPuuid(puuid: puuid)
-        self.lane = matchDTO.getLaneByPuuid(puuid: puuid)?.rawValue
-        self.isWin = matchDTO.isWingByPuuid(puudid: puuid)
-        self.version = matchDTO.getVersion()
-        self.gameCreation = matchDTO.gameCreation
-    }
-}
+//
+//extension CDMatch {
+//    convenience init(matchDTO: MatchDTO, puuid: String, context: NSManagedObjectContext) {
+//        self.init(context: context)
+//        self.id = matchDTO.getMatchID()
+//        self.myChmpionID = matchDTO.championNameByPuuid(puuid: puuid)
+//        self.enemyChampionID = matchDTO.getEnemyChampionNameByPuuid(puuid: puuid)
+//        self.lane = matchDTO.getLaneByPuuid(puuid: puuid)?.rawValue
+//        self.isWin = matchDTO.isWinByPuuid(puudid: puuid)
+//        self.version = matchDTO.getVersion()
+//        self.gameCreation = matchDTO.gameCreation
+//    }
+//}

@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct SummonerDTO: Codable {
+struct SummonerDTO: Codable, DummyCreatable {
+    static func dummyData() -> SummonerDTO {
+        return SummonerDTO(id: "0", accountID: "0", puuid: "123", name: "SwiftUI", profileIconID: 0, revisionDate: 0, summonerLevel: 0)
+    }
+    
+    static func dummyDatas() -> [SummonerDTO] {
+        return []
+    }
+    
+    typealias Dummy = SummonerDTO
+    
     let id, accountID, puuid, name: String
     let profileIconID, revisionDate, summonerLevel: Int
 
@@ -18,4 +28,6 @@ struct SummonerDTO: Codable {
         case profileIconID = "profileIconId"
         case revisionDate, summonerLevel
     }
+    
+    
 }

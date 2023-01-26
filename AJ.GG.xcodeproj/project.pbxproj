@@ -60,6 +60,7 @@
 		15C448512959899C0063223E /* SummonerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C448502959899C0063223E /* SummonerDTO.swift */; };
 		15C4485329598A4D0063223E /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C4485229598A4D0063223E /* ServerError.swift */; };
 		15E52E06298143D2004B4DBC /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E52E05298143D2004B4DBC /* Match.swift */; };
+		15F0FBCF2982660B00E5BAB2 /* DummyCretable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0FBCE2982660B00E5BAB2 /* DummyCretable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +137,7 @@
 		15C448502959899C0063223E /* SummonerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerDTO.swift; sourceTree = "<group>"; };
 		15C4485229598A4D0063223E /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		15E52E05298143D2004B4DBC /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		15F0FBCE2982660B00E5BAB2 /* DummyCretable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyCretable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +311,7 @@
 		15A4D6FE295973170052E3AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				15F0FBCE2982660B00E5BAB2 /* DummyCretable.swift */,
 				1526DD022980010500340069 /* CoreData + Extension */,
 				15A4D7132959895F0052E3AD /* DTO */,
 				15C4485229598A4D0063223E /* ServerError.swift */,
@@ -554,6 +557,7 @@
 				1597B1DA2971218900A66486 /* RiotImageService.swift in Sources */,
 				151CA69329813AEB0095D8DC /* CircleChampionImage.swift in Sources */,
 				1526DD082980024500340069 /* CDMatch + Extension.swift in Sources */,
+				15F0FBCF2982660B00E5BAB2 /* DummyCretable.swift in Sources */,
 				15A4D6CD295972D60052E3AD /* AJ_GGApp.swift in Sources */,
 				15A4D7092959787B0052E3AD /* ViewExtension.swift in Sources */,
 				1526DD062980016D00340069 /* Summoner + Extension.swift in Sources */,

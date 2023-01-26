@@ -11,13 +11,10 @@ import CoreData
 struct ContentView: View {
     
     var body: some View {
-        Group {
-            
-            HStack {
-                CircleChampionImage(champion: Champion.dummyChampion(), isEnemy: false)
-                CircleChampionImage(champion: Champion.dummyChampion(), isEnemy: true)
-            }
-//            RegisterSummonerView()
+        NavigationStack {
+            RegisterSummonerView()
         }
+        .padding(.init(top: 1, leading: 1, bottom: 1, trailing: 1))
+        
     }
 }

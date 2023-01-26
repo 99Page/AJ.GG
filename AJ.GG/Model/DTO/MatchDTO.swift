@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct MatchDTO: Codable {
+struct MatchDTO: Codable, DummyCreatable {
+    static func dummyDatas() -> [MatchDTO] {
+        return [] 
+    }
+    
+    static func dummyData() -> MatchDTO {
+        return MatchDTO(metadata: MetadataDTO.dummyData(), info: InfoDTO.dummyData())
+    }
+    
+    typealias Dummy = MatchDTO
+    
     let metadata: MetadataDTO
     let info: InfoDTO
     
@@ -27,7 +37,7 @@ struct MatchDTO: Codable {
         return info.getLaneByPuuid(puuid: puuid)
     }
     
-    func isWingByPuuid(puudid: String) -> Bool {
+    func isWinByPuuid(puudid: String) -> Bool {
         return info.isWinByPuuid(puuid: puudid)
     }
     
@@ -35,11 +45,11 @@ struct MatchDTO: Codable {
         return self.getMatchID() == match.id
     }
     
-    func getChampionNameByPuuid(puuid: String) -> String? {
-        return info.getChampionNameByPuuid(puuid: puuid)
+    func myChampion(puuid: String) -> Champion {
+        return info.myChampionByPuuid(puuid: puuid)
     }
     
-    func getEnemyChampionNameByPuuid(puuid: String) -> String? {
-        return info.getEnemyChmapionByPuuid(puuid: puuid)
+    func rivalChampion(puuid: String) -> Champion {
+        return info.rivalChampionByPuuid(puuid: puuid)
     }
 }

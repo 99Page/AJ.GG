@@ -9,6 +9,8 @@ import Foundation
 import CoreData
 
 class SummonerManager: DataManagerDelegate {
+    typealias Data = Summoner
+    
     typealias CDData = Summoner
     
     let context: NSManagedObjectContext

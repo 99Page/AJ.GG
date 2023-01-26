@@ -7,7 +7,13 @@
 
 import Foundation
 
-struct MetadataDTO: Codable {
+struct MetadataDTO: Codable, DummyCreatable {
+    static func dummyDatas() -> [MetadataDTO] {
+        return [] 
+    }
+    
+    typealias Dummy = MetadataDTO
+    
     let dataVersion, matchID: String
     let participants: [String]
 
@@ -15,6 +21,10 @@ struct MetadataDTO: Codable {
         case dataVersion
         case matchID = "matchId"
         case participants
+    }
+    
+    static func dummyData() -> MetadataDTO {
+        return MetadataDTO(dataVersion: "13.1", matchID: "", participants: [])
     }
     
     func getVersion() -> String {

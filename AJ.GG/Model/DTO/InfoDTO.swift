@@ -7,7 +7,17 @@
 
 import Foundation
 
-struct InfoDTO: Codable {
+struct InfoDTO: Codable, DummyCreatable {
+    static func dummyDatas() -> [InfoDTO] {
+        return [] 
+    }
+    
+    static func dummyData() -> InfoDTO {
+        return InfoDTO(_gameCreation: 1, gameDuration: 1, gameEndTimestamp: 1, gameID: 1, _gameMode: "rank", gameName: "123", gameStartTimestamp: 1, gameType: "1", gameVersion: "1", mapID: 0, participants: ParticipantDTO.dummyDatas(), platformID: "123", queueID: 100, tournamentCode: "123")
+    }
+    
+    typealias Dummy = InfoDTO
+    
     private let _gameCreation, gameDuration, gameEndTimestamp, gameID: Int64
     private let _gameMode: String
     private let gameName: String
@@ -17,7 +27,7 @@ struct InfoDTO: Codable {
     private let participants: ParticipantDTOs
     private let platformID: String
     private let queueID: Int
-    private let teams: Teams
+//    private let teams: Teams
     private let tournamentCode: String
 
     enum CodingKeys: String, CodingKey {
@@ -30,7 +40,8 @@ struct InfoDTO: Codable {
         case participants
         case platformID = "platformId"
         case queueID = "queueId"
-        case teams, tournamentCode
+//        case teams
+        case tournamentCode
     }
     
     var gameCreation: Int64 {
@@ -68,17 +79,17 @@ struct InfoDTO: Codable {
         return participants.first { $0.isEnemy(teamID: myTeamID, lane: myLane)}?.getPuuid()
     }
     
-    func getChampionNameByPuuid(puuid: String) -> String? {
-        return participants.first { $0.isSamePuuid(puuid: puuid) }?.getChampionName()
+    func myChampionByPuuid(puuid: String) -> Champion {
+        return participants.first { $0.isSamePuuid(puuid: puuid) }?.champion ?? Champion.optionalCase()
 
     }
     
-    func getEnemyChmapionByPuuid(puuid: String) -> String? {
+    func rivalChampionByPuuid(puuid: String) -> Champion {
         if let enemyPuuid = getEnemyPuuidByPuuid(puuid: puuid) {
-            return getChampionNameByPuuid(puuid: enemyPuuid)
+            return myChampionByPuuid(puuid: enemyPuuid)
         }
         
-        return nil
+        return Champion.optionalCase()
     }
     
     func isWinByPuuid(puuid: String) -> Bool {

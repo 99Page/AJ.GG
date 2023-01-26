@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Kingfisher
 
 struct Champion {
     private let _name: String
@@ -18,9 +19,17 @@ struct Champion {
         _name
     }
     
+    var image: KFImage {
+        KFImage(URL(string: RiotURL.championSquareAsset(champion: self.name).url))
+    }
+    
     static func dummyChampion() -> Champion {
         
         let championNames = ["Aatrox", "Garen", "Darius"]
         return Champion(name: championNames.randomElement() ?? "Aatrox")
+    }
+    
+    static func optionalCase() -> Champion {
+        return Champion(name: "Poro")
     }
 }
