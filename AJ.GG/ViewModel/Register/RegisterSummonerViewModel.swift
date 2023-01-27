@@ -18,6 +18,7 @@ class RegisterSummonerViewModel: ObservableObject {
     private let matchV5Service: MatchV5ServiceEnable
     
     var searchedSummoner: SummonerDTO?
+    
     @Published var summonerName: String = ""
     @Published var tier: LeagueTier?
     @Published var summoners: [Summoner] = []
@@ -29,6 +30,10 @@ class RegisterSummonerViewModel: ObservableObject {
     
     var matchesIndices: Range<Int> {
         summoners.indices
+    }
+    
+    var emblemImage: Image {
+        self.tier?.emblemImage ?? Tier.bronze.emblemImage
     }
     
     init(summonerService: SummonerServiceEnable, leagueV4Service: LeagueV4ServiceEnable, matchV5Service: MatchV5ServiceEnable) {
@@ -46,6 +51,9 @@ class RegisterSummonerViewModel: ObservableObject {
             let summonerResult = await summonerService.summonerByName(summonerName: self.summonerName)
             let summoner = try summonerResult.get()
             self.searchedSummoner = summoner
+            
+            let leagueResult = await leagueV4Service.leagueTierBySummonerID(summonerID: summoner.id)
+            self.tier = try leagueResult.get()
             
             
             let matchIDsResult = await matchV5Service.matcheIDsByPuuid(puuid: summoner.puuid)

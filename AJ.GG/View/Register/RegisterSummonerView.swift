@@ -19,46 +19,78 @@ struct RegisterSummonerView: View {
                                                                    matchV5Service: MatchV5Service())
     @FocusState private var focusState: Field?
     
-    var isSummonerNameFocused: Bool{
-        focusState == .summonerName
-    }
+    let spaceName: String = "scroll"
     
     var body: some View {
-        ScrollView {
-            VStack {
-                CapsuleText(text: $viewModel.summonerName,
-                            title: viewModel._title)
-                    .padding(.horizontal, 30)
-                    .focused($focusState, equals: .summonerName)
-                    .animation(.easeIn(duration: 0.4), value: isSummonerNameFocused)
-                    .onSubmit {
-                        Task {
-                            viewModel.buttonTapped
+        
+        GeometryReader { outer in
+            let safeAreaTop = outer.safeAreaInsets.top
+            ScrollView {
+                VStack {
+                    CapsuleText(text: $viewModel.summonerName,
+                                title: viewModel._title)
+                        .padding(.horizontal, 30)
+                        .focused($focusState, equals: .summonerName)
+                        .onSubmit {
+                            Task {
+                                viewModel.buttonTapped
+                            }
                         }
+                    
+                    if let summoner = viewModel.searchedSummoner {
+                        RecordView(matches: viewModel.matches, summoner: summoner)
+                            .padding(.horizontal, 10)
                     }
-                
-                if let tier = viewModel.tier {
-                    tier.emblemImage
                 }
-                
-                if let summoner = viewModel.searchedSummoner {
-                    RecordView(matches: viewModel.matches, summoner: summoner)
-                        .padding(.horizontal, 10)
+                .padding(.all, 1)
+                .overlay {
+                    hiddenTitle(safeAreaTop: safeAreaTop)
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.all, 1)
-        }
-        .toolbar {
-            ToolbarItem(placement: .keyboard) {
-                Button {
-                    Task { await viewModel.buttonTapped() }
-                    focusState = nil
-                } label: {
-                    Text("완료")
+            .coordinateSpace(name: self.spaceName)
+            .toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    keyboardButton()
                 }
-                .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func keyboardButton() -> some View {
+        HStack {
+            
+            Button {
+                focusState = nil
+            } label: {
+                Text("종료")
+            }
 
+            Button {
+                Task { await viewModel.buttonTapped() }
+                focusState = nil
+            } label: {
+                Text("검색")
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .trailing)
+    }
+    
+    @ViewBuilder
+    private func hiddenTitle(safeAreaTop: CGFloat) -> some View {
+        if let summoner = viewModel.searchedSummoner {
+            HiddenTitle(spaceName: self.spaceName, headerHeight: 50, topSafeArea: safeAreaTop) {
+                HStack {
+                    viewModel.emblemImage
+                        .resizable()
+                        .frame(maxWidth: 50, maxHeight: 50)
+                    Text("\(summoner.name)")
+                }
+                .frame(maxWidth: .infinity, maxHeight: 50)
+                .background(Color.white)
+                .onTapGesture {
+                    self.focusState = .summonerName
+                }
             }
         }
     }

@@ -15,7 +15,7 @@ struct RecordView: View {
     
     var body: some View {
         VStack {
-            ForEach(matches.indices) { i in
+            ForEach(matches.indices, id: \.self) { i in
                 RecordCell(match: matches[i], summoner: summoner)
             }
         }
