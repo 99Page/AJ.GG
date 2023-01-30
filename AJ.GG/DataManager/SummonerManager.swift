@@ -9,9 +9,6 @@ import Foundation
 import CoreData
 
 class SummonerManager: DataManagerDelegate {
-    typealias Data = Summoner
-    
-    typealias CDData = Summoner
     
     let context: NSManagedObjectContext
     
@@ -19,15 +16,15 @@ class SummonerManager: DataManagerDelegate {
         self.context = PersistenceController.shared.container.viewContext
     }
     
-    func add(_ data: Summoner) {
-        let insertData = NSEntityDescription.insertNewObject(forEntityName: "Summoner",
-                                                             into: self.context) as! Summoner
-        insertData.copy(data)
+    func add(_ data: [String: Any]) {
+        let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDSummoner",
+                                                             into: self.context) as! CDSummoner
+        insertData.setValues(data)
         save()
     }
     
-    func getAll() -> [Summoner] {
-        let request = NSFetchRequest<Summoner>(entityName: "Summoner")
+    func getAll() -> [CDSummoner] {
+        let request = NSFetchRequest<CDSummoner>(entityName: "CDSummoner")
         do {
             let summoners = try context.fetch(request)
             print("Fetch Success")
@@ -37,13 +34,12 @@ class SummonerManager: DataManagerDelegate {
             print(error.localizedDescription)
         }
         
-        return [Summoner]()
+        return [CDSummoner]()
     }
     
     func deleteAll() {
-        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = Summoner.fetchRequest()
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDSummoner.fetchRequest()
         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         _ = try? context.execute(batchDeleteRequest)
     }
-    
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import Combine
 
 struct RegisterSummonerView: View {
     
@@ -14,19 +15,25 @@ struct RegisterSummonerView: View {
         case summonerName
     }
     
-    @StateObject private var viewModel = RegisterSummonerViewModel(summonerService: SummonerService(),
-                                                                   leagueV4Service: LeagueV4Serivce(),
-                                                                   matchV5Service: MatchV5Service())
+    @StateObject private var viewModel = RegisterSummonerViewModel(
+        summonerService: SummonerService(),
+        leagueV4Service: LeagueV4Serivce(),
+        matchV5Service: MatchV5Service())
     @FocusState private var focusState: Field?
     
     let spaceName: String = "scroll"
+    let registerButtonHeight: CGFloat = 50
+    
+    var isShowingRegisterButton: Bool {
+        viewModel.isSearched && self.focusState == nil
+    }
     
     var body: some View {
         
         GeometryReader { outer in
             let safeAreaTop = outer.safeAreaInsets.top
             ScrollView {
-                VStack {
+                PGVStack {
                     CapsuleText(text: $viewModel.summonerName,
                                 title: viewModel._title)
                         .padding(.horizontal, 30)
@@ -36,16 +43,19 @@ struct RegisterSummonerView: View {
                                 viewModel.buttonTapped
                             }
                         }
-                    
-                    if let summoner = viewModel.searchedSummoner {
-                        RecordView(matches: viewModel.matches, summoner: summoner)
-                            .padding(.horizontal, 10)
-                    }
+                    record()
                 }
-                .padding(.all, 1)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .overlay {
                     hiddenTitle(safeAreaTop: safeAreaTop)
                 }
+            }
+            .keyboardHideWhenScreenTapped()
+            .overlay {
+                recordProgreeView()
+            }
+            .overlay(alignment: .bottom) {
+                registerButton()
             }
             .coordinateSpace(name: self.spaceName)
             .toolbar {
@@ -53,6 +63,43 @@ struct RegisterSummonerView: View {
                     keyboardButton()
                 }
             }
+        }
+        .padding(.init(top: 1, leading: 0, bottom: 0, trailing: 0))
+        .hidden(viewModel.isRegistered)
+    }
+
+    
+    @ViewBuilder
+    private func registerButton() -> some View {
+        if isShowingRegisterButton {
+            Button {
+                viewModel.registerButtonTapped()
+            } label: {
+                Text("등록하기")
+                    .frame(maxWidth: .infinity, maxHeight: registerButtonHeight, alignment: .center)
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    private func recordProgreeView() -> some View {
+        if viewModel.isSearching {
+            VStack(alignment: .center) {
+                Loader()
+                Text("전적을 검색중입니다.")
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+        }
+    }
+    
+    @ViewBuilder
+    private func record() -> some View {
+        if let summoner = viewModel.searchedSummoner {
+            RecordView(matches: viewModel.matches, summoner: summoner)
+                .padding(.horizontal, 10)
+                .padding(.bottom, registerButtonHeight)
         }
     }
     
@@ -84,10 +131,13 @@ struct RegisterSummonerView: View {
                     viewModel.emblemImage
                         .resizable()
                         .frame(maxWidth: 50, maxHeight: 50)
+                    
                     Text("\(summoner.name)")
                 }
-                .frame(maxWidth: .infinity, maxHeight: 50)
+                .padding(.top, safeAreaTop)
+                .frame(maxWidth: .infinity, maxHeight: 50 + safeAreaTop)
                 .background(Color.white)
+                .offset(y: -safeAreaTop)
                 .onTapGesture {
                     self.focusState = .summonerName
                 }

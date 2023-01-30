@@ -11,6 +11,7 @@ import XCTest
 final class SummonersServiceTests: XCTestCase {
     
     var service: SummonerServiceEnable!
+    let mySummonerName = "SwiftUI 4"
     
     override func setUpWithError() throws {
         service = SummonerService()
@@ -21,17 +22,25 @@ final class SummonersServiceTests: XCTestCase {
     }
     
     func testSummonerByNameForMyName() async {
-        let expectation = XCTestExpectation()
         
-        let mySummonerName = "오누영"
+        let start = CFAbsoluteTimeGetCurrent()
+        let expectation = XCTestExpectation()
         let response = await service.summonerByName(summonerName: mySummonerName)
         
-        if response.error != nil {
-            XCTFail("SummonerByNameForMyName Fail")
+        switch response {
+        case .success(_):
+            break
+        case .failure(let failure):
+            XCTFail("\(failure.localizedDescription)")
         }
         
+        let end = CFAbsoluteTimeGetCurrent()
+        let timeInterval = end - start
+        print("\(timeInterval)")
         expectation.fulfill()
         wait(for: [expectation], timeout: 1.0)
+        
+        
     }
     
     func testSummonerByNameForNotExistsname() async {
@@ -40,27 +49,14 @@ final class SummonersServiceTests: XCTestCase {
         let notExistedName = "오1누1영"
         let response = await service.summonerByName(summonerName: notExistedName)
         
-        if response.error == nil {
-            XCTFail("SummonerByName Fail")
+        switch response {
+        case .success(_):
+            XCTFail("XCTFail")
+        case .failure(let failure):
+            break
         }
         
         expectation.fulfill()
         wait(for: [expectation], timeout: 1.0)
     }
-    
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }

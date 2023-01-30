@@ -9,49 +9,71 @@ import SwiftUI
 
 struct RecordCell: View {
     
-    let match: MatchDTO
-    let summoner: SummonerDTO
+    let match: Match
+    let height: CGFloat = 70
+    
+    let myChampionImageSize: CGSize = CGSize(width: 70, height: 70)
+    let rivalChampionImageSize: CGSize = CGSize(width: 60, height: 60)
     
     var myChampion: Champion {
-        match.myChampion(puuid: summoner.puuid)
+        match.myChampion
     }
     
     var rivalChampion: Champion {
-        match.rivalChampion(puuid: summoner.puuid)
+        match.rivalChampion
     }
     
     var resultText: String {
-        match.isWinByPuuid(puudid: summoner.puuid) ? "승리" : "패배"
+        match.isWin ? "승리" : "패배"
     }
     
-    var kda: String {
-        "11/2/5"
+    var myKDA: String {
+        let kda = match.myKDAByPuuid(summoner.puuid)
+        return "\(kda[0])/\(kda[1])/\(kda[2])"
+    }
+    
+    var rivalKDA: String {
+        let kda = match.rivalKDAByPuuid(summoner.puuid)
+        return "\(kda[0])/\(kda[1])/\(kda[2])"
     }
     
     var body: some View {
         HStack(alignment: .bottom, spacing: 10) {
-            CircleChampionImage(champion: myChampion, isEnemy: false)
+            CircleChampionImage(champion: myChampion, size: myChampionImageSize)
    
             VStack(alignment: .leading) {
                 
-                Text(resultText)
-                    .padding(.leading, 5)
+                HStack {
+                    Text(resultText)
+                        .padding(.leading, 5)
+                    
+                    Spacer()
+                    
+                    Text("\(match.rivalSummonerNameByPuuid(summoner.puuid))")
+                }
                 
                 Rectangle()
                     .stroke(lineWidth: 2)
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
                 
-                Text(kda)
-                    .padding(.leading, 5)
+                HStack {
+                    Text(myKDA)
+                        .padding(.leading, 5)
+                    
+                    Spacer()
+                    
+                    Text(rivalKDA)
+                }
             }
-            .frame(alignment: .center)
+            .frame(maxHeight: .infinity, alignment: .center)
             .padding(.leading, -10)
             
-            CircleChampionImage(champion: rivalChampion, isEnemy: true)
+
+            CircleChampionImage(champion: rivalChampion, size: rivalChampionImageSize)
                 .frame(alignment: .bottom)
         }
-        .frame(maxWidth: .infinity, maxHeight: 70)
+        .frame(maxWidth: .infinity, maxHeight: height)
         
     }
 }

@@ -12,9 +12,11 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            RegisterSummonerView()
+            Group {
+                RegisterSummonerView()
+                ProfileView()
+            }
         }
-        .padding(.init(top: 1, leading: 1, bottom: 1, trailing: 1))
-        
+
     }
 }

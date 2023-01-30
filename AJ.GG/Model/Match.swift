@@ -8,13 +8,21 @@
 import Foundation
 
 struct Match {
-    let match: CDMatch
     
-    var myChampion: Champion {
-        return Champion(name: match.myChmpionID ?? "Aatrox")
+    let myChampion: Champion
+    let rivalChampion: Champion
+    let isWin: Bool
+    
+    
+    init(_ match: CDMatch) {
+        self.myChampion = Champion(name: match.myChampionID ?? Champion.optionalCase().name)
+        self.rivalChampion = Champion(name: match.myChampionID ?? Champion.optionalCase().name)
+        self.isWin = match.isWin
     }
     
-    var rivalChampion: Champion {
-        return Champion(name: match.enemyChampionID ?? "Aatrox")
+    init(_ match: MatchDTO, puuid: String) {
+        self.myChampion = match.myChampionByPuuid(puuid)
+        self.rivalChampion = match.rivalChampionByPuuid(puuid)
+        self.isWin = match.isWinByPuuid(puuid)
     }
 }

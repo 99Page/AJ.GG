@@ -13,6 +13,11 @@ struct AJ_GGApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    #if DEBUG
+                    UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
+                    #endif
+                }
         }
     }
 }

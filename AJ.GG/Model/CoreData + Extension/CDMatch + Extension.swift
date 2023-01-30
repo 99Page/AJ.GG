@@ -14,31 +14,17 @@ extension CDMatch {
     }
 }
 
-extension CDMatch: Copyable {
-    func copy(_ origin: CDMatch) {
-        self.id = origin.id
-        self.myChmpionID = origin.myChmpionID
-        self.enemyChampionID = origin.enemyChampionID
-        self.lane = origin.lane
-        self.isWin = origin.isWin
-        self.version = origin.version
-        self.gameCreation = origin.gameCreation
+extension CDMatch: AllSettable {
+    func setValues(_ data: [String : Any]) {
+        self.setValue(data["enemyChampionID"], forKey: "enemyChampionID")
+        self.setValue(data["gameCreation"], forKey: "gameCreation")
+        self.setValue(data["id"], forKey: "id")
+        self.setValue(data["isWin"], forKey: "isWin")
+        self.setValue(data["lane"], forKey: "lane")
+        self.setValue(data["myChampionID"], forKey: "myChampionID")
+        self.setValue(data["version"], forKey: "version")
+        self.setValue(data["playedBy"], forKey: "playedBy")
     }
-    
-    typealias Data = CDMatch
-    
-    
 }
-//
-//extension CDMatch {
-//    convenience init(matchDTO: MatchDTO, puuid: String, context: NSManagedObjectContext) {
-//        self.init(context: context)
-//        self.id = matchDTO.getMatchID()
-//        self.myChmpionID = matchDTO.championNameByPuuid(puuid: puuid)
-//        self.enemyChampionID = matchDTO.getEnemyChampionNameByPuuid(puuid: puuid)
-//        self.lane = matchDTO.getLaneByPuuid(puuid: puuid)?.rawValue
-//        self.isWin = matchDTO.isWinByPuuid(puudid: puuid)
-//        self.version = matchDTO.getVersion()
-//        self.gameCreation = matchDTO.gameCreation
-//    }
-//}
+
+

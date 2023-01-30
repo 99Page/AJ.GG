@@ -21,10 +21,16 @@ class RegisterSummonerViewModel: ObservableObject {
     
     @Published var summonerName: String = ""
     @Published var tier: LeagueTier?
-    @Published var summoners: [Summoner] = []
-    @Published private var _matches: [MatchDTO] = []
+    @Published var summoners: [CDSummoner] = []
+    @Published private var _matches: [Match] = []
     
-    var matches: [MatchDTO] {
+    @Published var isSearching = false
+    
+    var isRegistered: Bool {
+        !summoners.isEmpty
+    }
+    
+    var matches: [Match] {
         _matches
     }
     
@@ -34,6 +40,10 @@ class RegisterSummonerViewModel: ObservableObject {
     
     var emblemImage: Image {
         self.tier?.emblemImage ?? Tier.bronze.emblemImage
+    }
+    
+    var isSearched: Bool {
+        searchedSummoner != nil 
     }
     
     init(summonerService: SummonerServiceEnable, leagueV4Service: LeagueV4ServiceEnable, matchV5Service: MatchV5ServiceEnable) {
@@ -47,6 +57,8 @@ class RegisterSummonerViewModel: ObservableObject {
     @MainActor
     func buttonTapped() async {
         do {
+            
+            self.isSearching = true
             self._matches.removeAll()
             let summonerResult = await summonerService.summonerByName(summonerName: self.summonerName)
             let summoner = try summonerResult.get()
@@ -54,24 +66,43 @@ class RegisterSummonerViewModel: ObservableObject {
             
             let leagueResult = await leagueV4Service.leagueTierBySummonerID(summonerID: summoner.id)
             self.tier = try leagueResult.get()
-            
-            
+
+
             let matchIDsResult = await matchV5Service.matcheIDsByPuuid(puuid: summoner.puuid)
             switch matchIDsResult {
             case .success(let matchIds):
                 let matcheDTOsResult = await matchV5Service.searchMatchDTOsByMatchIDs(matchIDs: matchIds)
-                
+
                 switch matcheDTOsResult {
                 case .success(let success):
-                    self._matches = success
+                    self._matches = success.map { Match($0, puuid: summoner.puuid)}
                 case .failure(let failure):
                     throw failure
                 }
             case .failure(let failure):
                 throw failure
             }
+            self.isSearching = false
         } catch {
-
+            self.isSearching = false
+            
+        }
+    }
+    
+    func registerButtonTapped() {
+        
+        if let summoner = self.searchedSummoner, let tier = self.tier {
+            
+            let data: [String: Any] = [
+                "id" : summoner.id,
+                "puuid" : summoner.puuid,
+                "leaguePoints" : tier.points,
+                "summonerName" : summoner.name,
+                "rank" : tier.rank?.rawValue ?? "I",
+                "tier" : tier.tier?.rawValue ?? "IRON"
+            ]
+            
+            self.summonerManager.add(data)
         }
     }
 }

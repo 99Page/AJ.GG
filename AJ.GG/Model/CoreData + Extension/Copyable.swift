@@ -7,7 +7,6 @@
 
 import Foundation
 
-protocol Copyable {
-    associatedtype Data
-    func copy(_ origin: Data) 
+protocol AllSettable {
+    func setValues(_ data: [String: Any]) 
 }

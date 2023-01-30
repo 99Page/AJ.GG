@@ -14,7 +14,7 @@
 		151EAEA4296683BF00322ACE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151EAEA3296683BF00322ACE /* StringExtension.swift */; };
 		151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151EAEA6296687DA00322ACE /* StringExntensionTests.swift */; };
 		1526DD042980011E00340069 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526DD032980011E00340069 /* Copyable.swift */; };
-		1526DD062980016D00340069 /* Summoner + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526DD052980016D00340069 /* Summoner + Extension.swift */; };
+		1526DD062980016D00340069 /* CDSummoner + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526DD052980016D00340069 /* CDSummoner + Extension.swift */; };
 		1526DD082980024500340069 /* CDMatch + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526DD072980024500340069 /* CDMatch + Extension.swift */; };
 		15298C98296C8FEF005FC900 /* champ.json in Resources */ = {isa = PBXBuildFile; fileRef = 15298C97296C8FEF005FC900 /* champ.json */; };
 		15298C9A296C9002005FC900 /* Champion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15298C99296C9002005FC900 /* Champion.swift */; };
@@ -59,6 +59,7 @@
 		15A9ED65296EE0D10043A5B4 /* RoundedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A9ED64296EE0D10043A5B4 /* RoundedText.swift */; };
 		15C448512959899C0063223E /* SummonerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C448502959899C0063223E /* SummonerDTO.swift */; };
 		15C4485329598A4D0063223E /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C4485229598A4D0063223E /* ServerError.swift */; };
+		15E1685B298774EF00F91CAB /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1685A298774EF00F91CAB /* Loader.swift */; };
 		15E52E06298143D2004B4DBC /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E52E05298143D2004B4DBC /* Match.swift */; };
 		15E9E18C2983922B008B614F /* PGVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9E18B2983922B008B614F /* PGVStack.swift */; };
 		15E9E19129839B9C008B614F /* HiddenTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9E19029839B9C008B614F /* HiddenTitle.swift */; };
@@ -90,7 +91,7 @@
 		151EAEA3296683BF00322ACE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		151EAEA6296687DA00322ACE /* StringExntensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExntensionTests.swift; sourceTree = "<group>"; };
 		1526DD032980011E00340069 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
-		1526DD052980016D00340069 /* Summoner + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Summoner + Extension.swift"; sourceTree = "<group>"; };
+		1526DD052980016D00340069 /* CDSummoner + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSummoner + Extension.swift"; sourceTree = "<group>"; };
 		1526DD072980024500340069 /* CDMatch + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMatch + Extension.swift"; sourceTree = "<group>"; };
 		15298C97296C8FEF005FC900 /* champ.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = champ.json; sourceTree = "<group>"; };
 		15298C99296C9002005FC900 /* Champion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Champion.swift; sourceTree = "<group>"; };
@@ -138,6 +139,7 @@
 		15A9ED64296EE0D10043A5B4 /* RoundedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedText.swift; sourceTree = "<group>"; };
 		15C448502959899C0063223E /* SummonerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerDTO.swift; sourceTree = "<group>"; };
 		15C4485229598A4D0063223E /* ServerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
+		15E1685A298774EF00F91CAB /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
 		15E52E05298143D2004B4DBC /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		15E9E18B2983922B008B614F /* PGVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PGVStack.swift; sourceTree = "<group>"; };
 		15E9E19029839B9C008B614F /* HiddenTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenTitle.swift; sourceTree = "<group>"; };
@@ -183,7 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				1526DD032980011E00340069 /* Copyable.swift */,
-				1526DD052980016D00340069 /* Summoner + Extension.swift */,
+				1526DD052980016D00340069 /* CDSummoner + Extension.swift */,
 				1526DD072980024500340069 /* CDMatch + Extension.swift */,
 			);
 			path = "CoreData + Extension";
@@ -337,6 +339,7 @@
 				151CA69229813AEB0095D8DC /* CircleChampionImage.swift */,
 				151CA69429813DB40095D8DC /* RecordCell.swift */,
 				15E9E19029839B9C008B614F /* HiddenTitle.swift */,
+				15E1685A298774EF00F91CAB /* Loader.swift */,
 			);
 			path = UIComponents;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				15C4485329598A4D0063223E /* ServerError.swift in Sources */,
 				152FBE69296D2AB800B082C7 /* InfoDTO.swift in Sources */,
 				152FBE65296D275E00B082C7 /* ParticipantDTO.swift in Sources */,
+				15E1685B298774EF00F91CAB /* Loader.swift in Sources */,
 				1585915D2962BF8700E888FC /* ProfileView.swift in Sources */,
 				15E9E18C2983922B008B614F /* PGVStack.swift in Sources */,
 				15A4D704295975300052E3AD /* RegisterSummonerViewModel.swift in Sources */,
@@ -575,7 +579,7 @@
 				15F0FBCF2982660B00E5BAB2 /* DummyCretable.swift in Sources */,
 				15A4D6CD295972D60052E3AD /* AJ_GGApp.swift in Sources */,
 				15A4D7092959787B0052E3AD /* ViewExtension.swift in Sources */,
-				1526DD062980016D00340069 /* Summoner + Extension.swift in Sources */,
+				1526DD062980016D00340069 /* CDSummoner + Extension.swift in Sources */,
 				15717271295D666C0053BCC1 /* UserDefaultKey.swift in Sources */,
 				15E9E19129839B9C008B614F /* HiddenTitle.swift in Sources */,
 				15A4D706295975640052E3AD /* CapsuleText.swift in Sources */,

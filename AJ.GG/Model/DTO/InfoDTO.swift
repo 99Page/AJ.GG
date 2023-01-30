@@ -52,6 +52,27 @@ struct InfoDTO: Codable, DummyCreatable {
         return _gameMode
     }
     
+    func rivalSummonerNameByPuuid(_ puuid: String) -> String {
+        if let rivalPuuid = rivalPuuidByPuuid(puuid: puuid) {
+            return participants.first { $0.isSamePuuid(puuid: rivalPuuid) }?.summonerName ?? "페이커"
+        }
+        
+        return "페이커"
+    }
+    
+    func myKDAByPuuid(_ puuid: String) -> [Int] {
+        return participants.first { $0.isSamePuuid(puuid: puuid) }?.kda ?? [-1, -1, -1]
+    }
+    
+    func rivalKDAByPuuid(_ puuid: String) -> [Int] {
+        if let rivalPuuid = rivalPuuidByPuuid(puuid: puuid) {
+            return myKDAByPuuid(rivalPuuid)
+        }
+        
+        return [-1, -1, -1]
+    }
+    
+    
     func isSummonerRift() -> Bool {
         self.gameMode.isEqual(str: "CLASSIC")
     }
@@ -64,7 +85,7 @@ struct InfoDTO: Codable, DummyCreatable {
         return participants.first { $0.isSamePuuid(puuid: puuid)}?.getTeamID()
     }
     
-    func getEnemyPuuidByPuuid(puuid: String) -> String? {
+    func rivalPuuidByPuuid(puuid: String) -> String? {
         let myTeamID = getTeamIDByPuuid(puuid: puuid)!
         let myLane = getLaneByPuuid(puuid: puuid)!
         
@@ -85,7 +106,7 @@ struct InfoDTO: Codable, DummyCreatable {
     }
     
     func rivalChampionByPuuid(puuid: String) -> Champion {
-        if let enemyPuuid = getEnemyPuuidByPuuid(puuid: puuid) {
+        if let enemyPuuid = rivalPuuidByPuuid(puuid: puuid) {
             return myChampionByPuuid(puuid: enemyPuuid)
         }
         

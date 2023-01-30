@@ -87,6 +87,10 @@ struct ParticipantDTO: Codable, DummyCreatable {
         case teamPosition, timeCCingOthers, timePlayed, totalDamageDealt, totalDamageDealtToChampions, totalDamageShieldedOnTeammates, totalDamageTaken, totalHeal, totalHealsOnTeammates, totalMinionsKilled, totalTimeCCDealt, totalTimeSpentDead, totalUnitsHealed, tripleKills, trueDamageDealt, trueDamageDealtToChampions, trueDamageTaken, turretKills, turretTakedowns, turretsLost, unrealKills, visionClearedPings, visionScore, visionWardsBoughtInGame, wardsKilled, wardsPlaced, win
     }
     
+    var kda: [Int] {
+        return [self.kills, self.deaths, self.assists]
+    }
+    
     var champion: Champion {
         return Champion(name: self.championName)
     }

@@ -17,11 +17,13 @@ struct RecordView: View {
         VStack {
             ForEach(matches.indices, id: \.self) { i in
                 RecordCell(match: matches[i], summoner: summoner)
+                Divider()
+                    .foregroundColor(.black)
             }
         }
     }
 }
-//
+
 //struct RecordView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        RecordView()

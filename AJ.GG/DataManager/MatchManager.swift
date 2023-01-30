@@ -10,8 +10,6 @@ import CoreData
 
 class MatchManager: DataManagerDelegate {
     typealias CDData = CDMatch
-    typealias Data = Match
-    
     let context: NSManagedObjectContext
     
     
@@ -19,17 +17,15 @@ class MatchManager: DataManagerDelegate {
         self.context = PersistenceController.shared.container.viewContext
     }
     
-    func add(_ data: CDMatch) {
-        
-        let matches = self.getAll()
-        guard !matches.contains( where: { data.isEqual($0) }) else { return }
-        let insertData = NSEntityDescription.insertNewObject(forEntityName: "Match", into: self.context) as! CDMatch
-        insertData.copy(data)
+    func add(_ data: [String : Any]) {
+        let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDMatch",
+                                                             into: self.context) as! CDMatch
+        insertData.setValues(data)
         save()
     }
     
     func getAll() -> [CDMatch] {
-        let request = NSFetchRequest<CDMatch>(entityName: "Match")
+        let request = NSFetchRequest<CDMatch>(entityName: "CDMatch")
         request.sortDescriptors = [NSSortDescriptor(key: "gameCreation", ascending: false)]
         do {
             let matches = try self.context.fetch(request)

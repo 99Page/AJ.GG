@@ -11,21 +11,17 @@ struct CircleChampionImage: View {
     
     
     let champion: Champion
-    let isEnemy: Bool
+    let size: CGSize
     
-    init(champion: Champion, isEnemy: Bool) {
+    init(champion: Champion, size: CGSize) {
         self.champion = champion
-        self.isEnemy = isEnemy
+        self.size = size
     }
     
     var outsideColor: Color {
-        isEnemy ? Color.red : Color.blue
+        size.width < 70 ? Color.red : Color.blue
     }
-    
-    var size: CGSize {
-        isEnemy ? CGSize(width: 50, height: 50) : CGSize(width: 70, height: 70)
-    }
-    
+   
     var body: some View {
         BaseChamiponImage(champion: champion)
             .frame(cgsize: size)
@@ -42,6 +38,6 @@ struct CircleChampionImage: View {
 
 struct CircleChampionImage_Previews: PreviewProvider {
     static var previews: some View {
-        CircleChampionImage(champion: Champion.dummyChampion(), isEnemy: false)
+        CircleChampionImage(champion: Champion.dummyChampion(), size: CGSize(width: 70, height: 70))
     }
 }

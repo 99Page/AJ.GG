@@ -29,7 +29,7 @@ final class StringExntensionTests: XCTestCase {
                                  nil, nil, nil]
         
         for i in 0..<tierStrings.count {
-            let actual = tierStrings[i].tier()
+            let actual = Tier(tierStrings[i])
             let expected = expectedTiers[i]
             XCTAssertEqual(actual, expected)
         }

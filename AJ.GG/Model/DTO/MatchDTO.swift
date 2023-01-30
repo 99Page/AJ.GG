@@ -8,6 +8,10 @@
 import Foundation
 
 struct MatchDTO: Codable, DummyCreatable {
+    
+    let metadata: MetadataDTO
+    let info: InfoDTO
+    
     static func dummyDatas() -> [MatchDTO] {
         return [] 
     }
@@ -18,38 +22,48 @@ struct MatchDTO: Codable, DummyCreatable {
     
     typealias Dummy = MatchDTO
     
-    let metadata: MetadataDTO
-    let info: InfoDTO
     
     var gameCreation: Int64 {
         info.gameCreation
     }
     
-    func getVersion() -> String {
+    func version() -> String {
         return metadata.getVersion()
     }
     
-    func getMatchID() -> String {
+    func matchID() -> String {
         return metadata.getMatchID()
     }
     
-    func getLaneByPuuid(puuid: String) -> Lane? {
+    func getLaneByPuuid(_ puuid: String) -> Lane? {
         return info.getLaneByPuuid(puuid: puuid)
     }
     
-    func isWinByPuuid(puudid: String) -> Bool {
+    func isWinByPuuid(_ puudid: String) -> Bool {
         return info.isWinByPuuid(puuid: puudid)
     }
     
     func isEqualMatchID(match: CDMatch) -> Bool {
-        return self.getMatchID() == match.id
+        return self.matchID() == match.id
     }
     
-    func myChampion(puuid: String) -> Champion {
+    func myChampionByPuuid(_ puuid: String) -> Champion {
         return info.myChampionByPuuid(puuid: puuid)
     }
     
-    func rivalChampion(puuid: String) -> Champion {
+    func rivalChampionByPuuid(_ puuid: String) -> Champion {
         return info.rivalChampionByPuuid(puuid: puuid)
+    }
+    
+    func myKDAByPuuid(_ puuid: String) -> [Int] {
+        return info.myKDAByPuuid(puuid)
+    }
+    
+    func rivalKDAByPuuid(_ puuid: String) -> [Int] {
+        return info.rivalKDAByPuuid(puuid)
+    }
+    
+    func rivalSummonerNameByPuuid(_ puuid: String) -> String {
+        return info.rivalSummonerNameByPuuid(puuid)
     }
 }
