@@ -9,7 +9,7 @@ import Foundation
 
 struct SummonerDTO: Codable, DummyCreatable {
     static func dummyData() -> SummonerDTO {
-        return SummonerDTO(id: "0", accountID: "0", puuid: "123", name: "SwiftUI", profileIconID: 0, revisionDate: 0, summonerLevel: 0)
+        return SummonerDTO(id: "0", accountID: "0", puuid: "123", name: "SwiftUI", profileIconID: 685, revisionDate: 0, summonerLevel: 0)
     }
     
     static func dummyDatas() -> [SummonerDTO] {

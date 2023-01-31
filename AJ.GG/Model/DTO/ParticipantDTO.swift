@@ -135,7 +135,7 @@ struct ParticipantDTO: Codable, DummyCreatable {
 typealias ParticipantDTOs = [ParticipantDTO]
 
 
-enum Lane: String, Codable {
+enum Lane: String, Codable, CaseIterable {
     case invalid = "Invalid"
     case top = "TOP"
     case jungle = "JUNGLE"
@@ -143,4 +143,27 @@ enum Lane: String, Codable {
     case adCarry = "BOTTOM"
     case supoort = "UTILITY"
     case none = "NONE"
+    
+    static func selectableLanes() -> [Lane] {
+        return [.top, .jungle, .mid, .adCarry, .supoort, .none]
+    }
+    
+    var imageName: String {
+        switch self {
+        case .invalid:
+            return "Lane_None"
+        case .top:
+            return "Lane_Top"
+        case .jungle:
+            return "Lane_Jungle"
+        case .mid:
+            return "Lane_Middle"
+        case .adCarry:
+            return "Lane_Bottom"
+        case .supoort:
+            return "Lane_Utility"
+        case .none:
+            return "Lane_None"
+        }
+    }
 }
