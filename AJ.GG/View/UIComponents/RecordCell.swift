@@ -28,12 +28,12 @@ struct RecordCell: View {
     }
     
     var myKDA: String {
-        let kda = match.myKDAByPuuid(summoner.puuid)
+        let kda = match.myKDA
         return "\(kda[0])/\(kda[1])/\(kda[2])"
     }
     
     var rivalKDA: String {
-        let kda = match.rivalKDAByPuuid(summoner.puuid)
+        let kda = match.rivalKDA
         return "\(kda[0])/\(kda[1])/\(kda[2])"
     }
     
@@ -49,7 +49,7 @@ struct RecordCell: View {
                     
                     Spacer()
                     
-                    Text("\(match.rivalSummonerNameByPuuid(summoner.puuid))")
+                    Text(match.rivalSummonerName)
                 }
                 
                 Rectangle()
@@ -80,7 +80,6 @@ struct RecordCell: View {
 
 struct RecordCell_Previews: PreviewProvider {
     static var previews: some View {
-        RecordCell(match: MatchDTO.dummyData(),
-                   summoner: SummonerDTO.dummyData())
+        RecordCell(match: Match.dummyData())
     }
 }

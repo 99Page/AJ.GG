@@ -43,3 +43,4 @@ class SummonerManager: DataManagerDelegate {
         _ = try? context.execute(batchDeleteRequest)
     }
 }
+

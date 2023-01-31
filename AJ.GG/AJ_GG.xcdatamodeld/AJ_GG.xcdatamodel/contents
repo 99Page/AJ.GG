@@ -6,7 +6,15 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="isWin" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lane" optional="YES" attributeType="String"/>
+        <attribute name="myAssist" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="myChampionID" optional="YES" attributeType="String" defaultValueString="Aatrox"/>
+        <attribute name="myDeath" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="myKill" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="mySummonerName" optional="YES" attributeType="String"/>
+        <attribute name="rivalAssist" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rivalDeath" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rivalKill" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rivalSummonerName" optional="YES" attributeType="String"/>
         <attribute name="version" optional="YES" attributeType="String"/>
         <relationship name="playedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSummoner" inverseName="plays" inverseEntity="CDSummoner"/>
     </entity>

@@ -87,7 +87,7 @@ struct RegisterSummonerView: View {
     private func recordProgreeView() -> some View {
         if viewModel.isSearching {
             VStack(alignment: .center) {
-                Loader()
+                RotatingCircle()
                 Text("전적을 검색중입니다.")
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
@@ -96,11 +96,9 @@ struct RegisterSummonerView: View {
     
     @ViewBuilder
     private func record() -> some View {
-        if let summoner = viewModel.searchedSummoner {
-            RecordView(matches: viewModel.matches, summoner: summoner)
-                .padding(.horizontal, 10)
-                .padding(.bottom, registerButtonHeight)
-        }
+        RecordView(matches: viewModel.matches)
+            .padding(.horizontal, 10)
+            .padding(.bottom, registerButtonHeight)
     }
     
     @ViewBuilder

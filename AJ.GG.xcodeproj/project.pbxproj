@@ -28,6 +28,7 @@
 		152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE70296D2C9600B082C7 /* PerksDTO.swift */; };
 		152FBE73296D2D9800B082C7 /* MatchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE72296D2D9800B082C7 /* MatchDTO.swift */; };
 		153B514D297500EF005E2FAF /* DataManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B514C297500EF005E2FAF /* DataManagerDelegate.swift */; };
+		156DA4F32988CEAA00786730 /* Summoner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4F22988CEAA00786730 /* Summoner.swift */; };
 		15717271295D666C0053BCC1 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717270295D666C0053BCC1 /* UserDefaultKey.swift */; };
 		15717277295D70640053BCC1 /* SummonersServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717276295D70640053BCC1 /* SummonersServiceTests.swift */; };
 		15717279295D73930053BCC1 /* LeagueV4Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717278295D73930053BCC1 /* LeagueV4Service.swift */; };
@@ -105,6 +106,7 @@
 		152FBE70296D2C9600B082C7 /* PerksDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerksDTO.swift; sourceTree = "<group>"; };
 		152FBE72296D2D9800B082C7 /* MatchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDTO.swift; sourceTree = "<group>"; };
 		153B514C297500EF005E2FAF /* DataManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerDelegate.swift; sourceTree = "<group>"; };
+		156DA4F22988CEAA00786730 /* Summoner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summoner.swift; sourceTree = "<group>"; };
 		15717270295D666C0053BCC1 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
 		15717276295D70640053BCC1 /* SummonersServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonersServiceTests.swift; sourceTree = "<group>"; };
 		15717278295D73930053BCC1 /* LeagueV4Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueV4Service.swift; sourceTree = "<group>"; };
@@ -205,6 +207,18 @@
 				15A4D703295975300052E3AD /* RegisterSummonerViewModel.swift */,
 			);
 			path = Register;
+			sourceTree = "<group>";
+		};
+		156DA4F12988CE0800786730 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				156DA4F22988CEAA00786730 /* Summoner.swift */,
+				15298C99296C9002005FC900 /* Champion.swift */,
+				15F0FBCE2982660B00E5BAB2 /* DummyCretable.swift */,
+				15E52E05298143D2004B4DBC /* Match.swift */,
+				1571727E295D78BE0053BCC1 /* Tier.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		15717275295D704D0053BCC1 /* Service */ = {
@@ -318,13 +332,10 @@
 		15A4D6FE295973170052E3AD /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				15F0FBCE2982660B00E5BAB2 /* DummyCretable.swift */,
 				1526DD022980010500340069 /* CoreData + Extension */,
 				15A4D7132959895F0052E3AD /* DTO */,
+				156DA4F12988CE0800786730 /* Model */,
 				15C4485229598A4D0063223E /* ServerError.swift */,
-				1571727E295D78BE0053BCC1 /* Tier.swift */,
-				15E52E05298143D2004B4DBC /* Match.swift */,
-				15298C99296C9002005FC900 /* Champion.swift */,
 				15298C97296C8FEF005FC900 /* champ.json */,
 			);
 			path = Model;
@@ -585,6 +596,7 @@
 				15A4D706295975640052E3AD /* CapsuleText.swift in Sources */,
 				15A4D70C295980B70052E3AD /* SummonersService.swift in Sources */,
 				151CA6912981379C0095D8DC /* BaseChamiponImage.swift in Sources */,
+				156DA4F32988CEAA00786730 /* Summoner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

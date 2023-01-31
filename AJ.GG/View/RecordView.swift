@@ -10,13 +10,12 @@ import Kingfisher
 
 struct RecordView: View {
     
-    let matches: [MatchDTO]
-    let summoner: SummonerDTO
+    let matches: [Match]
     
     var body: some View {
         VStack {
             ForEach(matches.indices, id: \.self) { i in
-                RecordCell(match: matches[i], summoner: summoner)
+                RecordCell(match: matches[i])
                 Divider()
                     .foregroundColor(.black)
             }

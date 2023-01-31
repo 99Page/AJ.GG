@@ -50,6 +50,7 @@ class RegisterSummonerViewModel: ObservableObject {
         self.summonerService = summonerService
         self.leagueV4Service = leagueV4Service
         self.summonerManager = SummonerManager()
+        self.summonerManager.deleteAll()
         self.summoners = summonerManager.getAll()
         self.matchV5Service = matchV5Service
     }
