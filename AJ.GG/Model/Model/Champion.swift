@@ -8,7 +8,13 @@
 import Foundation
 import Kingfisher
 
-struct Champion {
+struct Champion: DummyCreatable, Identifiable {
+    
+
+    
+    typealias Dummy = Champion
+    
+    let id = UUID().uuidString
     private let _name: String
     
     init(name: String) {
@@ -23,10 +29,14 @@ struct Champion {
         KFImage(URL(string: RiotURL.championSquareAsset(champion: self.name).url))
     }
     
-    static func dummyChampion() -> Champion {
-        
+    static func dummyData() -> Champion {
         let championNames = ["Aatrox", "Garen", "Darius"]
         return Champion(name: championNames.randomElement() ?? "Aatrox")
+    }
+    
+    static func dummyDatas() -> [Champion] {
+        let championNames = ["Aatrox", "Garen", "Darius", "Gwen"]
+        return championNames.map { Champion(name: $0)}
     }
     
     static func optionalCase() -> Champion {

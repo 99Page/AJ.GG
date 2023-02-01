@@ -41,7 +41,7 @@
 		1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727C295D76130053BCC1 /* RiotAuthorization.swift */; };
 		1571727F295D78BE0053BCC1 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727E295D78BE0053BCC1 /* Tier.swift */; };
 		1585915D2962BF8700E888FC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915C2962BF8700E888FC /* ProfileView.swift */; };
-		1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* HomeViewModel.swift */; };
+		1585915F2962BF9900E888FC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* ProfileViewModel.swift */; };
 		1597B1D82970FCE100A66486 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597B1D72970FCE100A66486 /* RecordView.swift */; };
 		1597B1DA2971218900A66486 /* RiotImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597B1D92971218900A66486 /* RiotImageService.swift */; };
 		1597B1DD297123E700A66486 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1597B1DC297123E700A66486 /* Kingfisher */; };
@@ -69,6 +69,9 @@
 		15E52E06298143D2004B4DBC /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E52E05298143D2004B4DBC /* Match.swift */; };
 		15E9E18C2983922B008B614F /* PGVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9E18B2983922B008B614F /* PGVStack.swift */; };
 		15E9E19129839B9C008B614F /* HiddenTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9E19029839B9C008B614F /* HiddenTitle.swift */; };
+		15ED7F2B298A220000E49B5F /* ChampionWinRateImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ED7F2A298A220000E49B5F /* ChampionWinRateImage.swift */; };
+		15ED7F2D298A247600E49B5F /* Double + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ED7F2C298A247600E49B5F /* Double + Extension.swift */; };
+		15ED7F2F298A2D4800E49B5F /* TMP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ED7F2E298A2D4800E49B5F /* TMP.swift */; };
 		15F0FBCF2982660B00E5BAB2 /* DummyCretable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F0FBCE2982660B00E5BAB2 /* DummyCretable.swift */; };
 /* End PBXBuildFile section */
 
@@ -124,7 +127,7 @@
 		1571727C295D76130053BCC1 /* RiotAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotAuthorization.swift; sourceTree = "<group>"; };
 		1571727E295D78BE0053BCC1 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
 		1585915C2962BF8700E888FC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		1585915E2962BF9900E888FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		1585915E2962BF9900E888FC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		1597B1D72970FCE100A66486 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		1597B1D92971218900A66486 /* RiotImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotImageService.swift; sourceTree = "<group>"; };
 		1597B1DE2971270400A66486 /* AJ-GG-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AJ-GG-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -155,6 +158,9 @@
 		15E52E05298143D2004B4DBC /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		15E9E18B2983922B008B614F /* PGVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PGVStack.swift; sourceTree = "<group>"; };
 		15E9E19029839B9C008B614F /* HiddenTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenTitle.swift; sourceTree = "<group>"; };
+		15ED7F2A298A220000E49B5F /* ChampionWinRateImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionWinRateImage.swift; sourceTree = "<group>"; };
+		15ED7F2C298A247600E49B5F /* Double + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double + Extension.swift"; sourceTree = "<group>"; };
+		15ED7F2E298A2D4800E49B5F /* TMP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMP.swift; sourceTree = "<group>"; };
 		15F0FBCE2982660B00E5BAB2 /* DummyCretable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyCretable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -291,6 +297,7 @@
 				15A4D6FD295973100052E3AD /* ViewModel */,
 				15A4D6FC295973080052E3AD /* View */,
 				15A4D6CE295972D60052E3AD /* ContentView.swift */,
+				15ED7F2E298A2D4800E49B5F /* TMP.swift */,
 				15A4D6CC295972D60052E3AD /* AJ_GGApp.swift */,
 				15A4D6D0295972D70052E3AD /* Assets.xcassets */,
 				15A4D6DA295972D70052E3AD /* Info.plist */,
@@ -342,7 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				1526DD0A2980079200340069 /* Register */,
-				1585915E2962BF9900E888FC /* HomeViewModel.swift */,
+				1585915E2962BF9900E888FC /* ProfileViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -362,12 +369,11 @@
 		15A4D700295974E30052E3AD /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				15ED7F29298A21D000E49B5F /* Champion */,
 				15A4D705295975640052E3AD /* CapsuleText.swift */,
 				15A9ED64296EE0D10043A5B4 /* RoundedText.swift */,
-				151CA6902981379C0095D8DC /* BaseChamiponImage.swift */,
 				156DA4F62988E82C00786730 /* BaseProfileIconImage.swift */,
 				156DA4FD2988F3ED00786730 /* LaneImage.swift */,
-				151CA69229813AEB0095D8DC /* CircleChampionImage.swift */,
 				151CA69429813DB40095D8DC /* RecordCell.swift */,
 				15E9E19029839B9C008B614F /* HiddenTitle.swift */,
 				15E1685A298774EF00F91CAB /* RotatingCircle.swift */,
@@ -382,6 +388,7 @@
 			children = (
 				15A4D7082959787B0052E3AD /* ViewExtension.swift */,
 				151EAEA3296683BF00322ACE /* StringExtension.swift */,
+				15ED7F2C298A247600E49B5F /* Double + Extension.swift */,
 				156DA4FB2988E9D600786730 /* Array + Extension.swift */,
 			);
 			path = Extensions;
@@ -431,6 +438,16 @@
 				15E9E18B2983922B008B614F /* PGVStack.swift */,
 			);
 			path = PGView;
+			sourceTree = "<group>";
+		};
+		15ED7F29298A21D000E49B5F /* Champion */ = {
+			isa = PBXGroup;
+			children = (
+				151CA6902981379C0095D8DC /* BaseChamiponImage.swift */,
+				151CA69229813AEB0095D8DC /* CircleChampionImage.swift */,
+				15ED7F2A298A220000E49B5F /* ChampionWinRateImage.swift */,
+			);
+			path = Champion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -572,7 +589,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */,
+				1585915F2962BF9900E888FC /* ProfileViewModel.swift in Sources */,
+				15ED7F2B298A220000E49B5F /* ChampionWinRateImage.swift in Sources */,
 				159D74F1296ECBEE009668CB /* SummonerManager.swift in Sources */,
 				152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */,
 				1597B1D82970FCE100A66486 /* RecordView.swift in Sources */,
@@ -584,6 +602,7 @@
 				15717279295D73930053BCC1 /* LeagueV4Service.swift in Sources */,
 				15A4D6D6295972D70052E3AD /* Persistence.swift in Sources */,
 				15A4D7022959751E0052E3AD /* RegisterSummonerView.swift in Sources */,
+				15ED7F2F298A2D4800E49B5F /* TMP.swift in Sources */,
 				151CA69529813DB50095D8DC /* RecordCell.swift in Sources */,
 				152FBE73296D2D9800B082C7 /* MatchDTO.swift in Sources */,
 				1571727B295D73FB0053BCC1 /* LeagueEntryDTO .swift in Sources */,
@@ -596,6 +615,7 @@
 				1571727F295D78BE0053BCC1 /* Tier.swift in Sources */,
 				151EAEA4296683BF00322ACE /* StringExtension.swift in Sources */,
 				15C448512959899C0063223E /* SummonerDTO.swift in Sources */,
+				15ED7F2D298A247600E49B5F /* Double + Extension.swift in Sources */,
 				15298C9A296C9002005FC900 /* Champion.swift in Sources */,
 				156DA4FC2988E9D600786730 /* Array + Extension.swift in Sources */,
 				152FBE63296D255600B082C7 /* MatchV5Service.swift in Sources */,

@@ -14,25 +14,18 @@ class ProfileViewModel: ObservableObject {
     let matchManager: MatchManager
     let matchV5Service: MatchV5ServiceEnable
     
-    @Published var matches: [CDMatch] = []
     @Published var summoners: [CDSummoner] = []
     @Published var selectedSummoner: CDSummoner
+    @Published var matches: [CDMatch] = []
     
     init(matchV5Service: MatchV5ServiceEnable) {
         self.summonerManager = SummonerManager()
         self.matchManager = MatchManager()
+        self.matchV5Service = matchV5Service
         
         let fetchedSummoners = summonerManager.getAll()
         self.summoners = fetchedSummoners
         self.selectedSummoner = fetchedSummoners[0]
-        self.matchV5Service = matchV5Service
-        
-        self.matches = matchManager.getAll()
-        print("\(matches.count)")
-        
-//        Task {
-//            await saveMatches()
-//        }
     }
     
     private func saveMatches() async {
