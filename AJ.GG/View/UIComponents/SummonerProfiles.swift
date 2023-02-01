@@ -25,7 +25,7 @@ struct SummonerProfiles: View {
                         }
                 }
                 
-                ForEach(summoners.indices) { i in
+                ForEach(summoners.indices, id: \.self) { i in
                     SummonerProfile(summoner: summoners[i])
                 }
             }

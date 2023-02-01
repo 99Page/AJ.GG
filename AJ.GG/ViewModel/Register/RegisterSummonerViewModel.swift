@@ -21,7 +21,7 @@ class RegisterSummonerViewModel: ObservableObject {
     
     @Published var summonerName: String = ""
     @Published var tier: LeagueTier?
-    @Published var summoners: [CDSummoner] = []
+    @Published var summoners: [Summoner] = []
     @Published private var _matches: [Match] = []
     
     @Published var isSearching = false
@@ -49,7 +49,7 @@ class RegisterSummonerViewModel: ObservableObject {
     init(summonerService: SummonerServiceEnable, leagueV4Service: LeagueV4ServiceEnable, matchV5Service: MatchV5ServiceEnable) {
         self.summonerService = summonerService
         self.leagueV4Service = leagueV4Service
-        self.summonerManager = SummonerManager()
+        self.summonerManager = SummonerManager(preview: false)
         self.summonerManager.deleteAll()
         self.summoners = summonerManager.getAll()
         self.matchV5Service = matchV5Service

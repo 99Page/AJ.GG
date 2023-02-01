@@ -10,10 +10,16 @@ import CoreData
 
 class SummonerManager: DataManagerDelegate {
     
+    typealias Data = Summoner
+    
     let context: NSManagedObjectContext
     
-    init() {
-        self.context = PersistenceController.shared.container.viewContext
+    init(preview: Bool) {
+        if preview {
+            self.context = PersistenceController.preview.container.viewContext
+        } else {
+            self.context = PersistenceController.shared.container.viewContext
+        }
     }
     
     func add(_ data: [String: Any]) {
@@ -23,18 +29,18 @@ class SummonerManager: DataManagerDelegate {
         save()
     }
     
-    func getAll() -> [CDSummoner] {
+    func getAll() -> [Summoner] {
         let request = NSFetchRequest<CDSummoner>(entityName: "CDSummoner")
         do {
             let summoners = try context.fetch(request)
             print("Fetch Success")
-            return summoners
+            return summoners.map { Summoner(cdSummoner: $0) }
         } catch {
             print("ERROR FETCHING CORE DATA")
             print(error.localizedDescription)
         }
         
-        return [CDSummoner]()
+        return []
     }
     
     func deleteAll() {

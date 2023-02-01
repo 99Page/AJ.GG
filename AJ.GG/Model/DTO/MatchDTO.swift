@@ -35,7 +35,7 @@ struct MatchDTO: Codable, DummyCreatable {
         return metadata.getMatchID()
     }
     
-    func getLaneByPuuid(_ puuid: String) -> Lane? {
+    func laneByPuuid(_ puuid: String) -> Lane {
         return info.getLaneByPuuid(puuid: puuid)
     }
     

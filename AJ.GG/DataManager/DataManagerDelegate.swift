@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 protocol DataManagerDelegate {
-    associatedtype CDData: AllSettable
+    associatedtype Data
     
     var context: NSManagedObjectContext {
         get 
@@ -17,7 +17,7 @@ protocol DataManagerDelegate {
     
     func add(_ data: [String: Any])
     func save()
-    func getAll() -> [CDData]
+    func getAll() -> [Data]
     func deleteAll()
 }
 

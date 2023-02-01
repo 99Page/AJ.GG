@@ -9,9 +9,9 @@ import Foundation
 import CoreData
 
 class MatchManager: DataManagerDelegate {
-    typealias CDData = CDMatch
-    let context: NSManagedObjectContext
+    typealias Data = Match
     
+    let context: NSManagedObjectContext
     
     init() {
         self.context = PersistenceController.shared.container.viewContext
@@ -24,19 +24,19 @@ class MatchManager: DataManagerDelegate {
         save()
     }
     
-    func getAll() -> [CDMatch] {
+    func getAll() -> [Match] {
         let request = NSFetchRequest<CDMatch>(entityName: "CDMatch")
         request.sortDescriptors = [NSSortDescriptor(key: "gameCreation", ascending: false)]
         do {
             let matches = try self.context.fetch(request)
             print("Fetch Success")
-            return matches
+            return matches.map { Match($0) }
         } catch {
             print("ERROR FETCHING CORE DATA")
             print(error.localizedDescription)
         }
         
-        return [CDMatch]()
+        return []
     }
     
     func deleteAll() {

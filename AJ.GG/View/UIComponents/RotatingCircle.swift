@@ -9,7 +9,7 @@ struct RotatingCircle: View {
                 .stroke(Color.blue, lineWidth: 4)
                 .frame(width: 50, height: 50)
                 .rotationEffect(.degrees(rotation))
-                .animation(Animation.linear(duration: 2).repeatForever(autoreverses: false))
+                .animation(Animation.linear(duration: 2).repeatForever(autoreverses: false), value: rotation)
                 .onAppear() {
                     self.rotation = 360
                 }

@@ -11,7 +11,12 @@ struct ChampionWinRateImage: View {
     
     let percentage: Double
     let champion: Champion
+    let isBlueGraph: Bool
     @State private var animatePercentage = 0.0
+    
+    var gradient: Gradient {
+        isBlueGraph ? Gradient(colors: [.blue, .purple]) : Gradient(colors: [.red, .orange])
+    }
        
     var body: some View {
         VStack {
@@ -26,7 +31,11 @@ struct ChampionWinRateImage: View {
 
                 Circle()
                     .trim(from: 0, to: CGFloat(min(animatePercentage, 1)))
-                    .stroke(LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .bottom, endPoint: .top), lineWidth: 5)
+                    .stroke(
+                        LinearGradient(gradient: gradient, startPoint: .bottom,
+                                       endPoint: .top),
+                        lineWidth: 5
+                    )
                     .frame(width: 70, height:  70)
                     .rotationEffect(Angle(degrees: -90))
                     .animation(.linear(duration: 1), value: animatePercentage)
@@ -45,6 +54,6 @@ struct ChampionWinRateImage: View {
 struct ChampionWinRateImage_Previews: PreviewProvider {
     static var previews: some View {
         ChampionWinRateImage(percentage: 0.9367,
-                             champion: Champion.dummyData())
+                             champion: Champion.dummyData(), isBlueGraph: false)
     }
 }

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProfileView: View {
 
-//    @StateObject var viewModel: ProfileViewModel = ProfileViewModel(matchV5Service: MatchV5Service())
+    @StateObject
+    var viewModel: ProfileViewModel = ProfileViewModel(summonerManager: SummonerManager(preview: false))
     
     let lanes = Lane.selectableLanes()
     
@@ -18,9 +19,8 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            
             HStack(alignment: .center) {
-                SummonerProfiles(summoners: Summoner.dummyDatas())
+                SummonerProfiles(summoners: viewModel.summoners)
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -42,7 +42,7 @@ struct ProfileView: View {
                     HStack {
                         ForEach(tmpChampions) { data in
                             let rate = [0.2, 0.9]
-                            ChampionWinRateImage(percentage: rate.randomElement()!, champion: data)
+                            ChampionWinRateImage(percentage: rate.randomElement()!, champion: data, isBlueGraph: true)
                                 .padding(.horizontal, 5)
                         }
                     }
@@ -54,7 +54,7 @@ struct ProfileView: View {
                     HStack {
                         ForEach(tmpChampions) { data in
                             let rate = [0.2, 0.9]
-                            ChampionWinRateImage(percentage: rate.randomElement()!, champion: data)
+                            ChampionWinRateImage(percentage: rate.randomElement()!, champion: data, isBlueGraph: false)
                                 .padding(.horizontal, 5)
                         }
                     }
@@ -72,6 +72,6 @@ struct ProfileView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        ProfileView(viewModel: ProfileViewModel(summonerManager: SummonerManager(preview: true)))
     }
 }

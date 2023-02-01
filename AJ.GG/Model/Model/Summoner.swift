@@ -9,19 +9,8 @@ import Foundation
 
 struct Summoner: DummyCreatable, Identifiable {
     
-    static func dummyData() -> Summoner {
-        return  Summoner(summonerID: "", puuid: "", summonerName: "SwiftUI", profileIconID: 685)
-    }
-    
-    static func dummyDatas() -> [Summoner] {
-        return [
-            Summoner(summonerID: "", puuid: "", summonerName: "SwiftUI", profileIconID: 686),
-//            Summoner(summonerID: "", puuid: "", summonerName: "SwiftUI 2", profileIconID: 687),
-            Summoner(summonerID: "", puuid: "", summonerName: "SwiftUI 3", profileIconID: 688)
-        ]
-    }
-    
     typealias Dummy = Summoner
+    
     
     let id = UUID().uuidString
     let summonerID: String
@@ -36,10 +25,29 @@ struct Summoner: DummyCreatable, Identifiable {
         self.profileIconID = profileIconID
     }
     
+    init(cdSummoner: CDSummoner) {
+        self.summonerID = cdSummoner.id ?? "-1"
+        self.puuid = cdSummoner.puuid ?? "-1"
+        self.summonerName = cdSummoner.summonerName ?? "에러"
+        self.profileIconID = cdSummoner.profileIconID 
+    }
+    
     init(_ summonerDTO: SummonerDTO) {
         self.summonerID = summonerDTO.id
         self.puuid = summonerDTO.puuid
         self.summonerName = summonerDTO.name
         self.profileIconID = Int16(summonerDTO.profileIconID)
+    }
+    
+    static func dummyData() -> Summoner {
+        return  Summoner(summonerID: "", puuid: "", summonerName: "SwiftUI", profileIconID: 685)
+    }
+    
+    static func dummyDatas() -> [Summoner] {
+        return [
+            Summoner(summonerID: "", puuid: "", summonerName: "SwiftUI", profileIconID: 686),
+//            Summoner(summonerID: "", puuid: "", summonerName: "SwiftUI 2", profileIconID: 687),
+            Summoner(summonerID: "", puuid: "", summonerName: "SwiftUI 3", profileIconID: 688)
+        ]
     }
 }

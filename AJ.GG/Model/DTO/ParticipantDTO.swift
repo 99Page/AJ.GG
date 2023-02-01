@@ -148,6 +148,10 @@ enum Lane: String, Codable, CaseIterable {
         return [.top, .jungle, .mid, .adCarry, .supoort, .none]
     }
     
+    func isEqual(_ lane: Lane) -> Bool {
+        return self == lane
+    }
+    
     var imageName: String {
         switch self {
         case .invalid:

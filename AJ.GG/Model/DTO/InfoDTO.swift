@@ -77,8 +77,8 @@ struct InfoDTO: Codable, DummyCreatable {
         self.gameMode.isEqual(str: "CLASSIC")
     }
     
-    func getLaneByPuuid(puuid: String) -> Lane? {
-        return participants.first { $0.isSamePuuid(puuid: puuid) }?.getLane()
+    func getLaneByPuuid(puuid: String) -> Lane {
+        return participants.first { $0.isSamePuuid(puuid: puuid) }?.getLane() ?? .invalid
     }
     
     func getTeamIDByPuuid(puuid: String) -> Int? {
@@ -87,7 +87,7 @@ struct InfoDTO: Codable, DummyCreatable {
     
     func rivalPuuidByPuuid(puuid: String) -> String? {
         let myTeamID = getTeamIDByPuuid(puuid: puuid)!
-        let myLane = getLaneByPuuid(puuid: puuid)!
+        let myLane = getLaneByPuuid(puuid: puuid)
         
 //        print("myTeamID: \(myTeamID), myLane: \(myLane)")
 //        
