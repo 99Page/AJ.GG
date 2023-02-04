@@ -16,20 +16,77 @@ class ProfileViewModel: ObservableObject {
 //
     @Published var summoners: [Summoner] = []
     @Published var selectedSummoner: Summoner
-//    @Published var matches: [Match] = []
-//    @Published var selectedLane: Lane = .top
+    
+    @Published var selectedLane: Lane = .mid
+    @Published var matches: [Match] = []
+    
+    var filterdMatchsByLane: [Match] {
+        matches.filter { $0.lane == selectedLane }
+    }
+    
+    var myChampionRecords: [ChampionWithRate] {
+        var dictionary: [String: [Int]] = [:]
+        
+        for match in filterdMatchsByLane {
+            if dictionary[match.myChampionName] == nil {
+                dictionary[match.myChampionName] = [0, 0]
+            }
+            
+            if match.isWin {
+                dictionary[match.myChampionName]![0] += 1
+            } else {
+                dictionary[match.myChampionName]![1] += 1
+            }
+        }
+        
+        var result: [ChampionWithRate] = []
+        
+        for (k, v) in dictionary {
+            let array = v
+            let win = array[0]
+            let total = array[0] + array[1]
+            result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
+        }
+        
+        return result
+    }
+    
+//    var rivalChampionRecords: [ChampionWithRate] {
+//        var dictionary: [String: [Int]] = [:]
 //
-//    var fileterdMatches: [Match] {
-//        let result =  matches.filter { $0.isEqualLane(selectedLane) }
+//        for match in filterdMatchsByLane {
+//            if dictionary[match.rivalChampion] == nil {
+//                dictionary[match.myChampionName] = [0, 0]
+//            }
+//
+//            if match.isWin {
+//                dictionary[match.myChampionName]![0] += 1
+//            } else {
+//                dictionary[match.myChampionName]![1] += 1
+//            }
+//        }
+//
+//        var result: [ChampionWithRate] = []
+//
+//        for (k, v) in dictionary {
+//            let array = v
+//            let win = array[0]
+//            let total = array[0] + array[1]
+//            result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
+//        }
+//
 //        return result
 //    }
     
-    init(summonerManager: SummonerManager) {
+    init(summonerManager: SummonerManager, matchManager: MatchManager) {
         self.summonerManager = summonerManager
-        self.matchManager = MatchManager()
+        self.matchManager = matchManager
+        
         let fetchedSummoners = summonerManager.getAll()
         self.summoners = fetchedSummoners
         self.selectedSummoner = fetchedSummoners[0]
+        
+        self.matches = matchManager.getAll()
     }
 //    init(matchV5Service: MatchV5ServiceEnable) {
 //        self.summonerManager = SummonerManager()

@@ -14,26 +14,108 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         
-        for _ in 0..<2 {
+        for _ in 0..<1 {
             let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDSummoner",
                                                                  into: viewContext) as! CDSummoner
             insertData.summonerName = "SwiftUI"
             insertData.profileIconID = 660
         }
+        
+        for _ in 0..<5 {
+            let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDMatch",
+                                                                 into: viewContext) as! CDMatch
+            
+            insertData.enemyChampionID = "Gwen"
+            insertData.gameCreation = 10000
+            insertData.myAssist = 5
+            insertData.id = "1234"
+            insertData.isWin = true
+            insertData.myChampionID = "Aatrox"
+            insertData.lane = "TOP"
+            insertData.myDeath = 5
+            insertData.myKill = 10
+            insertData.mySummonerName = "SwiftUI"
+            insertData.rivalKill = 1
+            insertData.rivalDeath = 3
+            insertData.rivalAssist = 10
+            insertData.rivalSummonerName = "Jeus"
+            insertData.version = "3.14"
+        }
+        
+        for _ in 0..<5 {
+            let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDMatch",
+                                                                 into: viewContext) as! CDMatch
+            
+            insertData.enemyChampionID = "Gwen"
+            insertData.gameCreation = 10000
+            insertData.myAssist = 5
+            insertData.id = "1234"
+            insertData.isWin = true
+            insertData.myChampionID = "Aatrox"
+            insertData.lane = "MIDDLE"
+            insertData.myDeath = 5
+            insertData.myKill = 10
+            insertData.mySummonerName = "SwiftUI"
+            insertData.rivalKill = 1
+            insertData.rivalDeath = 3
+            insertData.rivalAssist = 10
+            insertData.rivalSummonerName = "Faker"
+            insertData.version = "3.14"
+        }
+        
+        let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDMatch",
+                                                             into: viewContext) as! CDMatch
+        
+        insertData.enemyChampionID = "Gwen"
+        insertData.gameCreation = 10000
+        insertData.myAssist = 5
+        insertData.id = "1234"
+        insertData.isWin = false
+        insertData.myChampionID = "Aatrox"
+        insertData.lane = "MIDDLE"
+        insertData.myDeath = 5
+        insertData.myKill = 10
+        insertData.mySummonerName = "SwiftUI"
+        insertData.rivalKill = 1
+        insertData.rivalDeath = 3
+        insertData.rivalAssist = 10
+        insertData.rivalSummonerName = "Faker"
+        insertData.version = "3.14"
+        
+        let insertData2 = NSEntityDescription.insertNewObject(forEntityName: "CDMatch",
+                                                             into: viewContext) as! CDMatch
+        insertData2.enemyChampionID = "Gwen"
+        insertData2.gameCreation = 10000
+        insertData2.myAssist = 5
+        insertData2.id = "1234"
+        insertData2.isWin = true
+        insertData2.myChampionID = "Ryze"
+        insertData2.lane = "MIDDLE"
+        insertData2.myDeath = 5
+        insertData2.myKill = 10
+        insertData2.mySummonerName = "SwiftUI"
+        insertData2.rivalKill = 1
+        insertData2.rivalDeath = 3
+        insertData2.rivalAssist = 10
+        insertData2.rivalSummonerName = "Faker"
+        insertData2.version = "3.14"
 //        for _ in 0..<10 {
 //            let newItem = Item(context: viewContext)
 //            newItem.timestamp = Date()
 //        }
-//        do {
-//            try viewContext.save()
-//        } catch {
-//            // Replace this implementation with code to handle the error appropriately.
-//            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            let nsError = error as NSError
-//            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-//        }
+        
+        do {
+            try viewContext.save()
+        } catch {
+            // Replace this implementation with code to handle the error appropriately.
+            // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            let nsError = error as NSError
+            fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+        }
         return result
     }()
+    
+    
 
     let container: NSPersistentCloudKitContainer
 

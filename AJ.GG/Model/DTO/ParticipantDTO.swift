@@ -135,7 +135,7 @@ struct ParticipantDTO: Codable, DummyCreatable {
 typealias ParticipantDTOs = [ParticipantDTO]
 
 
-enum Lane: String, Codable, CaseIterable {
+enum Lane: String, Codable, CaseIterable, Equatable {
     case invalid = "Invalid"
     case top = "TOP"
     case jungle = "JUNGLE"
@@ -151,7 +151,7 @@ enum Lane: String, Codable, CaseIterable {
     func isEqual(_ lane: Lane) -> Bool {
         return self == lane
     }
-    
+
     var imageName: String {
         switch self {
         case .invalid:

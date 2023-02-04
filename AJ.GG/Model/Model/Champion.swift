@@ -8,7 +8,18 @@
 import Foundation
 import Kingfisher
 
-struct Champion: DummyCreatable, Identifiable {
+struct ChampionWithRate: Identifiable {
+    let id = UUID().uuidString
+    let champion: Champion
+    let win: Int
+    let lose: Int
+    
+    var winRate: Double {
+        Double(win) / Double(win+lose)
+    }
+}
+
+struct Champion: DummyCreatable, Identifiable, Hashable {
     
 
     

@@ -25,7 +25,7 @@ struct Match: Identifiable, DummyCreatable {
     
     let id = UUID().uuidString
     let mySummonerName: String
-    let myChampion: Champion
+    let _myChampion: Champion
     let myKDA: [Int16]
     
     let rivalChampion: Champion
@@ -35,13 +35,17 @@ struct Match: Identifiable, DummyCreatable {
     let isWin: Bool
     let lane: Lane
     
+    var myChampionName: String {
+        _myChampion.name
+    }
+    
     func isEqualLane(_ lane: Lane) -> Bool {
         return lane.isEqual(lane)
     }
     
     init(mySummonerName: String, myChampion: Champion, myKDA: [Int16], rivalChampion: Champion, rivalSummonerName: String, rivalKDA: [Int16], isWin: Bool, lane: Lane) {
         self.mySummonerName = mySummonerName
-        self.myChampion = myChampion
+        self._myChampion = myChampion
         self.myKDA = myKDA
         self.rivalChampion = rivalChampion
         self.rivalSummonerName = rivalSummonerName
@@ -51,7 +55,7 @@ struct Match: Identifiable, DummyCreatable {
     }
     
     init(_ match: CDMatch) {
-        self.myChampion = Champion(name: match.myChampionID ?? Champion.optionalCase().name)
+        self._myChampion = Champion(name: match.myChampionID ?? Champion.optionalCase().name)
         self.mySummonerName = match.mySummonerName ?? "에러"
         self.myKDA = [match.myKill, match.myDeath, match.myAssist]
         
@@ -65,7 +69,7 @@ struct Match: Identifiable, DummyCreatable {
     
     init(_ match: MatchDTO, puuid: String) {
         
-        self.myChampion = match.myChampionByPuuid(puuid)
+        self._myChampion = match.myChampionByPuuid(puuid)
         self.mySummonerName = match.rivalSummonerNameByPuuid(puuid)
         self.myKDA = match.myKDAByPuuid(puuid).map { Int16($0) }
         

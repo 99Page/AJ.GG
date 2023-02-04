@@ -16,7 +16,7 @@ struct RecordCell: View {
     let rivalChampionImageSize: CGSize = CGSize(width: 60, height: 60)
     
     var myChampion: Champion {
-        match.myChampion
+        match._myChampion
     }
     
     var rivalChampion: Champion {

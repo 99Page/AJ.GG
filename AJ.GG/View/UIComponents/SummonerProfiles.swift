@@ -30,6 +30,7 @@ struct SummonerProfiles: View {
                 }
             }
         }
+        .frame(height: 90)
     }
 }
 
