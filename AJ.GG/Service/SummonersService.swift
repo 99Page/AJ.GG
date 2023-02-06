@@ -20,19 +20,26 @@ class SummonerService: RiotAuthorizaiton, SummonerServiceEnable {
         let url = "https://KR.api.riotgames.com/lol/summoner/v4/summoners/by-name/\(summonerName)"
         let encoded = url.addingPercentEncoding(withAllowedCharacters: .urlFragmentAllowed)!
         let encodedURL = URL(string: encoded)!
+//
+//        let response1 = await AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: headers).serializingString().response
+//
+//        switch response1.result{
+//        case .success(let value):
+//            print("value: \(value)")
+//        case .failure(let err):
+//            print("\(err.errorDescription)")
+//        }
+//
         
-        let response = await AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: headers).serializingDecodable(SummonerDTO.self).response
+        let response = await AF.request(encodedURL, method: .get, encoding: JSONEncoding.default, headers: headers)
+            .validate(statusCode: 200..<300)
+            .serializingDecodable(SummonerDTO.self).response
         
-        if response.error != nil {
-            print(response.debugDescription)
-        }
         
-        let result = response.result
-        
-        return result.mapError { err in
+        return response.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
-            return NetworkError(AFError: err, status: serverError)
-        }
+            return NetworkError(AFError: err, serverError: serverError)
+        }.result
     }
     
     func idByName(summonerName: String) async -> Result<String, NetworkError> {

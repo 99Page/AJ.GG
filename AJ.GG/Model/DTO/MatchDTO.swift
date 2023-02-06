@@ -7,21 +7,15 @@
 
 import Foundation
 
-struct MatchDTO: Codable, DummyCreatable {
-    
+struct MatchDTO: Codable{
+
     let metadata: MetadataDTO
     let info: InfoDTO
     
-    static func dummyDatas() -> [MatchDTO] {
-        return [] 
+    
+    var isRankGame: Bool {
+        info.isRankGame
     }
-    
-    static func dummyData() -> MatchDTO {
-        return MatchDTO(metadata: MetadataDTO.dummyData(), info: InfoDTO.dummyData())
-    }
-    
-    typealias Dummy = MatchDTO
-    
     
     var gameCreation: Int64 {
         info.gameCreation

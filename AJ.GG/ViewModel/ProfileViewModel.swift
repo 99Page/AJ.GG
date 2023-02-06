@@ -10,6 +10,9 @@ import Foundation
 
 class ProfileViewModel: ObservableObject {
     
+    
+    let matchV5Service: MatchV5ServiceEnable
+    
     let summonerManager: SummonerManager
     let matchManager: MatchManager
 //    let matchV5Service: MatchV5ServiceEnable
@@ -78,14 +81,14 @@ class ProfileViewModel: ObservableObject {
 //        return result
 //    }
     
-    init(summonerManager: SummonerManager, matchManager: MatchManager) {
+    init(summonerManager: SummonerManager, matchManager: MatchManager, matchV5Service: MatchV5ServiceEnable) {
         self.summonerManager = summonerManager
         self.matchManager = matchManager
+        self.matchV5Service = matchV5Service
         
         let fetchedSummoners = summonerManager.getAll()
         self.summoners = fetchedSummoners
         self.selectedSummoner = fetchedSummoners[0]
-        
         self.matches = matchManager.getAll()
     }
 //    init(matchV5Service: MatchV5ServiceEnable) {

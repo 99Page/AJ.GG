@@ -44,6 +44,10 @@ struct InfoDTO: Codable, DummyCreatable {
         case tournamentCode
     }
     
+    var isRankGame: Bool {
+        return gameType == "MATCHED_GAME" && gameMode == "CLASSIC"
+    }
+    
     var gameCreation: Int64 {
         return _gameCreation
     }

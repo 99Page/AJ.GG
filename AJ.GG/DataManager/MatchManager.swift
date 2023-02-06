@@ -19,6 +19,8 @@ class MatchManager: DataManagerDelegate {
         } else {
             self.context = PersistenceController.shared.container.viewContext
         }
+        
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
     
     func add(_ data: [String : Any]) {

@@ -11,7 +11,7 @@ struct ProfileView: View {
 
     @StateObject
     var viewModel: ProfileViewModel = ProfileViewModel(summonerManager: SummonerManager(preview: false),
-                                                       matchManager: MatchManager())
+                                                       matchManager: MatchManager(), matchV5Service: MatchV5Service())
     
     let lanes = Lane.selectableLanes()
     let tmpChampions = Champion.dummyDatas()
@@ -88,6 +88,6 @@ struct ProfileView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: ProfileViewModel(summonerManager: SummonerManager(preview: true),
-                                                matchManager: MatchManager(inPreview: true)))
+                                                matchManager: MatchManager(inPreview: true), matchV5Service: MatchV5Service()))
     }
 }

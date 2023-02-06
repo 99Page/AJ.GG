@@ -12,6 +12,7 @@ final class SummonersServiceTests: XCTestCase {
     
     var service: SummonerServiceEnable!
     let mySummonerName = "SwiftUI 4"
+    let nameDoesNotExist = "SwiftUI 5"
     
     override func setUpWithError() throws {
         service = SummonerService()
@@ -45,14 +46,13 @@ final class SummonersServiceTests: XCTestCase {
     
     func testSummonerByNameForNotExistsname() async {
         let expectation = XCTestExpectation()
-        
-        let notExistedName = "오1누1영"
-        let response = await service.summonerByName(summonerName: notExistedName)
+        let response = await service.summonerByName(summonerName: nameDoesNotExist)
         
         switch response {
         case .success(_):
             XCTFail("XCTFail")
         case .failure(let failure):
+            print("\(failure)")
             break
         }
         

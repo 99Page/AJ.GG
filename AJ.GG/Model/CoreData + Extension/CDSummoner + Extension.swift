@@ -31,5 +31,6 @@ extension CDSummoner: AllSettable {
         self.setValue(data["tier"], forKey: "tier")
         self.setValue(data["rank"], forKey: "rank")
         self.setValue(data["leaguePoints"], forKey: "leaguePoints")
+        self.setValue(data["profileIconID"], forKey: "profileIconID")
     }
 }

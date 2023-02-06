@@ -27,7 +27,7 @@ class LeagueV4Serivce: RiotAuthorizaiton, LeagueV4ServiceEnable {
         let result = response.result
         return result.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
-            return NetworkError(AFError: err, status: serverError)
+            return NetworkError(AFError: err, serverError: serverError)
         }
     }
     

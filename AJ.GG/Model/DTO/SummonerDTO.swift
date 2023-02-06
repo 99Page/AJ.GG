@@ -28,6 +28,20 @@ struct SummonerDTO: Codable, DummyCreatable {
         case profileIconID = "profileIconId"
         case revisionDate, summonerLevel
     }
-    
-    
 }
+
+struct TempSummonerDTO: Codable{
+    
+    let id: Int
+    let accountID, puuid, name: String
+    let profileIconID, revisionDate, summonerLevel: Int
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case accountID = "accountId"
+        case puuid, name
+        case profileIconID = "profileIconId"
+        case revisionDate, summonerLevel
+    }
+}
+

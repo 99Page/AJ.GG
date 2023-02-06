@@ -10,10 +10,30 @@ import Alamofire
 
 struct NetworkError: Error {
     let AFError: AFError?
-    let status: ServerError?
+    let serverError: ServerError?
+    
+    var message: String {
+        serverError?.meesage ?? ""
+    }
+    
+    var statusCode: Int {
+        serverError?.statusCode ?? 200
+    }
 }
 
-struct ServerError: Codable {
+struct ServerError: Codable, Error {
+    let status: ServerDecoding
+    
+    var meesage: String {
+        status.message
+    }
+    
+    var statusCode: Int {
+        status.statusCode
+    }
+}
+
+struct ServerDecoding: Codable {
     let message: String
     let statusCode: Int
 
@@ -22,4 +42,5 @@ struct ServerError: Codable {
         case statusCode = "status_code"
     }
 }
+
 

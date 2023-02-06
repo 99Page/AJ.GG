@@ -28,7 +28,7 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
         let result = response.result
         return result.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
-            return NetworkError(AFError: err, status: serverError)
+            return NetworkError(AFError: err, serverError: serverError)
         }
     }
     
@@ -45,7 +45,7 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
         let result = response.result
         return result.mapError { err in
             let serverError = response.data.flatMap { try? JSONDecoder().decode(ServerError.self, from: $0) }
-            return NetworkError(AFError: err, status: serverError)
+            return NetworkError(AFError: err, serverError: serverError)
         }
     }
     
@@ -56,7 +56,9 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
             let matchResult = await self.matchByMatchID(matchID: matchID)
             switch matchResult {
             case .success(let success):
-                matchDTOs.append(success)
+                if success.isRankGame {
+                    matchDTOs.append(success)
+                }
             case .failure(let failure):
                 return .failure(failure)
             }
@@ -68,6 +70,7 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
     
     func searchMatchDTOsByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError> {
         let idsResult = await self.matcheIDsByPuuid(puuid: puuid)
+
         switch idsResult {
         case .success(let ids):
             return await searchMatchDTOsByMatchIDs(matchIDs: ids)

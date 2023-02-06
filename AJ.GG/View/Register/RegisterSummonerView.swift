@@ -43,6 +43,22 @@ struct RegisterSummonerView: View {
                                 viewModel.buttonTapped
                             }
                         }
+                    
+                    HStack {
+                        Image(systemName: "exclamationmark.circle")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(.gray)
+                        
+                        Text("최근 20게임 중 랭크게임만 표시됩니다.")
+                            .font(.system(size: 16, weight: .bold))
+                            .foregroundColor(.gray)
+                        
+                        Spacer()
+                    }
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 5)
+                    .hidden(!viewModel.isSearched)
+                    
                     record()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -50,6 +66,14 @@ struct RegisterSummonerView: View {
                     hiddenTitle(safeAreaTop: safeAreaTop)
                 }
             }
+            .alert(viewModel.alert.title, isPresented: $viewModel.alert.isPresentedAlert, actions: {
+                Button(role: .cancel) {
+                } label: {
+                    Text("확인")
+                }
+            }, message: {
+                viewModel.alert.message
+            })
             .keyboardHideWhenScreenTapped()
             .overlay {
                 recordProgreeView()

@@ -17,6 +17,11 @@
         <attribute name="rivalSummonerName" optional="YES" attributeType="String"/>
         <attribute name="version" optional="YES" attributeType="String"/>
         <relationship name="playedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSummoner" inverseName="plays" inverseEntity="CDSummoner"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="CDSummoner" representedClassName="CDSummoner" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="String"/>

@@ -44,8 +44,10 @@
 		1571727F295D78BE0053BCC1 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727E295D78BE0053BCC1 /* Tier.swift */; };
 		1585915D2962BF8700E888FC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915C2962BF8700E888FC /* ProfileView.swift */; };
 		1585915F2962BF9900E888FC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* ProfileViewModel.swift */; };
+		15961DE12990B25F00806655 /* ServiceAlertEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15961DE02990B25F00806655 /* ServiceAlertEnable.swift */; };
+		15961DE42990E10800806655 /* RegisterVIewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15961DE32990E10800806655 /* RegisterVIewModelTests.swift */; };
+		15961DE62990EB8500806655 /* DictionaryCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15961DE52990EB8500806655 /* DictionaryCreator.swift */; };
 		1597B1D82970FCE100A66486 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597B1D72970FCE100A66486 /* RecordView.swift */; };
-		1597B1DA2971218900A66486 /* RiotImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597B1D92971218900A66486 /* RiotImageService.swift */; };
 		1597B1DD297123E700A66486 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1597B1DC297123E700A66486 /* Kingfisher */; };
 		159D74F1296ECBEE009668CB /* SummonerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159D74F0296ECBEE009668CB /* SummonerManager.swift */; };
 		15A4D6CD295972D60052E3AD /* AJ_GGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6CC295972D60052E3AD /* AJ_GGApp.swift */; };
@@ -132,8 +134,10 @@
 		1571727E295D78BE0053BCC1 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
 		1585915C2962BF8700E888FC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1585915E2962BF9900E888FC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		15961DE02990B25F00806655 /* ServiceAlertEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAlertEnable.swift; sourceTree = "<group>"; };
+		15961DE32990E10800806655 /* RegisterVIewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVIewModelTests.swift; sourceTree = "<group>"; };
+		15961DE52990EB8500806655 /* DictionaryCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryCreator.swift; sourceTree = "<group>"; };
 		1597B1D72970FCE100A66486 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
-		1597B1D92971218900A66486 /* RiotImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotImageService.swift; sourceTree = "<group>"; };
 		1597B1DE2971270400A66486 /* AJ-GG-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AJ-GG-Info.plist"; sourceTree = SOURCE_ROOT; };
 		159D74F0296ECBEE009668CB /* SummonerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerManager.swift; sourceTree = "<group>"; };
 		15A4D6C9295972D60052E3AD /* AJ.GG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AJ.GG.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -203,13 +207,6 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		152292E5298E55B70070B023 /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
-			sourceTree = "<group>";
-		};
 		1526DD022980010500340069 /* CoreData + Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +262,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		15961DE22990E0E800806655 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				15961DE32990E10800806655 /* RegisterVIewModelTests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		159D74EF296ECBD6009668CB /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -272,6 +277,7 @@
 				153B514C297500EF005E2FAF /* DataManagerDelegate.swift */,
 				159D74F0296ECBEE009668CB /* SummonerManager.swift */,
 				151BC86C296FDC2E0042D719 /* MatchManager.swift */,
+				15961DE52990EB8500806655 /* DictionaryCreator.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 			children = (
 				151EAEA5296687C200322ACE /* Extension */,
 				15717275295D704D0053BCC1 /* Service */,
+				15961DE22990E0E800806655 /* ViewModel */,
 				15A4D6E3295972D70052E3AD /* AJ_GGTests.swift */,
 			);
 			path = AJ.GGTests;
@@ -359,6 +366,7 @@
 		15A4D6FD295973100052E3AD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				15961DE02990B25F00806655 /* ServiceAlertEnable.swift */,
 				1526DD0A2980079200340069 /* Register */,
 				1585915E2962BF9900E888FC /* ProfileViewModel.swift */,
 			);
@@ -380,7 +388,6 @@
 		15A4D700295974E30052E3AD /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
-				152292E5298E55B70070B023 /* New Group */,
 				15ED7F29298A21D000E49B5F /* Champion */,
 				15A4D705295975640052E3AD /* CapsuleText.swift */,
 				15A9ED64296EE0D10043A5B4 /* RoundedText.swift */,
@@ -415,7 +422,6 @@
 				15A4D70B295980B70052E3AD /* SummonersService.swift */,
 				15717278295D73930053BCC1 /* LeagueV4Service.swift */,
 				152FBE62296D255600B082C7 /* MatchV5Service.swift */,
-				1597B1D92971218900A66486 /* RiotImageService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -619,6 +625,7 @@
 				15ED7F2F298A2D4800E49B5F /* TMP.swift in Sources */,
 				152292E4298E55010070B023 /* DropDown.swift in Sources */,
 				151CA69529813DB50095D8DC /* RecordCell.swift in Sources */,
+				15961DE62990EB8500806655 /* DictionaryCreator.swift in Sources */,
 				152FBE73296D2D9800B082C7 /* MatchDTO.swift in Sources */,
 				1571727B295D73FB0053BCC1 /* LeagueEntryDTO .swift in Sources */,
 				15A9ED65296EE0D10043A5B4 /* RoundedText.swift in Sources */,
@@ -645,7 +652,6 @@
 				152FBE6F296D2BA400B082C7 /* ObjectivesDTO.swift in Sources */,
 				156DA4FE2988F3ED00786730 /* LaneImage.swift in Sources */,
 				15A4D6D9295972D70052E3AD /* AJ_GG.xcdatamodeld in Sources */,
-				1597B1DA2971218900A66486 /* RiotImageService.swift in Sources */,
 				151CA69329813AEB0095D8DC /* CircleChampionImage.swift in Sources */,
 				1526DD082980024500340069 /* CDMatch + Extension.swift in Sources */,
 				15F0FBCF2982660B00E5BAB2 /* DummyCretable.swift in Sources */,
@@ -656,6 +662,7 @@
 				156DA4F52988E35800786730 /* SummonerProfile.swift in Sources */,
 				15E9E19129839B9C008B614F /* HiddenTitle.swift in Sources */,
 				15A4D706295975640052E3AD /* CapsuleText.swift in Sources */,
+				15961DE12990B25F00806655 /* ServiceAlertEnable.swift in Sources */,
 				15A4D70C295980B70052E3AD /* SummonersService.swift in Sources */,
 				156DA4F72988E82C00786730 /* BaseProfileIconImage.swift in Sources */,
 				151CA6912981379C0095D8DC /* BaseChamiponImage.swift in Sources */,
@@ -671,6 +678,7 @@
 				15A4D6E4295972D70052E3AD /* AJ_GGTests.swift in Sources */,
 				151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */,
 				15717277295D70640053BCC1 /* SummonersServiceTests.swift in Sources */,
+				15961DE42990E10800806655 /* RegisterVIewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
