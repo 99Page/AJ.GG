@@ -145,14 +145,14 @@ enum Lane: String, Codable, CaseIterable, Equatable {
     case none = "NONE"
     
     static func selectableLanes() -> [Lane] {
-        return [.top, .jungle, .mid, .adCarry, .supoort, .none]
+        return [.top, .jungle, .mid, .adCarry, .supoort]
     }
     
     func isEqual(_ lane: Lane) -> Bool {
         return self == lane
     }
-
-    var imageName: String {
+    
+    var image: String {
         switch self {
         case .invalid:
             return "Lane_None"
@@ -168,6 +168,44 @@ enum Lane: String, Codable, CaseIterable, Equatable {
             return "Lane_Utility"
         case .none:
             return "Lane_None"
+        }
+    }
+    
+    var imageHover: String {
+        switch self {
+        case .invalid:
+            return "Lane_None_Hover"
+        case .top:
+            return "Lane_Top_Hover"
+        case .jungle:
+            return "Lane_Jungle_Hover"
+        case .mid:
+            return "Lane_Middle_Hover"
+        case .adCarry:
+            return "Lane_Bottom_Hover"
+        case .supoort:
+            return "Lane_Utility_Hover"
+        case .none:
+            return "Lane_None_Hover"
+        }
+    }
+    
+    var imageUnselected: String {
+        switch self {
+        case .invalid:
+            return "Lane_None_Unselected"
+        case .top:
+            return "Lane_Top_Unselected"
+        case .jungle:
+            return "Lane_Jungle_Unselected"
+        case .mid:
+            return "Lane_Middle_Unselected"
+        case .adCarry:
+            return "Lane_Bottom_Unselected"
+        case .supoort:
+            return "Lane_Utility_Unselected"
+        case .none:
+            return "Lane_None_Unselected"
         }
     }
 }

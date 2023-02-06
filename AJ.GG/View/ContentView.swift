@@ -13,8 +13,8 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             Group {
-                RegisterSummonerView()
-//                ProfileView()
+//                RegisterSummonerView()
+                ProfileView()
             }
         }
 

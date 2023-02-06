@@ -32,6 +32,11 @@
         <attribute name="summonerName" optional="YES" attributeType="String"/>
         <attribute name="tier" optional="YES" attributeType="String"/>
         <relationship name="plays" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDMatch" inverseName="playedBy" inverseEntity="CDMatch"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>

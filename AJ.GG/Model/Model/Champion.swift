@@ -8,14 +8,23 @@
 import Foundation
 import Kingfisher
 
-struct ChampionWithRate: Identifiable {
+struct ChampionWithRate: Identifiable, Comparable {
+    static func < (lhs: ChampionWithRate, rhs: ChampionWithRate) -> Bool {
+        lhs.winRate > rhs.winRate
+    }
+    
     let id = UUID().uuidString
     let champion: Champion
+    
     let win: Int
     let lose: Int
     
     var winRate: Double {
         Double(win) / Double(win+lose)
+    }
+    
+    var loseRate: Double {
+        Double(lose) / Double(win+lose)
     }
 }
 

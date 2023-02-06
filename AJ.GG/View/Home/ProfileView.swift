@@ -33,7 +33,7 @@ struct ProfileView: View {
                         Button {
                             viewModel.selectedLane = lane
                         } label: {
-                            LaneImage(lane: lane)
+                            LaneImage(lane: lane, isSelected: lane.isEqual(viewModel.selectedLane))
                         }
                     }
                 }
@@ -41,32 +41,9 @@ struct ProfileView: View {
                 
                 CapsuleText(text: $text, title: "카운터 검색")
                 
-                Text("나의 베스트 챔피언")
-                    .font(.system(size: 14, weight: .heavy))
-                
-                
-                HStack {
-                    ForEach(viewModel.myChampionRecords.indices, id: \.self) { i in
-                        ChampionWinRateImage(percentage: viewModel.myChampionRecords[i].winRate, champion: viewModel.myChampionRecords[i].champion, isBlueGraph: true)
-                    }
-                }
-                
-                Text("어려운 챔피언")
-                    .font(.system(size: 14, weight: .heavy))
-                
-                
-                HStack {
-                    ForEach(tmpChampions) { data in
-                        let rate = [0.2, 0.9]
-                        ChampionWinRateImage(percentage: rate.randomElement()!, champion: data, isBlueGraph: false)
-                            .padding(.horizontal, 5)
-                    }
-                }
-                
-                Text("전적")
-                    .font(.system(size: 14, weight: .heavy))
-                
-                RecordView(matches: viewModel.filterdMatchsByLane)
+                myBestChampions()
+                hardRivalChampions()
+                records()
             }
             .padding(.horizontal)
         }
@@ -77,10 +54,58 @@ struct ProfileView: View {
                     .padding(.horizontal)
                     .frame(maxWidth: .infinity, maxHeight: headerHeight, alignment: .leading)
                     .background(Color.white)
-                
-//                DropDown(selection: $title, content: lanesTitle, activeTint: .primary.opacity(0.1), inActiveTint: .white.opacity(0.05), dynamic: false)
             }
             .padding(0)
+        }
+    }
+    
+    @ViewBuilder
+    private func myBestChampions() -> some View {
+        Group {
+            Text("나의 베스트 챔피언")
+                .font(.system(size: 14, weight: .heavy))
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(viewModel.myChampionRecords.indices, id: \.self) { i in
+                        ChampionWinRateImage(percentage: viewModel.myChampionRecords[i].winRate, champion: viewModel.myChampionRecords[i].champion, isBlueGraph: true)
+                    }
+                }
+                .frame(height: 100)
+            }
+            .padding(.horizontal, -10)
+        }
+    }
+    
+    @ViewBuilder
+    private func hardRivalChampions() -> some View {
+        Group {
+              Text("어려운 챔피언")
+                  .font(.system(size: 14, weight: .heavy))
+              
+              
+              ScrollView(.horizontal, showsIndicators: false) {
+                  HStack {
+                      ForEach(viewModel.rivalChampionRecords.indices, id: \.self) { i in
+                          ChampionWinRateImage(percentage: viewModel.rivalChampionRecords[i].loseRate,
+                                               champion: viewModel.rivalChampionRecords[i].champion,
+                                               isBlueGraph: false)
+                              .padding(.horizontal, 5)
+                      }
+                  }
+                  .frame(height: 100)
+              }
+              .padding(.horizontal, -10)
+        }
+    }
+    
+    @ViewBuilder
+    private func records() -> some View {
+        Group {
+            Text("전적")
+                .font(.system(size: 14, weight: .heavy))
+            
+            RecordView(matches: viewModel.filterdMatchsByLane)
         }
     }
 }

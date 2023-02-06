@@ -16,14 +16,9 @@ extension CDMatch {
 
 extension CDMatch: AllSettable {
     func setValues(_ data: [String : Any]) {
-        self.setValue(data["enemyChampionID"], forKey: "enemyChampionID")
-        self.setValue(data["gameCreation"], forKey: "gameCreation")
-        self.setValue(data["id"], forKey: "id")
-        self.setValue(data["isWin"], forKey: "isWin")
-        self.setValue(data["lane"], forKey: "lane")
-        self.setValue(data["myChampionID"], forKey: "myChampionID")
-        self.setValue(data["version"], forKey: "version")
-        self.setValue(data["playedBy"], forKey: "playedBy")
+        for (k, v) in data {
+            self.setValue(v, forKey: k)
+        }
     }
 }
 

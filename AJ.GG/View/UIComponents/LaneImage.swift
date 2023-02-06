@@ -10,9 +10,13 @@ import SwiftUI
 struct LaneImage: View {
     
     let lane: Lane
+    let isSelected: Bool
     
+    var imageString: String {
+        isSelected ? lane.image : lane.imageUnselected
+    }
     var body: some View {
-        Image(lane.imageName)
+        Image(imageString)
             .resizable()
             .scaledToFit()
     }
@@ -20,6 +24,6 @@ struct LaneImage: View {
 
 struct LaneImage_Previews: PreviewProvider {
     static var previews: some View {
-        LaneImage(lane: Lane.top)
+        LaneImage(lane: Lane.top, isSelected: true)
     }
 }
