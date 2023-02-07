@@ -10,6 +10,7 @@ import CoreData
 
 class SummonerManager: DataManagerDelegate {
     
+    
     typealias Data = Summoner
     
     let context: NSManagedObjectContext
@@ -29,7 +30,7 @@ class SummonerManager: DataManagerDelegate {
         save()
     }
     
-    func getAll() -> [Summoner] {
+    func fetchAll() -> [Summoner] {
         let request = NSFetchRequest<CDSummoner>(entityName: "CDSummoner")
         do {
             let summoners = try context.fetch(request)
@@ -41,6 +42,23 @@ class SummonerManager: DataManagerDelegate {
         }
         
         return []
+    }
+    
+    func fetchEntity(predicate: NSPredicate?) -> [Summoner] {
+        let request = NSFetchRequest<CDSummoner>(entityName: "CDSummoner")
+        request.predicate = predicate
+        
+        do {
+            let summoners = try context.fetch(request)
+            print("Fetch Success")
+            return summoners.map { Summoner(cdSummoner: $0) }
+        } catch {
+            print("ERROR FETCHING CORE DATA")
+            print(error.localizedDescription)
+        }
+        
+        return []
+        
     }
     
     func deleteAll() {

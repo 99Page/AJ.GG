@@ -11,19 +11,14 @@ struct ProfileView: View {
 
     @StateObject
     var viewModel: ProfileViewModel = ProfileViewModel(summonerManager: SummonerManager(preview: false),
-                                                       matchManager: MatchManager(), matchV5Service: MatchV5Service())
+                                                       matchManager: MatchManager(),
+                                                       matchV5Service: MatchV5Service())
     
     let lanes = Lane.selectableLanes()
-    let tmpChampions = Champion.dummyDatas()
     
     @State var text = ""
-    @State var title = "TOP"
     
     let headerHeight: CGFloat = 90
-    
-    var lanesTitle: [String] {
-        lanes.map { $0.rawValue }
-    }
     
     var body: some View {
         ScrollView {
@@ -43,6 +38,14 @@ struct ProfileView: View {
                 
                 myBestChampions()
                 hardRivalChampions()
+//                ChampionWinRateImagesSection(title: "나의 베스트 챔피언",
+//                                             winRate: true,
+//                                             championWithWinRates: viewModel.myChampionWithRates)
+//
+//                ChampionWinRateImagesSection(title: "상대하기 어려운 챔피언",
+//                                             winRate: false,
+//                                             championWithWinRates: viewModel.rivalChampionWithRates)
+            
                 records()
             }
             .padding(.horizontal)
@@ -63,34 +66,53 @@ struct ProfileView: View {
     private func myBestChampions() -> some View {
         Group {
             Text("나의 베스트 챔피언")
-                .font(.system(size: 14, weight: .heavy))
-            
+                .font(.system(size: 15, weight: .heavy))
+
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(viewModel.myChampionRecords.indices, id: \.self) { i in
-                        ChampionWinRateImage(percentage: viewModel.myChampionRecords[i].winRate, champion: viewModel.myChampionRecords[i].champion, isBlueGraph: true)
+                    ForEach(viewModel.myChampionWithRates.indices, id: \.self) { i in
+
+                        let champion = viewModel.myChampionWithRates[i].champion
+                        let percentage = viewModel.myChampionWithRates[i].winRate
+                        
+                        Button {
+                            self.viewModel.selectedChampion = champion
+                        } label: {
+                            ChampionWinRateImage(percentage: percentage,
+                                                 champion: champion,
+                                                 isBlueGraph: true)
+                        }
+                        .foregroundColor(.black)
                     }
                 }
                 .frame(height: 100)
+                .sheet(item: $viewModel.selectedChampion) {
+                    ChampionRecordView(champion: $0,
+                                       isMyChampion: true,
+                                       matchManager: MatchManager())
+                    .presentationDetents([.medium, .large])
+                }
             }
             .padding(.horizontal, -10)
         }
     }
-    
+
     @ViewBuilder
     private func hardRivalChampions() -> some View {
         Group {
               Text("어려운 챔피언")
-                  .font(.system(size: 14, weight: .heavy))
-              
-              
+                  .font(.system(size: 15, weight: .heavy))
+
+
               ScrollView(.horizontal, showsIndicators: false) {
                   HStack {
-                      ForEach(viewModel.rivalChampionRecords.indices, id: \.self) { i in
-                          ChampionWinRateImage(percentage: viewModel.rivalChampionRecords[i].loseRate,
-                                               champion: viewModel.rivalChampionRecords[i].champion,
+                      ForEach(viewModel.rivalChampionWithRates.indices, id: \.self) { i in
+
+                          let champion = viewModel.rivalChampionWithRates[i].champion
+
+                          ChampionWinRateImage(percentage: viewModel.rivalChampionWithRates[i].loseRate,
+                                               champion: champion,
                                                isBlueGraph: false)
-                              .padding(.horizontal, 5)
                       }
                   }
                   .frame(height: 100)
@@ -104,7 +126,7 @@ struct ProfileView: View {
         Group {
             Text("전적")
                 .font(.system(size: 14, weight: .heavy))
-            
+
             RecordView(matches: viewModel.filterdMatchsByLane)
         }
     }
@@ -113,6 +135,7 @@ struct ProfileView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(viewModel: ProfileViewModel(summonerManager: SummonerManager(preview: true),
-                                                matchManager: MatchManager(inPreview: true), matchV5Service: MatchV5Service()))
+                                                matchManager: MatchManager(inPreview: true),
+                                                matchV5Service: MatchV5Service()))
     }
 }

@@ -45,7 +45,7 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
         self.matchV5Service = matchV5Service
         self.summonerManager = summonerManager
         self.summonerManager.deleteAll()
-        self.summoners = summonerManager.getAll()
+        self.summoners = summonerManager.fetchAll()
     }
     
     
@@ -134,7 +134,7 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
     }
     
     func fetchSummonersAll() {
-        self.summoners = summonerManager.getAll()
+        self.summoners = summonerManager.fetchAll()
     }
     
     func deleteSummonersAll() {

@@ -21,14 +21,14 @@ struct PersistenceController {
             insertData.profileIconID = 660
         }
         
-        for _ in 0..<5 {
+        for i in 0...5 {
             let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDMatch",
                                                                  into: viewContext) as! CDMatch
             
             insertData.enemyChampionID = "Gwen"
             insertData.gameCreation = 10000
             insertData.myAssist = 5
-            insertData.id = "1234"
+            insertData.id = String(i)
             insertData.isWin = true
             insertData.myChampionID = "Aatrox"
             insertData.lane = "TOP"
@@ -42,14 +42,14 @@ struct PersistenceController {
             insertData.version = "3.14"
         }
         
-        for _ in 0..<5 {
+        for i in 6...10 {
             let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDMatch",
                                                                  into: viewContext) as! CDMatch
             
             insertData.enemyChampionID = "Gwen"
             insertData.gameCreation = 10000
             insertData.myAssist = 5
-            insertData.id = "1234"
+            insertData.id = String(i)
             insertData.isWin = true
             insertData.myChampionID = "Aatrox"
             insertData.lane = "MIDDLE"
@@ -69,7 +69,7 @@ struct PersistenceController {
         insertData.enemyChampionID = "Gwen"
         insertData.gameCreation = 10000
         insertData.myAssist = 5
-        insertData.id = "1234"
+        insertData.id = "1236"
         insertData.isWin = false
         insertData.myChampionID = "Aatrox"
         insertData.lane = "MIDDLE"
@@ -87,7 +87,7 @@ struct PersistenceController {
         insertData2.enemyChampionID = "Gwen"
         insertData2.gameCreation = 10000
         insertData2.myAssist = 5
-        insertData2.id = "1234"
+        insertData2.id = "1237"
         insertData2.isWin = true
         insertData2.myChampionID = "Ryze"
         insertData2.lane = "MIDDLE"

@@ -17,8 +17,9 @@ protocol DataManagerDelegate {
     
     func add(_ data: [String: Any])
     func save()
-    func getAll() -> [Data]
+    func fetchAll() -> [Data]
     func deleteAll()
+    func fetchEntity(predicate: NSPredicate?) -> [Data] 
 }
 
 extension DataManagerDelegate {

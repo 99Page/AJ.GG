@@ -8,9 +8,37 @@
 import Foundation
 import Kingfisher
 
-struct ChampionWithRate: Identifiable, Comparable {
+struct ChampionWithRate: Identifiable, Comparable, DummyCreatable {
+    
+    static func dummyData() -> ChampionWithRate {
+        return dummyDatas().randomElement()!
+    }
+    
+    static func dummyDatas() -> [ChampionWithRate] {
+        return [
+            ChampionWithRate(champion: Champion(name: "Aatrox"), win: 10, lose: 3),
+            ChampionWithRate(champion: Champion(name: "Gwen"), win: 5, lose: 1),
+            ChampionWithRate(champion: Champion(name: "Singed"), win: 6, lose: 2),
+            ChampionWithRate(champion: Champion(name: "Ryze"), win: 3, lose: 10),
+            ChampionWithRate(champion: Champion(name: "Ashe"), win: 21, lose: 4),
+        ]
+        
+    }
+    
+    typealias Dummy = ChampionWithRate
+    
+    
     static func < (lhs: ChampionWithRate, rhs: ChampionWithRate) -> Bool {
-        lhs.winRate > rhs.winRate
+        
+        if lhs.winRate != rhs.winRate {
+            return lhs.winRate > rhs.winRate
+        } else {
+            if lhs.total != rhs.total {
+                return lhs.total > rhs.total
+            } else {
+                return lhs.champion.name > rhs.champion.name
+            }
+        }
     }
     
     let id = UUID().uuidString
@@ -19,12 +47,16 @@ struct ChampionWithRate: Identifiable, Comparable {
     let win: Int
     let lose: Int
     
+    var total: Int {
+        win+lose
+    }
+    
     var winRate: Double {
-        Double(win) / Double(win+lose)
+        Double(win) / Double(total)
     }
     
     var loseRate: Double {
-        Double(lose) / Double(win+lose)
+        Double(lose) / Double(total)
     }
 }
 

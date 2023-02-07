@@ -100,4 +100,8 @@ struct Match: Identifiable, DummyCreatable {
         self.gameCreation = match.gameCreation
         self.version = match.version()
     }
+    
+    func containMatchID(_ matchID: String) -> Bool {
+        return self.id == matchID
+    }
 }

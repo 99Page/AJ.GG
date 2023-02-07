@@ -9,6 +9,8 @@ import Foundation
 import CoreData
 
 class MatchManager: DataManagerDelegate {
+
+    
     typealias Data = Match
     
     let context: NSManagedObjectContext
@@ -30,9 +32,26 @@ class MatchManager: DataManagerDelegate {
         save()
     }
     
-    func getAll() -> [Match] {
+    func fetchAll() -> [Match] {
         let request = NSFetchRequest<CDMatch>(entityName: "CDMatch")
         request.sortDescriptors = [NSSortDescriptor(key: "gameCreation", ascending: false)]
+        do {
+            let matches = try self.context.fetch(request)
+            print("Fetch Success")
+            return matches.map { Match($0) }
+        } catch {
+            print("ERROR FETCHING CORE DATA")
+            print(error.localizedDescription)
+        }
+        
+        return []
+    }
+    
+    func fetchEntity(predicate: NSPredicate?) -> [Match] {
+        let request = NSFetchRequest<CDMatch>(entityName: "CDMatch")
+        request.predicate = predicate
+        request.sortDescriptors = [NSSortDescriptor(key: "gameCreation", ascending: false)]
+        
         do {
             let matches = try self.context.fetch(request)
             print("Fetch Success")

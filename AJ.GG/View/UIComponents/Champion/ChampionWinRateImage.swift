@@ -54,6 +54,7 @@ struct ChampionWinRateImage: View {
 struct ChampionWinRateImage_Previews: PreviewProvider {
     static var previews: some View {
         ChampionWinRateImage(percentage: 0.9367,
-                             champion: Champion.dummyData(), isBlueGraph: false)
+                             champion: Champion.dummyData(),
+                             isBlueGraph: false)
     }
 }

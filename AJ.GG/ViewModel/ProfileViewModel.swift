@@ -12,22 +12,22 @@ class ProfileViewModel: ObservableObject {
     
     
     let matchV5Service: MatchV5ServiceEnable
-    
     let summonerManager: SummonerManager
     let matchManager: MatchManager
-//    let matchV5Service: MatchV5ServiceEnable
-//
+    
     @Published var summoners: [Summoner] = []
     @Published var selectedSummoner: Summoner
     
     @Published var selectedLane: Lane = .mid
     @Published var matches: [Match] = []
     
+    @Published var selectedChampion: Champion?
+    
     var filterdMatchsByLane: [Match] {
         matches.filter { $0.lane == selectedLane }
     }
     
-    var myChampionRecords: [ChampionWithRate] {
+    var myChampionWithRates: [ChampionWithRate] {
         var dictionary: [String: [Int]] = [:]
         
         for match in filterdMatchsByLane {
@@ -52,7 +52,7 @@ class ProfileViewModel: ObservableObject {
         return result.sorted()
     }
     
-    var rivalChampionRecords: [ChampionWithRate] {
+    var rivalChampionWithRates: [ChampionWithRate] {
         var dictionary: [String: [Int]] = [:]
         
         for match in filterdMatchsByLane {
@@ -83,32 +83,48 @@ class ProfileViewModel: ObservableObject {
         self.matchManager = matchManager
         self.matchV5Service = matchV5Service
         
-        let fetchedSummoners = summonerManager.getAll()
+        let fetchedSummoners = summonerManager.fetchAll()
         self.summoners = fetchedSummoners
         self.selectedSummoner = fetchedSummoners[0]
         
-        self.matches = matchManager.getAll()
         
         Task {
+            await fetchMatchesAll()
             await fetchRecentMatces(fetchedSummoners[0].puuid)
         }
     }
-    
+//    
     @MainActor
     private func fetchRecentMatces(_ puuid: String) async {
         Task {
-            let matchesResult = await matchV5Service.searchMatchDTOsByPuuid(puuid: puuid)
-            
-            switch matchesResult {
-            case .success(let success):
-                for data in success {
-                    let dict = DictionaryController.match(match: Match(data, puuid: puuid))
-                    matchManager.add(dict)
-                }
-                
+            let matcheIDsResult = await matchV5Service.matcheIDsByPuuid(puuid: puuid)
+            switch matcheIDsResult {
+            case .success(let ids):
+                await handleMatchIds(ids, puuid: puuid)
             case .failure(let failure):
                 print("\(failure)")
             }
         }
+    }
+    
+    private func handleMatchIds(_ ids: [String], puuid: String) async {
+        for id in ids {
+            if !matches.contains(where: { $0.containMatchID(id)}) {
+                let matchDtoResult = await matchV5Service.matchByMatchID(matchID: id)
+                switch matchDtoResult {
+                case .success(let success):
+                    let dict = DictionaryController.match(match: Match(success, puuid: puuid))
+                    matchManager.add(dict)
+                    await fetchMatchesAll()
+                case .failure(let failure):
+                    print("\(failure)")
+                }
+            }
+        }
+    }
+    
+    @MainActor
+    private func fetchMatchesAll() {
+        self.matches = matchManager.fetchAll()
     }
 }

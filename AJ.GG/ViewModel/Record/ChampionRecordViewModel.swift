@@ -1,0 +1,66 @@
+//
+//  ChampionRecordViewModel.swift
+//  AJ.GG
+//
+//  Created by 노우영 on 2023/02/07.
+//
+
+import Foundation
+import CoreData
+
+class ChampionRecordViewModel: ObservableObject {
+    
+    let champion: Champion
+    let matchManager: MatchManager
+    let isMyChampion: Bool
+    
+    @Published var matches: [Match] = []
+    
+    var championWithRates: [ChampionWithRate] {
+        var dictionary: [String: [Int]] = [:] 
+        
+        for match in matches {
+            if dictionary[match.rivalChampionName] == nil {
+                dictionary[match.rivalChampionName] = [0, 0]
+            }
+            
+            if match.isWin {
+                dictionary[match.rivalChampionName]![0] += 1
+            } else {
+                dictionary[match.rivalChampionName]![1] += 1
+            }
+        }
+        
+        var result: [ChampionWithRate] = []
+        
+        for (k, v) in dictionary {
+            let array = v
+            result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
+        }
+        
+        return result
+    }
+   
+    var championName: String {
+        self.champion.name
+    }
+    
+    init(champion: Champion, matchManager: MatchManager, isMyChampion: Bool) {
+        self.champion = champion
+        self.matchManager = matchManager
+        self.isMyChampion = isMyChampion
+        self.fetchEntities()
+    }
+    
+    private func fetchEntities() {
+        var predicate: NSPredicate
+        
+        if isMyChampion {
+            predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.myChampionID), champion.name)
+        } else {
+            predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.enemyChampionID), champion.name)
+        }
+        
+        self.matches = matchManager.fetchEntity(predicate: predicate)
+    }
+}
