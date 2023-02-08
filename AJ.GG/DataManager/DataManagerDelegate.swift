@@ -10,6 +10,7 @@ import CoreData
 
 protocol DataManagerDelegate {
     associatedtype Data
+    associatedtype CDData
     
     var context: NSManagedObjectContext {
         get 
@@ -19,14 +20,16 @@ protocol DataManagerDelegate {
     func save()
     func fetchAll() -> [Data]
     func deleteAll()
-    func fetchEntity(predicate: NSPredicate?) -> [Data] 
+    func fetchDatas(predicate: NSPredicate?) -> [Data]
+    func fetchEntites(predicate: NSPredicate?, sortDescriptor: [NSSortDescriptor]?) -> [CDData]
+    func updateEntites(predicate: NSPredicate?, data: [String: Any])
 }
 
 extension DataManagerDelegate {
     func save() {
         do {
             try context.save()
-            print("SAVE SUCCESS")
+//            print("SAVE SUCCESS")
         } catch {
             print("ERROR SAVING CORE DATA")
             print(error.localizedDescription)

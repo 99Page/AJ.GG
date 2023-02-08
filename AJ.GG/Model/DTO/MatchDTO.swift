@@ -12,7 +12,6 @@ struct MatchDTO: Codable{
     let metadata: MetadataDTO
     let info: InfoDTO
     
-    
     var isRankGame: Bool {
         info.isRankGame
     }

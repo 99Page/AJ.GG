@@ -26,10 +26,11 @@ struct ProfileView: View {
                 HStack {
                     ForEach(lanes, id: \.rawValue) { lane in
                         Button {
-                            viewModel.selectedLane = lane
+                            viewModel.laneButtonTapped(lane)
                         } label: {
                             LaneImage(lane: lane, isSelected: lane.isEqual(viewModel.selectedLane))
                         }
+                        .disabled(viewModel.selectedLane.isEqual(lane))
                     }
                 }
                 .padding(.horizontal, 80)
@@ -127,7 +128,7 @@ struct ProfileView: View {
             Text("전적")
                 .font(.system(size: 14, weight: .heavy))
 
-            RecordView(matches: viewModel.filterdMatchsByLane)
+            RecordView(matches: viewModel.matches)
         }
     }
 }

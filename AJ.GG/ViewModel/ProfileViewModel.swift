@@ -18,19 +18,15 @@ class ProfileViewModel: ObservableObject {
     @Published var summoners: [Summoner] = []
     @Published var selectedSummoner: Summoner
     
-    @Published var selectedLane: Lane = .mid
+    @Published var selectedLane: Lane = .top
     @Published var matches: [Match] = []
     
     @Published var selectedChampion: Champion?
     
-    var filterdMatchsByLane: [Match] {
-        matches.filter { $0.lane == selectedLane }
-    }
-    
     var myChampionWithRates: [ChampionWithRate] {
         var dictionary: [String: [Int]] = [:]
         
-        for match in filterdMatchsByLane {
+        for match in matches {
             if dictionary[match.myChampionName] == nil {
                 dictionary[match.myChampionName] = [0, 0]
             }
@@ -55,7 +51,7 @@ class ProfileViewModel: ObservableObject {
     var rivalChampionWithRates: [ChampionWithRate] {
         var dictionary: [String: [Int]] = [:]
         
-        for match in filterdMatchsByLane {
+        for match in matches {
             if dictionary[match.rivalChampionName] == nil {
                 dictionary[match.rivalChampionName] = [0, 0]
             }
@@ -89,7 +85,7 @@ class ProfileViewModel: ObservableObject {
         
         
         Task {
-            await fetchMatchesAll()
+            await fetchMatches()
             await fetchRecentMatces(fetchedSummoners[0].puuid)
         }
     }
@@ -113,9 +109,12 @@ class ProfileViewModel: ObservableObject {
                 let matchDtoResult = await matchV5Service.matchByMatchID(matchID: id)
                 switch matchDtoResult {
                 case .success(let success):
-                    let dict = DictionaryController.match(match: Match(success, puuid: puuid))
-                    matchManager.add(dict)
-                    await fetchMatchesAll()
+                    let predicate = NSPredicate(format: "id == %@", selectedSummoner.id)
+                    if let summoner = summonerManager.fetchEntites(predicate: predicate, sortDescriptor: nil).first {
+                        let dict = DictionaryController.match(match: Match(success, puuid: puuid), summoner: summoner)
+                        matchManager.add(dict)
+                        await fetchMatches()
+                    }
                 case .failure(let failure):
                     print("\(failure)")
                 }
@@ -124,7 +123,24 @@ class ProfileViewModel: ObservableObject {
     }
     
     @MainActor
-    private func fetchMatchesAll() {
-        self.matches = matchManager.fetchAll()
+    private func fetchMatches() {
+        self.matches.removeAll()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+            let summonerPredicate = NSPredicate(format: "id == %@", self.selectedSummoner.summonerID)
+            let summoners: [CDSummoner]  = self.summonerManager.fetchEntites(predicate: summonerPredicate, sortDescriptor: nil)
+            
+            if let summoner = summoners.first {
+                let predicate = NSPredicate(format: "%K == %@ AND %K == %@", #keyPath(CDMatch.playedBy), summoner, #keyPath(CDMatch.lane), self.selectedLane.rawValue)
+                self.matches = self.matchManager.fetchDatas(predicate: predicate)
+            }
+            
+        }
+    }
+    
+    @MainActor
+    func laneButtonTapped(_ lane: Lane) {
+        self.selectedLane = lane
+        fetchMatches()
     }
 }

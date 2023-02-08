@@ -9,8 +9,7 @@ import Foundation
 import CoreData
 
 class SummonerManager: DataManagerDelegate {
-    
-    
+    typealias CDData = CDSummoner
     typealias Data = Summoner
     
     let context: NSManagedObjectContext
@@ -44,13 +43,13 @@ class SummonerManager: DataManagerDelegate {
         return []
     }
     
-    func fetchEntity(predicate: NSPredicate?) -> [Summoner] {
+    func fetchDatas(predicate: NSPredicate?) -> [Summoner] {
         let request = NSFetchRequest<CDSummoner>(entityName: "CDSummoner")
         request.predicate = predicate
         
+        
         do {
             let summoners = try context.fetch(request)
-            print("Fetch Success")
             return summoners.map { Summoner(cdSummoner: $0) }
         } catch {
             print("ERROR FETCHING CORE DATA")
@@ -60,6 +59,38 @@ class SummonerManager: DataManagerDelegate {
         return []
         
     }
+    
+    func fetchEntites(predicate: NSPredicate?, sortDescriptor: [NSSortDescriptor]?) -> [CDSummoner] {
+        let request = NSFetchRequest<CDSummoner>(entityName: "CDSummoner")
+        request.predicate = predicate
+        request.sortDescriptors = sortDescriptor
+        
+        do {
+            let matches = try self.context.fetch(request)
+            return matches
+        } catch {
+            print("ERROR FETCHING CORE DATA")
+            print(error.localizedDescription)
+        }
+        
+        return []
+    }
+    
+    func updateEntites(predicate: NSPredicate?, data: [String: Any]) {
+        let request = NSFetchRequest<CDSummoner>(entityName: "CDSummoner")
+        
+        request.predicate = predicate
+        do {
+            let entities = try self.context.fetch(request)
+            for entity in entities {
+                entity.setValues(data)
+            }
+        } catch {
+            print("ERROR FETCHING CORE DATA")
+            print(error.localizedDescription)
+        }
+    }
+    
     
     func deleteAll() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDSummoner.fetchRequest()

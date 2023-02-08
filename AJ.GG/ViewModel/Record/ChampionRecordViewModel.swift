@@ -61,6 +61,6 @@ class ChampionRecordViewModel: ObservableObject {
             predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.enemyChampionID), champion.name)
         }
         
-        self.matches = matchManager.fetchEntity(predicate: predicate)
+        self.matches = matchManager.fetchDatas(predicate: predicate)
     }
 }

@@ -31,7 +31,7 @@
         <attribute name="rank" optional="YES" attributeType="String"/>
         <attribute name="summonerName" optional="YES" attributeType="String"/>
         <attribute name="tier" optional="YES" attributeType="String"/>
-        <relationship name="plays" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDMatch" inverseName="playedBy" inverseEntity="CDMatch"/>
+        <relationship name="plays" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDMatch" inverseName="playedBy" inverseEntity="CDMatch"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
                 <constraint value="id"/>

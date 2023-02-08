@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 
 class MatchManager: DataManagerDelegate {
-
     
+    typealias CDData = CDMatch
     typealias Data = Match
     
     let context: NSManagedObjectContext
@@ -37,7 +37,6 @@ class MatchManager: DataManagerDelegate {
         request.sortDescriptors = [NSSortDescriptor(key: "gameCreation", ascending: false)]
         do {
             let matches = try self.context.fetch(request)
-            print("Fetch Success")
             return matches.map { Match($0) }
         } catch {
             print("ERROR FETCHING CORE DATA")
@@ -47,14 +46,13 @@ class MatchManager: DataManagerDelegate {
         return []
     }
     
-    func fetchEntity(predicate: NSPredicate?) -> [Match] {
+    func fetchDatas(predicate: NSPredicate?) -> [Match] {
         let request = NSFetchRequest<CDMatch>(entityName: "CDMatch")
         request.predicate = predicate
         request.sortDescriptors = [NSSortDescriptor(key: "gameCreation", ascending: false)]
         
         do {
             let matches = try self.context.fetch(request)
-            print("Fetch Success")
             return matches.map { Match($0) }
         } catch {
             print("ERROR FETCHING CORE DATA")
@@ -63,6 +61,41 @@ class MatchManager: DataManagerDelegate {
         
         return []
     }
+    
+    func fetchEntites(predicate: NSPredicate?, sortDescriptor: [NSSortDescriptor]?) -> [CDMatch] {
+        let request = NSFetchRequest<CDMatch>(entityName: "CDMatch")
+        request.predicate = predicate
+        request.sortDescriptors = sortDescriptor
+        
+        do {
+            let matches = try self.context.fetch(request)
+            return matches
+        } catch {
+            print("ERROR FETCHING CORE DATA")
+            print(error.localizedDescription)
+        }
+        
+        return []
+    }
+    
+    func updateEntites(predicate: NSPredicate?, data: [String: Any]) {
+        let request = NSFetchRequest<CDMatch>(entityName: "CDMatch")
+        request.predicate = predicate
+        
+        do {
+            let matches = try self.context.fetch(request)
+            print("매치수 : \(matches.count)")
+            for match in matches {
+                match.setValues(data)
+                save()
+            }
+        } catch {
+            print("ERROR FETCHING CORE DATA")
+            print(error.localizedDescription)
+        }
+    }
+    
+   
     
     func deleteAll() {
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = CDMatch.fetchRequest()
