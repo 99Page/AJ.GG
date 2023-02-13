@@ -40,6 +40,39 @@ class ChampionRecordViewModel: ObservableObject {
         
         return result
     }
+    
+    var myChampionWithRates: [ChampionWithRate] {
+        var dictionary: [String: [Int]] = [:]
+        
+        for match in matches {
+            if dictionary[match.myChampionName] == nil {
+                dictionary[match.myChampionName] = [0, 0]
+            }
+            
+            if match.isWin {
+                dictionary[match.myChampionName]![0] += 1
+            } else {
+                dictionary[match.myChampionName]![1] += 1
+            }
+        }
+        
+        var result: [ChampionWithRate] = []
+        
+        for (k, v) in dictionary {
+            let array = v
+            result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
+        }
+        
+        return result
+    }
+    
+    var rates: [ChampionWithRate] {
+        if self.isMyChampion {
+            return championWithRates
+        } else {
+            return myChampionWithRates
+        }
+    }
    
     var championName: String {
         self.champion.name
@@ -57,6 +90,7 @@ class ChampionRecordViewModel: ObservableObject {
         
         if isMyChampion {
             predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.myChampionID), champion.name)
+            print("My Champion")
         } else {
             predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.enemyChampionID), champion.name)
         }

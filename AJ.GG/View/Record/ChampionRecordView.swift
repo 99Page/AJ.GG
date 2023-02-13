@@ -25,12 +25,12 @@ struct ChampionRecordView: View {
                 
                 ChampionWinRateImagesSection(title: "[\(viewModel.championName)] 상대하기 쉬운 챔피언",
                                              winRate: true,
-                                             championWithWinRates: viewModel.championWithRates)
+                                             championWithWinRates: viewModel.rates)
                 
                 
                 ChampionWinRateImagesSection(title: "[\(viewModel.championName)] 상대하기 어려운 챔피언",
                                              winRate: false,
-                                             championWithWinRates: viewModel.championWithRates)
+                                             championWithWinRates: viewModel.rates)
              
                 
                 Text("[\(viewModel.championName)] 전적")

@@ -9,8 +9,15 @@ import SwiftUI
 import Kingfisher
 
 struct ProfileView: View {
+    
+    struct ViewItem: Identifiable {
+        var id = UUID().uuidString
+        let champion: Champion
+        let isMyChampion: Bool
+    }
 
     @StateObject var viewModel: ProfileViewModel
+    @State private var item: ViewItem?
     
     let lanes = Lane.selectableLanes()
     
@@ -31,7 +38,7 @@ struct ProfileView: View {
                 HStack {
                     ForEach(lanes, id: \.rawValue) { lane in
                         Button {
-                            Task { await viewModel.laneButtonTapped(lane) }
+                            viewModel.laneButtonTapped(lane)
                         } label: {
                             LaneImage(lane: lane, isSelected: lane.isEqual(viewModel.selectedLane))
                         }
@@ -47,7 +54,11 @@ struct ProfileView: View {
                     hardRivalChampions()
                     records()
                 }
-                .hidden(viewModel.isMatchEmpty)
+                .hidden(viewModel.itemsDisappear || viewModel.isMatchEmpty)
+                .sheet(item: $item) {
+                    ChampionRecordView(champion: $0.champion, isMyChampion: $0.isMyChampion, matchManager: MatchManager())
+                        .presentationDetents([.medium, .large])
+                }
 
                 VStack(alignment: .center, spacing: 10) {
                     BaseProfileIconImage(iconID: IconID.piratePoro.rawValue)
@@ -95,7 +106,7 @@ struct ProfileView: View {
                         let percentage = viewModel.myChampionWithRates[i].winRate
 
                         Button {
-                            self.viewModel.selectedChampion = champion
+                            self.item = ViewItem(champion: champion, isMyChampion: true)
                         } label: {
                             ChampionWinRateImage(percentage: percentage,
                                                  champion: champion,
@@ -105,12 +116,6 @@ struct ProfileView: View {
                     }
                 }
                 .frame(height: 100)
-                .sheet(item: $viewModel.selectedChampion) {
-                    ChampionRecordView(champion: $0,
-                                       isMyChampion: true,
-                                       matchManager: MatchManager())
-                    .presentationDetents([.medium, .large])
-                }
             }
             .padding(.horizontal, -10)
         }
@@ -128,10 +133,16 @@ struct ProfileView: View {
                       ForEach(viewModel.rivalChampionWithRates.indices, id: \.self) { i in
 
                           let champion = viewModel.rivalChampionWithRates[i].champion
-
-                          ChampionWinRateImage(percentage: viewModel.rivalChampionWithRates[i].loseRate,
-                                               champion: champion,
-                                               isBlueGraph: false)
+                          let percentage = viewModel.rivalChampionWithRates[i].loseRate
+                          
+                          Button {
+                              self.item = ViewItem(champion: champion, isMyChampion: false)
+                          } label: {
+                              ChampionWinRateImage(percentage: percentage,
+                                                   champion: champion,
+                                                   isBlueGraph: false)
+                          }
+                          .foregroundColor(.black)
                       }
                   }
                   .frame(height: 100)
@@ -146,7 +157,7 @@ struct ProfileView: View {
             Text("전적")
                 .font(.system(size: 14, weight: .heavy))
 
-            RecordView(matches: viewModel.matches)
+            RecordView(matches: viewModel.matchesByLane)
         }
     }
 }

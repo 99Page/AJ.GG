@@ -21,14 +21,17 @@ class ProfileViewModel: ObservableObject {
     @Published var selectedLane: Lane = .top
     @Published var matches: [Match] = []
 
-    @Published var selectedChampion: Champion?
     
-    var fetchingOngoing: Bool = true
+    @Published var itemsDisappear: Bool = true
+    
+    var matchesByLane: [Match] {
+        matches.filter { $0.lane == selectedLane }
+    }
 
     var myChampionWithRates: [ChampionWithRate] {
         var dictionary: [String: [Int]] = [:]
 
-        for match in matches {
+        for match in matchesByLane {
             if dictionary[match.myChampionName] == nil {
                 dictionary[match.myChampionName] = [0, 0]
             }
@@ -53,7 +56,7 @@ class ProfileViewModel: ObservableObject {
     var rivalChampionWithRates: [ChampionWithRate] {
         var dictionary: [String: [Int]] = [:]
 
-        for match in matches {
+        for match in matchesByLane {
             if dictionary[match.rivalChampionName] == nil {
                 dictionary[match.rivalChampionName] = [0, 0]
             }
@@ -76,7 +79,7 @@ class ProfileViewModel: ObservableObject {
     }
 
     var isMatchEmpty: Bool {
-        self.matches.isEmpty && !self.fetchingOngoing
+        self.matchesByLane.isEmpty
     }
 
 
@@ -135,24 +138,28 @@ class ProfileViewModel: ObservableObject {
     @MainActor
     private func fetchMatches() async {
         self.matches.removeAll()
-        self.fetchingOngoing = true
+        self.itemsDisappear = true
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
             let summonerPredicate = NSPredicate(format: "id == %@", self.selectedSummoner.summonerID)
             let summoners: [CDSummoner]  = self.summonerManager.fetchEntites(predicate: summonerPredicate, sortDescriptor: nil)
 
             if let summoner = summoners.first {
-                let predicate = NSPredicate(format: "%K == %@ AND %K == %@", #keyPath(CDMatch.playedBy), summoner, #keyPath(CDMatch.lane), self.selectedLane.rawValue)
+                let predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.playedBy), summoner)
                 self.matches = self.matchManager.fetchDatas(predicate: predicate)
             }
             
-            self.fetchingOngoing = false
+            self.itemsDisappear = false
         }
     }
 
     @MainActor
-    func laneButtonTapped(_ lane: Lane) async {
+    func laneButtonTapped(_ lane: Lane) {
         self.selectedLane = lane
-        await fetchMatches()
+        self.itemsDisappear = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+            self.itemsDisappear = false
+        }
     }
 }
