@@ -15,7 +15,7 @@ class MatchManager: DataManagerDelegate {
     
     let context: NSManagedObjectContext
     
-    init(inPreview: Bool = false) {
+    required init(inPreview: Bool = false) {
         if inPreview {
             self.context = PersistenceController.preview.container.viewContext
         } else {

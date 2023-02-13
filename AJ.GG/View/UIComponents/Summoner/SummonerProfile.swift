@@ -13,7 +13,7 @@ struct SummonerProfile: View {
     
     var body: some View {
         VStack {
-            BaseProfileIconImage(summoner: summoner)
+            BaseProfileIconImage(iconID: Int(summoner.profileIconID))
                 .frame(width: 60, height: 60)
                 .clipShape(
                     RoundedRectangle(cornerRadius: 20)

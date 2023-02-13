@@ -14,84 +14,91 @@ class ProfileViewModel: ObservableObject {
     let matchV5Service: MatchV5ServiceEnable
     let summonerManager: SummonerManager
     let matchManager: MatchManager
-    
+//
     @Published var summoners: [Summoner] = []
     @Published var selectedSummoner: Summoner
-    
+
     @Published var selectedLane: Lane = .top
     @Published var matches: [Match] = []
-    
+
     @Published var selectedChampion: Champion?
     
+    var fetchingOngoing: Bool = true
+
     var myChampionWithRates: [ChampionWithRate] {
         var dictionary: [String: [Int]] = [:]
-        
+
         for match in matches {
             if dictionary[match.myChampionName] == nil {
                 dictionary[match.myChampionName] = [0, 0]
             }
-            
+
             if match.isWin {
                 dictionary[match.myChampionName]![0] += 1
             } else {
                 dictionary[match.myChampionName]![1] += 1
             }
         }
-        
+
         var result: [ChampionWithRate] = []
-        
+
         for (k, v) in dictionary {
             let array = v
             result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
         }
-        
+
         return result.sorted()
     }
-    
+
     var rivalChampionWithRates: [ChampionWithRate] {
         var dictionary: [String: [Int]] = [:]
-        
+
         for match in matches {
             if dictionary[match.rivalChampionName] == nil {
                 dictionary[match.rivalChampionName] = [0, 0]
             }
-            
+
             if match.isWin {
                 dictionary[match.rivalChampionName]![0] += 1
             } else {
                 dictionary[match.rivalChampionName]![1] += 1
             }
         }
-        
+
         var result: [ChampionWithRate] = []
-        
+
         for (k, v) in dictionary {
             let array = v
             result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
         }
-        
+
         return result.sorted().reversed()
     }
- 
-    
+
+    var isMatchEmpty: Bool {
+        self.matches.isEmpty && !self.fetchingOngoing
+    }
+
+
     init(summonerManager: SummonerManager, matchManager: MatchManager, matchV5Service: MatchV5ServiceEnable) {
+        print("ProfileViewModel init")
         self.summonerManager = summonerManager
         self.matchManager = matchManager
         self.matchV5Service = matchV5Service
-        
+
         let fetchedSummoners = summonerManager.fetchAll()
         self.summoners = fetchedSummoners
         self.selectedSummoner = fetchedSummoners[0]
-        
-        
+//
+//
         Task {
             await fetchMatches()
-            await fetchRecentMatces(fetchedSummoners[0].puuid)
+            await saveRecentRankMatches(fetchedSummoners[0].puuid)
         }
     }
-//    
+    
     @MainActor
-    private func fetchRecentMatces(_ puuid: String) async {
+    private func saveRecentRankMatches(_ puuid: String) async {
         Task {
             let matcheIDsResult = await matchV5Service.matcheIDsByPuuid(puuid: puuid)
             switch matcheIDsResult {
@@ -102,45 +109,50 @@ class ProfileViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func handleMatchIds(_ ids: [String], puuid: String) async {
-        for id in ids {
-            if !matches.contains(where: { $0.containMatchID(id)}) {
-                let matchDtoResult = await matchV5Service.matchByMatchID(matchID: id)
-                switch matchDtoResult {
-                case .success(let success):
-                    let predicate = NSPredicate(format: "id == %@", selectedSummoner.id)
+        let matchesResult = await matchV5Service.searchMatchDTOsByMatchIDs(matchIDs: ids)
+    
+        switch matchesResult {
+        case .success(let matches):
+            for match in matches {
+                if !self.matches.contains(where: { $0.containMatchID(match.matchID())}) {
+                    let predicate = NSPredicate(format: "id == %@", selectedSummoner.summonerID)
                     if let summoner = summonerManager.fetchEntites(predicate: predicate, sortDescriptor: nil).first {
-                        let dict = DictionaryController.match(match: Match(success, puuid: puuid), summoner: summoner)
+                        let dict = DictionaryController.match(match: Match(match, puuid: puuid), summoner: summoner)
                         matchManager.add(dict)
-                        await fetchMatches()
                     }
-                case .failure(let failure):
-                    print("\(failure)")
                 }
             }
+
+        case .failure(let failure):
+            print("\(failure)")
         }
+
+        await fetchMatches()
     }
-    
+
     @MainActor
-    private func fetchMatches() {
+    private func fetchMatches() async {
         self.matches.removeAll()
-        
+        self.fetchingOngoing = true
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
             let summonerPredicate = NSPredicate(format: "id == %@", self.selectedSummoner.summonerID)
             let summoners: [CDSummoner]  = self.summonerManager.fetchEntites(predicate: summonerPredicate, sortDescriptor: nil)
-            
+
             if let summoner = summoners.first {
                 let predicate = NSPredicate(format: "%K == %@ AND %K == %@", #keyPath(CDMatch.playedBy), summoner, #keyPath(CDMatch.lane), self.selectedLane.rawValue)
                 self.matches = self.matchManager.fetchDatas(predicate: predicate)
             }
             
+            self.fetchingOngoing = false
         }
     }
-    
+
     @MainActor
-    func laneButtonTapped(_ lane: Lane) {
+    func laneButtonTapped(_ lane: Lane) async {
         self.selectedLane = lane
-        fetchMatches()
+        await fetchMatches()
     }
 }

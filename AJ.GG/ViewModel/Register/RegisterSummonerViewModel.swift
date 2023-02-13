@@ -39,7 +39,7 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
     
     
     init(summonerService: SummonerServiceEnable, leagueV4Service: LeagueV4ServiceEnable,
-         matchV5Service: MatchV5ServiceEnable, summonerManager: SummonerManager = SummonerManager(preview: false)) {
+         matchV5Service: MatchV5ServiceEnable, summonerManager: SummonerManager = SummonerManager()) {
         self.summonerService = summonerService
         self.leagueV4Service = leagueV4Service
         self.matchV5Service = matchV5Service

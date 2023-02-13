@@ -6,13 +6,11 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ProfileView: View {
 
-    @StateObject
-    var viewModel: ProfileViewModel = ProfileViewModel(summonerManager: SummonerManager(preview: false),
-                                                       matchManager: MatchManager(),
-                                                       matchV5Service: MatchV5Service())
+    @StateObject var viewModel: ProfileViewModel
     
     let lanes = Lane.selectableLanes()
     
@@ -20,13 +18,20 @@ struct ProfileView: View {
     
     let headerHeight: CGFloat = 90
     
+    init(summonerManager: SummonerManager = SummonerManager(), matchManager: MatchManager = MatchManager(), matchV5Service: MatchV5ServiceEnable) {
+        self._viewModel = StateObject(wrappedValue: ProfileViewModel(summonerManager: summonerManager,
+                                                                     matchManager: matchManager,
+                                                                     matchV5Service: matchV5Service))
+    }
+    
     var body: some View {
         ScrollView {
-            PGVStack(alignment: .leading, spacing: 20) {
+            VStack(alignment: .leading, spacing: 20) {
+                
                 HStack {
                     ForEach(lanes, id: \.rawValue) { lane in
                         Button {
-                            viewModel.laneButtonTapped(lane)
+                            Task { await viewModel.laneButtonTapped(lane) }
                         } label: {
                             LaneImage(lane: lane, isSelected: lane.isEqual(viewModel.selectedLane))
                         }
@@ -34,20 +39,33 @@ struct ProfileView: View {
                     }
                 }
                 .padding(.horizontal, 80)
-                
+
                 CapsuleText(text: $text, title: "카운터 검색")
-                
-                myBestChampions()
-                hardRivalChampions()
-//                ChampionWinRateImagesSection(title: "나의 베스트 챔피언",
-//                                             winRate: true,
-//                                             championWithWinRates: viewModel.myChampionWithRates)
+
+                Group {
+                    myBestChampions()
+                    hardRivalChampions()
+                    records()
+                }
+                .hidden(viewModel.isMatchEmpty)
+
+                VStack(alignment: .center, spacing: 10) {
+                    BaseProfileIconImage(iconID: IconID.piratePoro.rawValue)
+                        .clipShape(RoundedRectangle(cornerRadius: 50))
+                    
+                    HStack(alignment: .top, spacing: 10) {
+                        Image(systemName: "exclamationmark.circle")
+                            .font(.system(size: 20))
+                        
+                        Text("해당 라인의 정보가 수집되지 않았습니다.")
+                            .font(.system(size: 20, weight: .heavy))
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.gray)
+                }
+                .frame(maxWidth: .infinity)
+                .hidden(!viewModel.isMatchEmpty)
 //
-//                ChampionWinRateImagesSection(title: "상대하기 어려운 챔피언",
-//                                             winRate: false,
-//                                             championWithWinRates: viewModel.rivalChampionWithRates)
-            
-                records()
             }
             .padding(.horizontal)
         }
@@ -75,7 +93,7 @@ struct ProfileView: View {
 
                         let champion = viewModel.myChampionWithRates[i].champion
                         let percentage = viewModel.myChampionWithRates[i].winRate
-                        
+
                         Button {
                             self.viewModel.selectedChampion = champion
                         } label: {
@@ -121,7 +139,7 @@ struct ProfileView: View {
               .padding(.horizontal, -10)
         }
     }
-    
+
     @ViewBuilder
     private func records() -> some View {
         Group {
@@ -135,8 +153,8 @@ struct ProfileView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(viewModel: ProfileViewModel(summonerManager: SummonerManager(preview: true),
-                                                matchManager: MatchManager(inPreview: true),
-                                                matchV5Service: MatchV5Service()))
+        ProfileView(summonerManager: SummonerManager(inPreview: true),
+                    matchManager: MatchManager(inPreview: true),
+                    matchV5Service: MatchV5Service())
     }
 }

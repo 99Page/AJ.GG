@@ -12,6 +12,8 @@ protocol DataManagerDelegate {
     associatedtype Data
     associatedtype CDData
     
+    init(inPreview: Bool)
+    
     var context: NSManagedObjectContext {
         get 
     }
@@ -29,7 +31,7 @@ extension DataManagerDelegate {
     func save() {
         do {
             try context.save()
-//            print("SAVE SUCCESS")
+            print("SAVE SUCCESS")
         } catch {
             print("ERROR SAVING CORE DATA")
             print(error.localizedDescription)

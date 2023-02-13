@@ -14,8 +14,8 @@ class SummonerManager: DataManagerDelegate {
     
     let context: NSManagedObjectContext
     
-    init(preview: Bool) {
-        if preview {
+    required init(inPreview: Bool = false) {
+        if inPreview {
             self.context = PersistenceController.preview.container.viewContext
         } else {
             self.context = PersistenceController.shared.container.viewContext

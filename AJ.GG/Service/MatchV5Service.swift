@@ -16,7 +16,7 @@ protocol MatchV5ServiceEnable {
 }
 
 class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
-    func matchByMatchID(matchID: String) async -> Result<MatchDTO, NetworkError> {
+    internal func matchByMatchID(matchID: String) async -> Result<MatchDTO, NetworkError> {
         
         let url = "\(url(region: .asia))/lol/match/v5/matches/\(matchID)"
         let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).serializingDecodable(MatchDTO.self).response

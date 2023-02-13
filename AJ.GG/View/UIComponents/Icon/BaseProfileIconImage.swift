@@ -10,15 +10,15 @@ import Kingfisher
 
 struct BaseProfileIconImage: View {
     
-    let summoner: Summoner
+    let iconID: Int
     var body: some View {
-        KFImage(URL(string: RiotURL.profileIcon(profileIconID: Int(summoner.profileIconID)).url))
+        KFImage(URL(string: RiotURL.profileIcon(iconID).url))
             .resizable()
     }
 }
 
 struct BaseProfileIconImage_Previews: PreviewProvider {
     static var previews: some View {
-        BaseProfileIconImage(summoner: Summoner.dummyData())
+        BaseProfileIconImage(iconID: IconID.piratePoro.rawValue)
     }
 }

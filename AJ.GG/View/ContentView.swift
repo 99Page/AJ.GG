@@ -14,7 +14,7 @@ struct ContentView: View {
         NavigationStack {
             Group {
 //                RegisterSummonerView()
-                ProfileView()
+                ProfileView(matchV5Service: MatchV5Service())
             }
         }
 

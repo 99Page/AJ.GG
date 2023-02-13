@@ -102,6 +102,7 @@ struct Match: Identifiable, DummyCreatable {
     }
     
     func containMatchID(_ matchID: String) -> Bool {
+//        print("\(self.id), \(matchID)")
         return self.id == matchID
     }
 }

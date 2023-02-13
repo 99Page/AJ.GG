@@ -29,7 +29,6 @@
 		152FBE6F296D2BA400B082C7 /* ObjectivesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE6E296D2BA400B082C7 /* ObjectivesDTO.swift */; };
 		152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE70296D2C9600B082C7 /* PerksDTO.swift */; };
 		152FBE73296D2D9800B082C7 /* MatchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE72296D2D9800B082C7 /* MatchDTO.swift */; };
-		153588762991FB5B0063AE28 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153588752991FB5B0063AE28 /* DataManager.swift */; };
 		1535887A299201270063AE28 /* ChampionRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15358879299201270063AE28 /* ChampionRecordViewModel.swift */; };
 		1535887C299206770063AE28 /* ChampionRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535887B299206770063AE28 /* ChampionRecordView.swift */; };
 		1535887F29921C3F0063AE28 /* ChampionWinRateImagesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535887E29921C3F0063AE28 /* ChampionWinRateImagesSection.swift */; };
@@ -122,7 +121,6 @@
 		152FBE6E296D2BA400B082C7 /* ObjectivesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectivesDTO.swift; sourceTree = "<group>"; };
 		152FBE70296D2C9600B082C7 /* PerksDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerksDTO.swift; sourceTree = "<group>"; };
 		152FBE72296D2D9800B082C7 /* MatchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDTO.swift; sourceTree = "<group>"; };
-		153588752991FB5B0063AE28 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		15358879299201270063AE28 /* ChampionRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionRecordViewModel.swift; sourceTree = "<group>"; };
 		1535887B299206770063AE28 /* ChampionRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionRecordView.swift; sourceTree = "<group>"; };
 		1535887E29921C3F0063AE28 /* ChampionWinRateImagesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionWinRateImagesSection.swift; sourceTree = "<group>"; };
@@ -293,6 +291,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		157AAC7A2999FB96002B927A /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				156DA4F62988E82C00786730 /* BaseProfileIconImage.swift */,
+			);
+			path = Icon;
+			sourceTree = "<group>";
+		};
 		15961DE22990E0E800806655 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,7 +315,6 @@
 				159D74F0296ECBEE009668CB /* SummonerManager.swift */,
 				151BC86C296FDC2E0042D719 /* MatchManager.swift */,
 				154A33BF2990EF82000E14A1 /* DictionaryController.swift */,
-				153588752991FB5B0063AE28 /* DataManager.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -421,11 +426,11 @@
 		15A4D700295974E30052E3AD /* UIComponents */ = {
 			isa = PBXGroup;
 			children = (
+				157AAC7A2999FB96002B927A /* Icon */,
 				1535887D29921C050063AE28 /* Summoner */,
 				15ED7F29298A21D000E49B5F /* Champion */,
 				15A4D705295975640052E3AD /* CapsuleText.swift */,
 				15A9ED64296EE0D10043A5B4 /* RoundedText.swift */,
-				156DA4F62988E82C00786730 /* BaseProfileIconImage.swift */,
 				156DA4FD2988F3ED00786730 /* LaneImage.swift */,
 				151CA69429813DB40095D8DC /* RecordCell.swift */,
 				15E9E19029839B9C008B614F /* HiddenTitle.swift */,
@@ -664,7 +669,6 @@
 				1571727B295D73FB0053BCC1 /* LeagueEntryDTO .swift in Sources */,
 				15A9ED65296EE0D10043A5B4 /* RoundedText.swift in Sources */,
 				153B514D297500EF005E2FAF /* DataManagerDelegate.swift in Sources */,
-				153588762991FB5B0063AE28 /* DataManager.swift in Sources */,
 				1526DD042980011E00340069 /* Copyable.swift in Sources */,
 				15A4D712295981090052E3AD /* RiotAPI.swift in Sources */,
 				152FBE6B296D2B0100B082C7 /* BanDTO.swift in Sources */,
