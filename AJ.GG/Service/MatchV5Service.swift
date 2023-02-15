@@ -11,8 +11,8 @@ import Alamofire
 protocol MatchV5ServiceEnable {
     func matcheIDsByPuuid(puuid: String) async -> Result<Strings, NetworkError>
     func matchByMatchID(matchID: String) async -> Result<MatchDTO, NetworkError>
-    func searchMatchDTOsByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError>
-    func searchMatchDTOsByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError>
+    func searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError>
+    func searchMatchDTOsWhereRankGameByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError>
 }
 
 class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
@@ -32,7 +32,7 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
         }
     }
     
-    func matcheIDsByPuuid(puuid: String) async -> Result<[String], NetworkError> {
+    internal func matcheIDsByPuuid(puuid: String) async -> Result<[String], NetworkError> {
         
         let url = "\(url(region: .asia))/lol/match/v5/matches/by-puuid/\(puuid)/ids"
         
@@ -49,16 +49,14 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
         }
     }
     
-    func searchMatchDTOsByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError> {
+    func searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError> {
         var matchDTOs: [MatchDTO] = []
         
         for matchID in matchIDs {
             let matchResult = await self.matchByMatchID(matchID: matchID)
             switch matchResult {
             case .success(let success):
-                if success.isRankGame {
-                    matchDTOs.append(success)
-                }
+                matchDTOs.append(success)
             case .failure(let failure):
                 return .failure(failure)
             }
@@ -68,14 +66,52 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
     }
     
     
-    func searchMatchDTOsByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError> {
+    func searchMatchDTOsWhereRankGameByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError> {
         let idsResult = await self.matcheIDsByPuuid(puuid: puuid)
 
         switch idsResult {
         case .success(let ids):
-            return await searchMatchDTOsByMatchIDs(matchIDs: ids)
+            return await searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: ids)
         case .failure(let failure):
             return .failure(failure)
+        }
+    }
+}
+
+class MockMatchV5Service: MatchV5ServiceEnable {
+    
+    func matcheIDsByPuuid(puuid: String) async -> Result<Strings, NetworkError> {
+        let matcheIDs = ["KR_0000000000", "KR_0000000001", "KR_0000000002"]
+        return .success(matcheIDs)
+    }
+    
+    func matchByMatchID(matchID: String) async -> Result<MatchDTO, NetworkError> {
+        let decoder = JSONDecoder()
+        
+        do {
+            let result = try! decoder.decode(MatchDTO.self, from: MATCH_DATA[0])
+            return .success(result)
+        }
+    }
+    
+    func searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError> {
+        let decoder = JSONDecoder()
+        
+        do {
+            let result = try! decoder.decode(MatchDTO.self, from: MATCH_DATA[0])
+            return .success([result])
+        }
+    }
+    
+    func searchMatchDTOsWhereRankGameByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError> {
+        let decoder = JSONDecoder()
+        
+        do {
+            var result: [MatchDTO] = []
+            for data in MATCH_DATA {
+                result.append(try! decoder.decode(MatchDTO.self, from: data))
+            }
+            return .success(result)
         }
     }
 }

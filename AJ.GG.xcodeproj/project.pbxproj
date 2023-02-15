@@ -46,6 +46,9 @@
 		1571727B295D73FB0053BCC1 /* LeagueEntryDTO .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727A295D73FB0053BCC1 /* LeagueEntryDTO .swift */; };
 		1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727C295D76130053BCC1 /* RiotAuthorization.swift */; };
 		1571727F295D78BE0053BCC1 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727E295D78BE0053BCC1 /* Tier.swift */; };
+		157AAC7D299A46E0002B927A /* MatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157AAC7C299A46E0002B927A /* MatchData.swift */; };
+		157AAC7F299A4890002B927A /* ProfileViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157AAC7E299A4890002B927A /* ProfileViewModelTests.swift */; };
+		157AAC81299A49D1002B927A /* MatchV5ServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157AAC80299A49D1002B927A /* MatchV5ServiceTests.swift */; };
 		1585915D2962BF8700E888FC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915C2962BF8700E888FC /* ProfileView.swift */; };
 		1585915F2962BF9900E888FC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* ProfileViewModel.swift */; };
 		15961DE12990B25F00806655 /* ServiceAlertEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15961DE02990B25F00806655 /* ServiceAlertEnable.swift */; };
@@ -138,6 +141,9 @@
 		1571727A295D73FB0053BCC1 /* LeagueEntryDTO .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LeagueEntryDTO .swift"; sourceTree = "<group>"; };
 		1571727C295D76130053BCC1 /* RiotAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotAuthorization.swift; sourceTree = "<group>"; };
 		1571727E295D78BE0053BCC1 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
+		157AAC7C299A46E0002B927A /* MatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchData.swift; sourceTree = "<group>"; };
+		157AAC7E299A4890002B927A /* ProfileViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelTests.swift; sourceTree = "<group>"; };
+		157AAC80299A49D1002B927A /* MatchV5ServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchV5ServiceTests.swift; sourceTree = "<group>"; };
 		1585915C2962BF8700E888FC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1585915E2962BF9900E888FC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		15961DE02990B25F00806655 /* ServiceAlertEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAlertEnable.swift; sourceTree = "<group>"; };
@@ -287,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				15717276295D70640053BCC1 /* SummonersServiceTests.swift */,
+				157AAC80299A49D1002B927A /* MatchV5ServiceTests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -299,10 +306,19 @@
 			path = Icon;
 			sourceTree = "<group>";
 		};
+		157AAC7B299A46D4002B927A /* Json */ = {
+			isa = PBXGroup;
+			children = (
+				157AAC7C299A46E0002B927A /* MatchData.swift */,
+			);
+			path = Json;
+			sourceTree = "<group>";
+		};
 		15961DE22990E0E800806655 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				15961DE32990E10800806655 /* RegisterVIewModelTests.swift */,
+				157AAC7E299A4890002B927A /* ProfileViewModelTests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -455,6 +471,7 @@
 		15A4D70A295980840052E3AD /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				157AAC7B299A46D4002B927A /* Json */,
 				1571727C295D76130053BCC1 /* RiotAuthorization.swift */,
 				15A4D70B295980B70052E3AD /* SummonersService.swift */,
 				15717278295D73930053BCC1 /* LeagueV4Service.swift */,
@@ -656,6 +673,7 @@
 				1597B1D82970FCE100A66486 /* RecordView.swift in Sources */,
 				1535887F29921C3F0063AE28 /* ChampionWinRateImagesSection.swift in Sources */,
 				151BC86D296FDC2E0042D719 /* MatchManager.swift in Sources */,
+				157AAC7D299A46E0002B927A /* MatchData.swift in Sources */,
 				156DA4FA2988E8EF00786730 /* SummonerProfiles.swift in Sources */,
 				15E52E06298143D2004B4DBC /* Match.swift in Sources */,
 				152FBE67296D2A5000B082C7 /* MetadataDTO.swift in Sources */,
@@ -715,9 +733,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				157AAC7F299A4890002B927A /* ProfileViewModelTests.swift in Sources */,
 				15A4D6E4295972D70052E3AD /* AJ_GGTests.swift in Sources */,
 				151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */,
 				15717277295D70640053BCC1 /* SummonersServiceTests.swift in Sources */,
+				157AAC81299A49D1002B927A /* MatchV5ServiceTests.swift in Sources */,
 				15961DE42990E10800806655 /* RegisterVIewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

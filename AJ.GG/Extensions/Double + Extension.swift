@@ -8,7 +8,6 @@
 import Foundation
 
 extension Double {
-    
     var winRate: String {
         let roundedDouble = self.rounded(toPlaces: 3) * 100
         let formattedString = String(format: "%.1f%%", roundedDouble)

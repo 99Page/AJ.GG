@@ -97,7 +97,7 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
             let matchIDsResult = await matchV5Service.matcheIDsByPuuid(puuid: summoner.puuid)
             switch matchIDsResult {
             case .success(let matchIds):
-                let matcheDTOsResult = await matchV5Service.searchMatchDTOsByMatchIDs(matchIDs: matchIds)
+                let matcheDTOsResult = await matchV5Service.searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: matchIds)
 
                 switch matcheDTOsResult {
                 case .success(let success):

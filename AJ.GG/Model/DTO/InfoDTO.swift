@@ -90,7 +90,7 @@ struct InfoDTO: Codable, DummyCreatable {
     }
     
     func rivalPuuidByPuuid(puuid: String) -> String? {
-        let myTeamID = getTeamIDByPuuid(puuid: puuid)!
+        let myTeamID = getTeamIDByPuuid(puuid: puuid) ?? -1 
         let myLane = getLaneByPuuid(puuid: puuid)
         
 //        print("myTeamID: \(myTeamID), myLane: \(myLane)")

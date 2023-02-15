@@ -56,8 +56,10 @@ struct ProfileView: View {
                 }
                 .hidden(viewModel.itemsDisappear || viewModel.isMatchEmpty)
                 .sheet(item: $item) {
-                    ChampionRecordView(champion: $0.champion, isMyChampion: $0.isMyChampion, matchManager: MatchManager())
-                        .presentationDetents([.medium, .large])
+                    ChampionRecordView(viewModel: ChampionRecordViewModel(champion: $0.champion,
+                                                                          matchManager: MatchManager(),
+                                                                          isMyChampion: $0.isMyChampion))
+                    .presentationDetents([.medium, .large])
                 }
 
                 VStack(alignment: .center, spacing: 10) {

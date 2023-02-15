@@ -17,8 +17,8 @@ struct PersistenceController {
         for _ in 0..<1 {
             let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDSummoner",
                                                                  into: viewContext) as! CDSummoner
-            insertData.summonerName = "SwiftUI"
-            insertData.profileIconID = 660
+            let data = DictionaryController.summoner(Summoner.dummyData(), LeagueTier(tier: nil, rank: nil, points: 10))
+            insertData.setValues(data)
         }
         
         for i in 0...5 {

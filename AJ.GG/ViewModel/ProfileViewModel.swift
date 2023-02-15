@@ -91,12 +91,18 @@ class ProfileViewModel: ObservableObject {
 
         let fetchedSummoners = summonerManager.fetchAll()
         self.summoners = fetchedSummoners
-        self.selectedSummoner = fetchedSummoners[0]
+        
+        if fetchedSummoners.count > 0 {
+            self.selectedSummoner = fetchedSummoners[0]
+        } else {
+            self.selectedSummoner = Summoner.dummyData()
+        }
 //
 //
         Task {
             await fetchMatches()
-            await saveRecentRankMatches(fetchedSummoners[0].puuid)
+            await saveRecentRankMatches(selectedSummoner.puuid)
+            print("ProfileViewInit Ended")
         }
     }
     
@@ -114,12 +120,13 @@ class ProfileViewModel: ObservableObject {
     }
 
     private func handleMatchIds(_ ids: [String], puuid: String) async {
-        let matchesResult = await matchV5Service.searchMatchDTOsByMatchIDs(matchIDs: ids)
-    
+        let matchesResult = await matchV5Service.searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: ids)
         switch matchesResult {
         case .success(let matches):
+            print("success!!")
             for match in matches {
-                if !self.matches.contains(where: { $0.containMatchID(match.matchID())}) {
+                if !self.matches.contains(where: { $0.containMatchID(match.matchID())}) && match.isRankGame {
+                    print("\(match.matchID())")
                     let predicate = NSPredicate(format: "id == %@", selectedSummoner.summonerID)
                     if let summoner = summonerManager.fetchEntites(predicate: predicate, sortDescriptor: nil).first {
                         let dict = DictionaryController.match(match: Match(match, puuid: puuid), summoner: summoner)
@@ -133,6 +140,7 @@ class ProfileViewModel: ObservableObject {
         }
 
         await fetchMatches()
+        print("\(self.matches.count)")
     }
 
     @MainActor

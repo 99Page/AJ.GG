@@ -9,16 +9,16 @@ import SwiftUI
 
 struct ChampionRecordView: View {
     
-    @StateObject private var viewModel: ChampionRecordViewModel
+    @ObservedObject var viewModel: ChampionRecordViewModel
     
-    init(champion: Champion, isMyChampion: Bool, matchManager: MatchManager) {
-        self._viewModel = StateObject(
-            wrappedValue: ChampionRecordViewModel(champion: champion,
-                                                  matchManager: matchManager,
-                                                  isMyChampion: isMyChampion)
-        )
-    }
-    
+//    init(champion: Champion, isMyChampion: Bool, matchManager: MatchManager) {
+//        self._viewModel = StateObject(
+//            wrappedValue: ChampionRecordViewModel(champion: champion,
+//                                                  matchManager: matchManager,
+//                                                  isMyChampion: isMyChampion)
+//        )
+//    }
+//
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             VStack(alignment: .leading, spacing: 20) {
@@ -43,10 +43,10 @@ struct ChampionRecordView: View {
     }
 }
 
-struct ChampionRecordView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChampionRecordView(champion: Champion(name: "Aatrox"),
-                           isMyChampion: true,
-                           matchManager: MatchManager(inPreview: true))
-    }
-}
+//struct ChampionRecordView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChampionRecordView(champion: Champion(name: "Aatrox"),
+//                           isMyChampion: true,
+//                           matchManager: MatchManager(inPreview: true))
+//    }
+//}
