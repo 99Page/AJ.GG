@@ -38,6 +38,7 @@ struct ProfileView: View {
                 HStack {
                     ForEach(lanes, id: \.rawValue) { lane in
                         Button {
+                            self.item = nil
                             viewModel.laneButtonTapped(lane)
                         } label: {
                             LaneImage(lane: lane, isSelected: lane.isEqual(viewModel.selectedLane))
@@ -59,7 +60,6 @@ struct ProfileView: View {
                     ChampionRecordView(viewModel: ChampionRecordViewModel(champion: $0.champion,
                                                                           matchManager: MatchManager(),
                                                                           isMyChampion: $0.isMyChampion))
-                    .presentationDetents([.medium, .large])
                 }
 
                 VStack(alignment: .center, spacing: 10) {
