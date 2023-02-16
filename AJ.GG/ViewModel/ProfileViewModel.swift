@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import CoreData
 
 
 class ProfileViewModel: ObservableObject {
     
     
     let matchV5Service: MatchV5ServiceEnable
-    let summonerManager: SummonerManager
-    let matchManager: MatchManager
-//
+    let summonerManager: DataManager<CDSummoner>
+    let matchManager: DataManager<CDMatch>
+    
     @Published var summoners: [Summoner] = []
     @Published var selectedSummoner: Summoner
 
@@ -83,13 +84,15 @@ class ProfileViewModel: ObservableObject {
     }
 
 
-    init(summonerManager: SummonerManager, matchManager: MatchManager, matchV5Service: MatchV5ServiceEnable) {
-        print("ProfileViewModel init")
-        self.summonerManager = summonerManager
-        self.matchManager = matchManager
+    init(matchV5Service: MatchV5ServiceEnable,
+         matchManager: DataManager<CDMatch>,
+         summonerManager: DataManager<CDSummoner>) {
+        
         self.matchV5Service = matchV5Service
-
-        let fetchedSummoners = summonerManager.fetchAll()
+        self.matchManager = matchManager
+        self.summonerManager = summonerManager
+        
+        let fetchedSummoners = summonerManager.fetchEntites().map {  Summoner(cdSummoner: $0) }
         self.summoners = fetchedSummoners
         
         if fetchedSummoners.count > 0 {
@@ -123,14 +126,14 @@ class ProfileViewModel: ObservableObject {
         let matchesResult = await matchV5Service.searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: ids)
         switch matchesResult {
         case .success(let matches):
-            print("success!!")
             for match in matches {
                 if !self.matches.contains(where: { $0.containMatchID(match.matchID())}) && match.isRankGame {
                     print("\(match.matchID())")
                     let predicate = NSPredicate(format: "id == %@", selectedSummoner.summonerID)
                     if let summoner = summonerManager.fetchEntites(predicate: predicate, sortDescriptor: nil).first {
-                        let dict = DictionaryController.match(match: Match(match, puuid: puuid), summoner: summoner)
-                        matchManager.add(dict)
+                        let matchEntity = matchManager.create()
+                        matchEntity.update(match: match, summonerEntity: summoner, puuid: puuid)
+                        matchManager.save()
                     }
                 }
             }
@@ -150,11 +153,12 @@ class ProfileViewModel: ObservableObject {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
             let summonerPredicate = NSPredicate(format: "id == %@", self.selectedSummoner.summonerID)
-            let summoners: [CDSummoner]  = self.summonerManager.fetchEntites(predicate: summonerPredicate, sortDescriptor: nil)
+            
+            let summoners: [CDSummoner]  = self.summonerManager.fetchEntites(predicate: summonerPredicate)
 
             if let summoner = summoners.first {
                 let predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.playedBy), summoner)
-                self.matches = self.matchManager.fetchDatas(predicate: predicate)
+                self.matches = self.matchManager.fetchEntites(predicate: predicate).map({ Match($0) })
             }
             
             self.itemsDisappear = false

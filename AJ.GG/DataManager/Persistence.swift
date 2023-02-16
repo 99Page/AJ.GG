@@ -13,14 +13,7 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        
-        for _ in 0..<1 {
-            let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDSummoner",
-                                                                 into: viewContext) as! CDSummoner
-            let data = DictionaryController.summoner(Summoner.dummyData(), LeagueTier(tier: nil, rank: nil, points: 10))
-            insertData.setValues(data)
-        }
-        
+    
         for i in 0...5 {
             let insertData = NSEntityDescription.insertNewObject(forEntityName: "CDMatch",
                                                                  into: viewContext) as! CDMatch
@@ -114,6 +107,14 @@ struct PersistenceController {
         }
         return result
     }()
+    
+    static var inMemory: PersistenceController = {
+        let result = PersistenceController(inMemory: true)
+        let viewContext = result.container.viewContext
+        return result
+    }()
+    
+    
     
     
 

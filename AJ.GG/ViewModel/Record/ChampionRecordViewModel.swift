@@ -11,7 +11,7 @@ import CoreData
 class ChampionRecordViewModel: ObservableObject {
     
     let champion: Champion
-    let matchManager: MatchManager
+    let matchManager: DataManager<CDMatch>
     let isMyChampion: Bool
     
     @Published var matches: [Match] = []
@@ -78,7 +78,7 @@ class ChampionRecordViewModel: ObservableObject {
         self.champion.name
     }
     
-    init(champion: Champion, matchManager: MatchManager, isMyChampion: Bool) {
+    init(champion: Champion, matchManager: DataManager<CDMatch>, isMyChampion: Bool) {
         self.champion = champion
         self.matchManager = matchManager
         self.isMyChampion = isMyChampion
@@ -95,6 +95,6 @@ class ChampionRecordViewModel: ObservableObject {
             predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.enemyChampionID), champion.name)
         }
         
-        self.matches = matchManager.fetchDatas(predicate: predicate)
+        self.matches = matchManager.fetchEntites(predicate: predicate).map({ Match($0) })
     }
 }

@@ -21,7 +21,7 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
     
     
     let _title = "소환사 이름을 입력해주세요."
-    private let summonerManager: SummonerManager
+    private let summonerManager: DataManager<CDSummoner>
     private let summonerService: SummonerServiceEnable
     private let leagueV4Service: LeagueV4ServiceEnable
     private let matchV5Service: MatchV5ServiceEnable
@@ -39,13 +39,13 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
     
     
     init(summonerService: SummonerServiceEnable, leagueV4Service: LeagueV4ServiceEnable,
-         matchV5Service: MatchV5ServiceEnable, summonerManager: SummonerManager = SummonerManager()) {
+         matchV5Service: MatchV5ServiceEnable,
+         summonerManager: DataManager<CDSummoner> = DataManager(useCase: .shared)) {
         self.summonerService = summonerService
         self.leagueV4Service = leagueV4Service
         self.matchV5Service = matchV5Service
         self.summonerManager = summonerManager
-        self.summonerManager.deleteAll()
-        self.summoners = summonerManager.fetchAll()
+        self.summoners = summonerManager.fetchEntites().map({  Summoner(cdSummoner: $0) })
     }
     
     
@@ -119,25 +119,9 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
         
         if let summoner = self.searchedSummoner, let tier = self.tier {
             
-            let data: [String: Any] = [
-                "id" : summoner.id,
-                "puuid" : summoner.puuid,
-                "leaguePoints" : tier.points,
-                "summonerName" : summoner.name,
-                "rank" : tier.rank?.rawValue ?? "I",
-                "tier" : tier.tier?.rawValue ?? "IRON",
-                "profileIconID" : summoner.profileIconID
-            ]
-            
-            self.summonerManager.add(data)
+            let summonerEntity = summonerManager.create()
+            summonerEntity.update(summoner: summoner, tier: tier)
+            summonerManager.save()
         }
-    }
-    
-    func fetchSummonersAll() {
-        self.summoners = summonerManager.fetchAll()
-    }
-    
-    func deleteSummonersAll() {
-        self.summonerManager.deleteAll()
     }
 }

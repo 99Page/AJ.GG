@@ -33,4 +33,14 @@ extension CDSummoner: AllSettable {
         self.setValue(data["leaguePoints"], forKey: "leaguePoints")
         self.setValue(data["profileIconID"], forKey: "profileIconID")
     }
+    
+    func update(summoner: SummonerDTO, tier: LeagueTier) {
+        self.tier = tier.tier?.rawValue
+        self.puuid = summoner.puuid
+        self.summonerName = summoner.name
+        self.id = summoner.id
+        self.leaguePoints = tier.points
+        self.profileIconID = Int16(summoner.profileIconID)
+        self.rank = tier.rank?.rawValue
+    }
 }

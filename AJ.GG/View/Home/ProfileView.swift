@@ -25,10 +25,10 @@ struct ProfileView: View {
     
     let headerHeight: CGFloat = 90
     
-    init(summonerManager: SummonerManager = SummonerManager(), matchManager: MatchManager = MatchManager(), matchV5Service: MatchV5ServiceEnable) {
-        self._viewModel = StateObject(wrappedValue: ProfileViewModel(summonerManager: summonerManager,
-                                                                     matchManager: matchManager,
-                                                                     matchV5Service: matchV5Service))
+    init(summonerManager: DataManager<CDSummoner> = DataManager(useCase: .shared),
+         matchManager: DataManager<CDMatch> = DataManager(useCase: .shared),
+         matchV5Service: MatchV5ServiceEnable) {
+        self._viewModel = StateObject(wrappedValue: ProfileViewModel(matchV5Service: matchV5Service, matchManager: matchManager, summonerManager: summonerManager))
     }
     
     var body: some View {
@@ -58,7 +58,7 @@ struct ProfileView: View {
                 .hidden(viewModel.itemsDisappear || viewModel.isMatchEmpty)
                 .sheet(item: $item) {
                     ChampionRecordView(viewModel: ChampionRecordViewModel(champion: $0.champion,
-                                                                          matchManager: MatchManager(),
+                                                                          matchManager: DataManager(useCase: .shared),
                                                                           isMyChampion: $0.isMyChampion))
                 }
 
@@ -166,8 +166,8 @@ struct ProfileView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView(summonerManager: SummonerManager(inPreview: true),
-                    matchManager: MatchManager(inPreview: true),
+        ProfileView(summonerManager: DataManager(useCase: .preview),
+                    matchManager: DataManager(useCase: .preview),
                     matchV5Service: MatchV5Service())
     }
 }
