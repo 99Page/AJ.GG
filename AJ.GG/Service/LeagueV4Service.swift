@@ -51,3 +51,15 @@ class LeagueV4Serivce: RiotAuthorizaiton, LeagueV4ServiceEnable {
         }
     }
 }
+
+class MockSuccessLeagueV4Service: LeagueV4ServiceEnable {
+    func leaguesBySummonerID(summonerID: String) async -> Result<LeagueEntryDTOs, NetworkError> {
+        return .success([LeagueEntryDTO(leagueID: "123", queueType: "123", tier: "123", rank: "123", summonerID: "123", summonerName: "123", leaguePoints: 12, wins: 13, losses: 23, veteran: true, inactive: true, freshBlood: true , hotStreak: true)])
+    }
+    
+    func leagueTierBySummonerID(summonerID: String) async -> Result<LeagueTier?, NetworkError> {
+        return .success(LeagueTier(tier: Tier.diamond, rank: Rank.i, points: 25))
+    }
+    
+    
+}

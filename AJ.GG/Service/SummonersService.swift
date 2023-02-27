@@ -55,3 +55,18 @@ class SummonerService: RiotAuthorizaiton, SummonerServiceEnable {
     
     
 }
+
+class MockSummonerSerivce: SummonerServiceEnable {
+    
+    func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError> {
+        let summonerDTO = SummonerDTO(id: "1234", accountID: "1234", puuid: "1234", name: "1234", profileIconID: 1, revisionDate: 1, summonerLevel: 1)
+        
+        return .success(summonerDTO)
+    }
+    
+    func idByName(summonerName: String) async -> Result<String, NetworkError> {
+        return .success("SwiftUI")
+    }
+    
+    
+}

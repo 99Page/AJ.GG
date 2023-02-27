@@ -32,6 +32,7 @@
 		1535887C299206770063AE28 /* ChampionRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535887B299206770063AE28 /* ChampionRecordView.swift */; };
 		1535887F29921C3F0063AE28 /* ChampionWinRateImagesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535887E29921C3F0063AE28 /* ChampionWinRateImagesSection.swift */; };
 		153B514D297500EF005E2FAF /* DataManagerEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 153B514C297500EF005E2FAF /* DataManagerEnable.swift */; };
+		154BD09829A72B85003E1ECB /* CDMatchEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154BD09729A72B85003E1ECB /* CDMatchEnable.swift */; };
 		156388C4299DEF79008714F9 /* CoreDataCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156388C3299DEF79008714F9 /* CoreDataCase.swift */; };
 		156388C6299DF5D1008714F9 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156388C5299DF5D1008714F9 /* DataManager.swift */; };
 		156DA4F32988CEAA00786730 /* Summoner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4F22988CEAA00786730 /* Summoner.swift */; };
@@ -126,6 +127,8 @@
 		1535887B299206770063AE28 /* ChampionRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionRecordView.swift; sourceTree = "<group>"; };
 		1535887E29921C3F0063AE28 /* ChampionWinRateImagesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionWinRateImagesSection.swift; sourceTree = "<group>"; };
 		153B514C297500EF005E2FAF /* DataManagerEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerEnable.swift; sourceTree = "<group>"; };
+		154BD09629A728B6003E1ECB /* Note.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Note.md; sourceTree = "<group>"; };
+		154BD09729A72B85003E1ECB /* CDMatchEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDMatchEnable.swift; sourceTree = "<group>"; };
 		156388C3299DEF79008714F9 /* CoreDataCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCase.swift; sourceTree = "<group>"; };
 		156388C5299DF5D1008714F9 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		156DA4F22988CEAA00786730 /* Summoner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summoner.swift; sourceTree = "<group>"; };
@@ -328,6 +331,7 @@
 				153B514C297500EF005E2FAF /* DataManagerEnable.swift */,
 				156388C5299DF5D1008714F9 /* DataManager.swift */,
 				156388C3299DEF79008714F9 /* CoreDataCase.swift */,
+				154BD09729A72B85003E1ECB /* CDMatchEnable.swift */,
 			);
 			path = DataManager;
 			sourceTree = "<group>";
@@ -368,6 +372,7 @@
 				15A4D6DA295972D70052E3AD /* Info.plist */,
 				15A4D6D7295972D70052E3AD /* AJ_GG.xcdatamodeld */,
 				15A4D6D2295972D70052E3AD /* Preview Content */,
+				154BD09629A728B6003E1ECB /* Note.md */,
 			);
 			path = AJ.GG;
 			sourceTree = "<group>";
@@ -666,6 +671,7 @@
 				15ED7F2B298A220000E49B5F /* ChampionWinRateImage.swift in Sources */,
 				152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */,
 				1597B1D82970FCE100A66486 /* RecordView.swift in Sources */,
+				154BD09829A72B85003E1ECB /* CDMatchEnable.swift in Sources */,
 				1535887F29921C3F0063AE28 /* ChampionWinRateImagesSection.swift in Sources */,
 				157AAC7D299A46E0002B927A /* MatchData.swift in Sources */,
 				156DA4FA2988E8EF00786730 /* SummonerProfiles.swift in Sources */,

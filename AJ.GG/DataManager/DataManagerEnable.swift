@@ -28,7 +28,7 @@ extension DataManagerEnable {
     func create() -> CDData {
         let entity = NSEntityDescription.insertNewObject(forEntityName: CDData.entity().name ?? "name",
                                                              into: self.context) as! CDData
-        
+        save()
         return entity
     }
     

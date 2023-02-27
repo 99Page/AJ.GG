@@ -80,7 +80,7 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
     }
     
     @MainActor
-    func buttonTapped() async {
+    func searchButtonTapped() async {
         do {
             self.isSearching = true
             clear()
@@ -116,9 +116,7 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
     }
     
     func registerButtonTapped() {
-        
         if let summoner = self.searchedSummoner, let tier = self.tier {
-            
             let summonerEntity = summonerManager.create()
             summonerEntity.update(summoner: summoner, tier: tier)
             summonerManager.save()

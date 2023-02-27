@@ -40,7 +40,7 @@ struct RegisterSummonerView: View {
                         .focused($focusState, equals: .summonerName)
                         .onSubmit {
                             Task {
-                                viewModel.buttonTapped
+                                viewModel.searchButtonTapped
                             }
                         }
                     
@@ -136,7 +136,7 @@ struct RegisterSummonerView: View {
             }
 
             Button {
-                Task { await viewModel.buttonTapped() }
+                Task { await viewModel.searchButtonTapped() }
                 focusState = nil
             } label: {
                 Text("검색")

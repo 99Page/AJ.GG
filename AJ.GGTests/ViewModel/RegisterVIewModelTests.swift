@@ -14,7 +14,7 @@
 //
 //    override func setUpWithError() throws {
 //        // Put setup code here. This method is called before the invocation of each test method in the class.
-//        viewModel = RegisterSummonerViewModel(summonerService: SummonerService(), leagueV4Service: LeagueV4Serivce(), matchV5Service: MatchV5Service(), summonerManager: SummonerManager(inPreview: true))
+//        viewModel = RegisterSummonerViewModel(summonerService: MockSummonerSerivce(), leagueV4Service: <#T##LeagueV4ServiceEnable#>, matchV5Service: <#T##MatchV5ServiceEnable#>)
 //    }
 //
 //    override func tearDownWithError() throws {
@@ -34,7 +34,7 @@
 //        XCTAssertEqual(expected, actual)
 //
 //    }
-//    
+//
 //    func testRegistetButtonTappedWhenSummonerSearched() {
 //        let expectation = XCTestExpectation()
 //
