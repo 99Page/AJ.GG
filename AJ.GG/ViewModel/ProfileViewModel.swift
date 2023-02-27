@@ -24,6 +24,7 @@ class ProfileViewModel: ObservableObject {
 
     
     @Published var itemsDisappear: Bool = true
+    @Published var counterRecordStrategy: RecordStrategy = MyRecordStrategy()
     
     var matchesByLane: [Match] {
         matches.filter { $0.lane == selectedLane }

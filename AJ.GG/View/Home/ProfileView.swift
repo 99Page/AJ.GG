@@ -59,7 +59,7 @@ struct ProfileView: View {
                 .sheet(item: $item) {
                     ChampionRecordView(viewModel: ChampionRecordViewModel(champion: $0.champion,
                                                                           matchManager: DataManager(useCase: .shared),
-                                                                          isMyChampion: $0.isMyChampion))
+                                                                          strategy: viewModel.counterRecordStrategy))
                 }
 
                 VStack(alignment: .center, spacing: 10) {
@@ -109,6 +109,7 @@ struct ProfileView: View {
 
                         Button {
                             self.item = ViewItem(champion: champion, isMyChampion: true)
+                            self.viewModel.counterRecordStrategy = MyRecordStrategy()
                         } label: {
                             ChampionWinRateImage(percentage: percentage,
                                                  champion: champion,
@@ -139,6 +140,7 @@ struct ProfileView: View {
                           
                           Button {
                               self.item = ViewItem(champion: champion, isMyChampion: false)
+                              self.viewModel.counterRecordStrategy = RivalCounterRecordStrategy()
                           } label: {
                               ChampionWinRateImage(percentage: percentage,
                                                    champion: champion,

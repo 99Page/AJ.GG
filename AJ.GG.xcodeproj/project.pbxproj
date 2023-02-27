@@ -28,6 +28,10 @@
 		152FBE6F296D2BA400B082C7 /* ObjectivesDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE6E296D2BA400B082C7 /* ObjectivesDTO.swift */; };
 		152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE70296D2C9600B082C7 /* PerksDTO.swift */; };
 		152FBE73296D2D9800B082C7 /* MatchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152FBE72296D2D9800B082C7 /* MatchDTO.swift */; };
+		1534E75729AC9027007B1874 /* RecordStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534E75629AC9027007B1874 /* RecordStrategy.swift */; };
+		1534E75929AC904C007B1874 /* MyRecordStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534E75829AC904C007B1874 /* MyRecordStrategy.swift */; };
+		1534E75C29AC90C9007B1874 /* RivalCounterReordStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534E75B29AC90C9007B1874 /* RivalCounterReordStrategy.swift */; };
+		1534E75E29AC9147007B1874 /* CounterRecordContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534E75D29AC9147007B1874 /* CounterRecordContext.swift */; };
 		1535887A299201270063AE28 /* ChampionRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15358879299201270063AE28 /* ChampionRecordViewModel.swift */; };
 		1535887C299206770063AE28 /* ChampionRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535887B299206770063AE28 /* ChampionRecordView.swift */; };
 		1535887F29921C3F0063AE28 /* ChampionWinRateImagesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535887E29921C3F0063AE28 /* ChampionWinRateImagesSection.swift */; };
@@ -123,6 +127,10 @@
 		152FBE6E296D2BA400B082C7 /* ObjectivesDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectivesDTO.swift; sourceTree = "<group>"; };
 		152FBE70296D2C9600B082C7 /* PerksDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerksDTO.swift; sourceTree = "<group>"; };
 		152FBE72296D2D9800B082C7 /* MatchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchDTO.swift; sourceTree = "<group>"; };
+		1534E75629AC9027007B1874 /* RecordStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordStrategy.swift; sourceTree = "<group>"; };
+		1534E75829AC904C007B1874 /* MyRecordStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecordStrategy.swift; sourceTree = "<group>"; };
+		1534E75B29AC90C9007B1874 /* RivalCounterReordStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RivalCounterReordStrategy.swift; sourceTree = "<group>"; };
+		1534E75D29AC9147007B1874 /* CounterRecordContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterRecordContext.swift; sourceTree = "<group>"; };
 		15358879299201270063AE28 /* ChampionRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionRecordViewModel.swift; sourceTree = "<group>"; };
 		1535887B299206770063AE28 /* ChampionRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionRecordView.swift; sourceTree = "<group>"; };
 		1535887E29921C3F0063AE28 /* ChampionWinRateImagesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionWinRateImagesSection.swift; sourceTree = "<group>"; };
@@ -244,6 +252,25 @@
 			path = Register;
 			sourceTree = "<group>";
 		};
+		1534E75529AC9011007B1874 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				1534E75A29AC9053007B1874 /* CounterRecordStrategy */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		1534E75A29AC9053007B1874 /* CounterRecordStrategy */ = {
+			isa = PBXGroup;
+			children = (
+				1534E75629AC9027007B1874 /* RecordStrategy.swift */,
+				1534E75829AC904C007B1874 /* MyRecordStrategy.swift */,
+				1534E75B29AC90C9007B1874 /* RivalCounterReordStrategy.swift */,
+				1534E75D29AC9147007B1874 /* CounterRecordContext.swift */,
+			);
+			path = CounterRecordStrategy;
+			sourceTree = "<group>";
+		};
 		153588772991FF4D0063AE28 /* Record */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,6 +389,7 @@
 				1597B1DE2971270400A66486 /* AJ-GG-Info.plist */,
 				15A4D710295980FE0052E3AD /* Environment */,
 				15A4D707295978590052E3AD /* Extensions */,
+				1534E75529AC9011007B1874 /* Protocols */,
 				159D74EF296ECBD6009668CB /* DataManager */,
 				15A4D70A295980840052E3AD /* Service */,
 				15A4D6FE295973170052E3AD /* Model */,
@@ -707,7 +735,9 @@
 				15E9E18C2983922B008B614F /* PGVStack.swift in Sources */,
 				156388C4299DEF79008714F9 /* CoreDataCase.swift in Sources */,
 				15A4D704295975300052E3AD /* RegisterSummonerViewModel.swift in Sources */,
+				1534E75929AC904C007B1874 /* MyRecordStrategy.swift in Sources */,
 				1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */,
+				1534E75E29AC9147007B1874 /* CounterRecordContext.swift in Sources */,
 				152FBE6F296D2BA400B082C7 /* ObjectivesDTO.swift in Sources */,
 				156DA4FE2988F3ED00786730 /* LaneImage.swift in Sources */,
 				15A4D6D9295972D70052E3AD /* AJ_GG.xcdatamodeld in Sources */,
@@ -725,7 +755,9 @@
 				15961DE12990B25F00806655 /* ServiceAlertEnable.swift in Sources */,
 				15A4D70C295980B70052E3AD /* SummonersService.swift in Sources */,
 				156DA4F72988E82C00786730 /* BaseProfileIconImage.swift in Sources */,
+				1534E75C29AC90C9007B1874 /* RivalCounterReordStrategy.swift in Sources */,
 				151CA6912981379C0095D8DC /* BaseChamiponImage.swift in Sources */,
+				1534E75729AC9027007B1874 /* RecordStrategy.swift in Sources */,
 				152292E7298E55CC0070B023 /* ProfileHeader.swift in Sources */,
 				156DA4F32988CEAA00786730 /* Summoner.swift in Sources */,
 			);
