@@ -82,6 +82,9 @@ struct ProfileView: View {
             }
             .padding(.horizontal)
         }
+        .navigationDestination(isPresented: $viewModel.isEmptySummoner) {
+            RegisterSummonerView()
+        }
         .padding(.top, headerHeight)
         .overlay(alignment: .top) {
             HStack(alignment: .center) {

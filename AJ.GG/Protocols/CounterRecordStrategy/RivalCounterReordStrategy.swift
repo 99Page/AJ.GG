@@ -34,6 +34,6 @@ struct RivalCounterRecordStrategy: RecordStrategy {
             result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
         }
         
-        return result
+        return result.sorted()
     }
 }

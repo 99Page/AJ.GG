@@ -21,63 +21,17 @@ class ProfileViewModel: ObservableObject {
 
     @Published var selectedLane: Lane = .top
     @Published var matches: [Match] = []
+    @Published var myChampionWithRates: [ChampionWithRate] = []
+    @Published var rivalChampionWithRates: [ChampionWithRate] = []
 
     
     @Published var itemsDisappear: Bool = true
     @Published var counterRecordStrategy: RecordStrategy = MyRecordStrategy()
     
+    @Published var isEmptySummoner: Bool = false
+    
     var matchesByLane: [Match] {
         matches.filter { $0.lane == selectedLane }
-    }
-
-    var myChampionWithRates: [ChampionWithRate] {
-        var dictionary: [String: [Int]] = [:]
-
-        for match in matchesByLane {
-            if dictionary[match.myChampionName] == nil {
-                dictionary[match.myChampionName] = [0, 0]
-            }
-
-            if match.isWin {
-                dictionary[match.myChampionName]![0] += 1
-            } else {
-                dictionary[match.myChampionName]![1] += 1
-            }
-        }
-
-        var result: [ChampionWithRate] = []
-
-        for (k, v) in dictionary {
-            let array = v
-            result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
-        }
-
-        return result.sorted()
-    }
-
-    var rivalChampionWithRates: [ChampionWithRate] {
-        var dictionary: [String: [Int]] = [:]
-
-        for match in matchesByLane {
-            if dictionary[match.rivalChampionName] == nil {
-                dictionary[match.rivalChampionName] = [0, 0]
-            }
-
-            if match.isWin {
-                dictionary[match.rivalChampionName]![0] += 1
-            } else {
-                dictionary[match.rivalChampionName]![1] += 1
-            }
-        }
-
-        var result: [ChampionWithRate] = []
-
-        for (k, v) in dictionary {
-            let array = v
-            result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
-        }
-
-        return result.sorted().reversed()
     }
 
     var isMatchEmpty: Bool {
@@ -101,12 +55,16 @@ class ProfileViewModel: ObservableObject {
         } else {
             self.selectedSummoner = Summoner.dummyData()
         }
-//
-//
+        
+        
         Task {
             await fetchMatches()
             await saveRecentRankMatches(selectedSummoner.puuid)
             print("ProfileViewInit Ended")
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+            self.isEmptySummoner = true
         }
     }
     
@@ -117,8 +75,9 @@ class ProfileViewModel: ObservableObject {
             switch matcheIDsResult {
             case .success(let ids):
                 await handleMatchIds(ids, puuid: puuid)
-            case .failure(let failure):
-                print("\(failure)")
+                await fetchMatches()
+            case .failure(_):
+                print("saveRecentRankMatches Fail")
             }
         }
     }
@@ -142,9 +101,6 @@ class ProfileViewModel: ObservableObject {
         case .failure(let failure):
             print("\(failure)")
         }
-
-        await fetchMatches()
-        print("\(self.matches.count)")
     }
 
     @MainActor
@@ -154,12 +110,11 @@ class ProfileViewModel: ObservableObject {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
             let summonerPredicate = NSPredicate(format: "id == %@", self.selectedSummoner.summonerID)
-            
             let summoners: [CDSummoner]  = self.summonerManager.fetchEntites(predicate: summonerPredicate)
-
             if let summoner = summoners.first {
                 let predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.playedBy), summoner)
                 self.matches = self.matchManager.fetchEntites(predicate: predicate).map({ Match($0) })
+                self.setRates()
             }
             
             self.itemsDisappear = false
@@ -170,9 +125,19 @@ class ProfileViewModel: ObservableObject {
     func laneButtonTapped(_ lane: Lane) {
         self.selectedLane = lane
         self.itemsDisappear = true
+        setRates()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
             self.itemsDisappear = false
         }
+    }
+    
+    @MainActor
+    func setRates() {
+        var counterRecordContext = CounterRecordContext(strategy: RivalCounterRecordStrategy())
+        self.myChampionWithRates = counterRecordContext.sort(matches: self.matchesByLane)
+        
+        counterRecordContext = CounterRecordContext(strategy: MyRecordStrategy())
+        self.rivalChampionWithRates = counterRecordContext.sort(matches: self.matchesByLane)
     }
 }

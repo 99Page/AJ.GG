@@ -15,6 +15,7 @@ struct RegisterSummonerView: View {
         case summonerName
     }
     
+    @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = RegisterSummonerViewModel(
         summonerService: SummonerService(),
         leagueV4Service: LeagueV4Serivce(),
@@ -89,7 +90,7 @@ struct RegisterSummonerView: View {
             }
         }
         .padding(.init(top: 1, leading: 0, bottom: 0, trailing: 0))
-        .hidden(viewModel.isRegistered)
+        .navigationBarBackButtonHidden()
     }
 
     
@@ -98,6 +99,7 @@ struct RegisterSummonerView: View {
         if isShowingRegisterButton {
             Button {
                 viewModel.registerButtonTapped()
+                dismiss() 
             } label: {
                 Text("등록하기")
                     .frame(maxWidth: .infinity, maxHeight: registerButtonHeight, alignment: .center)

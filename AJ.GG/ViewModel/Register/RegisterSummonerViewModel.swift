@@ -52,11 +52,7 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
     var isPresentedAlert: Bool {
         alert.isPresentedAlert
     }
-    
-    var isRegistered: Bool {
-        !summoners.isEmpty
-    }
-    
+
     var matches: [Match] {
         _matches
     }
@@ -72,21 +68,16 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
     var isSearched: Bool {
         searchedSummoner != nil 
     }
-
-    private func clear() {
-        self._matches.removeAll()
-        self.tier = nil
-        self.searchedSummoner = nil
-    }
     
     @MainActor
     func searchButtonTapped() async {
+        
+        self.isSearching = true
+        
         do {
-            self.isSearching = true
             clear()
             
             let summonerResult = await summonerService.summonerByName(summonerName: self.summonerName)
-      
             let summoner = try summonerResult.get()
             self.searchedSummoner = summoner
             
@@ -108,11 +99,11 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
             case .failure(let failure):
                 throw failure
             }
-            self.isSearching = false
         } catch {
-            self.isSearching = false
             self.showAlert(error as! NetworkError)
         }
+        
+        self.isSearching = false
     }
     
     func registerButtonTapped() {
@@ -121,5 +112,11 @@ class RegisterSummonerViewModel: ObservableObject, ServiceAlertEnable {
             summonerEntity.update(summoner: summoner, tier: tier)
             summonerManager.save()
         }
+    }
+    
+    private func clear() {
+        self._matches.removeAll()
+        self.tier = nil
+        self.searchedSummoner = nil
     }
 }

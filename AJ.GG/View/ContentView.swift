@@ -12,10 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            Group {
-//                RegisterSummonerView()
-                ProfileView(matchV5Service: MatchV5Service())
-            }
+            ProfileView(matchV5Service: MatchV5Service())
         }
 
     }
