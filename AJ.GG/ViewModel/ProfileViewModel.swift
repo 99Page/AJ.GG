@@ -11,8 +11,24 @@ import CoreData
 
 class ProfileViewModel: ObservableObject {
     let matchV5Service: MatchV5ServiceEnable
+    let summonerManager: CDSummonerManager
     
-    init(matchV5Serivce: MatchV5ServiceEnable) {
+    @Published var summoners: [Summoner] = []
+    @Published var isSummonerEmpty: Bool = false
+    
+    init(matchV5Serivce: MatchV5ServiceEnable, containerSoruce: PersistentContainerSource) {
         self.matchV5Service = matchV5Serivce
+        self.summonerManager = CDSummonerManager(container: PersistentContainerInjector.select(source: containerSoruce))
+        
+        fetchSummoners()
+    }
+    
+    private func fetchSummoners() {
+        self.summoners = summonerManager.fetchAll()
+        if summoners.isEmpty {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.isSummonerEmpty = true
+            }
+        }
     }
 }

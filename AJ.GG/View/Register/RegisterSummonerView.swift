@@ -1,39 +1,40 @@
-////
-////  RegisterSummonerView.swift
-////  AJ.GG
-////
-////  Created by 노우영 on 2022/12/26.
-////
 //
-//import SwiftUI
-//import CoreData
-//import Combine
+//  RegisterSummonerView.swift
+//  AJ.GG
 //
-//struct RegisterSummonerView: View {
-//    
+//  Created by 노우영 on 2022/12/26.
+//
+
+import SwiftUI
+import CoreData
+import Combine
+
+struct RegisterSummonerView: View {
+
 //    enum Field: String, Hashable {
 //        case summonerName
 //    }
-//    
+//
 //    @Environment(\.dismiss) private var dismiss
 //    @StateObject private var viewModel = RegisterSummonerViewModel(
 //        summonerService: SummonerService(),
 //        leagueV4Service: LeagueV4Serivce(),
 //        matchV5Service: MatchV5Service())
 //    @FocusState private var focusState: Field?
-//    
+
 //    let spaceName: String = "scroll"
 //    let registerButtonHeight: CGFloat = 50
-//    
+//
 //    var isShowingRegisterButton: Bool {
 //        viewModel.isSearched && self.focusState == nil
 //    }
-//    
-//    var body: some View {
-//        
-//        GeometryReader { outer in
-//            let safeAreaTop = outer.safeAreaInsets.top
-//            ScrollView {
+
+    var body: some View {
+
+        GeometryReader { outer in
+            let safeAreaTop = outer.safeAreaInsets.top
+            ScrollView {
+                Text("RegisterSummonerView")
 //                PGVStack {
 //                    CapsuleText(text: $viewModel.summonerName,
 //                                title: viewModel._title)
@@ -44,22 +45,22 @@
 //                                viewModel.searchButtonTapped
 //                            }
 //                        }
-//                    
+//
 //                    HStack {
 //                        Image(systemName: "exclamationmark.circle")
 //                            .font(.system(size: 16, weight: .bold))
 //                            .foregroundColor(.gray)
-//                        
+//
 //                        Text("최근 20게임 중 랭크게임만 표시됩니다.")
 //                            .font(.system(size: 16, weight: .bold))
 //                            .foregroundColor(.gray)
-//                        
+//
 //                        Spacer()
 //                    }
 //                    .padding(.horizontal, 10)
 //                    .padding(.vertical, 5)
 //                    .hidden(!viewModel.isSearched)
-//                    
+//
 //                    record()
 //                }
 //                .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -87,19 +88,20 @@
 //                ToolbarItem(placement: .keyboard) {
 //                    keyboardButton()
 //                }
-//            }
-//        }
-//        .padding(.init(top: 1, leading: 0, bottom: 0, trailing: 0))
-//        .navigationBarBackButtonHidden()
-//    }
-//
-//    
+            }
+            .accessibilityIdentifier("RegisterSummonerView")
+        }
+        .padding(.init(top: 1, leading: 0, bottom: 0, trailing: 0))
+        .navigationBarBackButtonHidden()
+    }
+
+
 //    @ViewBuilder
 //    private func registerButton() -> some View {
 //        if isShowingRegisterButton {
 //            Button {
 //                viewModel.registerButtonTapped()
-//                dismiss() 
+//                dismiss()
 //            } label: {
 //                Text("등록하기")
 //                    .frame(maxWidth: .infinity, maxHeight: registerButtonHeight, alignment: .center)
@@ -108,7 +110,7 @@
 //            }
 //        }
 //    }
-//    
+//
 //    @ViewBuilder
 //    private func recordProgreeView() -> some View {
 //        if viewModel.isSearching {
@@ -119,18 +121,18 @@
 //            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 //        }
 //    }
-//    
+//
 //    @ViewBuilder
 //    private func record() -> some View {
 //        RecordView(matches: viewModel.matches)
 //            .padding(.horizontal, 10)
 //            .padding(.bottom, registerButtonHeight)
 //    }
-//    
+//
 //    @ViewBuilder
 //    private func keyboardButton() -> some View {
 //        HStack {
-//            
+//
 //            Button {
 //                focusState = nil
 //            } label: {
@@ -146,7 +148,7 @@
 //        }
 //        .frame(maxWidth: .infinity, alignment: .trailing)
 //    }
-//    
+//
 //    @ViewBuilder
 //    private func hiddenTitle(safeAreaTop: CGFloat) -> some View {
 //        if let summoner = viewModel.searchedSummoner {
@@ -155,7 +157,7 @@
 //                    viewModel.emblemImage
 //                        .resizable()
 //                        .frame(maxWidth: 50, maxHeight: 50)
-//                    
+//
 //                    Text("\(summoner.name)")
 //                }
 //                .padding(.top, safeAreaTop)
@@ -168,10 +170,10 @@
 //            }
 //        }
 //    }
-//}
-//
-//struct RegisterSummonerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RegisterSummonerView()
-//    }
-//}
+}
+
+struct RegisterSummonerView_Previews: PreviewProvider {
+    static var previews: some View {
+        RegisterSummonerView()
+    }
+}

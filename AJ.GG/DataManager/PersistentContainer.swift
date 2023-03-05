@@ -24,12 +24,25 @@ struct PreviewPersistentContainer: PersistentContainerSource {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        
+        addSummoner()
+    }
+    
+    private func addSummoner() {
+        let context = container.viewContext
+        let summoner = NSEntityDescription.insertNewObject(forEntityName: CDSummoner.entity().name ?? "CDSummoner", into: context)
+        
+        do {
+            try context.save()
+        } catch {
+            print("ERROR SAVING CORE DATA")
+        }
     }
 }
 
-struct MockPersistentContainer: PersistentContainerSource {
+struct EmptyPersistentContainer: PersistentContainerSource {
     let container: NSPersistentCloudKitContainer
-    static var shared: PersistentContainerSource = MockPersistentContainer()
+    static var shared: PersistentContainerSource = EmptyPersistentContainer()
     init() {
         container = NSPersistentCloudKitContainer(name: "AJ_GG")
         container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
@@ -55,4 +68,27 @@ struct PersistentContainer: PersistentContainerSource {
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
+}
+
+
+enum PersistentContainerInjector: String {
+    case empty = "empty"
+    case pre = "preview"
+    
+    var dependency: PersistentContainerSource {
+        switch self {
+        case .empty:
+            return EmptyPersistentContainer()
+        case .pre:
+            return PreviewPersistentContainer()
+        }
+    }
+    
+    static func select(source: PersistentContainerSource) -> PersistentContainerSource {
+           if let variable = ProcessInfo.processInfo.environment["-ContainerSource"] {
+               return PersistentContainerInjector(rawValue: variable)?.dependency ?? source
+           } else {
+               return source
+           }
+       }
 }

@@ -1,40 +1,39 @@
-////
-////  HomeView.swift
-////  AJ.GG
-////
-////  Created by 노우영 on 2023/01/02.
-////
 //
-//import SwiftUI
-//import Kingfisher
+//  HomeView.swift
+//  AJ.GG
 //
-//struct ProfileView: View {
+//  Created by 노우영 on 2023/01/02.
 //
-//    struct ViewItem: Identifiable {
-//        var id = UUID().uuidString
-//        let champion: Champion
-//        let isMyChampion: Bool
-//    }
-//
-//    @StateObject var viewModel: ProfileViewModel
-//    @State private var item: ViewItem?
-//
-//    let lanes = Lane.selectableLanes()
-//
-//    @State var text = ""
-//
-//    let headerHeight: CGFloat = 90
-//
-//    init(summonerManager: DataManager<CDSummoner> = DataManager(useCase: .shared),
-//         matchManager: DataManager<CDMatch> = DataManager(useCase: .shared),
-//         matchV5Service: MatchV5ServiceEnable) {
-//        self._viewModel = StateObject(wrappedValue: ProfileViewModel(matchV5Service: matchV5Service, matchManager: matchManager, summonerManager: summonerManager))
-//    }
-//
-//    var body: some View {
-//        ScrollView {
-//            VStack(alignment: .leading, spacing: 20) {
-//
+
+import SwiftUI
+import Kingfisher
+
+struct ProfileView: View {
+
+    struct ViewItem: Identifiable {
+        var id = UUID().uuidString
+        let champion: Champion
+        let isMyChampion: Bool
+    }
+
+    @StateObject var viewModel: ProfileViewModel
+    @State private var item: ViewItem?
+
+    let lanes = Lane.selectableLanes()
+
+    @State var text = ""
+
+    let headerHeight: CGFloat = 90
+
+    init() {
+        self._viewModel = StateObject(wrappedValue: ProfileViewModel(matchV5Serivce: MatchV5Service(),
+                                                                     containerSoruce: PersistentContainer()))
+    }
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                    Text("HomeView")
 //                HStack {
 //                    ForEach(lanes, id: \.rawValue) { lane in
 //                        Button {
@@ -78,14 +77,15 @@
 //                }
 //                .frame(maxWidth: .infinity)
 //                .hidden(!viewModel.isMatchEmpty)
-////
-//            }
-//            .padding(.horizontal)
-//        }
-//        .navigationDestination(isPresented: $viewModel.isEmptySummoner) {
-//            RegisterSummonerView()
-//        }
-//        .padding(.top, headerHeight)
+//
+            }
+            .padding(.horizontal)
+        }
+        .accessibilityIdentifier("HomeView")
+        .navigationDestination(isPresented: $viewModel.isSummonerEmpty) {
+            RegisterSummonerView()
+        }
+        .padding(.top, headerHeight)
 //        .overlay(alignment: .top) {
 //            HStack(alignment: .center) {
 //                SummonerProfiles(summoners: viewModel.summoners)
@@ -95,8 +95,8 @@
 //            }
 //            .padding(0)
 //        }
-//    }
-//
+    }
+
 //    @ViewBuilder
 //    private func myBestChampions() -> some View {
 //        Group {
@@ -167,8 +167,8 @@
 //            RecordView(matches: viewModel.matchesByLane)
 //        }
 //    }
-//}
-//
+}
+
 //struct HomeView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ProfileView(summonerManager: DataManager(useCase: .preview),
