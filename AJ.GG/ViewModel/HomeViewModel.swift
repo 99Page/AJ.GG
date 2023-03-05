@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 
-class ProfileViewModel: ObservableObject {
+class HomeViewModel: ObservableObject {
     let matchV5Service: MatchV5ServiceEnable
     let summonerManager: CDSummonerManager
     

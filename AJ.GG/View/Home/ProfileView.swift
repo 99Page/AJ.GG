@@ -16,7 +16,7 @@ struct ProfileView: View {
         let isMyChampion: Bool
     }
 
-    @StateObject var viewModel: ProfileViewModel
+    @StateObject var viewModel: HomeViewModel
     @State private var item: ViewItem?
 
     let lanes = Lane.selectableLanes()
@@ -26,7 +26,7 @@ struct ProfileView: View {
     let headerHeight: CGFloat = 90
 
     init() {
-        self._viewModel = StateObject(wrappedValue: ProfileViewModel(matchV5Serivce: MatchV5Service(),
+        self._viewModel = StateObject(wrappedValue: HomeViewModel(matchV5Serivce: MatchV5Service(),
                                                                      containerSoruce: PersistentContainer()))
     }
 

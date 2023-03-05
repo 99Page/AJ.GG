@@ -37,6 +37,7 @@
 		1535887F29921C3F0063AE28 /* ChampionWinRateImagesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1535887E29921C3F0063AE28 /* ChampionWinRateImagesSection.swift */; };
 		154BD09829A72B85003E1ECB /* CDSummonerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 154BD09729A72B85003E1ECB /* CDSummonerManager.swift */; };
 		156133FA29B47DCB0016FCC5 /* HomeViewModel_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156133F929B47DCB0016FCC5 /* HomeViewModel_UITests.swift */; };
+		156133FC29B489E00016FCC5 /* HomeViewModel_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156133FB29B489E00016FCC5 /* HomeViewModel_Tests.swift */; };
 		156DA4F32988CEAA00786730 /* Summoner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4F22988CEAA00786730 /* Summoner.swift */; };
 		156DA4F52988E35800786730 /* SummonerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4F42988E35800786730 /* SummonerProfile.swift */; };
 		156DA4F72988E82C00786730 /* BaseProfileIconImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4F62988E82C00786730 /* BaseProfileIconImage.swift */; };
@@ -52,7 +53,7 @@
 		157AAC7D299A46E0002B927A /* MatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157AAC7C299A46E0002B927A /* MatchData.swift */; };
 		157AAC81299A49D1002B927A /* MatchV5ServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157AAC80299A49D1002B927A /* MatchV5ServiceTests.swift */; };
 		1585915D2962BF8700E888FC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915C2962BF8700E888FC /* ProfileView.swift */; };
-		1585915F2962BF9900E888FC /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* ProfileViewModel.swift */; };
+		1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* HomeViewModel.swift */; };
 		15961DE12990B25F00806655 /* ServiceAlertEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15961DE02990B25F00806655 /* ServiceAlertEnable.swift */; };
 		1597B1D82970FCE100A66486 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597B1D72970FCE100A66486 /* RecordView.swift */; };
 		1597B1DD297123E700A66486 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1597B1DC297123E700A66486 /* Kingfisher */; };
@@ -134,6 +135,7 @@
 		154BD09629A728B6003E1ECB /* Note.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Note.md; sourceTree = "<group>"; };
 		154BD09729A72B85003E1ECB /* CDSummonerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CDSummonerManager.swift; sourceTree = "<group>"; };
 		156133F929B47DCB0016FCC5 /* HomeViewModel_UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel_UITests.swift; sourceTree = "<group>"; };
+		156133FB29B489E00016FCC5 /* HomeViewModel_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel_Tests.swift; sourceTree = "<group>"; };
 		156DA4F22988CEAA00786730 /* Summoner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summoner.swift; sourceTree = "<group>"; };
 		156DA4F42988E35800786730 /* SummonerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerProfile.swift; sourceTree = "<group>"; };
 		156DA4F62988E82C00786730 /* BaseProfileIconImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileIconImage.swift; sourceTree = "<group>"; };
@@ -149,7 +151,7 @@
 		157AAC7C299A46E0002B927A /* MatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchData.swift; sourceTree = "<group>"; };
 		157AAC80299A49D1002B927A /* MatchV5ServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchV5ServiceTests.swift; sourceTree = "<group>"; };
 		1585915C2962BF8700E888FC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		1585915E2962BF9900E888FC /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		1585915E2962BF9900E888FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		15961DE02990B25F00806655 /* ServiceAlertEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAlertEnable.swift; sourceTree = "<group>"; };
 		1597B1D72970FCE100A66486 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		1597B1DE2971270400A66486 /* AJ-GG-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AJ-GG-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -339,6 +341,7 @@
 		15961DE22990E0E800806655 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				156133FB29B489E00016FCC5 /* HomeViewModel_Tests.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -443,7 +446,7 @@
 				15961DE02990B25F00806655 /* ServiceAlertEnable.swift */,
 				15358878299200F80063AE28 /* Record */,
 				1526DD0A2980079200340069 /* Register */,
-				1585915E2962BF9900E888FC /* ProfileViewModel.swift */,
+				1585915E2962BF9900E888FC /* HomeViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -685,7 +688,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1585915F2962BF9900E888FC /* ProfileViewModel.swift in Sources */,
+				1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */,
 				1535887A299201270063AE28 /* ChampionRecordViewModel.swift in Sources */,
 				15ED7F2B298A220000E49B5F /* ChampionWinRateImage.swift in Sources */,
 				152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */,
@@ -756,6 +759,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15A4D6E4295972D70052E3AD /* AJ_GGTests.swift in Sources */,
+				156133FC29B489E00016FCC5 /* HomeViewModel_Tests.swift in Sources */,
 				151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */,
 				15717277295D70640053BCC1 /* SummonersServiceTests.swift in Sources */,
 				157AAC81299A49D1002B927A /* MatchV5ServiceTests.swift in Sources */,
