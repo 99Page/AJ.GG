@@ -67,6 +67,4 @@ class MockSummonerSerivce: SummonerServiceEnable {
     func idByName(summonerName: String) async -> Result<String, NetworkError> {
         return .success("SwiftUI")
     }
-    
-    
 }

@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            ProfileView(matchV5Service: MatchV5Service())
+            Text("Hello, World!")
         }
 
     }

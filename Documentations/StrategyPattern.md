@@ -106,4 +106,4 @@ potocol RecordStrategy {
  }
  ``` 
 
- 이 프로토콜을 사용하는 `ChampionRecordViewModel`은 이제 `RecordStrategy`를 준수하는 새로운 정렬 방식이 나와도 OCP를 지키면서 확장할 수 있다. 
+ 이 프로토콜을 사용하는 `ChampionRecordViewModel`은 이제 `RecordStrategy`를 준수하는 새로운 정렬 방식이 나와도 OCP를 지키면서 확장할 수 있다. 3
