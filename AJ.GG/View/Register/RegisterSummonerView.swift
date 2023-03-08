@@ -11,16 +11,13 @@ import Combine
 
 struct RegisterSummonerView: View {
 
-//    enum Field: String, Hashable {
-//        case summonerName
-//    }
-//
-//    @Environment(\.dismiss) private var dismiss
-//    @StateObject private var viewModel = RegisterSummonerViewModel(
-//        summonerService: SummonerService(),
-//        leagueV4Service: LeagueV4Serivce(),
-//        matchV5Service: MatchV5Service())
-//    @FocusState private var focusState: Field?
+    enum Field: String, Hashable {
+        case summonerName
+    }
+    
+    @StateObject private var viewModel = SummonerRegistrationViewModel(summonerService: SummonerService(),
+                                                                       leagueV4Service: LeagueV4Serivce())
+    @FocusState private var focusState: Field?
 
 //    let spaceName: String = "scroll"
 //    let registerButtonHeight: CGFloat = 50
@@ -34,17 +31,16 @@ struct RegisterSummonerView: View {
         GeometryReader { outer in
             let safeAreaTop = outer.safeAreaInsets.top
             ScrollView {
-                Text("RegisterSummonerView")
-//                PGVStack {
-//                    CapsuleText(text: $viewModel.summonerName,
-//                                title: viewModel._title)
-//                        .padding(.horizontal, 30)
-//                        .focused($focusState, equals: .summonerName)
-//                        .onSubmit {
-//                            Task {
-//                                viewModel.searchButtonTapped
-//                            }
-//                        }
+                PGVStack {
+                    CapsuleText(text: $viewModel.summonerName,
+                                title: viewModel.title)
+                        .padding(.horizontal, 30)
+                        .focused($focusState, equals: .summonerName)
+                        .onSubmit {
+                            Task {
+                                viewModel.searchButtonTapped
+                            }
+                        }
 //
 //                    HStack {
 //                        Image(systemName: "exclamationmark.circle")
@@ -62,7 +58,7 @@ struct RegisterSummonerView: View {
 //                    .hidden(!viewModel.isSearched)
 //
 //                    record()
-//                }
+                }
 //                .frame(maxWidth: .infinity, maxHeight: .infinity)
 //                .overlay {
 //                    hiddenTitle(safeAreaTop: safeAreaTop)
@@ -96,20 +92,7 @@ struct RegisterSummonerView: View {
     }
 
 
-//    @ViewBuilder
-//    private func registerButton() -> some View {
-//        if isShowingRegisterButton {
-//            Button {
-//                viewModel.registerButtonTapped()
-//                dismiss()
-//            } label: {
-//                Text("등록하기")
-//                    .frame(maxWidth: .infinity, maxHeight: registerButtonHeight, alignment: .center)
-//                    .background(Color.blue)
-//                    .foregroundColor(.white)
-//            }
-//        }
-//    }
+//    @V3
 //
 //    @ViewBuilder
 //    private func recordProgreeView() -> some View {

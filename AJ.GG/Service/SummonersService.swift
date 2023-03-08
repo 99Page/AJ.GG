@@ -8,12 +8,12 @@
 import Foundation
 import Alamofire
 
-protocol SummonerServiceEnable {
+protocol SummonerServiceEnabled {
     func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError>
     func idByName(summonerName: String) async -> Result<String, NetworkError>
 }
 
-class SummonerService: RiotAuthorizaiton, SummonerServiceEnable {
+class SummonerService: RiotAuthorizaiton, SummonerServiceEnabled {
     
     func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError> {
         
@@ -56,7 +56,7 @@ class SummonerService: RiotAuthorizaiton, SummonerServiceEnable {
     
 }
 
-class MockSummonerSerivce: SummonerServiceEnable {
+class MockSummonerSerivceSuccess: SummonerServiceEnabled {
     
     func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError> {
         let summonerDTO = SummonerDTO(id: "1234", accountID: "1234", puuid: "1234", name: "1234", profileIconID: 1, revisionDate: 1, summonerLevel: 1)
@@ -67,4 +67,20 @@ class MockSummonerSerivce: SummonerServiceEnable {
     func idByName(summonerName: String) async -> Result<String, NetworkError> {
         return .success("SwiftUI")
     }
+}
+
+class MockSummonerServiceFailure: SummonerServiceEnabled {
+    func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError> {
+        let status: ServerDecoding = ServerDecoding(message: "Data not found", statusCode: 404)
+        let serverError: ServerError = ServerError(status: status)
+        return .failure(NetworkError(AFError: nil, serverError: serverError))
+    }
+    
+    func idByName(summonerName: String) async -> Result<String, NetworkError> {
+            let status: ServerDecoding = ServerDecoding(message: "Data not found", statusCode: 404)
+            let serverError: ServerError = ServerError(status: status)
+            return .failure(NetworkError(AFError: nil, serverError: serverError)) 
+    }
+    
+    
 }

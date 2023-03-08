@@ -8,12 +8,12 @@
 import Foundation
 import Alamofire
 
-protocol LeagueV4ServiceEnable {
+protocol LeagueV4ServiceEnabled {
     func leaguesBySummonerID(summonerID: String) async -> Result<LeagueEntryDTOs, NetworkError>
     func leagueTierBySummonerID(summonerID: String) async -> Result<LeagueTier?, NetworkError>
 }
 
-class LeagueV4Serivce: RiotAuthorizaiton, LeagueV4ServiceEnable {
+class LeagueV4Serivce: RiotAuthorizaiton, LeagueV4ServiceEnabled {
     
     func leaguesBySummonerID(summonerID: String) async -> Result<LeagueEntryDTOs, NetworkError> {
         
@@ -52,7 +52,7 @@ class LeagueV4Serivce: RiotAuthorizaiton, LeagueV4ServiceEnable {
     }
 }
 
-class MockSuccessLeagueV4Service: LeagueV4ServiceEnable {
+class MockSuccessLeagueV4ServiceSuccess: LeagueV4ServiceEnabled {
     func leaguesBySummonerID(summonerID: String) async -> Result<LeagueEntryDTOs, NetworkError> {
         return .success([LeagueEntryDTO(leagueID: "123", queueType: "123", tier: "123", rank: "123", summonerID: "123", summonerName: "123", leaguePoints: 12, wins: 13, losses: 23, veteran: true, inactive: true, freshBlood: true , hotStreak: true)])
     }
