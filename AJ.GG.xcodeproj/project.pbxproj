@@ -51,7 +51,6 @@
 		1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727C295D76130053BCC1 /* RiotAuthorization.swift */; };
 		1571727F295D78BE0053BCC1 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727E295D78BE0053BCC1 /* Tier.swift */; };
 		157AAC7D299A46E0002B927A /* MatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157AAC7C299A46E0002B927A /* MatchData.swift */; };
-		157AAC81299A49D1002B927A /* MatchV5ServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157AAC80299A49D1002B927A /* MatchV5ServiceTests.swift */; };
 		1585915D2962BF8700E888FC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915C2962BF8700E888FC /* ProfileView.swift */; };
 		1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* HomeViewModel.swift */; };
 		15961DE12990B25F00806655 /* ServiceAlertEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15961DE02990B25F00806655 /* ServiceAlertEnable.swift */; };
@@ -65,8 +64,7 @@
 		15A4D6D9295972D70052E3AD /* AJ_GG.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6D7295972D70052E3AD /* AJ_GG.xcdatamodeld */; };
 		15A4D6E4295972D70052E3AD /* AJ_GGTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6E3295972D70052E3AD /* AJ_GGTests.swift */; };
 		15A4D6EE295972D70052E3AD /* AJ_GGUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6ED295972D70052E3AD /* AJ_GGUITests.swift */; };
-		15A4D6F0295972D70052E3AD /* AJ_GGUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6EF295972D70052E3AD /* AJ_GGUITestsLaunchTests.swift */; };
-		15A4D7022959751E0052E3AD /* RegisterSummonerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D7012959751E0052E3AD /* RegisterSummonerView.swift */; };
+		15A4D7022959751E0052E3AD /* SummonerRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D7012959751E0052E3AD /* SummonerRegistrationView.swift */; };
 		15A4D704295975300052E3AD /* SummonerRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D703295975300052E3AD /* SummonerRegistrationViewModel.swift */; };
 		15A4D706295975640052E3AD /* CapsuleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D705295975640052E3AD /* CapsuleText.swift */; };
 		15A4D7092959787B0052E3AD /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D7082959787B0052E3AD /* ViewExtension.swift */; };
@@ -150,7 +148,6 @@
 		1571727C295D76130053BCC1 /* RiotAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotAuthorization.swift; sourceTree = "<group>"; };
 		1571727E295D78BE0053BCC1 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
 		157AAC7C299A46E0002B927A /* MatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchData.swift; sourceTree = "<group>"; };
-		157AAC80299A49D1002B927A /* MatchV5ServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchV5ServiceTests.swift; sourceTree = "<group>"; };
 		1585915C2962BF8700E888FC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1585915E2962BF9900E888FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		15961DE02990B25F00806655 /* ServiceAlertEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAlertEnable.swift; sourceTree = "<group>"; };
@@ -168,8 +165,7 @@
 		15A4D6E3295972D70052E3AD /* AJ_GGTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJ_GGTests.swift; sourceTree = "<group>"; };
 		15A4D6E9295972D70052E3AD /* AJ.GGUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AJ.GGUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A4D6ED295972D70052E3AD /* AJ_GGUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJ_GGUITests.swift; sourceTree = "<group>"; };
-		15A4D6EF295972D70052E3AD /* AJ_GGUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJ_GGUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		15A4D7012959751E0052E3AD /* RegisterSummonerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterSummonerView.swift; sourceTree = "<group>"; };
+		15A4D7012959751E0052E3AD /* SummonerRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerRegistrationView.swift; sourceTree = "<group>"; };
 		15A4D703295975300052E3AD /* SummonerRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerRegistrationViewModel.swift; sourceTree = "<group>"; };
 		15A4D705295975640052E3AD /* CapsuleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleText.swift; sourceTree = "<group>"; };
 		15A4D7082959787B0052E3AD /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
@@ -237,7 +233,7 @@
 		1526DD092980075900340069 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				15A4D7012959751E0052E3AD /* RegisterSummonerView.swift */,
+				15A4D7012959751E0052E3AD /* SummonerRegistrationView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -319,7 +315,6 @@
 			isa = PBXGroup;
 			children = (
 				15717276295D70640053BCC1 /* SummonersServiceTests.swift */,
-				157AAC80299A49D1002B927A /* MatchV5ServiceTests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -423,7 +418,6 @@
 			isa = PBXGroup;
 			children = (
 				15A4D6ED295972D70052E3AD /* AJ_GGUITests.swift */,
-				15A4D6EF295972D70052E3AD /* AJ_GGUITestsLaunchTests.swift */,
 				15D55C2629ADF165004CC334 /* RegisterViewTests.swift */,
 				156133F929B47DCB0016FCC5 /* HomeViewModel_UITests.swift */,
 			);
@@ -705,7 +699,7 @@
 				152FBE6D296D2B6B00B082C7 /* TeamDTO.swift in Sources */,
 				15717279295D73930053BCC1 /* LeagueV4Service.swift in Sources */,
 				15A4D6D6295972D70052E3AD /* PersistentContainer.swift in Sources */,
-				15A4D7022959751E0052E3AD /* RegisterSummonerView.swift in Sources */,
+				15A4D7022959751E0052E3AD /* SummonerRegistrationView.swift in Sources */,
 				152292E4298E55010070B023 /* DropDown.swift in Sources */,
 				151CA69529813DB50095D8DC /* RecordCell.swift in Sources */,
 				152FBE73296D2D9800B082C7 /* MatchDTO.swift in Sources */,
@@ -766,7 +760,6 @@
 				151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */,
 				15EFFAB129B8721800975D90 /* SummonerRegistrationViewModel_Tests.swift in Sources */,
 				15717277295D70640053BCC1 /* SummonersServiceTests.swift in Sources */,
-				157AAC81299A49D1002B927A /* MatchV5ServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,7 +769,6 @@
 			files = (
 				15A4D6EE295972D70052E3AD /* AJ_GGUITests.swift in Sources */,
 				15D55C2729ADF165004CC334 /* RegisterViewTests.swift in Sources */,
-				15A4D6F0295972D70052E3AD /* AJ_GGUITestsLaunchTests.swift in Sources */,
 				156133FA29B47DCB0016FCC5 /* HomeViewModel_UITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

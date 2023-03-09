@@ -83,7 +83,7 @@ struct ProfileView: View {
         }
         .accessibilityIdentifier("HomeView")
         .navigationDestination(isPresented: $viewModel.isSummonerEmpty) {
-            RegisterSummonerView()
+            SummonerRegistrationView()
         }
         .padding(.top, headerHeight)
 //        .overlay(alignment: .top) {

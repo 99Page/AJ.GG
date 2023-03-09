@@ -1,62 +1,109 @@
-////
-////  SummonersServiceTests.swift
-////  AJ.GGTests
-////
-////  Created by 노우영 on 2022/12/29.
-////
 //
-//import XCTest
-//@testable import AJ_GG
+//  SummonersServiceTests.swift
+//  AJ.GGTests
 //
-//final class SummonersServiceTests: XCTestCase {
-//    
-//    var service: SummonerServiceEnable!
-//    let mySummonerName = "SwiftUI 4"
-//    let nameDoesNotExist = "SwiftUI 5"
-//    
-//    override func setUpWithError() throws {
-//        service = SummonerService()
-//    }
+//  Created by 노우영 on 2022/12/29.
 //
-//    override func tearDownWithError() throws {
-//        service = nil
-//    }
-//    
-//    func testSummonerByNameForMyName() async {
-//        
-//        let start = CFAbsoluteTimeGetCurrent()
-//        let expectation = XCTestExpectation()
-//        let response = await service.summonerByName(summonerName: mySummonerName)
-//        
-//        switch response {
-//        case .success(_):
-//            break
-//        case .failure(let failure):
-//            XCTFail("\(failure.localizedDescription)")
-//        }
-//        
-//        let end = CFAbsoluteTimeGetCurrent()
-//        let timeInterval = end - start
-//        print("\(timeInterval)")
-//        expectation.fulfill()
-//        wait(for: [expectation], timeout: 1.0)
-//        
-//        
-//    }
-//    
-//    func testSummonerByNameForNotExistsname() async {
-//        let expectation = XCTestExpectation()
-//        let response = await service.summonerByName(summonerName: nameDoesNotExist)
-//        
-//        switch response {
-//        case .success(_):
-//            XCTFail("XCTFail")
-//        case .failure(let failure):
-//            print("\(failure)")
-//            break
-//        }
-//        
-//        expectation.fulfill()
-//        wait(for: [expectation], timeout: 1.0)
-//    }
-//}
+
+import XCTest
+@testable import AJ_GG
+
+final class SummonersServiceTests: XCTestCase {
+    
+    override func setUpWithError() throws {
+      
+    }
+
+    override func tearDownWithError() throws {
+
+    }
+    
+    func test_MockSummonerServiceSuccess_idByName_doesReturnSuccess() async {
+        
+        //  Given
+        let expectation = XCTestExpectation()
+        let service = MockSummonerSerivceSuccess()
+        
+        //  When
+        let result = await service.idByName(summonerName: "SwiftUI 4")
+        
+        
+        //  Then
+        switch result {
+        case .success(_):
+            expectation.fulfill()
+        case .failure(_):
+            XCTFail()
+        }
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    
+    func test_MockSummonerServiceSuccess_summonerByName_doesReturnSuccess() async {
+        
+        //  Given
+        let expectation = XCTestExpectation()
+        let service = MockSummonerSerivceSuccess()
+        let name = "SwiftUI 4"
+        
+        //  When
+        let result = await service.summonerByName(summonerName: name)
+        
+        
+        //  Then
+        
+        switch result {
+        case .success(let value):
+            expectation.fulfill()
+            XCTAssertEqual(value.name, name)
+        case .failure(let failure):
+            XCTFail(failure.localizedDescription)
+        }
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    
+    func test_MockSummonerServiceFailure_idByName_doesReturnFailure() async {
+        
+        //  Given
+        let expectation = XCTestExpectation()
+        let service = MockSummonerServiceFailure()
+        
+        //  When
+        let result = await service.idByName(summonerName: "SwiftUI 4")
+        
+        
+        //  Then
+        switch result {
+        case .success(_):
+            XCTFail()
+        case .failure(_):
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_MockSummonerServiceFailure_summonerByName_doesReturnFailure() async {
+        
+        //  Given
+        let expectation = XCTestExpectation()
+        let service = MockSummonerServiceFailure()
+        
+        //  When
+        let result = await service.summonerByName(summonerName: "SwiftUI 4")
+        
+        
+        //  Then
+        switch result {
+        case .success(_):
+            XCTFail()
+        case .failure(_):
+            expectation.fulfill()
+        }
+        
+        wait(for: [expectation], timeout: 1)
+    }
+}

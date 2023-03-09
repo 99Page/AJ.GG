@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 import Combine
 
-struct RegisterSummonerView: View {
+struct SummonerRegistrationView: View {
 
     enum Field: String, Hashable {
         case summonerName
@@ -85,7 +85,7 @@ struct RegisterSummonerView: View {
 //                    keyboardButton()
 //                }
             }
-            .accessibilityIdentifier("RegisterSummonerView")
+            .accessibilityIdentifier("SummonerRegistrationView")
         }
         .padding(.init(top: 1, leading: 0, bottom: 0, trailing: 0))
         .navigationBarBackButtonHidden()
@@ -157,6 +157,6 @@ struct RegisterSummonerView: View {
 
 struct RegisterSummonerView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterSummonerView()
+        SummonerRegistrationView()
     }
 }
