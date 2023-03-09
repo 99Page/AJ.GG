@@ -9,6 +9,7 @@ import XCTest
 @testable import AJ_GG
 
 final class HomeViewModel_UITests: XCTestCase {
+    
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -27,18 +28,19 @@ final class HomeViewModel_UITests: XCTestCase {
         let app = XCUIApplication()
         app.launchEnvironment = ["-ContainerSource" : "empty"]
         
-        let registerSummonerView = app.scrollViews["RegisterSummonerView"]
+        let summonerRegistrationView = app.scrollViews["SummonerRegistrationView"]
         let homeView = app.scrollViews["HomeView"]
         app.launch()
         
         //  When
         
-        let registerSummonerViewExists = registerSummonerView.waitForExistence(timeout: 2)
+        let registerSummonerViewExists = summonerRegistrationView.waitForExistence(timeout: 2)
         
         //  Then
         XCTAssertTrue(registerSummonerViewExists)
         XCTAssertFalse(homeView.exists)
     }
+    
     
     func test_HomeViewModel_RegisterViewNavigationLink_shouldNotNavigateToRegisterSummonerView() {
         //  Given

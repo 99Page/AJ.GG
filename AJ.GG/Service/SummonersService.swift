@@ -8,11 +8,31 @@
 import Foundation
 import Alamofire
 
+
 protocol SummonerServiceEnabled {
     func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError>
     func idByName(summonerName: String) async -> Result<String, NetworkError>
 }
 
+enum SummonerServiceInjector: String {
+    case failure = "failure"
+    
+    var dependency: SummonerServiceEnabled {
+        switch self {
+        
+        case .failure:
+            return MockSummonerServiceFailure()
+        }
+    }
+    
+    static func select(service: SummonerServiceEnabled) -> SummonerServiceEnabled {
+           if let variable = ProcessInfo.processInfo.environment["-SummonerService"] {
+               return SummonerServiceInjector(rawValue: variable)?.dependency ?? service
+           } else {
+               return service
+           }
+       }
+}
 class SummonerService: RiotAuthorizaiton, SummonerServiceEnabled {
     
     func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError> {

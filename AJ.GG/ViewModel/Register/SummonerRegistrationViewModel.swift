@@ -11,21 +11,25 @@ import SwiftUI
 
 class SummonerRegistrationViewModel: ObservableObject {
     @Published var summonerName: String = ""
+    
     @Published var summoner: Summoner?
     @Published var leagueTier: LeagueTier? 
     @Published var matches: [Match] = []
     
-    let title = "소환사의 이름을 입력해주세요."
+    @Published var isPresented: Bool = false
+    
+    let title = "소환사 이름을 입력해주세요."
     private let summonerService: SummonerServiceEnabled
     private let leagueV4Service: LeagueV4ServiceEnabled
     private let matchV5Service: MatchV5ServiceEnabled
     
     init(summonerService: SummonerServiceEnabled, leagueV4Service: LeagueV4ServiceEnabled,
          matchV5Service: MatchV5ServiceEnabled) {
-        self.summonerService = summonerService
+        self.summonerService = SummonerServiceInjector.select(service: summonerService)
         self.leagueV4Service = leagueV4Service
         self.matchV5Service = matchV5Service
     }
+    
     
     func searchButtonTapped() async {
         guard !summonerName.isEmpty else {
@@ -37,6 +41,7 @@ class SummonerRegistrationViewModel: ObservableObject {
         case .success(let value):
             self.summoner = Summoner(value)
         case .failure(_):
+            isPresented = true 
             return
         }
         

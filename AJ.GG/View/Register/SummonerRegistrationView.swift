@@ -33,14 +33,26 @@ struct SummonerRegistrationView: View {
             let safeAreaTop = outer.safeAreaInsets.top
             ScrollView {
                 PGVStack {
-                    CapsuleText(text: $viewModel.summonerName,
-                                title: viewModel.title)
-                        .padding(.horizontal, 30)
+                    TextField(viewModel.title, text: $viewModel.summonerName)
+                        .font(.system(size: 15, weight: .heavy))
                         .focused($focusState, equals: .summonerName)
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 10)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke()
+                                .foregroundColor(.gray)
+                        }
+                        .padding(.horizontal, 30)
                         .onSubmit {
                             Task {
-                                viewModel.searchButtonTapped
+                                await viewModel.searchButtonTapped()
                             }
+                        }
+                        .accessibilityIdentifier("SummonerNameText")
+                        .submitLabel(.search)
+                        .alert(isPresented: $viewModel.isPresented) {
+                            Alert(title: Text("에러"))
                         }
 //
 //                    HStack {
@@ -87,6 +99,9 @@ struct SummonerRegistrationView: View {
 //                }
             }
             .accessibilityIdentifier("SummonerRegistrationView")
+            .onAppear {
+                self.focusState = .summonerName
+            }
         }
         .padding(.init(top: 1, leading: 0, bottom: 0, trailing: 0))
         .navigationBarBackButtonHidden()

@@ -43,7 +43,7 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
             XCTFail()
             return
         }
-        
+
         //  When
         
         //  Then
