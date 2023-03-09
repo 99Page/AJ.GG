@@ -24,7 +24,7 @@ final class HomeViewModel_Tests: XCTestCase {
     
     func test_HomeViewModel_fetchSummoners_shouldBeStoredValues() {
         //  Given
-        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5Service(), containerSoruce: PreviewPersistentContainer())
+        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5ServiceSuccess(), containerSoruce: PreviewPersistentContainer())
         guard let vm = viewModel else {
             XCTFail()
             return
@@ -39,7 +39,7 @@ final class HomeViewModel_Tests: XCTestCase {
     
     func test_HomeViewModel_fetchSummoners_shouldBeStoredValues2() {
         //  Given
-        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5Service(), containerSoruce: EmptyPersistentContainer())
+        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5ServiceSuccess(), containerSoruce: EmptyPersistentContainer())
         guard let vm = viewModel else {
             XCTFail()
             return
@@ -53,7 +53,7 @@ final class HomeViewModel_Tests: XCTestCase {
     
     func test_HomeViewModel_isSummonerEmpty_shoudBeTrue() {
         //  Given
-        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5Service(), containerSoruce: EmptyPersistentContainer())
+        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5ServiceSuccess(), containerSoruce: EmptyPersistentContainer())
         guard let vm = viewModel else {
             XCTFail()
             return
@@ -76,7 +76,7 @@ final class HomeViewModel_Tests: XCTestCase {
     
     func test_HomeViewModel_isSummonerEmpty_shoudBeFalse() {
         //  Given
-        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5Service(), containerSoruce: PreviewPersistentContainer())
+        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5ServiceSuccess(), containerSoruce: PreviewPersistentContainer())
         guard let vm = viewModel else {
             XCTFail()
             return

@@ -8,15 +8,12 @@
 import Foundation
 import Alamofire
 
-protocol MatchV5ServiceEnable {
-    func matcheIDsByPuuid(puuid: String) async -> Result<Strings, NetworkError>
-    func matchByMatchID(matchID: String) async -> Result<MatchDTO, NetworkError>
-    func searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError>
+protocol MatchV5ServiceEnabled {
     func searchMatchDTOsWhereRankGameByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError>
 }
 
-class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
-    func matchByMatchID(matchID: String) async -> Result<MatchDTO, NetworkError> {
+class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnabled {
+    private func matchByMatchID(matchID: String) async -> Result<MatchDTO, NetworkError> {
         
         let url = "\(url(region: .asia))/lol/match/v5/matches/\(matchID)"
         let response = await AF.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).serializingDecodable(MatchDTO.self).response
@@ -32,7 +29,7 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
         }
     }
     
-    func matcheIDsByPuuid(puuid: String) async -> Result<[String], NetworkError> {
+    private func matcheIDsByPuuid(puuid: String) async -> Result<[String], NetworkError> {
         
         let url = "\(url(region: .asia))/lol/match/v5/matches/by-puuid/\(puuid)/ids"
         
@@ -49,7 +46,7 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
         }
     }
     
-    func searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError> {
+    private func searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError> {
         var matchDTOs: [MatchDTO] = []
         
         for matchID in matchIDs {
@@ -78,31 +75,7 @@ class MatchV5Service: RiotAuthorizaiton, MatchV5ServiceEnable {
     }
 }
 
-class MockMatchV5Service: MatchV5ServiceEnable {
-    
-    func matcheIDsByPuuid(puuid: String) async -> Result<Strings, NetworkError> {
-        let matcheIDs = ["KR_0000000000", "KR_0000000001", "KR_0000000002"]
-        return .success(matcheIDs)
-    }
-    
-    func matchByMatchID(matchID: String) async -> Result<MatchDTO, NetworkError> {
-        let decoder = JSONDecoder()
-        
-        do {
-            let result = try! decoder.decode(MatchDTO.self, from: MATCH_DATA[0])
-            return .success(result)
-        }
-    }
-    
-    func searchMatchDTOsWhereRankGameByMatchIDs(matchIDs: [String]) async -> Result<[MatchDTO], NetworkError> {
-        let decoder = JSONDecoder()
-        
-        do {
-            let result = try! decoder.decode(MatchDTO.self, from: MATCH_DATA[0])
-            return .success([result])
-        }
-    }
-    
+class MockMatchV5ServiceSuccess: MatchV5ServiceEnabled {
     func searchMatchDTOsWhereRankGameByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError> {
         let decoder = JSONDecoder()
         
@@ -116,3 +89,10 @@ class MockMatchV5Service: MatchV5ServiceEnable {
     }
 }
 
+class MockMatchV5ServiceFailure: MatchV5ServiceEnabled {
+    func searchMatchDTOsWhereRankGameByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError> {
+        let status: ServerDecoding = ServerDecoding(message: "Data not found", statusCode: 404)
+        let serverError: ServerError = ServerError(status: status)
+        return .failure(NetworkError(AFError: nil, serverError: serverError))
+    }
+}

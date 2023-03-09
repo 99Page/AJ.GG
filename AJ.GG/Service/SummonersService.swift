@@ -82,6 +82,4 @@ class MockSummonerServiceFailure: SummonerServiceEnabled {
         let serverError: ServerError = ServerError(status: status)
         return .failure(NetworkError(AFError: nil, serverError: serverError)) 
     }
-    
-    
 }

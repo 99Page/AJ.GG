@@ -18,10 +18,13 @@ class SummonerRegistrationViewModel: ObservableObject {
     let title = "소환사의 이름을 입력해주세요."
     private let summonerService: SummonerServiceEnabled
     private let leagueV4Service: LeagueV4ServiceEnabled
+    private let matchV5Service: MatchV5ServiceEnabled
     
-    init(summonerService: SummonerServiceEnabled, leagueV4Service: LeagueV4ServiceEnabled) {
+    init(summonerService: SummonerServiceEnabled, leagueV4Service: LeagueV4ServiceEnabled,
+         matchV5Service: MatchV5ServiceEnabled) {
         self.summonerService = summonerService
         self.leagueV4Service = leagueV4Service
+        self.matchV5Service = matchV5Service
     }
     
     func searchButtonTapped() async {
@@ -44,11 +47,19 @@ class SummonerRegistrationViewModel: ObservableObject {
             case .failure(_):
                 return
             }
+            
+            switch await matchV5Service.searchMatchDTOsWhereRankGameByPuuid(puuid: summoner.puuid) {
+            case .success(let value):
+                self.matches = value.map { Match($0, puuid: summoner.puuid) }
+            case .failure(_):
+                return
+            }
         }
     }
 
     private func clear() {
         summoner = nil
+        leagueTier = nil 
         matches = []
     }
 }

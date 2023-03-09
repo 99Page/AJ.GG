@@ -10,13 +10,13 @@ import CoreData
 
 
 class HomeViewModel: ObservableObject {
-    let matchV5Service: MatchV5ServiceEnable
+    let matchV5Service: MatchV5ServiceEnabled
     let summonerManager: CDSummonerManager
     
     @Published var summoners: [Summoner] = []
     @Published var isSummonerEmpty: Bool = false
     
-    init(matchV5Serivce: MatchV5ServiceEnable, containerSoruce: PersistentContainerSource) {
+    init(matchV5Serivce: MatchV5ServiceEnabled, containerSoruce: PersistentContainerSource) {
         self.matchV5Service = matchV5Serivce
         self.summonerManager = CDSummonerManager(container: PersistentContainerInjector.select(source: containerSoruce))
         

@@ -16,7 +16,8 @@ struct SummonerRegistrationView: View {
     }
     
     @StateObject private var viewModel = SummonerRegistrationViewModel(summonerService: SummonerService(),
-                                                                       leagueV4Service: LeagueV4Serivce())
+                                                                       leagueV4Service: LeagueV4Serivce(),
+                                                                       matchV5Service: MatchV5Service())
     @FocusState private var focusState: Field?
 
 //    let spaceName: String = "scroll"
