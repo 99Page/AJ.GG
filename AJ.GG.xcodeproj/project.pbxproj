@@ -50,6 +50,7 @@
 		1571727B295D73FB0053BCC1 /* LeagueEntryDTO .swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727A295D73FB0053BCC1 /* LeagueEntryDTO .swift */; };
 		1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727C295D76130053BCC1 /* RiotAuthorization.swift */; };
 		1571727F295D78BE0053BCC1 /* Tier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1571727E295D78BE0053BCC1 /* Tier.swift */; };
+		1573B56129B9797F00A85B16 /* LeagueV4ServiceEnabled_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1573B56029B9797F00A85B16 /* LeagueV4ServiceEnabled_Tests.swift */; };
 		157AAC7D299A46E0002B927A /* MatchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157AAC7C299A46E0002B927A /* MatchData.swift */; };
 		1585915D2962BF8700E888FC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915C2962BF8700E888FC /* ProfileView.swift */; };
 		1585915F2962BF9900E888FC /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1585915E2962BF9900E888FC /* HomeViewModel.swift */; };
@@ -147,6 +148,7 @@
 		1571727A295D73FB0053BCC1 /* LeagueEntryDTO .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LeagueEntryDTO .swift"; sourceTree = "<group>"; };
 		1571727C295D76130053BCC1 /* RiotAuthorization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotAuthorization.swift; sourceTree = "<group>"; };
 		1571727E295D78BE0053BCC1 /* Tier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tier.swift; sourceTree = "<group>"; };
+		1573B56029B9797F00A85B16 /* LeagueV4ServiceEnabled_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeagueV4ServiceEnabled_Tests.swift; sourceTree = "<group>"; };
 		157AAC7C299A46E0002B927A /* MatchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchData.swift; sourceTree = "<group>"; };
 		1585915C2962BF8700E888FC /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		1585915E2962BF9900E888FC /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				15717276295D70640053BCC1 /* SummonersServiceTests.swift */,
+				1573B56029B9797F00A85B16 /* LeagueV4ServiceEnabled_Tests.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				156133FC29B489E00016FCC5 /* HomeViewModel_Tests.swift in Sources */,
 				151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */,
 				15EFFAB129B8721800975D90 /* SummonerRegistrationViewModel_Tests.swift in Sources */,
+				1573B56129B9797F00A85B16 /* LeagueV4ServiceEnabled_Tests.swift in Sources */,
 				15717277295D70640053BCC1 /* SummonersServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

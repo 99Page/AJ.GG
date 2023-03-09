@@ -12,6 +12,7 @@ import SwiftUI
 class SummonerRegistrationViewModel: ObservableObject {
     @Published var summonerName: String = ""
     @Published var summoner: Summoner?
+    @Published var leagueTier: LeagueTier? 
     @Published var matches: [Match] = []
     
     let title = "소환사의 이름을 입력해주세요."
@@ -29,21 +30,23 @@ class SummonerRegistrationViewModel: ObservableObject {
             return
         }
         
-        var id = ""
-        
-        switch await searchSummonerIdByName() {
+        switch await summonerService.summonerByName(summonerName: summonerName) {
         case .success(let value):
-            id = value
-        case .failure(let error):
-            print("\(error.localizedDescription)")
+            self.summoner = Summoner(value)
+        case .failure(_):
             return
         }
+        
+        if let summoner = summoner {
+            switch await leagueV4Service.leagueTierBySummonerID(summonerID: summoner.summonerID) {
+            case .success(let value):
+                self.leagueTier = value
+            case .failure(_):
+                return
+            }
+        }
     }
-    
-    private func searchSummonerIdByName() async -> Result<String, NetworkError> {
-        return await self.summonerService.idByName(summonerName: summonerName)
-    }
-    
+
     private func clear() {
         summoner = nil
         matches = []
