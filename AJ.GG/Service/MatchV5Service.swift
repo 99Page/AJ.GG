@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-protocol MatchV5ServiceEnabled {
+protocol MatchV5ServiceEnabled: ServiceProtocol {
     func searchMatchDTOsWhereRankGameByPuuid(puuid: String) async -> Result<[MatchDTO], NetworkError>
 }
 

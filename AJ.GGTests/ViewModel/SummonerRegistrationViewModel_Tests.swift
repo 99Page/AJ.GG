@@ -122,7 +122,7 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
     }
     
     
-    func test_SummonerRegistrationViewModel_searchButtonTapped_summonerShouldBeNil() async {
+    func test_SummonerRegistrationViewModel_searchButtonTapped_clearValues() async {
         //  Given
         let vm = SummonerRegistrationViewModel(summonerService: MockSummonerSerivceSuccess(),
                                                leagueV4Service: MockLeagueV4ServiceSuccess(),
@@ -137,5 +137,7 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
         
         //  Then
         XCTAssertNil(vm.summoner)
+        XCTAssertNil(vm.leagueTier)
+        XCTAssertTrue(vm.matches.isEmpty)
     }
 }

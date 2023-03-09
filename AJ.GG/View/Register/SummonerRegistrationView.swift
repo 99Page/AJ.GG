@@ -77,14 +77,6 @@ struct SummonerRegistrationView: View {
 //                    hiddenTitle(safeAreaTop: safeAreaTop)
 //                }
 //            }
-//            .alert(viewModel.alert.title, isPresented: $viewModel.alert.isPresentedAlert, actions: {
-//                Button(role: .cancel) {
-//                } label: {
-//                    Text("확인")
-//                }
-//            }, message: {
-//                viewModel.alert.message
-//            })
 //            .keyboardHideWhenScreenTapped()
 //            .overlay {
 //                recordProgreeView()

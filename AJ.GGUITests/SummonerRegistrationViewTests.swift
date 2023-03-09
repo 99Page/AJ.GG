@@ -23,14 +23,15 @@ final class SummonerRegistrationViewTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func test_SummonerRegistrationView_networkErrorAlert_doesExists() {
+    func test_SummonerRegistrationView_alert_doesExists() {
         //  Given
         guard let app = app else {
             XCTFail()
             return
         }
+        
         app.launch()
-        app.launchEnvironment = ["-SummonerService" : "Failure"]
+        app.launchEnvironment = ["-SummonerService" : "failure"]
         
         let key = app.keys["A"]
         let key2 = app.keys["a"]
@@ -45,5 +46,32 @@ final class SummonerRegistrationViewTests: XCTestCase {
         //  Then
         let alertExists = alert.waitForExistence(timeout: 2)
         XCTAssertTrue(alertExists)
+    }
+    
+    func test_SummonerRegistrationView_alert_doesNotExists() {
+        //  Given
+        guard let app = app else {
+            XCTFail()
+            return
+        }
+        
+        app.launchEnvironment = ["-SummonerService" : "success",
+                                 "-LeagueV4Service" : "success",
+                                 "-MatchV5Service" : "success"]
+        app.launch()
+        
+        let key = app.keys["A"]
+        let key2 = app.keys["a"]
+        let alert = app.alerts.firstMatch
+        
+        //  When
+        key.tap()
+        key2.tap()
+        key2.tap()
+        app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".keyboards",".buttons[\"검색\"]",".buttons[\"Search\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        
+        //  Then
+        let alertExists = alert.waitForExistence(timeout: 2)
+        XCTAssertFalse(alertExists)
     }
 }

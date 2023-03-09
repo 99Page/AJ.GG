@@ -8,7 +8,7 @@
 import Foundation
 import Alamofire
 
-protocol LeagueV4ServiceEnabled {
+protocol LeagueV4ServiceEnabled: ServiceProtocol {
     func leagueTierBySummonerID(summonerID: String) async -> Result<LeagueTier?, NetworkError>
 }
 

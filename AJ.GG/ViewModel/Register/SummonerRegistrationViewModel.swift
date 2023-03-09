@@ -26,11 +26,12 @@ class SummonerRegistrationViewModel: ObservableObject {
     init(summonerService: SummonerServiceEnabled, leagueV4Service: LeagueV4ServiceEnabled,
          matchV5Service: MatchV5ServiceEnabled) {
         self.summonerService = SummonerServiceInjector.select(service: summonerService)
-        self.leagueV4Service = leagueV4Service
-        self.matchV5Service = matchV5Service
+        self.leagueV4Service = LeagueV4ServiceInjector.select(service: leagueV4Service)
+        self.matchV5Service = MatchV5ServiceInjector.select(service: matchV5Service)
     }
     
     
+    @MainActor
     func searchButtonTapped() async {
         guard !summonerName.isEmpty else {
             clear()
