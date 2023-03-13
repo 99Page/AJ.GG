@@ -15,152 +15,52 @@ struct SummonerRegistrationView: View {
         case summonerName
     }
     
-    @StateObject private var viewModel = SummonerRegistrationViewModel(summonerService: SummonerService(),
-                                                                       leagueV4Service: LeagueV4Serivce(),
-                                                                       matchV5Service: MatchV5Service())
+    @StateObject private var
+    viewModel = SummonerRegistrationViewModel(summonerService: SummonerService(),
+                                              leagueV4Service: LeagueV4Serivce(),
+                                              matchV5Service: MatchV5Service())
+    
     @FocusState private var focusState: Field?
+    let registerButtonHeight: CGFloat = 50
 
-//    let spaceName: String = "scroll"
-//    let registerButtonHeight: CGFloat = 50
-//
-//    var isShowingRegisterButton: Bool {
-//        viewModel.isSearched && self.focusState == nil
-//    }
 
     var body: some View {
-
-        GeometryReader { outer in
-            let safeAreaTop = outer.safeAreaInsets.top
-            ScrollView {
-                PGVStack {
-                    TextField(viewModel.title, text: $viewModel.summonerName)
-                        .font(.system(size: 15, weight: .heavy))
-                        .focused($focusState, equals: .summonerName)
-                        .padding(.horizontal, 15)
-                        .padding(.vertical, 10)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke()
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.horizontal, 30)
-                        .onSubmit {
-                            Task {
-                                await viewModel.searchButtonTapped()
-                            }
-                        }
-                        .accessibilityIdentifier("SummonerNameText")
-                        .submitLabel(.search)
-                        .alert(isPresented: $viewModel.isPresented) {
-                            Alert(title: Text("에러"))
-                        }
-//
-//                    HStack {
-//                        Image(systemName: "exclamationmark.circle")
-//                            .font(.system(size: 16, weight: .bold))
-//                            .foregroundColor(.gray)
-//
-//                        Text("최근 20게임 중 랭크게임만 표시됩니다.")
-//                            .font(.system(size: 16, weight: .bold))
-//                            .foregroundColor(.gray)
-//
-//                        Spacer()
-//                    }
-//                    .padding(.horizontal, 10)
-//                    .padding(.vertical, 5)
-//                    .hidden(!viewModel.isSearched)
-//
-//                    record()
+        VStack {
+            TextField(viewModel.title, text: $viewModel.summonerName)
+                .font(.system(size: 15, weight: .heavy))
+                .focused($focusState, equals: .summonerName)
+                .onSubmit {
+                    Task {
+                        await viewModel.searchButtonTapped()
+                    }
                 }
-//                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                .overlay {
-//                    hiddenTitle(safeAreaTop: safeAreaTop)
-//                }
-//            }
-//            .keyboardHideWhenScreenTapped()
-//            .overlay {
-//                recordProgreeView()
-//            }
-//            .overlay(alignment: .bottom) {
-//                registerButton()
-//            }
-//            .coordinateSpace(name: self.spaceName)
-//            .toolbar {
-//                ToolbarItem(placement: .keyboard) {
-//                    keyboardButton()
-//                }
+                .accessibilityIdentifier("SummonerNameText")
+                .submitLabel(.search)
+                .alert(isPresented: $viewModel.isPresented) {
+                    Alert(title: Text("소환사 이름을 확인해주세요"))
+                }
+                .roundedRectangle(color: .gray)
+            
+            Button {
+                Task { await viewModel.searchButtonTapped() }
+            } label: {
+                Text("검색하기")
+                    .font(.system(size: 15, weight: .heavy))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundColor(.blue)
+                    .roundedRectangle(color: .blue)
             }
-            .accessibilityIdentifier("SummonerRegistrationView")
-            .onAppear {
-                self.focusState = .summonerName
+            .accessibilityIdentifier("SearchButton")
+            .navigationDestination(isPresented: $viewModel.goToNextView) {
+                SummoreRecordView(viewModel: viewModel)
             }
+
+            
         }
-        .padding(.init(top: 1, leading: 0, bottom: 0, trailing: 0))
-        .navigationBarBackButtonHidden()
+        .onAppear {
+            self.focusState = .summonerName
+        }
     }
-
-
-//    @V3
-//
-//    @ViewBuilder
-//    private func recordProgreeView() -> some View {
-//        if viewModel.isSearching {
-//            VStack(alignment: .center) {
-//                RotatingCircle()
-//                Text("전적을 검색중입니다.")
-//            }
-//            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-//        }
-//    }
-//
-//    @ViewBuilder
-//    private func record() -> some View {
-//        RecordView(matches: viewModel.matches)
-//            .padding(.horizontal, 10)
-//            .padding(.bottom, registerButtonHeight)
-//    }
-//
-//    @ViewBuilder
-//    private func keyboardButton() -> some View {
-//        HStack {
-//
-//            Button {
-//                focusState = nil
-//            } label: {
-//                Text("종료")
-//            }
-//
-//            Button {
-//                Task { await viewModel.searchButtonTapped() }
-//                focusState = nil
-//            } label: {
-//                Text("검색")
-//            }
-//        }
-//        .frame(maxWidth: .infinity, alignment: .trailing)
-//    }
-//
-//    @ViewBuilder
-//    private func hiddenTitle(safeAreaTop: CGFloat) -> some View {
-//        if let summoner = viewModel.searchedSummoner {
-//            HiddenTitle(spaceName: self.spaceName, headerHeight: 50, topSafeArea: safeAreaTop) {
-//                HStack {
-//                    viewModel.emblemImage
-//                        .resizable()
-//                        .frame(maxWidth: 50, maxHeight: 50)
-//
-//                    Text("\(summoner.name)")
-//                }
-//                .padding(.top, safeAreaTop)
-//                .frame(maxWidth: .infinity, maxHeight: 50 + safeAreaTop)
-//                .background(Color.white)
-//                .offset(y: -safeAreaTop)
-//                .onTapGesture {
-//                    self.focusState = .summonerName
-//                }
-//            }
-//        }
-//    }
 }
 
 struct RegisterSummonerView_Previews: PreviewProvider {

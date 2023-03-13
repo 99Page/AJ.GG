@@ -36,4 +36,19 @@ extension View {
     }
 }
 
+extension View {
+    @ViewBuilder
+    func roundedRectangle(color: Color) -> some View {
+        self
+            .padding(.horizontal, 15)
+            .padding(.vertical, 10)
+            .overlay {
+                RoundedRectangle(cornerRadius: 5)
+                    .stroke()
+                    .foregroundColor(color)
+            }
+            .padding(.horizontal, 30)
+    }
+}
+
 

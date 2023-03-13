@@ -41,14 +41,14 @@ final class SummonerRegistrationViewTests: XCTestCase {
         key.tap()
         key2.tap()
         key2.tap()
-        app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".keyboards",".buttons[\"검색\"]",".buttons[\"Search\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.buttons["SearchButton"].tap()
         
         //  Then
         let alertExists = alert.waitForExistence(timeout: 2)
         XCTAssertTrue(alertExists)
     }
     
-    func test_SummonerRegistrationView_alert_doesNotExists() {
+    func test_SummonerRegistrationView_SearchButton_shouldPresentAlert() {
         //  Given
         guard let app = app else {
             XCTFail()
@@ -59,19 +59,41 @@ final class SummonerRegistrationViewTests: XCTestCase {
                                  "-LeagueV4Service" : "success",
                                  "-MatchV5Service" : "success"]
         app.launch()
+        let alert = app.alerts.firstMatch
+        let searchButton = app.buttons["SearchButton"]
         
+        //  When
+        searchButton.tap()
+                
+        //  Then
+        let alertExists = alert.waitForExistence(timeout: 1)
+        XCTAssertTrue(alertExists)
+    }
+    
+    func test_SummonerRegistrationView_SearchButton_shouldNaviateToSummonerRecordView() {
+        //  Given
+        guard let app = app else {
+            XCTFail()
+            return
+        }
+        
+        app.launchEnvironment = ["-SummonerService" : "success",
+                                 "-LeagueV4Service" : "success",
+                                 "-MatchV5Service" : "success"]
+        app.launch()
+        let alert = app.alerts.firstMatch
         let key = app.keys["A"]
         let key2 = app.keys["a"]
-        let alert = app.alerts.firstMatch
+        let searchButton = app.buttons["SearchButton"]
+        let summonerRecordView = app.scrollViews["SummonerRecordView"]
         
         //  When
         key.tap()
         key2.tap()
-        key2.tap()
-        app/*@START_MENU_TOKEN@*/.buttons["Search"]/*[[".keyboards",".buttons[\"검색\"]",".buttons[\"Search\"]"],[[[-1,2],[-1,1],[-1,0,1]],[[-1,2],[-1,1]]],[0]]@END_MENU_TOKEN@*/.tap()
-        
+        searchButton.tap()
+                
         //  Then
-        let alertExists = alert.waitForExistence(timeout: 2)
-        XCTAssertFalse(alertExists)
+        let summonerRecordViewExists = summonerRecordView.waitForExistence(timeout: 1)
+        XCTAssertTrue(summonerRecordViewExists)
     }
 }
