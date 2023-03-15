@@ -14,7 +14,7 @@
 		151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 151EAEA6296687DA00322ACE /* StringExntensionTests.swift */; };
 		152292E4298E55010070B023 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152292E3298E55010070B023 /* DropDown.swift */; };
 		152292E7298E55CC0070B023 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152292E6298E55CC0070B023 /* ProfileHeader.swift */; };
-		15242F7B29BEDD8C009C1D10 /* SummoreRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15242F7A29BEDD8C009C1D10 /* SummoreRecordView.swift */; };
+		15242F7B29BEDD8C009C1D10 /* SummonerRecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15242F7A29BEDD8C009C1D10 /* SummonerRecordView.swift */; };
 		1526DD042980011E00340069 /* Copyable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526DD032980011E00340069 /* Copyable.swift */; };
 		1526DD062980016D00340069 /* CDSummoner + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526DD052980016D00340069 /* CDSummoner + Extension.swift */; };
 		1526DD082980024500340069 /* CDMatch + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1526DD072980024500340069 /* CDMatch + Extension.swift */; };
@@ -80,6 +80,7 @@
 		15D55C2729ADF165004CC334 /* SummonerRegistrationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15D55C2629ADF165004CC334 /* SummonerRegistrationViewTests.swift */; };
 		15E1685B298774EF00F91CAB /* RotatingCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E1685A298774EF00F91CAB /* RotatingCircle.swift */; };
 		15E52E06298143D2004B4DBC /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E52E05298143D2004B4DBC /* Match.swift */; };
+		15E7B51329C1542800A3E128 /* SummonerManager_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E7B51229C1542800A3E128 /* SummonerManager_Tests.swift */; };
 		15E9E18C2983922B008B614F /* PGVStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9E18B2983922B008B614F /* PGVStack.swift */; };
 		15E9E19129839B9C008B614F /* HiddenTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15E9E19029839B9C008B614F /* HiddenTitle.swift */; };
 		15ED7F2B298A220000E49B5F /* ChampionWinRateImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15ED7F2A298A220000E49B5F /* ChampionWinRateImage.swift */; };
@@ -113,7 +114,7 @@
 		151EAEA6296687DA00322ACE /* StringExntensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExntensionTests.swift; sourceTree = "<group>"; };
 		152292E3298E55010070B023 /* DropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		152292E6298E55CC0070B023 /* ProfileHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
-		15242F7A29BEDD8C009C1D10 /* SummoreRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummoreRecordView.swift; sourceTree = "<group>"; };
+		15242F7A29BEDD8C009C1D10 /* SummonerRecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerRecordView.swift; sourceTree = "<group>"; };
 		1526DD032980011E00340069 /* Copyable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Copyable.swift; sourceTree = "<group>"; };
 		1526DD052980016D00340069 /* CDSummoner + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSummoner + Extension.swift"; sourceTree = "<group>"; };
 		1526DD072980024500340069 /* CDMatch + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDMatch + Extension.swift"; sourceTree = "<group>"; };
@@ -183,6 +184,7 @@
 		15D55C2629ADF165004CC334 /* SummonerRegistrationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerRegistrationViewTests.swift; sourceTree = "<group>"; };
 		15E1685A298774EF00F91CAB /* RotatingCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotatingCircle.swift; sourceTree = "<group>"; };
 		15E52E05298143D2004B4DBC /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
+		15E7B51229C1542800A3E128 /* SummonerManager_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerManager_Tests.swift; sourceTree = "<group>"; };
 		15E9E18B2983922B008B614F /* PGVStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PGVStack.swift; sourceTree = "<group>"; };
 		15E9E19029839B9C008B614F /* HiddenTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenTitle.swift; sourceTree = "<group>"; };
 		15ED7F2A298A220000E49B5F /* ChampionWinRateImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChampionWinRateImage.swift; sourceTree = "<group>"; };
@@ -240,7 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				15A4D7012959751E0052E3AD /* SummonerRegistrationView.swift */,
-				15242F7A29BEDD8C009C1D10 /* SummoreRecordView.swift */,
+				15242F7A29BEDD8C009C1D10 /* SummonerRecordView.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -251,14 +253,6 @@
 				15A4D703295975300052E3AD /* SummonerRegistrationViewModel.swift */,
 			);
 			path = Register;
-			sourceTree = "<group>";
-		};
-		1534E75529AC9011007B1874 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				1534E75A29AC9053007B1874 /* CounterRecordStrategy */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		1534E75A29AC9053007B1874 /* CounterRecordStrategy */ = {
@@ -344,6 +338,16 @@
 			path = Json;
 			sourceTree = "<group>";
 		};
+		159011E129C02C3C004BF68D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1534E75A29AC9053007B1874 /* CounterRecordStrategy */,
+				15A4D707295978590052E3AD /* Extensions */,
+				15A4D710295980FE0052E3AD /* Environment */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		15961DE22990E0E800806655 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -386,9 +390,7 @@
 			isa = PBXGroup;
 			children = (
 				1597B1DE2971270400A66486 /* AJ-GG-Info.plist */,
-				15A4D710295980FE0052E3AD /* Environment */,
-				15A4D707295978590052E3AD /* Extensions */,
-				1534E75529AC9011007B1874 /* Protocols */,
+				159011E129C02C3C004BF68D /* Helpers */,
 				159D74EF296ECBD6009668CB /* DataManager */,
 				15A4D70A295980840052E3AD /* Service */,
 				15A4D6FE295973170052E3AD /* Model */,
@@ -415,6 +417,7 @@
 		15A4D6E2295972D70052E3AD /* AJ.GGTests */ = {
 			isa = PBXGroup;
 			children = (
+				15E7B51129C1540C00A3E128 /* DataManager */,
 				151EAEA5296687C200322ACE /* Extension */,
 				15717275295D704D0053BCC1 /* Service */,
 				15961DE22990E0E800806655 /* ViewModel */,
@@ -534,6 +537,14 @@
 				152FBE72296D2D9800B082C7 /* MatchDTO.swift */,
 			);
 			path = DTO;
+			sourceTree = "<group>";
+		};
+		15E7B51129C1540C00A3E128 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				15E7B51229C1542800A3E128 /* SummonerManager_Tests.swift */,
+			);
+			path = DataManager;
 			sourceTree = "<group>";
 		};
 		15E9E188298391FF008B614F /* PGView */ = {
@@ -735,7 +746,7 @@
 				15A4D704295975300052E3AD /* SummonerRegistrationViewModel.swift in Sources */,
 				1534E75929AC904C007B1874 /* MyRecordStrategy.swift in Sources */,
 				1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */,
-				15242F7B29BEDD8C009C1D10 /* SummoreRecordView.swift in Sources */,
+				15242F7B29BEDD8C009C1D10 /* SummonerRecordView.swift in Sources */,
 				1534E75E29AC9147007B1874 /* CounterRecordContext.swift in Sources */,
 				152FBE6F296D2BA400B082C7 /* ObjectivesDTO.swift in Sources */,
 				156DA4FE2988F3ED00786730 /* LaneImage.swift in Sources */,
@@ -766,6 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15E7B51329C1542800A3E128 /* SummonerManager_Tests.swift in Sources */,
 				156133FC29B489E00016FCC5 /* HomeViewModel_Tests.swift in Sources */,
 				151EAEA7296687DA00322ACE /* StringExntensionTests.swift in Sources */,
 				15EFFAB129B8721800975D90 /* SummonerRegistrationViewModel_Tests.swift in Sources */,

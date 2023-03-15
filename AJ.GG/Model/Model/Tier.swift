@@ -8,7 +8,17 @@
 import Foundation
 import SwiftUI
 
-struct LeagueTier {
+struct LeagueTier: DummyCreatable {
+    static func dummyData() -> LeagueTier {
+        return LeagueTier(tier: .gold, rank: .iii, points: 16)
+    }
+    
+    static func dummyDatas() -> [LeagueTier] {
+        return [dummyData()]
+    }
+    
+    typealias Dummy = LeagueTier
+    
     let tier: Tier?
     let rank: Rank?
     let points: Int32

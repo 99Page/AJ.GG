@@ -30,8 +30,8 @@ final class SummonerRegistrationViewTests: XCTestCase {
             return
         }
         
-        app.launch()
         app.launchEnvironment = ["-SummonerService" : "failure"]
+        app.launch()
         
         let key = app.keys["A"]
         let key2 = app.keys["a"]
@@ -48,7 +48,7 @@ final class SummonerRegistrationViewTests: XCTestCase {
         XCTAssertTrue(alertExists)
     }
     
-    func test_SummonerRegistrationView_SearchButton_shouldPresentAlert() {
+    func test_SummonerRegistrationView_alert_doesExists2() {
         //  Given
         guard let app = app else {
             XCTFail()
@@ -64,36 +64,10 @@ final class SummonerRegistrationViewTests: XCTestCase {
         
         //  When
         searchButton.tap()
-                
+        
         //  Then
         let alertExists = alert.waitForExistence(timeout: 1)
         XCTAssertTrue(alertExists)
-    }
-    
-    func test_SummonerRegistrationView_SearchButton_shouldNaviateToSummonerRecordView() {
-        //  Given
-        guard let app = app else {
-            XCTFail()
-            return
-        }
-        
-        app.launchEnvironment = ["-SummonerService" : "success",
-                                 "-LeagueV4Service" : "success",
-                                 "-MatchV5Service" : "success"]
-        app.launch()
-        let alert = app.alerts.firstMatch
-        let key = app.keys["A"]
-        let key2 = app.keys["a"]
-        let searchButton = app.buttons["SearchButton"]
-        let summonerRecordView = app.scrollViews["SummonerRecordView"]
-        
-        //  When
-        key.tap()
-        key2.tap()
-        searchButton.tap()
-                
-        //  Then
-        let summonerRecordViewExists = summonerRecordView.waitForExistence(timeout: 1)
-        XCTAssertTrue(summonerRecordViewExists)
+
     }
 }

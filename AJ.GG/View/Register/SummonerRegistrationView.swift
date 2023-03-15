@@ -18,7 +18,8 @@ struct SummonerRegistrationView: View {
     @StateObject private var
     viewModel = SummonerRegistrationViewModel(summonerService: SummonerService(),
                                               leagueV4Service: LeagueV4Serivce(),
-                                              matchV5Service: MatchV5Service())
+                                              matchV5Service: MatchV5Service(),
+                                              container: PersistentContainerInjector.run.container)
     
     @FocusState private var focusState: Field?
     let registerButtonHeight: CGFloat = 50
@@ -52,13 +53,14 @@ struct SummonerRegistrationView: View {
             }
             .accessibilityIdentifier("SearchButton")
             .navigationDestination(isPresented: $viewModel.goToNextView) {
-                SummoreRecordView(viewModel: viewModel)
+                SummonerRecordView(viewModel: viewModel)
             }
 
             
         }
         .onAppear {
             self.focusState = .summonerName
+            viewModel.clear()
         }
     }
 }

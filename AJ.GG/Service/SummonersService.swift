@@ -60,8 +60,9 @@ class SummonerService: RiotAuthorizaiton, SummonerServiceEnabled {
 class MockSummonerSerivceSuccess: SummonerServiceEnabled {
     
     func summonerByName(summonerName: String) async -> Result<SummonerDTO, NetworkError> {
-        let summonerDTO = SummonerDTO(id: "1234", accountID: "1234", puuid: "1234", name: summonerName
-                                      , profileIconID: 1, revisionDate: 1, summonerLevel: 1)
+        
+        let summonerDTO = SummonerDTO(id: "1234", accountID: "1234", puuid: "1234",
+                                      name: summonerName, profileIconID: 1, revisionDate: 1, summonerLevel: 1)
         
         return .success(summonerDTO)
     }

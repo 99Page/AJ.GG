@@ -16,26 +16,30 @@ class SummonerRegistrationViewModel: ObservableObject {
     @Published private(set) var leagueTier: LeagueTier?
     @Published private(set) var matches: [Match] = []
     
+    @Published private(set) var isSearchOngoing: Bool = false
     @Published var isPresented: Bool = false
+    @Published var isPresentedAddSummonerAlert: Bool = false
     @Published var goToNextView: Bool = false
     
     let title = "소환사 이름을 입력해주세요."
     private let summonerService: SummonerServiceEnabled
     private let leagueV4Service: LeagueV4ServiceEnabled
     private let matchV5Service: MatchV5ServiceEnabled
+    private let summonerManager: CDSummonerManager
     
     init(summonerService: SummonerServiceEnabled, leagueV4Service: LeagueV4ServiceEnabled,
-         matchV5Service: MatchV5ServiceEnabled) {
-        
+         matchV5Service: MatchV5ServiceEnabled, container: PersistentContainerSource) {
         self.summonerService = SummonerServiceInjector.select(service: summonerService)
         self.leagueV4Service = LeagueV4ServiceInjector.select(service: leagueV4Service)
         self.matchV5Service = MatchV5ServiceInjector.select(service: matchV5Service)
-        
+        self.summonerManager = CDSummonerManager(container: PersistentContainerInjector.select(source: container))
     }
     
     
     @MainActor
     func searchButtonTapped() async {
+        isSearchOngoing = true
+        
         guard !summonerName.isEmpty else {
             isPresented = true
             clear()
@@ -47,7 +51,7 @@ class SummonerRegistrationViewModel: ObservableObject {
             self.summoner = Summoner(value)
             goToNextView = true
         case .failure(_):
-            isPresented = true
+            handleFailure()
             return
         }
         
@@ -56,6 +60,7 @@ class SummonerRegistrationViewModel: ObservableObject {
             case .success(let value):
                 self.leagueTier = value
             case .failure(_):
+                handleFailure()
                 return
             }
             
@@ -63,14 +68,29 @@ class SummonerRegistrationViewModel: ObservableObject {
             case .success(let value):
                 self.matches = value.map { Match($0, puuid: summoner.puuid) }
             case .failure(_):
+                handleFailure()
                 return
             }
         }
+        
+        isSearchOngoing = false
+    }
+    
+    func handleFailure() {
+        self.isPresented = true
+        self.isSearchOngoing = false
     }
 
-    private func clear() {
+    func clear() {
         summoner = nil
         leagueTier = nil 
         matches = []
+        summonerName = "" 
+    }
+    
+    func addSummoner() {
+        if let summoner = self.summoner, let leagueTier = self.leagueTier {
+            summonerManager.addSummoner(summoner: summoner, leagueTier: leagueTier)
+        }
     }
 }

@@ -7,11 +7,25 @@
 
 import CoreData
 
-class CDSummonerManager {
+final class CDSummonerManager {
     let context: NSManagedObjectContext
     
     init(container: PersistentContainerSource) {
         self.context = container.container.viewContext
+    }
+    
+    func addSummoner(summoner: Summoner, leagueTier: LeagueTier) {
+        let summonerEntity = NSEntityDescription.insertNewObject(forEntityName: CDSummoner.entity().name ?? "CDSummoner",
+                                                                 into: context) as! CDSummoner
+        summonerEntity.id = summoner.summonerID
+        summonerEntity.leaguePoints = leagueTier.points
+        summonerEntity.profileIconID = summoner.profileIconID
+        summonerEntity.puuid = summoner.puuid
+        summonerEntity.rank = leagueTier.rank?.rawValue
+        summonerEntity.summonerName = summoner.summonerName
+        summonerEntity.tier = leagueTier.tier?.rawValue
+        
+        save()
     }
     
     func fetchAll() -> [Summoner] {
@@ -23,6 +37,14 @@ class CDSummonerManager {
         } catch {
             print("ERROR FETCHING")
             return []
+        }
+    }
+    
+    func save() {
+        do {
+            try context.save()
+        } catch {
+            print("\(error)")
         }
     }
 }

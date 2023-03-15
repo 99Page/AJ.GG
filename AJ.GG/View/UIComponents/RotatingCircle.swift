@@ -13,6 +13,7 @@ struct RotatingCircle: View {
                 .onAppear() {
                     self.rotation = 360
                 }
+                .accessibilityIdentifier("RotatingCircle")
         }
 }
 

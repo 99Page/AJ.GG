@@ -21,10 +21,6 @@ struct ProfileView: View {
 
     let lanes = Lane.selectableLanes()
 
-    @State var text = ""
-
-    let headerHeight: CGFloat = 90
-
     init() {
         self._viewModel = StateObject(wrappedValue: HomeViewModel(matchV5Serivce: MatchV5Service(),
                                                                      containerSoruce: PersistentContainer()))
@@ -33,59 +29,16 @@ struct ProfileView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
-                    Text("HomeView")
-//                HStack {
-//                    ForEach(lanes, id: \.rawValue) { lane in
-//                        Button {
-//                            self.item = nil
-//                            viewModel.laneButtonTapped(lane)
-//                        } label: {
-//                            LaneImage(lane: lane, isSelected: lane.isEqual(viewModel.selectedLane))
-//                        }
-//                        .disabled(viewModel.selectedLane.isEqual(lane))
-//                    }
-//                }
-//                .padding(.horizontal, 80)
-//
-//                CapsuleText(text: $text, title: "카운터 검색")
-//
-//                Group {
-//                    myBestChampions()
-//                    hardRivalChampions()
-//                    records()
-//                }
-//                .hidden(viewModel.itemsDisappear || viewModel.isMatchEmpty)
-//                .sheet(item: $item) {
-//                    ChampionRecordView(viewModel: ChampionRecordViewModel(champion: $0.champion,
-//                                                                          matchManager: DataManager(useCase: .shared),
-//                                                                          strategy: viewModel.counterRecordStrategy))
-//                }
-//
-//                VStack(alignment: .center, spacing: 10) {
-//                    BaseProfileIconImage(iconID: IconID.piratePoro.rawValue)
-//                        .clipShape(RoundedRectangle(cornerRadius: 50))
-//
-//                    HStack(alignment: .top, spacing: 10) {
-//                        Image(systemName: "exclamationmark.circle")
-//                            .font(.system(size: 20))
-//
-//                        Text("해당 라인의 정보가 수집되지 않았습니다.")
-//                            .font(.system(size: 20, weight: .heavy))
-//                    }
-//                    .frame(maxWidth: .infinity, alignment: .leading)
-//                    .foregroundColor(.gray)
-//                }
-//                .frame(maxWidth: .infinity)
-//                .hidden(!viewModel.isMatchEmpty)
-//
+                Text("HomeView")
             }
             .padding(.horizontal)
+            
+            .navigationDestination(isPresented: $viewModel.isSummonerEmpty) {
+                SummonerRegistrationView()
+            }
         }
         .accessibilityIdentifier("HomeView")
-        .navigationDestination(isPresented: $viewModel.isSummonerEmpty) {
-            SummonerRegistrationView()
-        }
-        .padding(.top, headerHeight)
+        .padding(.top, 1)
 //        .overlay(alignment: .top) {
 //            HStack(alignment: .center) {
 //                SummonerProfiles(summoners: viewModel.summoners)

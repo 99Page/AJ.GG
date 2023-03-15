@@ -7,10 +7,14 @@
 
 import Foundation
 
-struct Summoner: DummyCreatable, Identifiable {
+struct Summoner: DummyCreatable, Identifiable, Equatable {
     
     typealias Dummy = Summoner
     
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.summonerID == rhs.summonerID && lhs.puuid == rhs.puuid &&
+        lhs.summonerName == rhs.summonerName && lhs.profileIconID == rhs.profileIconID
+    }
     
     let id = UUID().uuidString
     let summonerID: String
@@ -40,7 +44,7 @@ struct Summoner: DummyCreatable, Identifiable {
     }
     
     static func dummyData() -> Summoner {
-        return  Summoner(summonerID: "", puuid: "", summonerName: "SwiftUI", profileIconID: 685)
+        return  Summoner(summonerID: "jU2mjgEFQ0ly_fqZliKMNUhNwrFeAaV4Fq1YSTjQD5kXCPk", puuid: "123", summonerName: "SwiftUI", profileIconID: 685)
     }
     
     static func dummyDatas() -> [Summoner] {

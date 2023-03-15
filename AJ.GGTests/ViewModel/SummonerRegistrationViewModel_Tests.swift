@@ -15,7 +15,8 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
     override func setUpWithError() throws {
         viewModel = SummonerRegistrationViewModel(summonerService: SummonerService(),
                                                   leagueV4Service: LeagueV4Serivce(),
-                                                  matchV5Service: MatchV5Service())
+                                                  matchV5Service: MatchV5Service(),
+                                                  container: PersistentContainerInjector.empty.container)
     }
 
     override func tearDownWithError() throws {
@@ -80,7 +81,8 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
         //  Given
         let vm = SummonerRegistrationViewModel(summonerService: MockSummonerSerivceSuccess(),
                                                leagueV4Service: MockLeagueV4ServiceSuccess(),
-                                               matchV5Service: MockMatchV5ServiceSuccess())
+                                               matchV5Service: MockMatchV5ServiceSuccess(),
+                                               container: PersistentContainerInjector.empty.container)
         
         vm.summonerName = "SwiftUI 4"
         
@@ -95,7 +97,8 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
         //  Given
         let vm = SummonerRegistrationViewModel(summonerService: MockSummonerSerivceSuccess(),
                                                leagueV4Service: MockLeagueV4ServiceSuccess(),
-                                               matchV5Service: MockMatchV5ServiceSuccess())
+                                               matchV5Service: MockMatchV5ServiceSuccess(),
+                                               container: PersistentContainerInjector.empty.container)
         
         vm.summonerName = "SwiftUI 4"
         
@@ -110,7 +113,8 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
         //  Given
         let vm = SummonerRegistrationViewModel(summonerService: MockSummonerSerivceSuccess(),
                                                leagueV4Service: MockLeagueV4ServiceSuccess(),
-                                               matchV5Service: MockMatchV5ServiceSuccess())
+                                               matchV5Service: MockMatchV5ServiceSuccess(),
+                                               container: PersistentContainerInjector.empty.container)
         
         vm.summonerName = "SwiftUI 4"
         
@@ -121,12 +125,31 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
         XCTAssertFalse(vm.matches.isEmpty)
     }
     
+    func test_SummonerRegistrationViewModel_clear_shouldClearValues() async {
+        //  Given
+        let vm = SummonerRegistrationViewModel(summonerService: MockSummonerSerivceSuccess(),
+                                               leagueV4Service: MockLeagueV4ServiceSuccess(),
+                                               matchV5Service: MockMatchV5ServiceSuccess(),
+                                               container: PersistentContainerInjector.empty.container)
+        
+        vm.summonerName = "SwiftUI 4"
+        await vm.searchButtonTapped()
+        
+        //  When
+        vm.clear()
+        
+        //  Then
+        XCTAssertNil(vm.summoner)
+        XCTAssertNil(vm.leagueTier)
+        XCTAssertTrue(vm.matches.isEmpty)
+    }
     
     func test_SummonerRegistrationViewModel_searchButtonTapped_clearValues() async {
         //  Given
         let vm = SummonerRegistrationViewModel(summonerService: MockSummonerSerivceSuccess(),
                                                leagueV4Service: MockLeagueV4ServiceSuccess(),
-                                               matchV5Service: MockMatchV5ServiceSuccess())
+                                               matchV5Service: MockMatchV5ServiceSuccess(),
+                                               container: PersistentContainerInjector.empty.container)
         
         vm.summonerName = "SwiftUI 4"
         await vm.searchButtonTapped()

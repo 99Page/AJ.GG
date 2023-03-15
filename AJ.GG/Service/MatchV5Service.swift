@@ -80,6 +80,7 @@ class MockMatchV5ServiceSuccess: MatchV5ServiceEnabled {
         let decoder = JSONDecoder()
         
         do {
+            do { sleep(3) }
             var result: [MatchDTO] = []
             for data in MATCH_DATA {
                 result.append(try! decoder.decode(MatchDTO.self, from: data))

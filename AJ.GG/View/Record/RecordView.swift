@@ -20,6 +20,7 @@ struct RecordView: View {
                     .foregroundColor(.black)
             }
         }
+        .accessibilityIdentifier("RecordView")
     }
 }
 

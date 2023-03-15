@@ -74,19 +74,22 @@ struct PersistentContainer: PersistentContainerSource {
 enum PersistentContainerInjector: String {
     case empty = "empty"
     case pre = "preview"
+    case run = "run"
     
-    var dependency: PersistentContainerSource {
+    var container: PersistentContainerSource {
         switch self {
         case .empty:
             return EmptyPersistentContainer()
         case .pre:
             return PreviewPersistentContainer()
+        case .run:
+            return PersistentContainer()
         }
     }
     
     static func select(source: PersistentContainerSource) -> PersistentContainerSource {
            if let variable = ProcessInfo.processInfo.environment["-ContainerSource"] {
-               return PersistentContainerInjector(rawValue: variable)?.dependency ?? source
+               return PersistentContainerInjector(rawValue: variable)?.container ?? source
            } else {
                return source
            }
