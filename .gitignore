@@ -90,4 +90,5 @@ fastlane/test_output
 iOSInjectionProject/
 
 .DS_Store
-AJ.GG/Environment/
+*.Environment
+
