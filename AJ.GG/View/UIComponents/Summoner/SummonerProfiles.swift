@@ -14,17 +14,17 @@ struct SummonerProfiles: View {
     var body: some View {
         VStack {
             HStack(alignment: .top) {
-                if !summoners.isFull() {
-                    Image(systemName: "plus")
-                        .frame(width: 60, height: 60)
-                        .clipShape(
-                            RoundedRectangle(cornerRadius: 20)
-                        )
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 3)
-                        }
-                }
-                
+//                if !summoners.isFull() {
+//                    Image(systemName: "plus")
+//                        .frame(width: 60, height: 60)
+//                        .clipShape(
+//                            RoundedRectangle(cornerRadius: 20)
+//                        )
+//                        .overlay {
+//                            RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 3)
+//                        }
+//                }
+//                
                 ForEach(summoners.indices, id: \.self) { i in
                     SummonerProfile(summoner: summoners[i])
                 }

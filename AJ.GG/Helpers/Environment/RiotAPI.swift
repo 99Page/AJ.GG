@@ -12,7 +12,7 @@ let RIOT_API_URL = "https://KR.\(BASE_URL)"
 
 enum RiotAuth: String {
     case key = "X-Riot-Token"
-    case value = "RGAPI-bce312b7-0ae2-45f4-b739-c0cbad7c0b7b"
+    case value = "RGAPI-b14afcd7-88a5-4f03-9d30-803ccd8fa6db"
 }
 
 enum RiotURL {

@@ -29,7 +29,7 @@ final class SummonerManager_Tests: XCTestCase {
         
         //  Then
         if let fetchedSummoner = summonerManager.fetchAll().first {
-            XCTAssertEqual(summoner, fetchedSummoner)
+            XCTAssertEqual(summoner, Summoner(cdSummoner: fetchedSummoner))
         } else {
             XCTFail()
         }

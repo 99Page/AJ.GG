@@ -17,14 +17,13 @@ class HomeViewModel: ObservableObject {
     @Published var isSummonerEmpty: Bool = false
     
     init(matchV5Serivce: MatchV5ServiceEnabled, containerSoruce: PersistentContainerSource) {
-        self.matchV5Service = matchV5Serivce
+        self.matchV5Service = MatchV5ServiceInjector.select(service: matchV5Serivce)
         self.summonerManager = CDSummonerManager(container: PersistentContainerInjector.select(source: containerSoruce))
-        
         fetchSummoners()
     }
     
     private func fetchSummoners() {
-        self.summoners = summonerManager.fetchAll()
+        self.summoners = summonerManager.fetchAll().map { Summoner(cdSummoner: $0) }
         if summoners.isEmpty {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.isSummonerEmpty = true

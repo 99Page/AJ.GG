@@ -7,7 +7,7 @@
 
 import CoreData
 
-final class CDSummonerManager {
+final class CDSummonerManager: DataManagerProtocol {
     let context: NSManagedObjectContext
     
     init(container: PersistentContainerSource) {
@@ -17,34 +17,32 @@ final class CDSummonerManager {
     func addSummoner(summoner: Summoner, leagueTier: LeagueTier) {
         let summonerEntity = NSEntityDescription.insertNewObject(forEntityName: CDSummoner.entity().name ?? "CDSummoner",
                                                                  into: context) as! CDSummoner
-        summonerEntity.id = summoner.summonerID
-        summonerEntity.leaguePoints = leagueTier.points
-        summonerEntity.profileIconID = summoner.profileIconID
-        summonerEntity.puuid = summoner.puuid
-        summonerEntity.rank = leagueTier.rank?.rawValue
-        summonerEntity.summonerName = summoner.summonerName
-        summonerEntity.tier = leagueTier.tier?.rawValue
-        
+        summonerEntity.setValues(summoner: summoner, leagueTier: leagueTier)
         save()
     }
     
-    func fetchAll() -> [Summoner] {
+    func fetchAll() -> [CDSummoner] {
         let request: NSFetchRequest<CDSummoner> = NSFetchRequest(entityName: CDSummoner.entity().name ?? "CDSummoner")
         
         do {
             let summoners = try context.fetch(request)
-            return summoners.map { Summoner(cdSummoner: $0) }
+            return summoners
         } catch {
             print("ERROR FETCHING")
             return []
         }
     }
-    
-    func save() {
-        do {
-            try context.save()
-        } catch {
-            print("\(error)")
-        }
+}
+
+extension CDSummoner {
+    func setValues(summoner: Summoner, leagueTier: LeagueTier) {
+        self.id = summoner.summonerID
+        self.leaguePoints = leagueTier.points
+        self.profileIconID = summoner.profileIconID
+        self.puuid = summoner.puuid
+        self.rank = leagueTier.rank?.rawValue
+        self.summonerName = summoner.summonerName
+        self.tier = leagueTier.tier?.rawValue
+        
     }
 }

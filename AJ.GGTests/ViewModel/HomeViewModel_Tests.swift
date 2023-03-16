@@ -76,7 +76,8 @@ final class HomeViewModel_Tests: XCTestCase {
     
     func test_HomeViewModel_isSummonerEmpty_shoudBeFalse() {
         //  Given
-        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5ServiceSuccess(), containerSoruce: PreviewPersistentContainer())
+        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5ServiceSuccess(),
+                                  containerSoruce: PreviewPersistentContainer())
         guard let vm = viewModel else {
             XCTFail()
             return

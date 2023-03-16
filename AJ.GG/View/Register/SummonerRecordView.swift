@@ -51,10 +51,6 @@ struct SummonerRecordView: View {
                         .padding(.vertical, 5)
                         
                         record()
-                            .overlay {
-                                RotatingCircle()
-                                    .hidden(!viewModel.isSearchOngoing)
-                            }
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -85,7 +81,13 @@ struct SummonerRecordView: View {
     @ViewBuilder
     private func record() -> some View {
         RecordView(matches: viewModel.matches)
+            .frame(maxWidth: .infinity)
             .padding(.horizontal, 10)
+            .overlay {
+                RotatingCircle()
+                    .hidden(!viewModel.isSearchOngoing)
+                    .padding(.top, 100)
+            }
     }
 }
 

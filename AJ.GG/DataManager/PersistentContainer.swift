@@ -30,7 +30,8 @@ struct PreviewPersistentContainer: PersistentContainerSource {
     
     private func addSummoner() {
         let context = container.viewContext
-        let summoner = NSEntityDescription.insertNewObject(forEntityName: CDSummoner.entity().name ?? "CDSummoner", into: context)
+        let summoner = NSEntityDescription.insertNewObject(forEntityName: CDSummoner.entity().name ?? "CDSummoner", into: context) as! CDSummoner
+        summoner.setValues(summoner: Summoner.dummyData(), leagueTier: LeagueTier.dummyData())
         
         do {
             try context.save()

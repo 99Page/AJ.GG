@@ -36,18 +36,20 @@ struct ProfileView: View {
             .navigationDestination(isPresented: $viewModel.isSummonerEmpty) {
                 SummonerRegistrationView()
             }
+            .frame(maxWidth: .infinity)
         }
         .accessibilityIdentifier("HomeView")
         .padding(.top, 1)
-//        .overlay(alignment: .top) {
-//            HStack(alignment: .center) {
-//                SummonerProfiles(summoners: viewModel.summoners)
-//                    .padding(.horizontal)
-//                    .frame(maxWidth: .infinity, maxHeight: headerHeight, alignment: .leading)
-//                    .background(Color.white)
-//            }
-//            .padding(0)
-//        }
+        .overlay(alignment: .top) {
+            HStack {
+                SummonerProfiles(summoners: viewModel.summoners)
+                    .padding(.horizontal)
+                
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(0)
+        }
     }
 
 //    @ViewBuilder
