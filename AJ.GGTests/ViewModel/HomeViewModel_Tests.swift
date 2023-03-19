@@ -77,7 +77,7 @@ final class HomeViewModel_Tests: XCTestCase {
     func test_HomeViewModel_isSummonerEmpty_shoudBeFalse() {
         //  Given
         viewModel = HomeViewModel(matchV5Serivce: MockMatchV5ServiceSuccess(),
-                                  containerSoruce: PreviewPersistentContainer())
+                                  containerSoruce: PreviewPersistentContainer.shared)
         guard let vm = viewModel else {
             XCTFail()
             return
@@ -89,5 +89,54 @@ final class HomeViewModel_Tests: XCTestCase {
         XCTAssertFalse(vm.isSummonerEmpty)
     }
     
+    func test_HomeViewModel_summoners_shouldBeSet() {
+        //  Given
+        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5ServiceSuccess(),
+                                  containerSoruce: PreviewPersistentContainer.shared)
+        guard let vm = viewModel else {
+            XCTFail()
+            return
+        }
+        
+        let expectation = XCTestExpectation()
+        
+        //  When
+        vm.$summoners
+            .sink { value in
+                print("sink \(value)")
+                expectation.fulfill()
+            }
+            .store(in: &cancellable)
+        
+        //  Then
+        wait(for: [expectation], timeout: 1)
+        XCTAssertFalse(vm.summoners.isEmpty)
+    }
+    
+    
+    func test_HomeViewModel_matches_shouldBeSet() {
+        //  Given
+        viewModel = HomeViewModel(matchV5Serivce: MockMatchV5ServiceSuccess(),
+                                  containerSoruce: PreviewPersistentContainer.shared)
+        guard let vm = viewModel else {
+            XCTFail()
+            return
+        }
+        
+        let expectation = XCTestExpectation()
+        
+        //  When
+        vm.$matches
+            .sink { value in
+                print("sink \(value)")
+                expectation.fulfill()
+            }
+            .store(in: &cancellable)
+        
+        //  Then
+        wait(for: [expectation], timeout: 1)
+        XCTAssertFalse(vm.summoners.isEmpty)
+        XCTAssertFalse(vm.matches.isEmpty)
+    }
 
 }

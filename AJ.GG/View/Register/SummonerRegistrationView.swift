@@ -19,7 +19,7 @@ struct SummonerRegistrationView: View {
     viewModel = SummonerRegistrationViewModel(summonerService: SummonerService(),
                                               leagueV4Service: LeagueV4Serivce(),
                                               matchV5Service: MatchV5Service(),
-                                              container: PersistentContainerInjector.run.container)
+                                              container: PersistentContainer.shared)
     
     @FocusState private var focusState: Field?
     let registerButtonHeight: CGFloat = 50

@@ -21,6 +21,30 @@ extension CDMatch: AllSettable {
         }
     }
     
+    func setValues(summonerEntity: CDSummoner, match: Match) {
+        self.gameCreation = match.gameCreation
+        self.id = match.id
+        self.isWin = match.isWin
+        self.lane = match.lane.rawValue
+        self.version = match.version
+        
+        let myKDA = match.myKDA
+        self.myAssist = myKDA[2]
+        self.myChampionID = match.myChampionName
+        self.myKill = myKDA[0]
+        self.myDeath = myKDA[1]
+        self.mySummonerName = match.mySummonerName
+        
+        let rivalKDA = match.rivalKDA
+        self.enemyChampionID = match.rivalChampionName
+        self.rivalKill = rivalKDA[0]
+        self.rivalDeath = rivalKDA[1]
+        self.rivalAssist = rivalKDA[2]
+        self.rivalSummonerName = match.rivalSummonerName
+        
+        self.playedBy = summonerEntity
+    }
+    
     func update(match: MatchDTO, summonerEntity: CDSummoner, puuid: String) {
         self.id = match.matchID()
         

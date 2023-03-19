@@ -19,27 +19,7 @@ final class CDMatchManager: DataManagerProtocol {
     func add(summonerEntity: CDSummoner, match: Match) {
         let matchEntity = NSEntityDescription.insertNewObject(forEntityName: CDMatch.entity().name ?? "CDMatch",
                                                               into: context) as! CDMatch
-        matchEntity.gameCreation = match.gameCreation
-        matchEntity.id = match.id
-        matchEntity.isWin = match.isWin
-        matchEntity.lane = match.lane.rawValue
-        matchEntity.version = match.version
-        
-        let myKDA = match.myKDA
-        matchEntity.myAssist = myKDA[2]
-        matchEntity.myChampionID = match.myChampionName
-        matchEntity.myKill = myKDA[0]
-        matchEntity.myDeath = myKDA[1]
-        matchEntity.mySummonerName = match.mySummonerName
-        
-        let rivalKDA = match.rivalKDA
-        matchEntity.enemyChampionID = match.rivalChampionName
-        matchEntity.rivalKill = rivalKDA[0]
-        matchEntity.rivalDeath = rivalKDA[1]
-        matchEntity.rivalAssist = rivalKDA[2]
-        matchEntity.rivalSummonerName = match.rivalSummonerName
-        
-        summonerEntity.addToPlays(matchEntity)
+        matchEntity.setValues(summonerEntity: summonerEntity, match: match)
         save()
     }
     

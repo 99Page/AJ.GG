@@ -24,6 +24,7 @@ struct PreviewPersistentContainer: PersistentContainerSource {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
         
         addSummoner()
     }
@@ -31,13 +32,20 @@ struct PreviewPersistentContainer: PersistentContainerSource {
     private func addSummoner() {
         let context = container.viewContext
         let summoner = NSEntityDescription.insertNewObject(forEntityName: CDSummoner.entity().name ?? "CDSummoner", into: context) as! CDSummoner
+        
         summoner.setValues(summoner: Summoner.dummyData(), leagueTier: LeagueTier.dummyData())
+        addMatcheInSummoner(summonerEntity: summoner)
         
         do {
             try context.save()
         } catch {
             print("ERROR SAVING CORE DATA")
         }
+    }
+    
+    private func addMatcheInSummoner(summonerEntity: CDSummoner) {
+        let match = NSEntityDescription.insertNewObject(forEntityName: CDMatch.entity().name ?? "CDMatch", into: container.viewContext) as! CDMatch
+        match.setValues(summonerEntity: summonerEntity, match: Match.dummyData())
     }
 }
 
@@ -53,6 +61,7 @@ struct EmptyPersistentContainer: PersistentContainerSource {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
     }
 }
 
@@ -68,6 +77,7 @@ struct PersistentContainer: PersistentContainerSource {
             }
         })
         container.viewContext.automaticallyMergesChangesFromParent = true
+        container.viewContext.mergePolicy = NSMergePolicy.mergeByPropertyObjectTrump
     }
 }
 
@@ -80,11 +90,11 @@ enum PersistentContainerInjector: String {
     var container: PersistentContainerSource {
         switch self {
         case .empty:
-            return EmptyPersistentContainer()
+            return EmptyPersistentContainer.shared
         case .pre:
-            return PreviewPersistentContainer()
+            return PreviewPersistentContainer.shared
         case .run:
-            return PersistentContainer()
+            return PersistentContainer.shared
         }
     }
     
