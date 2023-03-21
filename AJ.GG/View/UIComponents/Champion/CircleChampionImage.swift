@@ -38,6 +38,6 @@ struct CircleChampionImage: View {
 
 struct CircleChampionImage_Previews: PreviewProvider {
     static var previews: some View {
-        CircleChampionImage(champion: Champion.dummyData(), size: CGSize(width: 70, height: 70))
+        CircleChampionImage(champion: Champion.dummyTopmMatch(), size: CGSize(width: 70, height: 70))
     }
 }

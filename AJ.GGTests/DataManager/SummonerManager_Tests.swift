@@ -21,8 +21,8 @@ final class SummonerManager_Tests: XCTestCase {
     func test_SummonerManager_addSummoner_shouldAddSummoner() {
         //  Given
         let summonerManager = CDSummonerManager(container: PersistentContainerInjector.empty.container)
-        let summoner = Summoner.dummyData()
-        let leagueTier = LeagueTier.dummyData()
+        let summoner = Summoner.dummyTopmMatch()
+        let leagueTier = LeagueTier.dummyTopmMatch()
         
         //  When
         summonerManager.addSummoner(summoner: summoner, leagueTier: leagueTier)

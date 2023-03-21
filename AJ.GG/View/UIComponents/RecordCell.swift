@@ -80,6 +80,6 @@ struct RecordCell: View {
 
 struct RecordCell_Previews: PreviewProvider {
     static var previews: some View {
-        RecordCell(match: Match.dummyData())
+        RecordCell(match: Match.dummyTopmMatch())
     }
 }

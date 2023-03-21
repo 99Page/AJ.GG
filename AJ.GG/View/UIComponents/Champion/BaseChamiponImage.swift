@@ -24,6 +24,6 @@ struct BaseChamiponImage: View {
 
 struct BaseChamiponImage_Previews: PreviewProvider {
     static var previews: some View {
-        BaseChamiponImage(champion: Champion.dummyData())
+        BaseChamiponImage(champion: Champion.dummyTopmMatch())
     }
 }

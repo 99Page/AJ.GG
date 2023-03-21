@@ -12,7 +12,7 @@ struct InfoDTO: Codable, DummyCreatable {
         return [] 
     }
     
-    static func dummyData() -> InfoDTO {
+    static func dummyTopmMatch() -> InfoDTO {
         return InfoDTO(_gameCreation: 1, gameDuration: 1, gameEndTimestamp: 1, gameID: 1, _gameMode: "rank", gameName: "123", gameStartTimestamp: 1, gameType: "1", gameVersion: "1", mapID: 0, participants: ParticipantDTO.dummyDatas(), platformID: "123", queueID: 100, tournamentCode: "123")
     }
     

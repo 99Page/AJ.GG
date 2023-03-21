@@ -8,7 +8,7 @@
 import SwiftUI
 import Kingfisher
 
-struct ProfileView: View {
+struct HomeView: View {
 
     struct ViewItem: Identifiable {
         var id = UUID().uuidString
@@ -27,28 +27,43 @@ struct ProfileView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 20) {
-                Text("HomeView")
-            }
-            .padding(.horizontal)
+        VStack(spacing: 5) {
             
-            .navigationDestination(isPresented: $viewModel.isSummonerEmpty) {
-                SummonerRegistrationView()
-            }
-            .frame(maxWidth: .infinity)
-        }
-        .accessibilityIdentifier("HomeView")
-        .padding(.top, 1)
-        .overlay(alignment: .top) {
             HStack {
                 SummonerProfiles(summoners: viewModel.summoners)
                     .padding(.horizontal)
                 
                 Spacer()
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(0)
+            
+            HStack {
+                ForEach(lanes, id: \.self) { lane in
+                    let image = viewModel.selectedLane == lane ?
+                    lane.image : lane.imageUnselected
+                    
+                    Button {
+                        viewModel.laneButtonTapped(lane)
+                    } label: {
+                        Image(image)
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                    }
+
+                }
+            }
+            
+            ScrollView {
+                VStack(alignment: .leading, spacing: 20) {
+                    RecordView(matches: viewModel.matchesByLane)
+                }
+                .padding(.horizontal)
+                
+                .navigationDestination(isPresented: $viewModel.isSummonerEmpty) {
+                    SummonerRegistrationView()
+                }
+                .frame(maxWidth: .infinity)
+            }
+            .accessibilityIdentifier("HomeView")
         }
     }
 
@@ -124,10 +139,8 @@ struct ProfileView: View {
 //    }
 }
 
-//struct HomeView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ProfileView(summonerManager: DataManager(useCase: .preview),
-//                    matchManager: DataManager(useCase: .preview),
-//                    matchV5Service: MatchV5Service())
-//    }
-//}
+struct HomeView_Previews: PreviewProvider {
+    static var previews: some View {
+        HomeView()
+    }
+}

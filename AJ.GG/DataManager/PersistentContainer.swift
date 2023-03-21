@@ -33,7 +33,7 @@ struct PreviewPersistentContainer: PersistentContainerSource {
         let context = container.viewContext
         let summoner = NSEntityDescription.insertNewObject(forEntityName: CDSummoner.entity().name ?? "CDSummoner", into: context) as! CDSummoner
         
-        summoner.setValues(summoner: Summoner.dummyData(), leagueTier: LeagueTier.dummyData())
+        summoner.setValues(summoner: Summoner.dummyTopmMatch(), leagueTier: LeagueTier.dummyTopmMatch())
         addMatcheInSummoner(summonerEntity: summoner)
         
         do {
@@ -45,7 +45,22 @@ struct PreviewPersistentContainer: PersistentContainerSource {
     
     private func addMatcheInSummoner(summonerEntity: CDSummoner) {
         let match = NSEntityDescription.insertNewObject(forEntityName: CDMatch.entity().name ?? "CDMatch", into: container.viewContext) as! CDMatch
-        match.setValues(summonerEntity: summonerEntity, match: Match.dummyData())
+        match.setValues(summonerEntity: summonerEntity, match: Match.dummyTopmMatch())
+        
+        do {
+            try container.viewContext.save()
+        } catch {
+            
+        }
+        
+        let midMatch = NSEntityDescription.insertNewObject(forEntityName: CDMatch.entity().name ?? "CDMatch", into: container.viewContext) as! CDMatch
+        midMatch.setValues(summonerEntity: summonerEntity, match: Match.dummyMidMatch())
+        
+        do {
+            try container.viewContext.save()
+        } catch {
+            
+        }
     }
 }
 

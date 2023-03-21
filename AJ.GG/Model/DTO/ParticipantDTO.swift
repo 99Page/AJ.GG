@@ -9,10 +9,10 @@ import Foundation
 
 struct ParticipantDTO: Codable, DummyCreatable {
     static func dummyDatas() -> [ParticipantDTO] {
-        return [dummyData(), dummyData()]
+        return [dummyTopmMatch(), dummyTopmMatch()]
     }
     
-    static func dummyData() -> ParticipantDTO {
+    static func dummyTopmMatch() -> ParticipantDTO {
         ParticipantDTO(allInPings: 0, assistMePings: 0, assists: 1, baitPings: 0, baronKills: 0, basicPings: 0, bountyLevel: 0, champExperience: 1, champLevel: 1, championID: 1, championName: "Aatrox", championTransform: 1, commandPings: 1, consumablesPurchased: 1, damageDealtToBuildings: 1, damageDealtToObjectives: 1, damageDealtToTurrets: 1, damageSelfMitigated: 1, dangerPings: 1, deaths: 1, detectorWardsPlaced: 1, doubleKills: 1, dragonKills: 1, eligibleForProgression: false, enemyMissingPings: 1, enemyVisionPings: 1, firstBloodAssist: false, firstBloodKill: false, firstTowerAssist: false, firstTowerKill: false, gameEndedInEarlySurrender: false, gameEndedInSurrender: false, getBackPings: 0, goldEarned: 0, goldSpent: 0, holdPings: 0, individualPosition: Lane.mid, inhibitorKills: 0, inhibitorTakedowns: 0, inhibitorsLost: 0, item0: 0, item1: 0, item2: 0, item3: 0, item4: 0, item5: 0, item6: 0, itemsPurchased: 0, killingSprees: 0, kills: 0, lane: Lane.mid, largestCriticalStrike: 0, largestKillingSpree: 0, largestMultiKill: 0, longestTimeSpentLiving: 0, magicDamageDealt: 0, magicDamageDealtToChampions: 0, magicDamageTaken: 0, needVisionPings: 0, neutralMinionsKilled: 0, nexusKills: 0, nexusLost: 0, nexusTakedowns: 0, objectivesStolen: 0, objectivesStolenAssists: 0, onMyWayPings: 0, participantID: 0, pentaKills: 0, physicalDamageDealt: 0, physicalDamageDealtToChampions: 0, physicalDamageTaken: 0, profileIcon: 0, pushPings: 0, puuid: "123", quadraKills: 0, riotIDName: "SwiftUI", riotIDTagline: "SwiftUI", role: "??", sightWardsBoughtInGame: 0, spell1Casts: 0, spell2Casts: 0, spell3Casts: 0, spell4Casts: 0, summoner1Casts: 0, summoner1ID: 0, summoner2Casts: 0, summoner2ID: 0, summonerID: "", summonerLevel: 0, summonerName: "SwiftUI", teamEarlySurrendered: false, teamID: 100, teamPosition: "MID", timeCCingOthers: 0, timePlayed: 0, totalDamageDealt: 0, totalDamageDealtToChampions: 0, totalDamageShieldedOnTeammates: 0, totalDamageTaken: 0, totalHeal: 0, totalHealsOnTeammates: 0, totalMinionsKilled: 0, totalTimeCCDealt: 0, totalTimeSpentDead: 0, totalUnitsHealed: 0, tripleKills: 0, trueDamageDealt: 0, trueDamageDealtToChampions: 0, trueDamageTaken: 0, turretKills: 0, turretTakedowns: 0, turretsLost: 0, unrealKills: 0, visionClearedPings: 0, visionScore: 0, visionWardsBoughtInGame: 0, wardsKilled: 0, wardsPlaced: 0, win: [true, false].randomElement() ?? true )
     }
     
@@ -148,8 +148,21 @@ enum Lane: String, Codable, CaseIterable, Equatable {
         return [.top, .jungle, .mid, .adCarry, .supoort]
     }
     
-    func isEqual(_ lane: Lane) -> Bool {
-        return self == lane
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.top, .top):
+            return true
+        case (.jungle, .jungle):
+            return true
+        case (.mid, .mid):
+            return true
+        case (.adCarry, .adCarry):
+            return true
+        case (.supoort, .supoort):
+            return true
+        default:
+            return false
+        }
     }
     
     var image: String {

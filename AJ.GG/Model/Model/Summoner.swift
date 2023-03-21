@@ -43,7 +43,7 @@ struct Summoner: DummyCreatable, Identifiable, Equatable {
         self.profileIconID = Int16(summonerDTO.profileIconID)
     }
     
-    static func dummyData() -> Summoner {
+    static func dummyTopmMatch() -> Summoner {
         return  Summoner(summonerID: "jU2mjgEFQ0ly_fqZliKMNUhNwrFeAaV4Fq1YSTjQD5kXCPk", puuid: "123", summonerName: "SwiftUI", profileIconID: 685)
     }
     

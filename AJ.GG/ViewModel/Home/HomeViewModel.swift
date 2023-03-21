@@ -14,24 +14,31 @@ class HomeViewModel: ObservableObject {
     let summonerManager: CDSummonerManager
     let matchManager: CDMatchManager
     
-    @Published var summoners: [Summoner] = []
-    @Published var matches: [Match] = []
+    @Published private(set) var summoners: [Summoner] = []
+    @Published private(set) var matches: [Match] = []
+    @Published private(set) var selectedLane: Lane = .top
     @Published var isSummonerEmpty: Bool = false
+    
+    var matchesByLane: [Match] {
+        return matches.filter {
+            $0.isEqualLane(selectedLane)
+        }
+    }
+    
     
     init(matchV5Serivce: MatchV5ServiceEnabled, containerSoruce: PersistentContainerSource) {
         self.matchV5Service = MatchV5ServiceInjector.select(service: matchV5Serivce)
         self.summonerManager = CDSummonerManager(container: PersistentContainerInjector.select(source: containerSoruce))
         self.matchManager = CDMatchManager(container: PersistentContainerInjector.select(source: containerSoruce))
         
-        fetchStoredEntities()
+        fetchAndStore()
     }
     
-    private func fetchStoredEntities() {
+    private func fetchAndStore()  {
         fetchSummoners()
     }
     
     private func fetchSummoners() {
-        print("fetchSummoner call!")
         let summonerEntities = summonerManager.fetchAll()
         self.summoners = summonerEntities.map { Summoner(cdSummoner: $0)}
         
@@ -41,14 +48,37 @@ class HomeViewModel: ObservableObject {
             }
         } else {
             for summonerEntity in summonerEntities {
-                fetchMatchesBySummoner(summonerEntity: summonerEntity)
+                Task {
+                    await fetchMatchesBySummoner(summonerEntity: summonerEntity)
+                    await addMatches(summonerEntity: summonerEntity)
+                    await fetchMatchesBySummoner(summonerEntity: summonerEntity)
+                }
             }
         }
     }
     
+    @MainActor
     private func fetchMatchesBySummoner(summonerEntity: CDSummoner) {
         let fetchedMatches = matchManager.fetchBySummoner(sumonerEntity: summonerEntity).map { Match($0) }
         
-        self.matches.append(contentsOf: fetchedMatches)
+        self.matches = fetchedMatches
+    }
+    
+    private func addMatches(summonerEntity: CDSummoner) async {
+        let summoner = Summoner(cdSummoner: summonerEntity)
+        
+        switch await matchV5Service.searchMatchDTOsWhereRankGameByPuuid(puuid: summoner.puuid) {
+        case .success(let values):
+            for value in values {
+                matchManager.add(summonerEntity: summonerEntity,
+                                 match: Match(value, puuid: summoner.puuid))
+            }
+        case .failure(_):
+            break
+        }
+    }
+    
+    func laneButtonTapped(_ lane: Lane) {
+        self.selectedLane = lane
     }
 }

@@ -9,12 +9,12 @@ import Foundation
 import SwiftUI
 
 struct LeagueTier: DummyCreatable {
-    static func dummyData() -> LeagueTier {
+    static func dummyTopmMatch() -> LeagueTier {
         return LeagueTier(tier: .gold, rank: .iii, points: 16)
     }
     
     static func dummyDatas() -> [LeagueTier] {
-        return [dummyData()]
+        return [dummyTopmMatch()]
     }
     
     typealias Dummy = LeagueTier

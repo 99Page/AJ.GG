@@ -7,9 +7,13 @@
 
 import Foundation
 
-struct Match: Identifiable, DummyCreatable {
-    static func dummyData() -> Match {
+struct Match: Identifiable {
+    static func dummyTopmMatch() -> Match {
         return Match(mySummonerName: "SwiftUI", myChampion: Champion(name: "Aatrox"), myKDA: [10, 2, 3], rivalChampion: Champion(name: "Garen"), rivalSummonerName: "Faker", rivalKDA: [1, 5, 2], isWin: true, lane: .top, gameCreation: 1234, version: "3.1")
+    }
+    
+    static func dummyMidMatch() -> Match {
+        return Match(mySummonerName: "SwiftUI", myChampion: Champion(name: "Aatrox"), myKDA: [10, 2, 3], rivalChampion: Champion(name: "Garen"), rivalSummonerName: "Faker", rivalKDA: [1, 5, 2], isWin: true, lane: .mid, gameCreation: 1234, version: "3.1")
     }
     
     static func dummyDatas() -> [Match] {
@@ -47,7 +51,7 @@ struct Match: Identifiable, DummyCreatable {
     }
     
     func isEqualLane(_ lane: Lane) -> Bool {
-        return lane.isEqual(lane)
+        return self.lane == lane
     }
     
     init(mySummonerName: String, myChampion: Champion, myKDA: [Int16], rivalChampion: Champion, rivalSummonerName: String, rivalKDA: [Int16], isWin: Bool, lane: Lane, gameCreation: Int64, version: String) {

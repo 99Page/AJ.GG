@@ -30,6 +30,6 @@ struct SummonerProfile: View {
 
 struct SummonerProfile_Previews: PreviewProvider {
     static var previews: some View {
-        SummonerProfile(summoner: Summoner.dummyData())
+        SummonerProfile(summoner: Summoner.dummyTopmMatch())
     }
 }

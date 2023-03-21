@@ -10,7 +10,7 @@ import Kingfisher
 
 struct ChampionWithRate: Identifiable, Comparable, DummyCreatable {
     
-    static func dummyData() -> ChampionWithRate {
+    static func dummyTopmMatch() -> ChampionWithRate {
         return dummyDatas().randomElement()!
     }
     
@@ -81,7 +81,7 @@ struct Champion: DummyCreatable, Identifiable, Hashable {
         KFImage(URL(string: RiotURL.championSquareAsset(champion: self.name).url))
     }
     
-    static func dummyData() -> Champion {
+    static func dummyTopmMatch() -> Champion {
         let championNames = ["Aatrox", "Garen", "Darius"]
         return Champion(name: championNames.randomElement() ?? "Aatrox")
     }

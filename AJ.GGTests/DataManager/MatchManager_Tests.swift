@@ -66,6 +66,8 @@ final class MatchManager_Tests: XCTestCase {
             //  When
             matchManager.add(summonerEntity: summoner, match: matches[0])
             matchManager.add(summonerEntity: summoner, match: matches[0])
+            
+            let expectation = matcheEntitis.count + 1
             let result = matchManager.fetchBySummoner(sumonerEntity: summoner).count
             
             //  Then

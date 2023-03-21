@@ -8,7 +8,7 @@
 import Foundation
 
 struct SummonerDTO: Codable, DummyCreatable {
-    static func dummyData() -> SummonerDTO {
+    static func dummyTopmMatch() -> SummonerDTO {
         return SummonerDTO(id: "0", accountID: "0", puuid: "123", name: "SwiftUI", profileIconID: 685, revisionDate: 0, summonerLevel: 0)
     }
     

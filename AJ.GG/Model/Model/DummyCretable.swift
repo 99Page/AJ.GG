@@ -10,6 +10,6 @@ import Foundation
 protocol DummyCreatable {
     associatedtype Dummy
     
-    static func dummyData() -> Dummy
+    static func dummyTopmMatch() -> Dummy
     static func dummyDatas() -> [Dummy]
 }

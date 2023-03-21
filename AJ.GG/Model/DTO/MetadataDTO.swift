@@ -23,7 +23,7 @@ struct MetadataDTO: Codable, DummyCreatable {
         case participants
     }
     
-    static func dummyData() -> MetadataDTO {
+    static func dummyTopmMatch() -> MetadataDTO {
         return MetadataDTO(dataVersion: "13.1", matchID: "", participants: [])
     }
     

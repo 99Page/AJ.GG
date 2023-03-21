@@ -17,6 +17,7 @@ class SummonerRegistrationViewModel: ObservableObject {
     @Published private(set) var matches: [Match] = []
     
     @Published private(set) var isSearchOngoing: Bool = false
+    
     @Published var isPresented: Bool = false
     @Published var isPresentedAddSummonerAlert: Bool = false
     @Published var goToNextView: Bool = false
