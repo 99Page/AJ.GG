@@ -7,12 +7,8 @@
 
 import Foundation
 
-struct MyRecordStrategy: RecordStrategy {
-    func predicate(championName: String) -> NSPredicate {
-        NSPredicate(format: "%K == %@", #keyPath(CDMatch.myChampionID), championName)
-    }
-    
-    func sort(matches: [Match]) -> [ChampionWithRate] {
+struct MyCounterRecordStrategy: RecordStrategy {
+    func toDictionary(matches: [Match]) -> [String : [Int]] {
         var dictionary: [String: [Int]] = [:]
         
         for match in matches {
@@ -27,13 +23,20 @@ struct MyRecordStrategy: RecordStrategy {
             }
         }
         
+        return dictionary
+    }
+    
+    func predicate(championName: String) -> NSPredicate {
+        NSPredicate(format: "%K == %@", #keyPath(CDMatch.myChampionID), championName)
+    }
+    
+    func convertToChampionWithRate(matches: [Match]) -> [ChampionWithRate] {
+        let dictionary = toDictionary(matches: matches)
         var result: [ChampionWithRate] = []
-        
         for (k, v) in dictionary {
             let array = v
             result.append(ChampionWithRate(champion: Champion(name: k), win: array[0], lose: array[1]))
         }
-        
         return result.sorted().reversed()
     }
 }

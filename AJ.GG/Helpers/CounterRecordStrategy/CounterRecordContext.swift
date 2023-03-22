@@ -11,10 +11,6 @@ struct CounterRecordContext {
     var strategy: RecordStrategy
     
     func sort(matches: [Match]) -> [ChampionWithRate] {
-        strategy.sort(matches: matches)
-    }
-    
-    func predicate(championName: String) -> NSPredicate {
-        strategy.predicate(championName: championName)
+        strategy.convertToChampionWithRate(matches: matches)
     }
 }

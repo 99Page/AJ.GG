@@ -54,6 +54,8 @@ struct HomeView: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 20) {
+                    myBestChampions()
+                    hardRivalChampions()
                     RecordView(matches: viewModel.matchesByLane)
                 }
                 .padding(.horizontal)
@@ -67,66 +69,66 @@ struct HomeView: View {
         }
     }
 
-//    @ViewBuilder
-//    private func myBestChampions() -> some View {
-//        Group {
-//            Text("나의 베스트 챔피언")
-//                .font(.system(size: 15, weight: .heavy))
-//
-//            ScrollView(.horizontal, showsIndicators: false) {
-//                HStack {
-//                    ForEach(viewModel.myChampionWithRates.indices, id: \.self) { i in
-//
-//                        let champion = viewModel.myChampionWithRates[i].champion
-//                        let percentage = viewModel.myChampionWithRates[i].winRate
-//
-//                        Button {
+    @ViewBuilder
+    private func myBestChampions() -> some View {
+        Group {
+            Text("나의 베스트 챔피언")
+                .font(.system(size: 15, weight: .heavy))
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(viewModel.rivalCount.indices, id: \.self) { i in
+
+                        let champion = viewModel.rivalCount[i].champion
+                        let percentage = viewModel.rivalCount[i].winRate
+
+                        Button {
 //                            self.item = ViewItem(champion: champion, isMyChampion: true)
 //                            self.viewModel.counterRecordStrategy = MyRecordStrategy()
-//                        } label: {
-//                            ChampionWinRateImage(percentage: percentage,
-//                                                 champion: champion,
-//                                                 isBlueGraph: true)
-//                        }
-//                        .foregroundColor(.black)
-//                    }
-//                }
-//                .frame(height: 100)
-//            }
-//            .padding(.horizontal, -10)
-//        }
-//    }
-//
-//    @ViewBuilder
-//    private func hardRivalChampions() -> some View {
-//        Group {
-//              Text("어려운 챔피언")
-//                  .font(.system(size: 15, weight: .heavy))
-//
-//
-//              ScrollView(.horizontal, showsIndicators: false) {
-//                  HStack {
-//                      ForEach(viewModel.rivalChampionWithRates.indices, id: \.self) { i in
-//
-//                          let champion = viewModel.rivalChampionWithRates[i].champion
-//                          let percentage = viewModel.rivalChampionWithRates[i].loseRate
-//
-//                          Button {
+                        } label: {
+                            ChampionWinRateImage(percentage: percentage,
+                                                 champion: champion,
+                                                 isBlueGraph: true)
+                        }
+                        .foregroundColor(.black)
+                    }
+                }
+                .frame(height: 100)
+            }
+            .padding(.horizontal, -10)
+        }
+    }
+
+    @ViewBuilder
+    private func hardRivalChampions() -> some View {
+        Group {
+              Text("어려운 챔피언")
+                  .font(.system(size: 15, weight: .heavy))
+
+
+              ScrollView(.horizontal, showsIndicators: false) {
+                  HStack {
+                      ForEach(viewModel.myCounter.indices, id: \.self) { i in
+
+                          let champion = viewModel.myCounter[i].champion
+                          let percentage = viewModel.myCounter[i].loseRate
+
+                          Button {
 //                              self.item = ViewItem(champion: champion, isMyChampion: false)
 //                              self.viewModel.counterRecordStrategy = RivalCounterRecordStrategy()
-//                          } label: {
-//                              ChampionWinRateImage(percentage: percentage,
-//                                                   champion: champion,
-//                                                   isBlueGraph: false)
-//                          }
-//                          .foregroundColor(.black)
-//                      }
-//                  }
-//                  .frame(height: 100)
-//              }
-//              .padding(.horizontal, -10)
-//        }
-//    }
+                          } label: {
+                              ChampionWinRateImage(percentage: percentage,
+                                                   champion: champion,
+                                                   isBlueGraph: false)
+                          }
+                          .foregroundColor(.black)
+                      }
+                  }
+                  .frame(height: 100)
+              }
+              .padding(.horizontal, -10)
+        }
+    }
 //
 //    @ViewBuilder
 //    private func records() -> some View {

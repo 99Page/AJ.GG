@@ -8,7 +8,7 @@
 import Foundation
 import Kingfisher
 
-struct ChampionWithRate: Identifiable, Comparable, DummyCreatable {
+struct ChampionWithRate: Identifiable, Comparable{
     
     static func dummyTopmMatch() -> ChampionWithRate {
         return dummyDatas().randomElement()!

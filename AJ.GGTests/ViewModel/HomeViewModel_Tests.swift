@@ -202,8 +202,8 @@ final class HomeViewModel_Tests: XCTestCase {
         for _ in 0..<100 {
             //  When
             guard let randomLane = lanes.randomElement() else {
-                return
                 XCTFail()
+                return
             }
             
             vm.laneButtonTapped(randomLane)

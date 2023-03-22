@@ -20,7 +20,11 @@ struct Match: Identifiable {
         return [
             Match(mySummonerName: "SwiftUI", myChampion: Champion(name: "Aatrox"), myKDA: [10, 2, 3], rivalChampion: Champion(name: "Garen"), rivalSummonerName: "Faker", rivalKDA: [1, 5, 2], isWin: true, lane: .top, gameCreation: 1234, version: "3.1"),
             Match(mySummonerName: "SwiftUI", myChampion: Champion(name: "Aatrox"), myKDA: [10, 2, 3], rivalChampion: Champion(name: "Garen"), rivalSummonerName: "Faker", rivalKDA: [1, 5, 2], isWin: false, lane: .top, gameCreation: 1234, version: "3.1"),
-            Match(mySummonerName: "SwiftUI", myChampion: Champion(name: "Aatrox"), myKDA: [10, 2, 3], rivalChampion: Champion(name: "Garen"), rivalSummonerName: "Faker", rivalKDA: [1, 5, 2], isWin: true, lane: .top, gameCreation: 1234, version: "3.1")
+            Match(mySummonerName: "SwiftUI", myChampion: Champion(name: "Aatrox"), myKDA: [10, 2, 3], rivalChampion: Champion(name: "Garen"), rivalSummonerName: "Faker", rivalKDA: [1, 5, 2], isWin: true, lane: .top, gameCreation: 1234, version: "3.1"),
+            
+            Match(mySummonerName: "SwiftUI", myChampion: Champion(name: "Singed"), myKDA: [10, 2, 3], rivalChampion: Champion(name: "Garen"), rivalSummonerName: "Faker", rivalKDA: [1, 5, 2], isWin: true, lane: .top, gameCreation: 1234, version: "3.1"),
+            Match(mySummonerName: "SwiftUI", myChampion: Champion(name: "Singed"), myKDA: [10, 2, 3], rivalChampion: Champion(name: "Garen"), rivalSummonerName: "Faker", rivalKDA: [1, 5, 2], isWin: true, lane: .top, gameCreation: 1234, version: "3.1"),
+            Match(mySummonerName: "SwiftUI", myChampion: Champion(name: "Singed"), myKDA: [10, 2, 3], rivalChampion: Champion(name: "Garen"), rivalSummonerName: "Faker", rivalKDA: [1, 5, 2], isWin: true, lane: .top, gameCreation: 1234, version: "3.1")
         ]
     }
     

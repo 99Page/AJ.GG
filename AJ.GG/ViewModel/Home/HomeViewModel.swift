@@ -25,6 +25,15 @@ class HomeViewModel: ObservableObject {
         }
     }
     
+    var rivalCount: [ChampionWithRate] {
+        let strategy = RivalCounterRecordStrategy()
+        return strategy.convertToChampionWithRate(matches: matchesByLane)
+    }
+    
+    var myCounter: [ChampionWithRate] {
+        let strategy = MyCounterRecordStrategy()
+        return strategy.convertToChampionWithRate(matches: matchesByLane)
+    }
     
     init(matchV5Serivce: MatchV5ServiceEnabled, containerSoruce: PersistentContainerSource) {
         self.matchV5Service = MatchV5ServiceInjector.select(service: matchV5Serivce)

@@ -8,6 +8,7 @@
 import Foundation
 
 protocol RecordStrategy {
-    func sort(matches: [Match]) -> [ChampionWithRate]
     func predicate(championName: String) -> NSPredicate
+    func toDictionary(matches: [Match]) -> [String: [Int]]
+    func convertToChampionWithRate(matches: [Match]) -> [ChampionWithRate]
 }
