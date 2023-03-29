@@ -76,5 +76,34 @@ final class MatchManager_Tests: XCTestCase {
             XCTFail()
         }
     }
+    
+    func test_MatchManager_fetch_shouldEqualFilterCountAndFetchCount() async {
+        //  Given
+        let matchManager = CDMatchManager(container: PersistentContainerInjector.pre.container)
+        let summonerManager = CDSummonerManager(container: PersistentContainerInjector.pre.container)
+        let summonerEntities = summonerManager.fetchAll()
+        
+        let laneOption: [Lane] = [.top, .mid, .adCarry]
+        let championOption = Champion(name: "Aatrox")
+        
+        if let summoner = summonerEntities.first {
+            let matcheEntitis = matchManager.fetchBySummoner(sumonerEntity: summoner)
+            
+            for _ in 0..<10 {
+                let lane = laneOption.randomElement() ?? .top
+                let expected = matcheEntitis.filter { $0.lane == lane.rawValue && $0.myChampionID == championOption.name }.count
+                
+                //  When
+                let result = matchManager.fetchMyChampion(summonerEntity: summoner, lane: lane, champion: championOption).count
+                
+                //  Then
+                XCTAssertEqual(expected, result)
+            }
+        } else {
+            XCTFail()
+        }
+    }
+    
+    
 
 }

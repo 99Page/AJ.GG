@@ -8,6 +8,14 @@
 import Foundation
 
 struct RivalCounterRecordStrategy: RecordStrategy {
+    func winRate() -> Bool {
+        return true
+    }
+    
+    func title(champion: Champion) -> String {
+        return "\(champion.name) 상대하기 쉬운 챔피언"
+    }
+    
     
     func predicate(championName: String) -> NSPredicate {
         NSPredicate(format: "%K == %@", #keyPath(CDMatch.enemyChampionID), championName)

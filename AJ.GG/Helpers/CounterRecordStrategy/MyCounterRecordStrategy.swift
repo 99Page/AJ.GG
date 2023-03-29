@@ -8,6 +8,16 @@
 import Foundation
 
 struct MyCounterRecordStrategy: RecordStrategy {
+    
+    func winRate() -> Bool {
+        return false
+    }
+    
+    func title(champion: Champion) -> String {
+        return "\(champion.name) 상대하기 어려운 챔피언"
+    }
+    
+    
     func toDictionary(matches: [Match]) -> [String : [Int]] {
         var dictionary: [String: [Int]] = [:]
         

@@ -26,7 +26,27 @@ final class CDMatchManager: DataManagerProtocol {
     func fetchBySummoner(sumonerEntity: CDSummoner) -> [CDMatch] {
         let request: NSFetchRequest<CDMatch> = NSFetchRequest(entityName: CDMatch.entity().name ?? "CDMatch")
         let predicate = NSPredicate(format: "%K == %@", #keyPath(CDMatch.playedBy), sumonerEntity)
-        let sortDescriptor = NSSortDescriptor(key: #keyPath(CDMatch.gameCreation), ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(CDMatch.gameCreation), ascending: false)
+        
+        request.predicate = predicate
+        request.sortDescriptors = [sortDescriptor]
+        
+        do {
+            let matchEntities = try context.fetch(request)
+            return matchEntities
+        } catch {
+            print("ERROR FETCHING")
+            return []
+        }
+    }
+    
+    func fetchMyChampion(summonerEntity: CDSummoner, lane: Lane, champion: Champion) -> [CDMatch] {
+        let request: NSFetchRequest<CDMatch> = NSFetchRequest(entityName: CDMatch.entity().name ?? "CDMatch")
+        let predicate = NSPredicate(format: "%K == %@ AND %K == %@ AND %K == %@",
+                                    #keyPath(CDMatch.playedBy), summonerEntity,
+                                    #keyPath(CDMatch.lane), lane.rawValue,
+                                    #keyPath(CDMatch.myChampionID), champion.name)
+        let sortDescriptor = NSSortDescriptor(key: #keyPath(CDMatch.gameCreation), ascending: false)
         
         request.predicate = predicate
         request.sortDescriptors = [sortDescriptor]

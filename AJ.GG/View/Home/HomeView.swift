@@ -9,15 +9,21 @@ import SwiftUI
 import Kingfisher
 
 struct HomeView: View {
-
+    
+    enum SheetDestination {
+        case myCounter
+        case rivalCounter
+    }
+    
     struct ViewItem: Identifiable {
         var id = UUID().uuidString
         let champion: Champion
-        let isMyChampion: Bool
+        let dest: SheetDestination
     }
 
     @StateObject var viewModel: HomeViewModel
     @State private var item: ViewItem?
+    @State private var isPresented: Bool = false
 
     let lanes = Lane.selectableLanes()
 
@@ -59,9 +65,31 @@ struct HomeView: View {
                     RecordView(matches: viewModel.matchesByLane)
                 }
                 .padding(.horizontal)
-                
                 .navigationDestination(isPresented: $viewModel.isSummonerEmpty) {
                     SummonerRegistrationView()
+                }
+                .sheet(item: $item) { item in
+                    
+                    switch item.dest {
+                    case .myCounter:
+                        let matches = viewModel.matchesByLane.filter {
+                            $0.myChampionName == item.champion.name
+                        }
+                        
+                        ChampionRecordView(champion: item.champion,
+                                           matches: matches,
+                                           recordStrategy: MyCounterRecordStrategy())
+                            .presentationDetents([.medium, .large])
+                    case .rivalCounter:
+                        let matches = viewModel.matchesByLane.filter {
+                            $0.rivalChampionName == item.champion.name
+                        }
+                        
+                        ChampionRecordView(champion: item.champion,
+                                           matches: matches,
+                                           recordStrategy: RivalCounterRecordStrategy())
+                            .presentationDetents([.medium, .large])
+                    }
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -83,8 +111,8 @@ struct HomeView: View {
                         let percentage = viewModel.rivalCount[i].winRate
 
                         Button {
-//                            self.item = ViewItem(champion: champion, isMyChampion: true)
-//                            self.viewModel.counterRecordStrategy = MyRecordStrategy()
+                            self.item = ViewItem(champion: champion,
+                                                 dest: .myCounter)
                         } label: {
                             ChampionWinRateImage(percentage: percentage,
                                                  champion: champion,
@@ -114,8 +142,8 @@ struct HomeView: View {
                           let percentage = viewModel.myCounter[i].loseRate
 
                           Button {
-//                              self.item = ViewItem(champion: champion, isMyChampion: false)
-//                              self.viewModel.counterRecordStrategy = RivalCounterRecordStrategy()
+                              self.item = ViewItem(champion: champion,
+                                                   dest: .rivalCounter)
                           } label: {
                               ChampionWinRateImage(percentage: percentage,
                                                    champion: champion,
