@@ -74,6 +74,10 @@
 		15A4D70F295980F20052E3AD /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 15A4D70E295980F20052E3AD /* Alamofire */; };
 		15A4D712295981090052E3AD /* RiotAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D711295981090052E3AD /* RiotAPI.swift */; };
 		15A9ED65296EE0D10043A5B4 /* RoundedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A9ED64296EE0D10043A5B4 /* RoundedText.swift */; };
+		15AFF38F29D404CA002EB7F4 /* MatchFilterStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFF38E29D404CA002EB7F4 /* MatchFilterStrategy.swift */; };
+		15AFF39129D4056B002EB7F4 /* MatchFilterContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFF39029D4056B002EB7F4 /* MatchFilterContext.swift */; };
+		15AFF39329D405A4002EB7F4 /* MyChampionFilterStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFF39229D405A4002EB7F4 /* MyChampionFilterStrategy.swift */; };
+		15AFF39529D4064F002EB7F4 /* RivalChampionFilterStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFF39429D4064F002EB7F4 /* RivalChampionFilterStrategy.swift */; };
 		15B4498A29CABC7700C3E7F9 /* CounterRecordStrategy_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B4498929CABC7700C3E7F9 /* CounterRecordStrategy_Tests.swift */; };
 		15BC7C9329B9BC19004E8C49 /* ServiceInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BC7C9229B9BC19004E8C49 /* ServiceInjector.swift */; };
 		15C448512959899C0063223E /* SummonerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C448502959899C0063223E /* SummonerDTO.swift */; };
@@ -183,6 +187,10 @@
 		15A4D70B295980B70052E3AD /* SummonersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonersService.swift; sourceTree = "<group>"; };
 		15A4D711295981090052E3AD /* RiotAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiotAPI.swift; sourceTree = "<group>"; };
 		15A9ED64296EE0D10043A5B4 /* RoundedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedText.swift; sourceTree = "<group>"; };
+		15AFF38E29D404CA002EB7F4 /* MatchFilterStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchFilterStrategy.swift; sourceTree = "<group>"; };
+		15AFF39029D4056B002EB7F4 /* MatchFilterContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchFilterContext.swift; sourceTree = "<group>"; };
+		15AFF39229D405A4002EB7F4 /* MyChampionFilterStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChampionFilterStrategy.swift; sourceTree = "<group>"; };
+		15AFF39429D4064F002EB7F4 /* RivalChampionFilterStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RivalChampionFilterStrategy.swift; sourceTree = "<group>"; };
 		15B4498929CABC7700C3E7F9 /* CounterRecordStrategy_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterRecordStrategy_Tests.swift; sourceTree = "<group>"; };
 		15BC7C9229B9BC19004E8C49 /* ServiceInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceInjector.swift; sourceTree = "<group>"; };
 		15C448502959899C0063223E /* SummonerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerDTO.swift; sourceTree = "<group>"; };
@@ -352,6 +360,7 @@
 		159011E129C02C3C004BF68D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				15AFF38D29D40444002EB7F4 /* MatchFilterStrategy */,
 				1534E75A29AC9053007B1874 /* CounterRecordStrategy */,
 				15A4D707295978590052E3AD /* Extensions */,
 				15A4D710295980FE0052E3AD /* Environment */,
@@ -553,6 +562,17 @@
 			path = DTO;
 			sourceTree = "<group>";
 		};
+		15AFF38D29D40444002EB7F4 /* MatchFilterStrategy */ = {
+			isa = PBXGroup;
+			children = (
+				15AFF38E29D404CA002EB7F4 /* MatchFilterStrategy.swift */,
+				15AFF39029D4056B002EB7F4 /* MatchFilterContext.swift */,
+				15AFF39229D405A4002EB7F4 /* MyChampionFilterStrategy.swift */,
+				15AFF39429D4064F002EB7F4 /* RivalChampionFilterStrategy.swift */,
+			);
+			path = MatchFilterStrategy;
+			sourceTree = "<group>";
+		};
 		15CA6B0529C2E91400DDF011 /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -742,6 +762,7 @@
 				152FBE71296D2C9600B082C7 /* PerksDTO.swift in Sources */,
 				1597B1D82970FCE100A66486 /* RecordView.swift in Sources */,
 				154BD09829A72B85003E1ECB /* CDSummonerManager.swift in Sources */,
+				15AFF39529D4064F002EB7F4 /* RivalChampionFilterStrategy.swift in Sources */,
 				1535887F29921C3F0063AE28 /* ChampionWinRateImagesSection.swift in Sources */,
 				157AAC7D299A46E0002B927A /* MatchData.swift in Sources */,
 				156DA4FA2988E8EF00786730 /* SummonerProfiles.swift in Sources */,
@@ -750,6 +771,7 @@
 				152FBE6D296D2B6B00B082C7 /* TeamDTO.swift in Sources */,
 				15717279295D73930053BCC1 /* LeagueV4Service.swift in Sources */,
 				15A4D6D6295972D70052E3AD /* PersistentContainer.swift in Sources */,
+				15AFF39129D4056B002EB7F4 /* MatchFilterContext.swift in Sources */,
 				15A4D7022959751E0052E3AD /* SummonerRegistrationView.swift in Sources */,
 				152292E4298E55010070B023 /* DropDown.swift in Sources */,
 				151CA69529813DB50095D8DC /* RecordCell.swift in Sources */,
@@ -774,6 +796,7 @@
 				15E1685B298774EF00F91CAB /* RotatingCircle.swift in Sources */,
 				1585915D2962BF8700E888FC /* HomeView.swift in Sources */,
 				15E9E18C2983922B008B614F /* PGVStack.swift in Sources */,
+				15AFF39329D405A4002EB7F4 /* MyChampionFilterStrategy.swift in Sources */,
 				15A4D704295975300052E3AD /* SummonerRegistrationViewModel.swift in Sources */,
 				1534E75929AC904C007B1874 /* MyCounterRecordStrategy.swift in Sources */,
 				1571727D295D76130053BCC1 /* RiotAuthorization.swift in Sources */,
@@ -794,6 +817,7 @@
 				15E9E19129839B9C008B614F /* HiddenTitle.swift in Sources */,
 				15A4D706295975640052E3AD /* CapsuleText.swift in Sources */,
 				15CA6B0929C2ED3900DDF011 /* DataManagerProtocol.swift in Sources */,
+				15AFF38F29D404CA002EB7F4 /* MatchFilterStrategy.swift in Sources */,
 				15961DE12990B25F00806655 /* ServiceAlertEnable.swift in Sources */,
 				15A4D70C295980B70052E3AD /* SummonersService.swift in Sources */,
 				156DA4F72988E82C00786730 /* BaseProfileIconImage.swift in Sources */,

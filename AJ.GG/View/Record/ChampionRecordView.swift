@@ -17,8 +17,6 @@ struct ChampionRecordView: View {
         self.champion = champion
         self.matches = matches
         self.context = CounterRecordContext(strategy: recordStrategy)
-        
-        print("\(recordStrategy.self)")
     }
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {

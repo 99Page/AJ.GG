@@ -10,15 +10,11 @@ import Kingfisher
 
 struct HomeView: View {
     
-    enum SheetDestination {
-        case myCounter
-        case rivalCounter
-    }
-    
     struct ViewItem: Identifiable {
         var id = UUID().uuidString
         let champion: Champion
-        let dest: SheetDestination
+        let matchFilterContext: MatchFilterContext
+        let strategy: RecordStrategy
     }
 
     @StateObject var viewModel: HomeViewModel
@@ -69,27 +65,13 @@ struct HomeView: View {
                     SummonerRegistrationView()
                 }
                 .sheet(item: $item) { item in
+                    let matches = item.matchFilterContext.execute(matches: viewModel.matchesByLane,
+                                                                  champion: item.champion)
                     
-                    switch item.dest {
-                    case .myCounter:
-                        let matches = viewModel.matchesByLane.filter {
-                            $0.myChampionName == item.champion.name
-                        }
-                        
-                        ChampionRecordView(champion: item.champion,
-                                           matches: matches,
-                                           recordStrategy: MyCounterRecordStrategy())
-                            .presentationDetents([.medium, .large])
-                    case .rivalCounter:
-                        let matches = viewModel.matchesByLane.filter {
-                            $0.rivalChampionName == item.champion.name
-                        }
-                        
-                        ChampionRecordView(champion: item.champion,
-                                           matches: matches,
-                                           recordStrategy: RivalCounterRecordStrategy())
-                            .presentationDetents([.medium, .large])
-                    }
+                    ChampionRecordView(champion: item.champion,
+                                       matches: matches,
+                                       recordStrategy: item.strategy)
+                        .presentationDetents([.medium, .large])
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -112,7 +94,8 @@ struct HomeView: View {
 
                         Button {
                             self.item = ViewItem(champion: champion,
-                                                 dest: .myCounter)
+                                                 matchFilterContext: MatchFilterContext(strategy: MyChampionFilterStrategy()),
+                                                 strategy: MyCounterRecordStrategy())
                         } label: {
                             ChampionWinRateImage(percentage: percentage,
                                                  champion: champion,
@@ -143,7 +126,8 @@ struct HomeView: View {
 
                           Button {
                               self.item = ViewItem(champion: champion,
-                                                   dest: .rivalCounter)
+                                                   matchFilterContext: MatchFilterContext(strategy: RivalChampionFilterStrategy()),
+                                                   strategy: RivalCounterRecordStrategy())
                           } label: {
                               ChampionWinRateImage(percentage: percentage,
                                                    champion: champion,
