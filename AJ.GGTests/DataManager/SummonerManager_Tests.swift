@@ -34,5 +34,31 @@ final class SummonerManager_Tests: XCTestCase {
             XCTFail()
         }
     }
+    
+    
+    func test_SummonerManager_deleteAll_shouldDeleteEverySummoner() {
+        //  Given
+        let summonerManager = CDSummonerManager(container: PreviewPersistentContainer.shared)
+        let matchManager = CDMatchManager(container: PreviewPersistentContainer.shared)
+        let test = summonerManager.fetchAll()
+        guard let summoner = test.first else {
+            XCTFail("Preview Data Error")
+            return
+        }
+        
+        XCTAssertFalse(test.isEmpty)
+        let checkMatch = matchManager.fetchBySummoner(sumonerEntity: summoner).isEmpty
+        XCTAssertFalse(checkMatch)
+        
+        //  When
+        summonerManager.deleteAll()
+        
+        //  Then
+        let actual = summonerManager.fetchAll()
+        XCTAssertTrue(actual.isEmpty)
+        
+        let isMatchEmpty = matchManager.fetchBySummoner(sumonerEntity: summoner).isEmpty
+        XCTAssertTrue(isMatchEmpty)
+    }
 
 }

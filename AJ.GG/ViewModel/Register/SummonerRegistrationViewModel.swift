@@ -89,9 +89,18 @@ class SummonerRegistrationViewModel: ObservableObject {
         summonerName = "" 
     }
     
-    func addSummoner() {
+    fileprivate func addSummoner() {
         if let summoner = self.summoner, let leagueTier = self.leagueTier {
             summonerManager.addSummoner(summoner: summoner, leagueTier: leagueTier)
         }
+    }
+    
+    fileprivate func deleteSummoner() {
+        summonerManager.deleteAll()
+    }
+    
+    func registerSummoner() {
+        deleteSummoner()
+        addSummoner()
     }
 }

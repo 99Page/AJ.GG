@@ -70,7 +70,7 @@ struct SummonerRecordView: View {
                 .alert(isPresented: $viewModel.isPresentedAddSummonerAlert) {
                     Alert(title: Text("소환사를 추가하시겠습니까?"),
                           primaryButton: .default(Text("확인"), action: {
-                        viewModel.addSummoner()
+                        viewModel.registerSummoner()
                     }),
                           secondaryButton: .cancel(Text("취소")))
                 }

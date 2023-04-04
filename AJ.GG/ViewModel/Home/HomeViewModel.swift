@@ -19,6 +19,9 @@ class HomeViewModel: ObservableObject {
     @Published private(set) var selectedLane: Lane = .top
     @Published var isSummonerEmpty: Bool = false
     
+    @Published var showSuccessToast: Bool = false
+    @Published var showFailureToast: Bool = false
+    
     var matchesByLane: [Match] {
         return matches.filter {
             $0.isEqualLane(selectedLane)
@@ -73,15 +76,37 @@ class HomeViewModel: ObservableObject {
         self.matches = fetchedMatches
     }
     
+    @MainActor
+    fileprivate func handleSuccessToast() {
+        self.showSuccessToast = true
+        
+        Task {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                self.showSuccessToast = false
+            }
+        }
+    }
+    
+    @MainActor
+    fileprivate func addMatches(_ values: ([MatchDTO]),
+                                _ summonerEntity: CDSummoner, _ summoner: Summoner) {
+        
+        for value in values {
+            matchManager.add(summonerEntity: summonerEntity,
+                             match: Match(value, puuid: summoner.puuid))
+        }
+        
+        handleSuccessToast()
+    }
+    
+    
+    
     private func addMatches(summonerEntity: CDSummoner) async {
         let summoner = Summoner(cdSummoner: summonerEntity)
         
         switch await matchV5Service.searchMatchDTOsWhereRankGameByPuuid(puuid: summoner.puuid) {
         case .success(let values):
-            for value in values {
-                matchManager.add(summonerEntity: summonerEntity,
-                                 match: Match(value, puuid: summoner.puuid))
-            }
+            await addMatches(values, summonerEntity, summoner)
         case .failure(_):
             break
         }

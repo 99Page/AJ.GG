@@ -32,6 +32,13 @@ final class CDSummonerManager: DataManagerProtocol {
             return []
         }
     }
+    
+    func deleteAll() {
+        let summoners = self.fetchAll()
+        for summoner in summoners {
+            context.delete(summoner)
+        }
+    }
 }
 
 extension CDSummoner {

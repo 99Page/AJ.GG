@@ -42,7 +42,6 @@
 		156DA4F32988CEAA00786730 /* Summoner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4F22988CEAA00786730 /* Summoner.swift */; };
 		156DA4F52988E35800786730 /* SummonerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4F42988E35800786730 /* SummonerProfile.swift */; };
 		156DA4F72988E82C00786730 /* BaseProfileIconImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4F62988E82C00786730 /* BaseProfileIconImage.swift */; };
-		156DA4FA2988E8EF00786730 /* SummonerProfiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4F92988E8EF00786730 /* SummonerProfiles.swift */; };
 		156DA4FC2988E9D600786730 /* Array + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4FB2988E9D600786730 /* Array + Extension.swift */; };
 		156DA4FE2988F3ED00786730 /* LaneImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 156DA4FD2988F3ED00786730 /* LaneImage.swift */; };
 		15717271295D666C0053BCC1 /* UserDefaultKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15717270295D666C0053BCC1 /* UserDefaultKey.swift */; };
@@ -78,6 +77,7 @@
 		15AFF39129D4056B002EB7F4 /* MatchFilterContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFF39029D4056B002EB7F4 /* MatchFilterContext.swift */; };
 		15AFF39329D405A4002EB7F4 /* MyChampionFilterStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFF39229D405A4002EB7F4 /* MyChampionFilterStrategy.swift */; };
 		15AFF39529D4064F002EB7F4 /* RivalChampionFilterStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AFF39429D4064F002EB7F4 /* RivalChampionFilterStrategy.swift */; };
+		15B2EB4129DBEA480060CB57 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = 15B2EB4029DBEA480060CB57 /* PopupView */; };
 		15B4498A29CABC7700C3E7F9 /* CounterRecordStrategy_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B4498929CABC7700C3E7F9 /* CounterRecordStrategy_Tests.swift */; };
 		15BC7C9329B9BC19004E8C49 /* ServiceInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BC7C9229B9BC19004E8C49 /* ServiceInjector.swift */; };
 		15C448512959899C0063223E /* SummonerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15C448502959899C0063223E /* SummonerDTO.swift */; };
@@ -152,7 +152,6 @@
 		156DA4F22988CEAA00786730 /* Summoner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summoner.swift; sourceTree = "<group>"; };
 		156DA4F42988E35800786730 /* SummonerProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerProfile.swift; sourceTree = "<group>"; };
 		156DA4F62988E82C00786730 /* BaseProfileIconImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseProfileIconImage.swift; sourceTree = "<group>"; };
-		156DA4F92988E8EF00786730 /* SummonerProfiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerProfiles.swift; sourceTree = "<group>"; };
 		156DA4FB2988E9D600786730 /* Array + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array + Extension.swift"; sourceTree = "<group>"; };
 		156DA4FD2988F3ED00786730 /* LaneImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaneImage.swift; sourceTree = "<group>"; };
 		15717270295D666C0053BCC1 /* UserDefaultKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultKey.swift; sourceTree = "<group>"; };
@@ -216,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B2EB4129DBEA480060CB57 /* PopupView in Frameworks */,
 				1597B1DD297123E700A66486 /* Kingfisher in Frameworks */,
 				15A4D70F295980F20052E3AD /* Alamofire in Frameworks */,
 			);
@@ -305,7 +305,6 @@
 		1535887D29921C050063AE28 /* Summoner */ = {
 			isa = PBXGroup;
 			children = (
-				156DA4F92988E8EF00786730 /* SummonerProfiles.swift */,
 				156DA4F42988E35800786730 /* SummonerProfile.swift */,
 			);
 			path = Summoner;
@@ -636,6 +635,7 @@
 			packageProductDependencies = (
 				15A4D70E295980F20052E3AD /* Alamofire */,
 				1597B1DC297123E700A66486 /* Kingfisher */,
+				15B2EB4029DBEA480060CB57 /* PopupView */,
 			);
 			productName = AJ.GG;
 			productReference = 15A4D6C9295972D60052E3AD /* AJ.GG.app */;
@@ -712,6 +712,7 @@
 			packageReferences = (
 				15A4D70D295980F20052E3AD /* XCRemoteSwiftPackageReference "Alamofire" */,
 				1597B1DB297123E700A66486 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				15B2EB3F29DBEA480060CB57 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = 15A4D6CA295972D60052E3AD /* Products */;
 			projectDirPath = "";
@@ -765,7 +766,6 @@
 				15AFF39529D4064F002EB7F4 /* RivalChampionFilterStrategy.swift in Sources */,
 				1535887F29921C3F0063AE28 /* ChampionWinRateImagesSection.swift in Sources */,
 				157AAC7D299A46E0002B927A /* MatchData.swift in Sources */,
-				156DA4FA2988E8EF00786730 /* SummonerProfiles.swift in Sources */,
 				15E52E06298143D2004B4DBC /* Match.swift in Sources */,
 				152FBE67296D2A5000B082C7 /* MetadataDTO.swift in Sources */,
 				152FBE6D296D2B6B00B082C7 /* TeamDTO.swift in Sources */,
@@ -1181,6 +1181,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		15B2EB3F29DBEA480060CB57 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1193,6 +1201,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 15A4D70D295980F20052E3AD /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		15B2EB4029DBEA480060CB57 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 15B2EB3F29DBEA480060CB57 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 /* End XCSwiftPackageProductDependency section */
 

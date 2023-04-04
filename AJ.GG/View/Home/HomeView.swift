@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Kingfisher
+import PopupView
 
 struct HomeView: View {
     
@@ -23,20 +24,30 @@ struct HomeView: View {
 
     let lanes = Lane.selectableLanes()
 
-    init() {
-        self._viewModel = StateObject(wrappedValue: HomeViewModel(matchV5Serivce: MatchV5Service(),
-                                                                     containerSoruce: PersistentContainer()))
+    init(matchV5Service: MatchV5ServiceEnabled, containerSource: PersistentContainerSource) {
+        self._viewModel = StateObject(wrappedValue: HomeViewModel(matchV5Serivce: matchV5Service,
+                                                                     containerSoruce: containerSource))
     }
 
     var body: some View {
         VStack(spacing: 5) {
             
             HStack {
-                SummonerProfiles(summoners: viewModel.summoners)
-                    .padding(.horizontal)
-                
+                if let summoner = viewModel.summoners.first {
+                    SummonerProfile(summoner: summoner)
+                }
                 Spacer()
+                
+                NavigationLink {
+                    SummonerRegistrationView()
+                } label: {
+                    Text("소환사 변경")
+                        .font(.system(size: 10, weight: .heavy))
+                        .foregroundColor(.blue)
+                        .roundedRectangle(color: .blue)
+                }
             }
+            .padding(.leading, 20)
             
             HStack {
                 ForEach(lanes, id: \.self) { lane in
@@ -77,6 +88,22 @@ struct HomeView: View {
             }
             .accessibilityIdentifier("HomeView")
         }
+        .popup(isPresented: $viewModel.showSuccessToast) {
+            Text("새로운 매치 저장을 성공했습니다.")
+                .padding(.top, 50)
+                .padding(.leading, 20)
+                .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)
+                .foregroundColor(.white)
+                .font(.system(size: 15, weight: .bold))
+                .background(Color.blue)
+        } customize: {
+            $0
+                .type(.toast)
+                .position(.top)
+                .animation(.spring(blendDuration: 1))
+                .closeOnTap(true)
+        }
+
     }
 
     @ViewBuilder
@@ -91,10 +118,11 @@ struct HomeView: View {
 
                         let champion = viewModel.rivalCount[i].champion
                         let percentage = viewModel.rivalCount[i].winRate
+                        let matchFilterContext = MatchFilterContext(strategy: MyChampionFilterStrategy())
 
                         Button {
                             self.item = ViewItem(champion: champion,
-                                                 matchFilterContext: MatchFilterContext(strategy: MyChampionFilterStrategy()),
+                                                 matchFilterContext: matchFilterContext,
                                                  strategy: MyCounterRecordStrategy())
                         } label: {
                             ChampionWinRateImage(percentage: percentage,
@@ -155,6 +183,7 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        HomeView(matchV5Service: MockMatchV5ServiceSuccess(),
+                 containerSource: PreviewPersistentContainer.shared)
     }
 }

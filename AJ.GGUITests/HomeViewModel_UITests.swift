@@ -57,6 +57,5 @@ final class HomeViewModel_UITests: XCTestCase {
         //  Then
         XCTAssertFalse(registerSummonerViewExists)
         XCTAssertTrue(homeView.exists)
-        
     }
 }

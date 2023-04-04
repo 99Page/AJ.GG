@@ -32,8 +32,8 @@ final class HomeViewModel_Tests: XCTestCase {
         }
         
         let expectation = XCTestExpectation()
-        //  When
         
+        //  When
         vm.$summoners
             .sink { _ in
                 expectation.fulfill()
@@ -183,7 +183,9 @@ final class HomeViewModel_Tests: XCTestCase {
             XCTFail()
             return
         }
+        
         //  When
+        
         //  Then
         XCTAssertEqual(vm.selectedLane, Lane.top)
     }
@@ -234,7 +236,6 @@ final class HomeViewModel_Tests: XCTestCase {
             .store(in: &cancellable)
         wait(for: [expectation], timeout: 4)
         
-        //  Then
         for _ in 0..<100 {
             //  When
             guard let lane = lanes.randomElement() else {
@@ -249,6 +250,10 @@ final class HomeViewModel_Tests: XCTestCase {
             
             //  Then
             XCTAssertEqual(count, vm.matchesByLane.count)
+        }
+        
+        for i in 0..<10 {
+            print("Hello")
         }
     }
 }

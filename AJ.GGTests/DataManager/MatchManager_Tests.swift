@@ -67,11 +67,11 @@ final class MatchManager_Tests: XCTestCase {
             matchManager.add(summonerEntity: summoner, match: matches[0])
             matchManager.add(summonerEntity: summoner, match: matches[0])
             
-            let expectation = matcheEntitis.count + 1
-            let result = matchManager.fetchBySummoner(sumonerEntity: summoner).count
+            let expected = matcheEntitis.count
+            let actual = matchManager.fetchBySummoner(sumonerEntity: summoner).count
             
             //  Then
-            XCTAssertEqual(matcheEntitis.count + 1, result)
+            XCTAssertEqual(expected, actual)
         } else {
             XCTFail()
         }
@@ -100,7 +100,7 @@ final class MatchManager_Tests: XCTestCase {
                 XCTAssertEqual(expected, result)
             }
         } else {
-            XCTFail()
+            XCTFail("There is no Summoner")
         }
     }
     

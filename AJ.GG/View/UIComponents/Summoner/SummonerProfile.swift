@@ -12,7 +12,7 @@ struct SummonerProfile: View {
     let summoner: Summoner
     
     var body: some View {
-        VStack {
+        HStack {
             BaseProfileIconImage(iconID: Int(summoner.profileIconID))
                 .frame(width: 60, height: 60)
                 .clipShape(
@@ -23,7 +23,8 @@ struct SummonerProfile: View {
                 }
             
             Text("\(summoner.summonerName)")
-                .font(.system(size: 12, weight: .semibold))
+                .font(.system(size: 20, weight: .semibold))
+            
         }
     }
 }
