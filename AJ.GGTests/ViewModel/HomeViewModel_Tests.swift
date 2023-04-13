@@ -234,7 +234,6 @@ final class HomeViewModel_Tests: XCTestCase {
                 expectation.fulfill()
             }
             .store(in: &cancellable)
-        wait(for: [expectation], timeout: 4)
         
         for _ in 0..<100 {
             //  When
@@ -250,10 +249,7 @@ final class HomeViewModel_Tests: XCTestCase {
             
             //  Then
             XCTAssertEqual(count, vm.matchesByLane.count)
-        }
-        
-        for i in 0..<10 {
-            print("Hello")
+            wait(for: [expectation], timeout: 4)
         }
     }
 }

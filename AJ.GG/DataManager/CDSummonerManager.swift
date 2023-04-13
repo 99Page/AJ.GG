@@ -8,6 +8,7 @@
 import CoreData
 
 final class CDSummonerManager: DataManagerProtocol {
+    
     let context: NSManagedObjectContext
     
     init(container: PersistentContainerSource) {

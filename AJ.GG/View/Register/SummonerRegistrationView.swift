@@ -22,6 +22,7 @@ struct SummonerRegistrationView: View {
                                               container: PersistentContainer.shared)
     
     @FocusState private var focusState: Field?
+    @EnvironmentObject var pathViewModel: PathViewModel
     let registerButtonHeight: CGFloat = 50
 
 
@@ -32,7 +33,7 @@ struct SummonerRegistrationView: View {
                 .focused($focusState, equals: .summonerName)
                 .onSubmit {
                     Task {
-                        await viewModel.searchButtonTapped()
+                        await viewModel.searchButtonTapped(pathViewModel.navigateTo)
                     }
                 }
                 .accessibilityIdentifier("SummonerNameText")
@@ -41,9 +42,13 @@ struct SummonerRegistrationView: View {
                     Alert(title: Text("소환사 이름을 확인해주세요"))
                 }
                 .roundedRectangle(color: .gray)
-            
+
             Button {
-                Task { await viewModel.searchButtonTapped() }
+                Task {
+                    await viewModel.searchButtonTapped(
+                        pathViewModel.navigateTo
+                    )
+                }
             } label: {
                 Text("검색하기")
                     .font(.system(size: 15, weight: .heavy))
@@ -52,15 +57,9 @@ struct SummonerRegistrationView: View {
                     .roundedRectangle(color: .blue)
             }
             .accessibilityIdentifier("SearchButton")
-            .navigationDestination(isPresented: $viewModel.goToNextView) {
-                SummonerRecordView(viewModel: viewModel)
-            }
-
-            
         }
         .onAppear {
             self.focusState = .summonerName
-            viewModel.clear()
         }
     }
 }

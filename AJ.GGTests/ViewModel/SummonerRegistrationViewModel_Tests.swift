@@ -11,6 +11,9 @@ import XCTest
 final class SummonerRegistrationViewModel_Tests: XCTestCase {
     
     var viewModel: SummonerRegistrationViewModel?
+    let dummyCompletion: (DestinationFactory) -> () = { _ in
+        
+    }
     
     override func setUpWithError() throws {
         viewModel = SummonerRegistrationViewModel(summonerService: SummonerService(),
@@ -87,7 +90,7 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
         vm.summonerName = "SwiftUI 4"
         
         //  When
-        await vm.searchButtonTapped()
+        await vm.searchButtonTapped(dummyCompletion)
         
         //  Then
         XCTAssertNotNil(vm.summoner)
@@ -103,7 +106,7 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
         vm.summonerName = "SwiftUI 4"
         
         //  When
-        await vm.searchButtonTapped()
+        await vm.searchButtonTapped(dummyCompletion)
         
         //  Then
         XCTAssertNotNil(vm.leagueTier)
@@ -119,31 +122,12 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
         vm.summonerName = "SwiftUI 4"
         
         //  When
-        await vm.searchButtonTapped()
+        await vm.searchButtonTapped(dummyCompletion)
         
         //  Then
         XCTAssertFalse(vm.matches.isEmpty)
     }
-    
-    func test_SummonerRegistrationViewModel_clear_shouldClearValues() async {
-        //  Given
-        let vm = SummonerRegistrationViewModel(summonerService: MockSummonerSerivceSuccess(),
-                                               leagueV4Service: MockLeagueV4ServiceSuccess(),
-                                               matchV5Service: MockMatchV5ServiceSuccess(),
-                                               container: PersistentContainerInjector.empty.container)
-        
-        vm.summonerName = "SwiftUI 4"
-        await vm.searchButtonTapped()
-        
-        //  When
-        vm.clear()
-        
-        //  Then
-        XCTAssertNil(vm.summoner)
-        XCTAssertNil(vm.leagueTier)
-        XCTAssertTrue(vm.matches.isEmpty)
-    }
-    
+
     func test_SummonerRegistrationViewModel_searchButtonTapped_clearValues() async {
         //  Given
         let vm = SummonerRegistrationViewModel(summonerService: MockSummonerSerivceSuccess(),
@@ -152,11 +136,11 @@ final class SummonerRegistrationViewModel_Tests: XCTestCase {
                                                container: PersistentContainerInjector.empty.container)
         
         vm.summonerName = "SwiftUI 4"
-        await vm.searchButtonTapped()
+        await vm.searchButtonTapped(dummyCompletion)
         vm.summonerName = ""
         
         //  When
-        await vm.searchButtonTapped()
+        await vm.searchButtonTapped(dummyCompletion)
         
         //  Then
         XCTAssertNil(vm.summoner)

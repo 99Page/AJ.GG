@@ -30,7 +30,7 @@ struct ChampionWinRateImage: View {
                     .frame(width: 70, height:  70)
 
                 Circle()
-                    .trim(from: 0, to: CGFloat(min(animatePercentage, 1)))
+                    .trim(from: 0, to: CGFloat(min(percentage, 1)))
                     .stroke(
                         LinearGradient(gradient: gradient, startPoint: .bottom,
                                        endPoint: .top),

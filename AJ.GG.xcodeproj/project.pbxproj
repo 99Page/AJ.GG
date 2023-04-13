@@ -59,6 +59,10 @@
 		15961DE12990B25F00806655 /* ServiceAlertEnable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15961DE02990B25F00806655 /* ServiceAlertEnable.swift */; };
 		1597B1D82970FCE100A66486 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597B1D72970FCE100A66486 /* RecordView.swift */; };
 		1597B1DD297123E700A66486 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 1597B1DC297123E700A66486 /* Kingfisher */; };
+		159ADCD029E6763E00B463D2 /* PathViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159ADCCF29E6763E00B463D2 /* PathViewModel.swift */; };
+		159ADCD229E6765700B463D2 /* DestinationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159ADCD129E6765700B463D2 /* DestinationFactory.swift */; };
+		159ADCD429E6814400B463D2 /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159ADCD329E6814400B463D2 /* TempView.swift */; };
+		159ADCD629E689B500B463D2 /* SummonerRecordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159ADCD529E689B500B463D2 /* SummonerRecordViewModel.swift */; };
 		15A4D6CD295972D60052E3AD /* AJ_GGApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6CC295972D60052E3AD /* AJ_GGApp.swift */; };
 		15A4D6CF295972D60052E3AD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15A4D6CE295972D60052E3AD /* ContentView.swift */; };
 		15A4D6D1295972D70052E3AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 15A4D6D0295972D70052E3AD /* Assets.xcassets */; };
@@ -169,6 +173,10 @@
 		15961DE02990B25F00806655 /* ServiceAlertEnable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceAlertEnable.swift; sourceTree = "<group>"; };
 		1597B1D72970FCE100A66486 /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		1597B1DE2971270400A66486 /* AJ-GG-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "AJ-GG-Info.plist"; sourceTree = SOURCE_ROOT; };
+		159ADCCF29E6763E00B463D2 /* PathViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathViewModel.swift; sourceTree = "<group>"; };
+		159ADCD129E6765700B463D2 /* DestinationFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationFactory.swift; sourceTree = "<group>"; };
+		159ADCD329E6814400B463D2 /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
+		159ADCD529E689B500B463D2 /* SummonerRecordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummonerRecordViewModel.swift; sourceTree = "<group>"; };
 		15A4D6C9295972D60052E3AD /* AJ.GG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AJ.GG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		15A4D6CC295972D60052E3AD /* AJ_GGApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AJ_GGApp.swift; sourceTree = "<group>"; };
 		15A4D6CE295972D60052E3AD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -270,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				15A4D703295975300052E3AD /* SummonerRegistrationViewModel.swift */,
+				159ADCD529E689B500B463D2 /* SummonerRecordViewModel.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -318,6 +327,7 @@
 				15F0FBCE2982660B00E5BAB2 /* DummyCretable.swift */,
 				15E52E05298143D2004B4DBC /* Match.swift */,
 				1571727E295D78BE0053BCC1 /* Tier.swift */,
+				159ADCD129E6765700B463D2 /* DestinationFactory.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -466,6 +476,7 @@
 				153588772991FF4D0063AE28 /* Record */,
 				1526DD092980075900340069 /* Register */,
 				156DA4F82988E8C700786730 /* Home */,
+				159ADCD329E6814400B463D2 /* TempView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -477,6 +488,7 @@
 				15358878299200F80063AE28 /* Record */,
 				1526DD0A2980079200340069 /* Register */,
 				15CA6B0529C2E91400DDF011 /* Home */,
+				159ADCCF29E6763E00B463D2 /* PathViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -770,6 +782,7 @@
 				152FBE67296D2A5000B082C7 /* MetadataDTO.swift in Sources */,
 				152FBE6D296D2B6B00B082C7 /* TeamDTO.swift in Sources */,
 				15717279295D73930053BCC1 /* LeagueV4Service.swift in Sources */,
+				159ADCD229E6765700B463D2 /* DestinationFactory.swift in Sources */,
 				15A4D6D6295972D70052E3AD /* PersistentContainer.swift in Sources */,
 				15AFF39129D4056B002EB7F4 /* MatchFilterContext.swift in Sources */,
 				15A4D7022959751E0052E3AD /* SummonerRegistrationView.swift in Sources */,
@@ -777,6 +790,7 @@
 				151CA69529813DB50095D8DC /* RecordCell.swift in Sources */,
 				152FBE73296D2D9800B082C7 /* MatchDTO.swift in Sources */,
 				1571727B295D73FB0053BCC1 /* LeagueEntryDTO .swift in Sources */,
+				159ADCD429E6814400B463D2 /* TempView.swift in Sources */,
 				15A9ED65296EE0D10043A5B4 /* RoundedText.swift in Sources */,
 				1526DD042980011E00340069 /* Copyable.swift in Sources */,
 				15A4D712295981090052E3AD /* RiotAPI.swift in Sources */,
@@ -784,6 +798,7 @@
 				15A4D6CF295972D60052E3AD /* ContentView.swift in Sources */,
 				1571727F295D78BE0053BCC1 /* Tier.swift in Sources */,
 				151EAEA4296683BF00322ACE /* StringExtension.swift in Sources */,
+				159ADCD629E689B500B463D2 /* SummonerRecordViewModel.swift in Sources */,
 				15C448512959899C0063223E /* SummonerDTO.swift in Sources */,
 				15ED7F2D298A247600E49B5F /* Double + Extension.swift in Sources */,
 				15298C9A296C9002005FC900 /* Champion.swift in Sources */,
@@ -818,6 +833,7 @@
 				15A4D706295975640052E3AD /* CapsuleText.swift in Sources */,
 				15CA6B0929C2ED3900DDF011 /* DataManagerProtocol.swift in Sources */,
 				15AFF38F29D404CA002EB7F4 /* MatchFilterStrategy.swift in Sources */,
+				159ADCD029E6763E00B463D2 /* PathViewModel.swift in Sources */,
 				15961DE12990B25F00806655 /* ServiceAlertEnable.swift in Sources */,
 				15A4D70C295980B70052E3AD /* SummonersService.swift in Sources */,
 				156DA4F72988E82C00786730 /* BaseProfileIconImage.swift in Sources */,

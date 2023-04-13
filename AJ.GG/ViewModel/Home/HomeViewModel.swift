@@ -46,13 +46,14 @@ class HomeViewModel: ObservableObject {
         fetchAndStore()
     }
     
-    private func fetchAndStore()  {
+    func fetchAndStore()  {
         fetchSummoners()
     }
     
     private func fetchSummoners() {
         let summonerEntities = summonerManager.fetchAll()
         self.summoners = summonerEntities.map { Summoner(cdSummoner: $0)}
+        print("\(summoners)")
         
         if summoners.isEmpty {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -106,7 +107,10 @@ class HomeViewModel: ObservableObject {
         
         switch await matchV5Service.searchMatchDTOsWhereRankGameByPuuid(puuid: summoner.puuid) {
         case .success(let values):
-            await addMatches(values, summonerEntity, summoner)
+            let actual = values.filter {
+                $0.isRankGame
+            }
+            await addMatches(actual, summonerEntity, summoner)
         case .failure(_):
             break
         }

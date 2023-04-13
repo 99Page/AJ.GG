@@ -9,10 +9,14 @@ import SwiftUI
 
 @main
 struct AJ_GGApp: App {
-
+    
+    @StateObject private var pathViewModel = PathViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView(matchV5Service: MatchV5Service(),
+                     containerSource: PersistentContainer.shared)
+                .environmentObject(pathViewModel)
                 .onAppear {
                     #if DEBUG
                     UserDefaults.standard.set(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")

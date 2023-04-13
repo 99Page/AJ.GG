@@ -9,11 +9,8 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    
     var body: some View {
-        NavigationStack {
-            HomeView(matchV5Service: MatchV5Service(),
-                     containerSource: PersistentContainer.shared)
-        }
+        HomeView(matchV5Service: MatchV5Service(),
+                 containerSource: PersistentContainer.shared)
     }
 }

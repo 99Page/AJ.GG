@@ -12,13 +12,13 @@ let RIOT_API_URL = "https://KR.\(BASE_URL)"
 
 enum RiotAuth: String {
     case key = "X-Riot-Token"
-    case value = "RGAPI-f57431e0-f90b-4890-8d48-6ffe7fbf206d"
+    case value = "RGAPI-d6201fb8-f40e-463e-91b3-9c512b7bf79a"
 }
 
 enum RiotURL {
     
     static let BASE_URL: String = "api.riotgames.com"
-    static let IMAGE_URL: String = "http://ddragon.leagueoflegends.com/cdn/13.1.1/img"
+    static let IMAGE_URL: String = "http://ddragon.leagueoflegends.com/cdn/13.7.1/img"
     
     case base(region: Region)
     case championSquareAsset(champion: String)

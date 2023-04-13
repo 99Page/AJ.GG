@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Summoner: DummyCreatable, Identifiable, Equatable {
+struct Summoner: DummyCreatable, Identifiable, Equatable, Hashable {
     
     typealias Dummy = Summoner
     

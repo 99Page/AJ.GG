@@ -19,91 +19,99 @@ struct HomeView: View {
     }
 
     @StateObject var viewModel: HomeViewModel
+    @EnvironmentObject var pathViewModel: PathViewModel
     @State private var item: ViewItem?
     @State private var isPresented: Bool = false
 
     let lanes = Lane.selectableLanes()
 
-    init(matchV5Service: MatchV5ServiceEnabled, containerSource: PersistentContainerSource) {
+    init(matchV5Service: MatchV5ServiceEnabled,
+         containerSource: PersistentContainerSource) {
         self._viewModel = StateObject(wrappedValue: HomeViewModel(matchV5Serivce: matchV5Service,
                                                                      containerSoruce: containerSource))
     }
 
     var body: some View {
-        VStack(spacing: 5) {
-            
-            HStack {
-                if let summoner = viewModel.summoners.first {
-                    SummonerProfile(summoner: summoner)
-                }
-                Spacer()
-                
-                NavigationLink {
-                    SummonerRegistrationView()
-                } label: {
-                    Text("소환사 변경")
-                        .font(.system(size: 10, weight: .heavy))
-                        .foregroundColor(.blue)
-                        .roundedRectangle(color: .blue)
-                }
-            }
-            .padding(.leading, 20)
-            
-            HStack {
-                ForEach(lanes, id: \.self) { lane in
-                    let image = viewModel.selectedLane == lane ?
-                    lane.image : lane.imageUnselected
-                    
-                    Button {
-                        viewModel.laneButtonTapped(lane)
-                    } label: {
-                        Image(image)
-                            .resizable()
-                            .frame(width: 40, height: 40)
+        NavigationStack(path: $pathViewModel.path) {
+        
+
+            VStack(spacing: 5) {
+
+                HStack {
+                    if let summoner = viewModel.summoners.first {
+                        SummonerProfile(summoner: summoner)
                     }
-
+                    Spacer()
+                    Button {
+                        pathViewModel.navigateTo(.registrationView)
+                    } label: {
+                        Text("소환사 변경")
+                            .font(.system(size: 10, weight: .heavy))
+                            .foregroundColor(.blue)
+                            .roundedRectangle(color: .blue)
+                    }
                 }
-            }
-            
-            ScrollView {
-                VStack(alignment: .leading, spacing: 20) {
-                    myBestChampions()
-                    hardRivalChampions()
-                    RecordView(matches: viewModel.matchesByLane)
-                }
-                .padding(.horizontal)
-                .navigationDestination(isPresented: $viewModel.isSummonerEmpty) {
-                    SummonerRegistrationView()
-                }
-                .sheet(item: $item) { item in
-                    let matches = item.matchFilterContext.execute(matches: viewModel.matchesByLane,
-                                                                  champion: item.champion)
-                    
-                    ChampionRecordView(champion: item.champion,
-                                       matches: matches,
-                                       recordStrategy: item.strategy)
-                        .presentationDetents([.medium, .large])
-                }
-                .frame(maxWidth: .infinity)
-            }
-            .accessibilityIdentifier("HomeView")
-        }
-        .popup(isPresented: $viewModel.showSuccessToast) {
-            Text("새로운 매치 저장을 성공했습니다.")
-                .padding(.top, 50)
                 .padding(.leading, 20)
-                .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)
-                .foregroundColor(.white)
-                .font(.system(size: 15, weight: .bold))
-                .background(Color.blue)
-        } customize: {
-            $0
-                .type(.toast)
-                .position(.top)
-                .animation(.spring(blendDuration: 1))
-                .closeOnTap(true)
-        }
+                
 
+                HStack {
+                    ForEach(lanes, id: \.self) { lane in
+                        let image = viewModel.selectedLane == lane ?
+                        lane.image : lane.imageUnselected
+
+                        Button {
+                            viewModel.laneButtonTapped(lane)
+                        } label: {
+                            Image(image)
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                        }
+
+                    }
+                }
+//
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 20) {
+                        myBestChampions()
+                        hardRivalChampions()
+                        RecordView(matches: viewModel.matchesByLane)
+                    }
+                    .padding(.horizontal)
+                    .sheet(item: $item) { item in
+                        let matches = item.matchFilterContext.execute(matches: viewModel.matchesByLane,
+                                                                      champion: item.champion)
+
+                        ChampionRecordView(champion: item.champion,
+                                           matches: matches,
+                                           recordStrategy: item.strategy)
+                            .presentationDetents([.medium, .large])
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+                .accessibilityIdentifier("HomeView")
+            }
+            .onAppear {
+                viewModel.fetchAndStore()
+            }
+            .popup(isPresented: $viewModel.showSuccessToast) {
+                Text("새로운 매치 저장을 성공했습니다.")
+                    .padding(.top, 50)
+                    .padding(.leading, 20)
+                    .frame(maxWidth: .infinity, maxHeight: 80, alignment: .leading)
+                    .foregroundColor(.white)
+                    .font(.system(size: 15, weight: .bold))
+                    .background(Color.blue)
+            } customize: {
+                $0
+                    .type(.toast)
+                    .position(.top)
+                    .animation(.spring(blendDuration: 1))
+                    .closeOnTap(true)
+            }
+            .navigationDestination(for: DestinationFactory.self) { dest in
+                dest.view
+            }
+        }
     }
 
     @ViewBuilder
@@ -169,16 +177,6 @@ struct HomeView: View {
               .padding(.horizontal, -10)
         }
     }
-//
-//    @ViewBuilder
-//    private func records() -> some View {
-//        Group {
-//            Text("전적")
-//                .font(.system(size: 14, weight: .heavy))
-//
-//            RecordView(matches: viewModel.matchesByLane)
-//        }
-//    }
 }
 
 struct HomeView_Previews: PreviewProvider {

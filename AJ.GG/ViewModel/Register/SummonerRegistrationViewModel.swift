@@ -38,69 +38,75 @@ class SummonerRegistrationViewModel: ObservableObject {
     
     
     @MainActor
-    func searchButtonTapped() async {
-        isSearchOngoing = true
+    func searchButtonTapped(_ completion: (DestinationFactory) -> ()) async {
+//        isSearchOngoing = true
         
-        guard !summonerName.isEmpty else {
-            isPresented = true
-            clear()
-            return
-        }
+//        guard !summonerName.isEmpty else {
+//            isPresented = true
+//            clear()
+//            return
+//        }
         
         switch await summonerService.summonerByName(summonerName: summonerName) {
         case .success(let value):
-            self.summoner = Summoner(value)
-            goToNextView = true
+            let summoner = Summoner(value)
+            completion(.recordView(summoner))
+//            self.summoner = Summoner(value)
+//            goToNextView = true
         case .failure(_):
             handleFailure()
             return
         }
-        
-        if let summoner = summoner {
-            switch await leagueV4Service.leagueTierBySummonerID(summonerID: summoner.summonerID) {
-            case .success(let value):
-                self.leagueTier = value
-            case .failure(_):
-                handleFailure()
-                return
-            }
-            
-            switch await matchV5Service.searchMatchDTOsWhereRankGameByPuuid(puuid: summoner.puuid) {
-            case .success(let value):
-                self.matches = value.map { Match($0, puuid: summoner.puuid) }
-            case .failure(_):
-                handleFailure()
-                return
-            }
-        }
-        
-        isSearchOngoing = false
+//
+//        if let summoner = summoner {
+//            switch await leagueV4Service.leagueTierBySummonerID(summonerID: summoner.summonerID) {
+//            case .success(let value):
+//                self.leagueTier = value
+//            case .failure(_):
+//                handleFailure()
+//                return
+//            }
+//
+//            switch await matchV5Service.searchMatchDTOsWhereRankGameByPuuid(puuid: summoner.puuid) {
+//            case .success(let value):
+//                self.matches = value.filter{
+//                    $0.isRankGame
+//                }.map {
+//                    Match($0, puuid: summoner.puuid)
+//                }
+//            case .failure(_):
+//                handleFailure()
+//                return
+//            }
+//        }
+//
+//        isSearchOngoing = false
     }
     
     func handleFailure() {
         self.isPresented = true
         self.isSearchOngoing = false
     }
-
-    func clear() {
-        summoner = nil
-        leagueTier = nil 
-        matches = []
-        summonerName = "" 
-    }
-    
-    fileprivate func addSummoner() {
-        if let summoner = self.summoner, let leagueTier = self.leagueTier {
-            summonerManager.addSummoner(summoner: summoner, leagueTier: leagueTier)
-        }
-    }
-    
-    fileprivate func deleteSummoner() {
-        summonerManager.deleteAll()
-    }
-    
-    func registerSummoner() {
-        deleteSummoner()
-        addSummoner()
-    }
+//
+//    func clear() {
+//        summoner = nil
+//        leagueTier = nil
+//        matches = []
+//        summonerName = ""
+//    }
+//
+//    fileprivate func addSummoner() {
+//        if let summoner = self.summoner, let leagueTier = self.leagueTier {
+//            summonerManager.addSummoner(summoner: summoner, leagueTier: leagueTier)
+//        }
+//    }
+//
+//    fileprivate func deleteSummoner() {
+//        summonerManager.deleteAll()
+//    }
+//
+//    func registerSummoner() {
+//        deleteSummoner()
+//        addSummoner()
+//    }
 }
