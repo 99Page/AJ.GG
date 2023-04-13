@@ -47,6 +47,7 @@ class HomeViewModel: ObservableObject {
     }
     
     func fetchAndStore()  {
+        self.matches.removeAll()
         fetchSummoners()
     }
     
