@@ -14,7 +14,7 @@ struct HomeView: View {
     struct ViewItem: Identifiable {
         var id = UUID().uuidString
         let champion: Champion
-        let matchFilterContext: MatchFilterContext
+        let matches: [Match]
         let strategy: RecordStrategy
     }
 
@@ -78,11 +78,8 @@ struct HomeView: View {
                     }
                     .padding(.horizontal)
                     .sheet(item: $item) { item in
-                        let matches = item.matchFilterContext.execute(matches: viewModel.matchesByLane,
-                                                                      champion: item.champion)
-
                         ChampionRecordView(champion: item.champion,
-                                           matches: matches,
+                                           matches: item.matches,
                                            recordStrategy: item.strategy)
                             .presentationDetents([.medium, .large])
                     }
@@ -126,11 +123,13 @@ struct HomeView: View {
 
                         let champion = viewModel.rivalCount[i].champion
                         let percentage = viewModel.rivalCount[i].winRate
-                        let matchFilterContext = MatchFilterContext(strategy: MyChampionFilterStrategy())
+                        let matchesFilter = MyChampionMatchFilter(delegate: OriginalMatches(matches: viewModel.matchesByLane),
+                                                            champion: champion)
+             
 
                         Button {
                             self.item = ViewItem(champion: champion,
-                                                 matchFilterContext: matchFilterContext,
+                                                 matches: matchesFilter.matches,
                                                  strategy: MyCounterRecordStrategy())
                         } label: {
                             ChampionWinRateImage(percentage: percentage,
@@ -159,10 +158,12 @@ struct HomeView: View {
 
                           let champion = viewModel.myCounter[i].champion
                           let percentage = viewModel.myCounter[i].loseRate
+                          let matchesFilter = RivalChampionMatchFilter(delegate: OriginalMatches(matches: viewModel.matchesByLane),
+                                                              champion: champion)
 
                           Button {
                               self.item = ViewItem(champion: champion,
-                                                   matchFilterContext: MatchFilterContext(strategy: RivalChampionFilterStrategy()),
+                                                   matches: matchesFilter.matches,
                                                    strategy: RivalCounterRecordStrategy())
                           } label: {
                               ChampionWinRateImage(percentage: percentage,
