@@ -68,5 +68,5 @@ Null object pattern은 null 타입 대신에 아무 동작도 하지 않는 객�
 이번 리팩토링을 통해 배운 점은 세가지다.
 1. Strategy pattern과 Null object pattern은 좋은 조합이다.
 2. Strategy context에 같은 프로토콜을 준수하는 프로퍼티가 있으면 안 된다. 
-3. 2번 문제가 우려될 경우 Decorator pattern을 고려하자
+3. 2번 문제가 우려될 경우 Decorator pattern을 고려하자. 
 
